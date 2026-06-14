@@ -1,92 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  EN: All-in-one widget. Power button centered on top (the hero) with a small connection dot in the
-      corner; temperature with − / + below; all five modes as chips at the bottom (active highlighted,
-      each selects its mode directly); a slim status line (indoor · power / off).
-  DE: Alles-Widget. Power-Knopf mittig oben (der Hero) mit kleinem Verbindungspunkt in der Ecke;
-      Temperatur mit − / + darunter; alle fünf Modi als Chips unten (aktiver hervorgehoben, jeder wählt
-      seinen Modus direkt); eine schlanke Statuszeile (Innen · Leistung / aus).
+  EN: Mode widget. Shows the current mode on top, then a row of all five modes as chips; tapping a
+      chip selects that mode directly (and powers the unit on). The active mode is highlighted.
+  DE: Modus-Widget. Zeigt oben den aktuellen Modus, darunter alle fünf Modi als Chips; ein Tippen wählt
+      den Modus direkt (und schaltet das Gerät ein). Der aktive Modus ist hervorgehoben.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     android:background="@drawable/widget_bg"
-    android:padding="16dp"
+    android:padding="14dp"
     android:theme="@android:style/Theme.DeviceDefault">
 
-    <!-- Header: power centered, connection dot in the top-right corner -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <View
-            android:id="@+id/widget_dot"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="top|end"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/widget_dot_off" />
-
-        <ImageButton
-            android:id="@+id/btn_power"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/widget_btn_bg"
-            android:src="@drawable/ic_w_power"
-            android:contentDescription="@string/widget_power"
-            android:scaleType="centerInside" />
-    </FrameLayout>
-
-    <!-- Temperature: − 24° + -->
-    <LinearLayout
+    <TextView
+        android:id="@+id/widget_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="12dp">
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="" />
 
-        <ImageButton
-            android:id="@+id/btn_minus"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/widget_btn_bg"
-            android:src="@drawable/ic_w_minus"
-            android:contentDescription="@string/widget_cool_down"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:id="@+id/widget_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="22dp"
-            android:minWidth="96dp"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="44sp"
-            android:textStyle="bold"
-            android:text="24°" />
-
-        <ImageButton
-            android:id="@+id/btn_plus"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/widget_btn_bg"
-            android:src="@drawable/ic_w_plus"
-            android:contentDescription="@string/widget_warm_up"
-            android:scaleType="centerInside" />
-    </LinearLayout>
-
-    <!-- Mode chips -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="14dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/mode_auto"
@@ -167,18 +112,5 @@
             android:ellipsize="end"
             android:text="@string/mode_fan" />
     </LinearLayout>
-
-    <!-- Status -->
-    <TextView
-        android:id="@+id/widget_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textColor="#A8FFFFFF"
-        android:textSize="12sp"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:text="" />
 
 </LinearLayout>

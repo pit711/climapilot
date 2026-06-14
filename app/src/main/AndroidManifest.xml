@@ -32,6 +32,11 @@
             android:name=".SceneAlarmReceiver"
             android:exported="false" />
 
+        <!-- Powers the unit off when the sleep timer fires, even with the app closed / Schaltet das Gerät aus, wenn der Sleep-Timer auslöst, auch bei geschlossener App -->
+        <receiver
+            android:name=".SleepTimerReceiver"
+            android:exported="false" />
+
         <!-- Re-arms scene schedules after a reboot / Stellt Szenen-Zeitpläne nach einem Neustart wieder her -->
         <receiver
             android:name=".BootReceiver"
@@ -41,44 +46,62 @@
             </intent-filter>
         </receiver>
 
-        <!-- Home-screen widget: quick power + temperature, offline / Homescreen-Widget: Ein-Aus + Temperatur, offline -->
+        <!-- All-in-one widget: name, temperature, power/±/mode + status, offline / Alles-Widget: Name, Temperatur, Ein-Aus/±/Modus + Status, offline.
+             Also the central control hub the purpose-built widgets broadcast their actions to / zugleich die zentrale Steuerstelle, an die die zweckgebundenen Widgets ihre Aktionen senden. -->
         <receiver
             android:name=".widget.AcWidgetProvider"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/widget_all_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.climapilot.free.widget.POWER" />
                 <action android:name="com.climapilot.free.widget.TEMP_UP" />
                 <action android:name="com.climapilot.free.widget.TEMP_DOWN" />
                 <action android:name="com.climapilot.free.widget.MODE" />
+                <action android:name="com.climapilot.free.widget.SET_MODE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_ac_info" />
         </receiver>
 
-        <!-- 2×2 widget variant / 2×2-Widget-Variante -->
+        <!-- Power-only widget / Reines Ein/Aus-Widget -->
         <receiver
-            android:name=".widget.AcWidget2x2Provider"
-            android:exported="false">
+            android:name=".widget.AcWidgetPowerProvider"
+            android:exported="false"
+            android:label="@string/widget_power_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_ac_2x2_info" />
+                android:resource="@xml/widget_power_info" />
         </receiver>
 
-        <!-- 1×1 widget variant / 1×1-Widget-Variante -->
+        <!-- Temperature-only widget / Reines Temperatur-Widget -->
         <receiver
-            android:name=".widget.AcWidget1x1Provider"
-            android:exported="false">
+            android:name=".widget.AcWidgetTempProvider"
+            android:exported="false"
+            android:label="@string/widget_temp_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_ac_1x1_info" />
+                android:resource="@xml/widget_temp_info" />
+        </receiver>
+
+        <!-- Mode-only widget / Reines Modus-Widget -->
+        <receiver
+            android:name=".widget.AcWidgetModeProvider"
+            android:exported="false"
+            android:label="@string/widget_mode_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_mode_info" />
         </receiver>
 
         <!-- Quick Settings tile: toggle AC power from the shade, offline / Schnelleinstellungen-Kachel: Klima aus der Statusleiste ein/aus, offline -->

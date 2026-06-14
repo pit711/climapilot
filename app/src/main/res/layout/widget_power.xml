@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  EN: Power-only widget. A single power button + on/off state; tapping anywhere toggles the AC.
+  DE: Reines Ein/Aus-Widget. Ein Power-Knopf + An/Aus-Zustand; Tippen schaltet die Klima.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/widget_bg"
+    android:padding="8dp"
+    android:theme="@android:style/Theme.DeviceDefault">
+
+    <ImageButton
+        android:id="@+id/btn_power"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/widget_btn_bg"
+        android:src="@drawable/ic_w_power"
+        android:contentDescription="@string/widget_power"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/widget_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="" />
+
+</LinearLayout>

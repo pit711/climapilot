@@ -109,13 +109,16 @@ object WidgetRepo {
     }
 
     private fun notifyWidgets(ctx: Context) {
-        // EN: Re-render every widget size that is currently placed. DE: Jede aktuell platzierte Widget-Größe neu rendern.
+        // EN: Re-render every placed widget variant (all-in-one + the purpose-built power/temp/mode ones).
+        // DE: Jede platzierte Widget-Variante neu rendern (Alles-Widget + die zweckgebundenen Power/Temp/Modus).
         val mgr = AppWidgetManager.getInstance(ctx)
         mgr.getAppWidgetIds(ComponentName(ctx, AcWidgetProvider::class.java))
             .takeIf { it.isNotEmpty() }?.let { AcWidgetProvider.renderAll(ctx, mgr, it) }
-        mgr.getAppWidgetIds(ComponentName(ctx, AcWidget2x2Provider::class.java))
-            .takeIf { it.isNotEmpty() }?.let { AcWidget2x2Provider.renderAll(ctx, mgr, it) }
-        mgr.getAppWidgetIds(ComponentName(ctx, AcWidget1x1Provider::class.java))
-            .takeIf { it.isNotEmpty() }?.let { AcWidget1x1Provider.renderAll(ctx, mgr, it) }
+        mgr.getAppWidgetIds(ComponentName(ctx, AcWidgetPowerProvider::class.java))
+            .takeIf { it.isNotEmpty() }?.let { AcWidgetPowerProvider.renderAll(ctx, mgr, it) }
+        mgr.getAppWidgetIds(ComponentName(ctx, AcWidgetTempProvider::class.java))
+            .takeIf { it.isNotEmpty() }?.let { AcWidgetTempProvider.renderAll(ctx, mgr, it) }
+        mgr.getAppWidgetIds(ComponentName(ctx, AcWidgetModeProvider::class.java))
+            .takeIf { it.isNotEmpty() }?.let { AcWidgetModeProvider.renderAll(ctx, mgr, it) }
     }
 }

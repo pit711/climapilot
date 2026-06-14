@@ -123,6 +123,8 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         useFahrenheit = SettingsRepo.useFahrenheit(ctx)
         pricePerKwh = SettingsRepo.pricePerKwh(ctx)
         sleepCustomMinutes = SettingsRepo.sleepCustomMinutes(ctx)
+        // EN: If a sleep-timer alarm is still pending, resume its on-screen countdown. DE: Falls ein Sleep-Timer-Alarm noch aussteht, dessen Countdown-Anzeige fortsetzen.
+        restoreSleepTimer()
     }
 
     /** EN: Remember a custom sleep duration so it appears as a quick chip next time. DE: Eine eigene Sleep-Dauer merken, damit sie nächstes Mal als Schnell-Chip erscheint. */
@@ -383,26 +385,50 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
 
     fun refreshNow() = viewModelScope.launch { runCatching { refreshOnce() } }
 
-    // EN: ---- sleep timer (client-side): power the unit off after N minutes ----
-    // DE: ---- Sleep-Timer (client-seitig): das Gerät nach N Minuten ausschalten ----
+    // EN: ---- sleep timer: power the unit off after N minutes ----
+    //     The actual power-off is an AlarmManager alarm (see SleepTimerScheduler), so it still fires
+    //     when the app is closed. The coroutine here only drives the on-screen remaining-time display.
+    // DE: ---- Sleep-Timer: das Gerät nach N Minuten ausschalten ----
+    //     Das eigentliche Ausschalten ist ein AlarmManager-Alarm (siehe SleepTimerScheduler), läuft
+    //     also auch bei geschlossener App. Die Coroutine hier treibt nur die Restzeit-Anzeige.
     fun startSleepTimer(minutes: Int) {
         cancelSleepTimer()
-        sleepTimerMinutes = minutes
-        sleepJob = viewModelScope.launch {
-            var remaining = minutes
-            while (remaining > 0) {
-                delay(60_000)
-                remaining--
-                sleepTimerMinutes = remaining
-            }
-            command({ powerOn = false }) { setPower(false) }
-            sleepTimerMinutes = null
-        }
+        val dev = connectedDevice ?: return
+        val triggerAt = System.currentTimeMillis() + minutes * 60_000L
+        // EN: Demo device has no cached token; skip the real alarm but still show the countdown. DE: Das Demo-Gerät hat kein gecachtes Token; echten Alarm überspringen, aber Countdown trotzdem zeigen.
+        if (dev.id != 0L) SleepTimerScheduler.schedule(getApplication(), dev.id, triggerAt)
+        startSleepDisplay(triggerAt)
     }
 
     fun cancelSleepTimer() {
         sleepJob?.cancel(); sleepJob = null
         sleepTimerMinutes = null
+        SleepTimerScheduler.cancel(getApplication())
+    }
+
+    /** EN: Restore the countdown display from a pending alarm when the app reopens. DE: Die Countdown-Anzeige aus einem ausstehenden Alarm wiederherstellen, wenn die App neu öffnet. */
+    private fun restoreSleepTimer() {
+        val triggerAt = SleepTimerScheduler.triggerAt(getApplication()) ?: return
+        if (triggerAt <= System.currentTimeMillis()) {
+            // EN: Already due — the alarm has (or will have) handled the power-off. DE: Bereits fällig — der Alarm hat das Ausschalten erledigt (oder erledigt es).
+            SleepTimerScheduler.clear(getApplication())
+            return
+        }
+        startSleepDisplay(triggerAt)
+    }
+
+    /** EN: Tick the remaining minutes from an absolute trigger time until it elapses. DE: Die Restminuten aus einer absoluten Auslösezeit herunterzählen, bis sie verstrichen ist. */
+    private fun startSleepDisplay(triggerAt: Long) {
+        sleepJob?.cancel()
+        sleepJob = viewModelScope.launch {
+            while (true) {
+                val remaining = triggerAt - System.currentTimeMillis()
+                if (remaining <= 0) { sleepTimerMinutes = null; break }
+                // EN: round up so "1m" shows until the last minute actually elapses. DE: aufrunden, damit „1m" bis zum tatsächlichen Ablauf der letzten Minute angezeigt wird.
+                sleepTimerMinutes = ((remaining + 59_999) / 60_000).toInt()
+                delay(1_000)
+            }
+        }
     }
 
     override fun onCleared() {

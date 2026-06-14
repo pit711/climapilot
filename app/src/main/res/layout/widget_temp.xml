@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  EN: Temperature-only widget. − / target temperature / + ; the buttons nudge the setpoint by 0.5 °C.
+  DE: Reines Temperatur-Widget. − / Zieltemperatur / + ; die Knöpfe ändern den Sollwert um 0,5 °C.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/widget_bg"
+    android:padding="12dp"
+    android:theme="@android:style/Theme.DeviceDefault">
+
+    <ImageButton
+        android:id="@+id/btn_minus"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/widget_btn_bg"
+        android:src="@drawable/ic_w_minus"
+        android:contentDescription="@string/widget_cool_down"
+        android:scaleType="centerInside" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/widget_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:text="24°" />
+
+        <TextView
+            android:id="@+id/widget_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#D8FFFFFF"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_plus"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/widget_btn_bg"
+        android:src="@drawable/ic_w_plus"
+        android:contentDescription="@string/widget_warm_up"
+        android:scaleType="centerInside" />
+
+</LinearLayout>

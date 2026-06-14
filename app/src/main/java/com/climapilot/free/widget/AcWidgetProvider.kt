@@ -38,6 +38,39 @@ class AcWidgetProvider : AppWidgetProvider() {
             ACTION_TEMP_UP -> control(ctx, Action.UP)
             ACTION_TEMP_DOWN -> control(ctx, Action.DOWN)
             ACTION_MODE -> control(ctx, Action.MODE)
+            ACTION_SET_MODE -> setModeDirect(ctx, intent.getIntExtra(EXTRA_MODE, 2))
+        }
+    }
+
+    /**
+     * EN: Select a specific mode (from the mode widget) and power the unit on, so picking a mode
+     *     always takes effect. Optimistic UI first, then the offline LAN command.
+     * DE: Einen bestimmten Modus wählen (aus dem Modus-Widget) und das Gerät einschalten, damit die
+     *     Auswahl immer wirkt. Erst optimistische UI, dann der Offline-LAN-Befehl.
+     */
+    private fun setModeDirect(ctx: Context, mode: Int) {
+        val snap = WidgetRepo.load(ctx)
+        val device = snap.device ?: run {
+            ctx.startActivity(
+                Intent(ctx, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+            return
+        }
+        WidgetRepo.updateMode(ctx, mode)
+        WidgetRepo.updatePowerTarget(ctx, true, snap.targetTemp)
+        val pending = goAsync()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val session = MideaAcSession(device, cachedCreds = TokenRepo.load(ctx, device.id))
+                session.connect()
+                session.powerOn = true
+                session.mode = mode
+                session.apply()
+                session.close()
+            } catch (_: Exception) {
+            } finally {
+                pending.finish()
+            }
         }
     }
 
@@ -92,36 +125,63 @@ class AcWidgetProvider : AppWidgetProvider() {
         const val ACTION_TEMP_UP = "com.climapilot.free.widget.TEMP_UP"
         const val ACTION_TEMP_DOWN = "com.climapilot.free.widget.TEMP_DOWN"
         const val ACTION_MODE = "com.climapilot.free.widget.MODE"
+        const val ACTION_SET_MODE = "com.climapilot.free.widget.SET_MODE"
+        const val EXTRA_MODE = "mode"
 
         fun renderAll(ctx: Context, mgr: AppWidgetManager, ids: IntArray) {
             val snap = WidgetRepo.load(ctx)
             for (id in ids) mgr.updateAppWidget(id, build(ctx, snap, id))
         }
 
+        // EN: Mode chip view id paired with the protocol mode value it selects. DE: Modus-Chip-View-ID mit dem Protokoll-Moduswert, den sie wählt.
+        private val modeChips = listOf(
+            R.id.mode_auto to 1,   // MODE_AUTO
+            R.id.mode_cool to 2,   // MODE_COOL
+            R.id.mode_dry to 3,    // MODE_DRY
+            R.id.mode_heat to 4,   // MODE_HEAT
+            R.id.mode_fan to 5,    // MODE_FAN
+        )
+
         private fun build(ctx: Context, snap: WidgetRepo.Snapshot, widgetId: Int): RemoteViews {
             val v = RemoteViews(ctx.packageName, R.layout.widget_ac)
-            v.setTextViewText(R.id.widget_name, snap.name)
             v.setTextViewText(R.id.widget_temp, formatTemp(snap.targetTemp))
 
+            // EN: Connection light — green when a device is wired up, dim otherwise (replaces the name).
+            // DE: Verbindungslicht — grün, wenn ein Gerät hinterlegt ist, sonst gedämpft (ersetzt den Namen).
+            val connected = snap.present && snap.device != null
+            v.setInt(
+                R.id.widget_dot, "setBackgroundResource",
+                if (connected) R.drawable.widget_dot_on else R.drawable.widget_dot_off,
+            )
+
+            // EN: Status line — the mode is shown by the chips below, so only indoor + power here.
+            // DE: Statuszeile — der Modus steht in den Chips darunter, hier nur Innentemperatur + Leistung.
             val status = when {
-                !snap.present -> ctx.getString(R.string.widget_not_connected)
+                snap.device == null -> ctx.getString(R.string.widget_not_connected)
                 !snap.powerOn -> ctx.getString(R.string.widget_off)
                 else -> {
-                    // EN: Show the current mode name first, then indoor temp + power. DE: Erst den aktuellen Modus-Namen, dann Innentemperatur + Leistung.
-                    val modeName = ctx.getString(modeNameRes(snap.mode))
                     val indoor = snap.indoorTemp?.let {
                         ctx.getString(R.string.widget_indoor, formatTemp(it))
                     }
                     val power = snap.powerW?.let { "${it.roundToInt()} W" }
-                    listOfNotNull(modeName, indoor, power).joinToString("  ·  ")
+                    listOfNotNull(indoor, power).joinToString("  ·  ")
                 }
             }
             v.setTextViewText(R.id.widget_status, status)
 
+            // EN: Mode chips: highlight the active one; each selects its mode directly. DE: Modus-Chips: aktiven hervorheben; jeder wählt seinen Modus direkt.
+            val activeMode = snap.mode.takeIf { snap.present && snap.powerOn }
+            for ((id, mode) in modeChips) {
+                v.setInt(
+                    id, "setBackgroundResource",
+                    if (mode == activeMode) R.drawable.widget_chip_active else R.drawable.widget_chip_bg,
+                )
+                v.setOnClickPendingIntent(id, broadcastSetMode(ctx, mode))
+            }
+
             v.setOnClickPendingIntent(R.id.btn_power, broadcast(ctx, ACTION_POWER, 1))
             v.setOnClickPendingIntent(R.id.btn_minus, broadcast(ctx, ACTION_TEMP_DOWN, 2))
             v.setOnClickPendingIntent(R.id.btn_plus, broadcast(ctx, ACTION_TEMP_UP, 3))
-            v.setOnClickPendingIntent(R.id.btn_mode, broadcast(ctx, ACTION_MODE, 4))
             v.setOnClickPendingIntent(R.id.widget_root, openApp(ctx))
             return v
         }
@@ -148,6 +208,22 @@ class AcWidgetProvider : AppWidgetProvider() {
             val intent = Intent(ctx, AcWidgetProvider::class.java).setAction(action)
             return PendingIntent.getBroadcast(
                 ctx, req, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
+        }
+
+        /**
+         * EN: PendingIntent that selects a SPECIFIC mode. A distinct request code per mode keeps the
+         *     mode extra from being collapsed onto a single shared PendingIntent.
+         * DE: PendingIntent, der einen BESTIMMTEN Modus wählt. Ein eigener Request-Code pro Modus
+         *     verhindert, dass das Modus-Extra auf einen geteilten PendingIntent zusammenfällt.
+         */
+        internal fun broadcastSetMode(ctx: Context, mode: Int): PendingIntent {
+            val intent = Intent(ctx, AcWidgetProvider::class.java)
+                .setAction(ACTION_SET_MODE)
+                .putExtra(EXTRA_MODE, mode)
+            return PendingIntent.getBroadcast(
+                ctx, 10 + mode, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
         }

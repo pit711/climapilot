@@ -69,6 +69,13 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
     // EN: Devices we have a cached token for — connect instantly & offline, no discovery needed.
     // DE: Geräte mit gecachtem Token — sofort und offline verbinden, ohne Suche.
     val known = remember { TokenRepo.list(context) }
+    // EN: Drop discovery hits that are already shown under "known devices" (match by id, ip as
+    //     fallback) so the same unit never appears twice after a re-scan.
+    // DE: Suchtreffer ausblenden, die bereits unter „Bekannte Geräte" stehen (per ID, IP als
+    //     Ausweich-Kriterium), damit dasselbe Gerät nach einer erneuten Suche nie doppelt erscheint.
+    val knownIds = remember(known) { known.map { it.id }.toSet() }
+    val knownIps = remember(known) { known.map { it.ip }.toSet() }
+    val discovered = vm.devices.filterNot { it.id in knownIds || it.ip in knownIps }
 
     Scaffold { inner ->
         LazyColumn(
@@ -147,11 +154,11 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
                 }
             }
 
-            if (vm.devices.isEmpty() && vm.status != Status.Discovering) {
+            if (discovered.isEmpty() && known.isEmpty() && vm.status != Status.Discovering) {
                 item { EmptyHint() }
             }
 
-            items(vm.devices, key = { it.ip }) { dev ->
+            items(discovered, key = { it.ip }) { dev ->
                 DeviceCard(dev, connecting = vm.status == Status.Connecting) { vm.connect(dev) }
             }
         }

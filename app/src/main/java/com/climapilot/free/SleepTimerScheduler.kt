@@ -1,0 +1,81 @@
+package com.climapilot.free
+
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
+
+/**
+ * EN: Schedules the sleep timer as an [AlarmManager] alarm so the unit still powers off after N
+ *     minutes even when the app is closed and its ViewModel (with the old in-process countdown) is
+ *     gone. The single pending power-off is persisted (target device id + absolute trigger time) so
+ *     the UI can restore the remaining-time display when the app is reopened, and so it can be
+ *     cancelled. Mirrors [SceneScheduler]: exact, allow-while-idle, with an inexact fallback if the
+ *     OS won't grant exact alarms.
+ *
+ * DE: Plant den Sleep-Timer als [AlarmManager]-Alarm, damit das Gerät auch dann nach N Minuten
+ *     ausschaltet, wenn die App geschlossen und ihr ViewModel (mit dem alten In-Prozess-Countdown)
+ *     weg ist. Das einzelne ausstehende Ausschalten wird gespeichert (Ziel-Geräte-ID + absolute
+ *     Auslösezeit), damit die UI beim erneuten Öffnen die Restzeit wiederherstellen und es abbrechen
+ *     kann. Analog zu [SceneScheduler]: exakt, allow-while-idle, mit ungenauem Fallback, falls das
+ *     System exakte Alarme verweigert.
+ */
+object SleepTimerScheduler {
+    const val ACTION_SLEEP_OFF = "com.climapilot.free.SLEEP_OFF"
+    const val EXTRA_DEVICE_ID = "deviceId"
+
+    private const val PREFS = "climapilot_sleep_timer"
+    private const val K_DEVICE = "device_id"
+    private const val K_TRIGGER = "trigger_at"
+    // EN: One fixed alarm slot — only a single sleep timer can be armed at a time. DE: Ein fester Alarm-Slot — es kann nur ein Sleep-Timer gleichzeitig aktiv sein.
+    private const val REQUEST_CODE = 0x51EE9
+
+    /** EN: Arm the power-off for [deviceId] at the absolute [triggerAt] (epoch millis). DE: Das Ausschalten für [deviceId] zur absoluten Zeit [triggerAt] (Epoch-Millis) aktivieren. */
+    fun schedule(ctx: Context, deviceId: Long, triggerAt: Long) {
+        prefs(ctx).edit().putLong(K_DEVICE, deviceId).putLong(K_TRIGGER, triggerAt).apply()
+        val am = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val pi = pendingIntent(ctx, deviceId)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !am.canScheduleExactAlarms()) {
+                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+            } else {
+                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+            }
+        } catch (e: SecurityException) {
+            // EN: Exact-alarm permission revoked at runtime → inexact fallback. DE: Exakt-Alarm-Recht zur Laufzeit entzogen → ungenauer Fallback.
+            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+        }
+    }
+
+    /** EN: Cancel the pending power-off (if any) and forget it. DE: Das ausstehende Ausschalten (falls vorhanden) abbrechen und vergessen. */
+    fun cancel(ctx: Context) {
+        val am = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        am.cancel(pendingIntent(ctx, deviceId(ctx) ?: 0L))
+        clear(ctx)
+    }
+
+    /** EN: Drop the persisted state (after the alarm fired or was cancelled). DE: Den gespeicherten Zustand verwerfen (nachdem der Alarm ausgelöst wurde oder abgebrochen ist). */
+    fun clear(ctx: Context) {
+        prefs(ctx).edit().remove(K_DEVICE).remove(K_TRIGGER).apply()
+    }
+
+    /** EN: Absolute trigger time of the pending power-off, or null if none is armed. DE: Absolute Auslösezeit des ausstehenden Ausschaltens, oder null, falls keiner aktiv ist. */
+    fun triggerAt(ctx: Context): Long? =
+        prefs(ctx).getLong(K_TRIGGER, 0L).takeIf { it > 0L }
+
+    /** EN: Target device id of the pending power-off, or null. DE: Ziel-Geräte-ID des ausstehenden Ausschaltens, oder null. */
+    fun deviceId(ctx: Context): Long? =
+        prefs(ctx).getLong(K_DEVICE, 0L).takeIf { prefs(ctx).contains(K_DEVICE) }
+
+    private fun pendingIntent(ctx: Context, deviceId: Long): PendingIntent {
+        val intent = Intent(ctx, SleepTimerReceiver::class.java).apply {
+            action = ACTION_SLEEP_OFF
+            putExtra(EXTRA_DEVICE_ID, deviceId)
+        }
+        val flags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        return PendingIntent.getBroadcast(ctx, REQUEST_CODE, intent, flags)
+    }
+
+    private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN: Active (currently selected) mode chip. DE: Aktiver (aktuell gewählter) Modus-Chip. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="14dp" />
+    <solid android:color="#28C6D6" />
+</shape>

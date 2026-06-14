@@ -2,6 +2,28 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.3] — 2026-06-14
+
+### 🇬🇧 English
+**Fixed**
+- A saved device could appear twice after "Search devices" — discovery results are now de-duplicated against saved devices.
+- The sleep timer only ran while the app was open; it now powers the AC off reliably even when the app is closed (via a system alarm).
+
+**Changed — Home-screen widgets**
+- Widgets reorganised by function: dedicated **power**, **temperature** and **mode** widgets, plus a redesigned **all-in-one** widget.
+- Mode picker instead of cycling: all modes (Auto · Cool · Dry · Heat · Fan) as chips with the active one highlighted — tap to select directly.
+- All-in-one widget redesigned: centered power button, a connection light (green = connected) instead of the device name, temperature with − / +, and the mode chips.
+
+### 🇩🇪 Deutsch
+**Behoben**
+- Ein gespeichertes Gerät konnte nach „Geräte suchen" doppelt erscheinen — Suchtreffer werden jetzt gegen gespeicherte Geräte dedupliziert.
+- Der Sleep-Timer lief bisher nur, solange die App geöffnet war. Er schaltet die Klima jetzt zuverlässig aus, auch wenn die App geschlossen ist (über einen System-Alarm).
+
+**Geändert — Homescreen-Widgets**
+- Widgets nach Funktion neu aufgeteilt: eigene Widgets für **Ein/Aus**, **Temperatur** und **Modus** — plus ein überarbeitetes **Alles-Widget**.
+- Modus-Auswahl statt Durchschalten: alle Modi (Auto · Kühlen · Trocknen · Heizen · Lüften) als Chips, der aktive hervorgehoben — direkt antippbar.
+- Alles-Widget neu gestaltet: zentrierter Ein/Aus-Knopf, ein Verbindungslicht (grün = verbunden) statt des Gerätenamens, Temperatur mit − / + und die Modus-Chips.
+
 ## [0.2] — 2026-06-14
 
 ### 🇬🇧 English
