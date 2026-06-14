@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN: 1×1 widget metadata. DE: Metadaten für das 1×1-Widget. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
+    android:targetCellWidth="1"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/widget_ac_1x1"
+    android:previewLayout="@layout/widget_ac_1x1"
+    android:resizeMode="none"
+    android:widgetCategory="home_screen"
+    android:description="@string/widget_description" />

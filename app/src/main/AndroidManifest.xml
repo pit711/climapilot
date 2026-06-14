@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <!-- Scene scheduling: exact daily alarms + re-arm after reboot / Szenen-Zeitplan: exakte Tagesalarme + Neuplanung nach Neustart -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MideaControl">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MideaControl">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Applies a scheduled scene when its daily alarm fires / Wendet eine geplante Szene an, wenn ihr Tagesalarm auslöst -->
+        <receiver
+            android:name=".SceneAlarmReceiver"
+            android:exported="false" />
+
+        <!-- Re-arms scene schedules after a reboot / Stellt Szenen-Zeitpläne nach einem Neustart wieder her -->
+        <receiver
+            android:name=".BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Home-screen widget: quick power + temperature, offline / Homescreen-Widget: Ein-Aus + Temperatur, offline -->
+        <receiver
+            android:name=".widget.AcWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.climapilot.free.widget.POWER" />
+                <action android:name="com.climapilot.free.widget.TEMP_UP" />
+                <action android:name="com.climapilot.free.widget.TEMP_DOWN" />
+                <action android:name="com.climapilot.free.widget.MODE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_ac_info" />
+        </receiver>
+
+        <!-- 2×2 widget variant / 2×2-Widget-Variante -->
+        <receiver
+            android:name=".widget.AcWidget2x2Provider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_ac_2x2_info" />
+        </receiver>
+
+        <!-- 1×1 widget variant / 1×1-Widget-Variante -->
+        <receiver
+            android:name=".widget.AcWidget1x1Provider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_ac_1x1_info" />
+        </receiver>
+
+        <!-- Quick Settings tile: toggle AC power from the shade, offline / Schnelleinstellungen-Kachel: Klima aus der Statusleiste ein/aus, offline -->
+        <service
+            android:name=".PowerTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_w_power"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

@@ -1,0 +1,20 @@
+# Android / Gradle build output
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+
+# Local config & secrets
+local.properties
+
+# Logs & temporary screenshots from the build session
+*_log.txt
+build_log.txt
+# session/debug screenshots (single-letter prefix + underscore)
+[a-z]_*.png

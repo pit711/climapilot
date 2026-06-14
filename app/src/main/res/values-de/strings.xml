@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Quick scenes / Schnell-Szenen -->
+    <string name="section_scenes">Szenen</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco-Nacht</string>
+    <string name="scene_comfort">Komfort</string>
+    <string name="scene_save">Speichern</string>
+    <string name="scene_save_title">Szene speichern</string>
+    <string name="scene_name_label">Szenenname</string>
+    <string name="scene_default_name">Szene</string>
+    <string name="scene_hint">Tippen zum Anwenden · lange drücken zum Bearbeiten</string>
+    <string name="scene_edit_title">Szene bearbeiten</string>
+    <string name="scene_schedule">Täglich ausführen</string>
+    <string name="scene_schedule_at">Uhrzeit: %1$s</string>
+    <string name="scene_schedule_note">Wird automatisch jeden Tag angewendet. Die App muss im Hintergrund erlaubt sein.</string>
+    <string name="scene_delete">Löschen</string>
+    <string name="scene_delete_title">Szene löschen?</string>
+    <string name="scene_delete_msg">„%1$s“ wird entfernt.</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Deine Klimaanlage im WLAN</string>
+    <string name="action_discover">Geräte suchen</string>
+    <string name="action_discovering">Suche läuft…</string>
+    <string name="action_manual">Manuell</string>
+    <string name="demo_preview">Vorschau ohne Gerät (Demo)</string>
+    <string name="empty_title">Noch keine Geräte</string>
+    <string name="empty_body">Tippe auf „Geräte suchen“. Das Handy muss im selben WLAN sein wie die Klima.</string>
+    <string name="error_no_devices">Keine Geräte gefunden. Gleiches WLAN? Sonst manuell hinzufügen.</string>
+    <string name="action_connect">Verbinden</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Zurück</string>
+    <string name="cd_refresh">Aktualisieren</string>
+    <string name="cd_power">Ein/Aus</string>
+    <string name="cd_reorder">Zum Umsortieren ziehen</string>
+    <string name="connected_to">Verbunden · %1$s</string>
+    <string name="disconnected">Getrennt</string>
+    <string name="state_on">EIN</string>
+    <string name="state_off">AUS</string>
+    <string name="target_temp">Zieltemperatur</string>
+    <string name="readout_indoor">Innen</string>
+    <string name="readout_outdoor">Außen</string>
+    <string name="readout_power">Leistung</string>
+
+    <string name="section_mode">Modus</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Kühlen</string>
+    <string name="mode_dry">Trocknen</string>
+    <string name="mode_heat">Heizen</string>
+    <string name="mode_fan">Lüften</string>
+
+    <string name="section_fan">Lüftergeschwindigkeit</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_silent">Leise</string>
+    <string name="fan_low">Niedrig</string>
+    <string name="fan_medium">Mittel</string>
+    <string name="fan_high">Hoch</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automatisch</string>
+    <string name="fan_level">Stufe: %1$d%%</string>
+
+    <string name="section_status">Live-Status</string>
+    <string name="status_indoor">Innentemperatur</string>
+    <string name="status_outdoor">Außentemperatur</string>
+    <string name="status_power">Leistung</string>
+    <string name="status_total">Verbrauch gesamt</string>
+    <string name="status_error">Fehlercode</string>
+    <string name="status_error_none">keiner</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Kosten gesamt</string>
+
+    <!-- Einstellungen: Anzeige &amp; Preis -->
+    <string name="settings_display">Anzeige &amp; Preis</string>
+    <string name="unit_fahrenheit">°F (Fahrenheit) anzeigen</string>
+    <string name="price_per_kwh">Preis pro kWh</string>
+    <string name="price_hint">Für die Schätzung der Gesamtkosten aus dem Verbrauch.</string>
+
+    <string name="section_options">Optionen</string>
+    <string name="option_swing">Swing (Lamellen)</string>
+    <string name="option_eco">Eco-Modus</string>
+    <string name="option_beep">Signalton</string>
+    <string name="option_anion">Ionisierer</string>
+    <string name="option_out_silent">Außengerät leise</string>
+    <string name="option_self_clean">Selbstreinigung</string>
+
+    <string name="section_gear">Kompressor-Drossel</string>
+    <string name="gear_full">Voll</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Sleep-Timer</string>
+    <string name="sleep_active">Schaltet in %1$d min aus</string>
+    <string name="sleep_cancel">Timer abbrechen</string>
+    <string name="sleep_custom">Eigene…</string>
+    <string name="sleep_custom_title">Sleep-Timer</string>
+    <string name="sleep_custom_label">Minuten</string>
+    <string name="action_start">Starten</string>
+
+    <!-- Steuer-Bildschirm: Hinweis zum Umsortieren der Karten -->
+    <string name="layout_hint">Tipp: Karte lange drücken, um sie in eine andere Reihenfolge zu ziehen.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Gerät manuell hinzufügen</string>
+    <string name="manual_hint">Für Verbindungen ohne Broadcast-Suche. Die Geräte-ID findest du in der Midea/SmartHome-App oder per Netzwerk-Scan.</string>
+    <string name="field_ip">IP-Adresse</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">Geräte-ID (Dezimal)</string>
+    <string name="field_name">Name (optional)</string>
+    <string name="action_add">Hinzufügen</string>
+    <string name="action_cancel">Abbrechen</string>
+
+    <!-- Token-Export -->
+    <string name="cd_export">Token exportieren</string>
+    <string name="export_title">Token exportieren</string>
+    <string name="export_hint">Mit diesen Zugangsdaten kannst du dieses Gerät lokal ohne Cloud steuern — sichere sie oder nutze sie in anderen Tools. Halte sie geheim.</string>
+    <string name="export_none">Noch kein Token. Verbinde dich einmal online mit dem Gerät, dann exportieren.</string>
+    <string name="export_copy">Kopieren</string>
+    <string name="export_share">Teilen</string>
+    <string name="export_copied">In Zwischenablage kopiert</string>
+    <string name="action_close">Schließen</string>
+    <string name="import_button">Importieren</string>
+    <string name="import_title">Token importieren</string>
+    <string name="import_hint">Füge einen Token-Block ein (aus Export, msmart, …). Das Gerät läuft dann offline.</string>
+    <string name="import_field">Token-Block</string>
+    <string name="import_ok">Token importiert</string>
+    <string name="import_error">Token-Block nicht lesbar</string>
+
+    <!-- Bekannte (gecachte) Geräte in der Geräteliste -->
+    <string name="known_devices">Gespeicherte Geräte (offline)</string>
+
+    <!-- Schnelleinstellungen-Kachel -->
+    <string name="tile_label">Klima Ein/Aus</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Vorschau (Demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Verbindung fehlgeschlagen: %1$s</string>
+    <string name="error_command">Befehl fehlgeschlagen: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Bevor du loslegst</string>
+    <string name="disclaimer_body">ClimaPilot ist eine unabhängige App und steht in keiner Verbindung zu Midea und wird von Midea weder unterstützt noch freigegeben. Sie steuert kompatible Klimaanlagen über dein lokales WLAN.\n\nStelle sicher, dass dein Gerät korrekt installiert und betriebssicher ist, bevor du Befehle sendest. Die Nutzung erfolgt auf eigene Gefahr; die Autoren übernehmen keine Haftung für Schäden oder Verluste.\n\nMesswerte wie die Leistung stammen vom Gerät und können ungenau sein.\n\nHinweis: Beim ersten Verbinden mit einem Gerät holt ClimaPilot einmalig ein Zugriffs-Token von Mideas Server (kein Konto nötig). Danach läuft die Steuerung vollständig lokal — du kannst der App den Internetzugang sogar entziehen.</string>
+    <string name="disclaimer_accept">Verstanden</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Schnellsteuerung der Klima</string>
+    <string name="widget_not_connected">Nicht verbunden</string>
+    <string name="widget_off">Aus</string>
+    <string name="widget_on">An</string>
+    <string name="widget_indoor">Innen %1$s</string>
+    <string name="widget_power">Ein/Aus</string>
+    <string name="widget_cool_down">Kühler</string>
+    <string name="widget_warm_up">Wärmer</string>
+    <string name="widget_mode">Modus</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Einstellungen</string>
+    <string name="cd_settings">Einstellungen</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="changelog_title">Änderungen</string>
+    <string name="support_title">Entwicklung unterstützen</string>
+    <string name="support_body">ClimaPilot ist kostenlos und werbefrei. Wenn es dir hilft, hält ein kleines Trinkgeld es am Leben — danke!</string>
+    <string name="support_kofi">Kaffee ausgeben (Ko-fi)</string>
+    <string name="support_paypal">Trinkgeld per PayPal</string>
+    <string name="credits_title">Danksagung</string>
+    <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
+    <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_2_title">Version 0.2</string>
+    <string name="changelog_0_2_body">•  Schnell-Szenen mit Editor &amp; Tagesplan\n•  Live-Status: Leistung, Gesamtverbrauch &amp; geschätzte Kosten\n•  Optionen: Swing, Eco, Signalton — plus Ionisierer, Außen-Leise &amp; Selbstreinigung, wo unterstützt\n•  Kompressor-Drossel; Sleep-Timer mit eigener, gespeicherter Dauer\n•  Offline-Token-Caching — Internet nur beim ersten Verbinden; Token exportieren &amp; importieren\n•  Gespeicherte Geräte für sofortiges Offline-Wiederverbinden\n•  Karten per Zieh-Griff umsortieren\n•  Homescreen-Widget in 1×1 / 2×2 / 4×2 (Ein/Aus, Temperatur, Modus) + Schnelleinstellungen-Kachel\n•  °C/°F-Umschaltung und Preis pro kWh</string>
+    <string name="changelog_0_1_title">Version 0.1</string>
+    <string name="changelog_0_1_body">•  Erste Veröffentlichung\n•  Lokale Steuerung von Midea-Klimageräten über WLAN\n•  Modus, Temperatur, Lüfter, Swing, Eco &amp; Signalton\n•  Live-Status: Innen-/Außentemperatur, Leistung, Verbrauch, Fehlercode\n•  Schnell-Szenen &amp; Sleep-Timer\n•  Kompressor-Drossel\n•  Demo-Modus ohne Gerät</string>
+</resources>

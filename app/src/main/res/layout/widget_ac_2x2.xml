@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  EN: 2×2 widget. Compact: name, target temperature, a row of −/power/+/mode buttons, and a status line.
+  DE: 2×2-Widget. Kompakt: Name, Zieltemperatur, eine Reihe −/Ein-Aus/+/Modus-Knöpfe und eine Statuszeile.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widget_bg"
+    android:padding="12dp"
+    android:theme="@android:style/Theme.DeviceDefault">
+
+    <TextView
+        android:id="@+id/widget_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="Midea" />
+
+    <TextView
+        android:id="@+id/widget_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="24°" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="4dp">
+
+        <ImageButton
+            android:id="@+id/btn_minus"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/widget_btn_bg"
+            android:src="@drawable/ic_w_minus"
+            android:contentDescription="@string/widget_cool_down"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/btn_power"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/widget_btn_bg"
+            android:src="@drawable/ic_w_power"
+            android:contentDescription="@string/widget_power"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/btn_plus"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/widget_btn_bg"
+            android:src="@drawable/ic_w_plus"
+            android:contentDescription="@string/widget_warm_up"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/btn_mode"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:background="@drawable/widget_btn_bg"
+            android:src="@drawable/ic_w_mode"
+            android:contentDescription="@string/widget_mode"
+            android:scaleType="centerInside" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/widget_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#D8FFFFFF"
+        android:textSize="11sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="" />
+
+</LinearLayout>

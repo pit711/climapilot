@@ -3,7 +3,7 @@
 **Control your Midea air conditioner locally over Wi-Fi — no cloud account required.**
 **Steuere deine Midea-Klimaanlage lokal im WLAN — ganz ohne Cloud-Konto.**
 
-[![Version](https://img.shields.io/badge/version-0.1-blue)](https://github.com/pit711/climapilot/releases)
+[![Version](https://img.shields.io/badge/version-0.2-blue)](https://github.com/pit711/climapilot/releases)
 [![Platform](https://img.shields.io/badge/platform-Android%208%2B-green)](#)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-support-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/711it)
 [![PayPal](https://img.shields.io/badge/PayPal-tip-00457C?logo=paypal&logoColor=white)](https://paypal.me/711IT)
@@ -24,15 +24,19 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 
 ### Features
 - 🔌 **Local control** over Wi-Fi (LAN protocol, V3 devices)
-- 🌡️ Power, mode (auto / cool / dry / heat / fan), target temperature
+- 📴 **Works offline after the first connect** — a one-time token is fetched once (no account); afterwards no internet is needed
+- 🌡️ Power, mode (auto / cool / dry / heat / fan), target temperature (°C/°F)
 - 💨 Fan speed presets + fine slider, swing, eco mode, beep
-- 📊 Live status: indoor / outdoor temperature, power draw, total consumption, error code
-- ⚡ Quick scenes & sleep timer
-- 🧊 Compressor throttle (where supported)
+- 🌬️ Device-specific modes where supported: ionizer, outdoor-silent, self-clean
+- 📊 Live status: indoor / outdoor temperature, power draw, consumption, **estimated cost** (price per kWh)
+- ⚡ Quick scenes with a full editor & **daily schedule**
+- 🧊 Compressor throttle (where supported) · sleep timer (presets + custom)
+- 🏠 **Home-screen widgets** (1×1 / 2×2 / 4×2) + **Quick Settings tile** — control offline from the home screen
+- 🔑 Export / import the device token (offline backup, reuse in other tools)
 - 👀 Demo mode — explore the UI without a device
 
 ### Install
-1. Download the latest `climapilot-0.1.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
+1. Download the latest `climapilot-0.2.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
 2. On your phone, allow installing from unknown sources when prompted.
 3. Open the app, tap **Search devices** (phone must be on the same Wi-Fi as the AC), and connect.
 
@@ -57,15 +61,19 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 
 ### Funktionen
 - 🔌 **Lokale Steuerung** über WLAN (LAN-Protokoll, V3-Geräte)
-- 🌡️ Ein/Aus, Modus (Auto / Kühlen / Trocknen / Heizen / Lüften), Zieltemperatur
+- 📴 **Offline nach dem ersten Verbinden** — einmalig wird ein Token geholt (kein Konto); danach kein Internet nötig
+- 🌡️ Ein/Aus, Modus (Auto / Kühlen / Trocknen / Heizen / Lüften), Zieltemperatur (°C/°F)
 - 💨 Lüfter-Presets + Feinregler, Swing, Eco-Modus, Signalton
-- 📊 Live-Status: Innen-/Außentemperatur, Leistung, Gesamtverbrauch, Fehlercode
-- ⚡ Schnell-Szenen & Sleep-Timer
-- 🧊 Kompressor-Drossel (wo unterstützt)
+- 🌬️ Gerätespezifische Modi, wo unterstützt: Ionisierer, Außen-Leise, Selbstreinigung
+- 📊 Live-Status: Innen-/Außentemperatur, Leistung, Verbrauch, **geschätzte Kosten** (Preis pro kWh)
+- ⚡ Schnell-Szenen mit vollem Editor & **Tagesplan**
+- 🧊 Kompressor-Drossel (wo unterstützt) · Sleep-Timer (Presets + eigene Dauer)
+- 🏠 **Homescreen-Widgets** (1×1 / 2×2 / 4×2) + **Schnelleinstellungen-Kachel** — offline vom Startbildschirm steuern
+- 🔑 Geräte-Token exportieren / importieren (Offline-Backup, Nutzung in anderen Tools)
 - 👀 Demo-Modus — UI ohne Gerät ausprobieren
 
 ### Installation
-1. Lade die aktuelle `climapilot-0.1.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
+1. Lade die aktuelle `climapilot-0.2.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
 2. Erlaube auf dem Handy bei der Nachfrage die Installation aus unbekannten Quellen.
 3. Öffne die App, tippe auf **Geräte suchen** (Handy im selben WLAN wie die Klima) und verbinde dich.
 

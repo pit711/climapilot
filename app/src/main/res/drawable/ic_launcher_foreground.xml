@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Split AC indoor unit body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M31,33 L77,33 A5,5 0 0 1 82,38 L82,45 A5,5 0 0 1 77,50 L31,50 A5,5 0 0 1 26,45 L26,38 A5,5 0 0 1 31,33 Z" />
+
+    <!-- Air-outlet louver slot -->
+    <path
+        android:fillColor="#0B5163"
+        android:pathData="M31,45.5 h46 a1.5,1.5 0 0 1 0,3 h-46 a1.5,1.5 0 0 1 0,-3 z" />
+
+    <!-- Display indicator -->
+    <path
+        android:fillColor="#0B5163"
+        android:pathData="M71,37.5 h5 a1,1 0 0 1 1,1 v1 a1,1 0 0 1 -1,1 h-5 a1,1 0 0 1 -1,-1 v-1 a1,1 0 0 1 1,-1 z" />
+
+    <!-- Sound / airflow waves -->
+    <path
+        android:strokeColor="#FFFFFFFF" android:strokeWidth="3.4"
+        android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M45,55 Q54,62 63,55" />
+    <path
+        android:strokeColor="#E6FFFFFF" android:strokeWidth="3.4"
+        android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M41,60 Q54,69 67,60" />
+    <path
+        android:strokeColor="#B0FFFFFF" android:strokeWidth="3.4"
+        android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M37,65 Q54,76 71,65" />
+</vector>
