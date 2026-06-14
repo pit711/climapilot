@@ -5,7 +5,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-    <!-- Scene scheduling: exact daily alarms + re-arm after reboot / Szenen-Zeitplan: exakte Tagesalarme + Neuplanung nach Neustart -->
+    <!-- Exact alarms for the sleep timer & scene schedules. USE_EXACT_ALARM (API 33+) is granted by
+         default for timer/alarm-clock apps so the sleep timer fires reliably without the user having to
+         flip a setting; SCHEDULE_EXACT_ALARM covers API 31/32. / Exakte Alarme für Sleep-Timer &
+         Szenen-Zeitpläne. USE_EXACT_ALARM (ab API 33) ist für Timer-/Wecker-Apps standardmäßig erteilt,
+         damit der Sleep-Timer ohne Nutzer-Einstellung zuverlässig auslöst; SCHEDULE_EXACT_ALARM deckt API 31/32. -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 

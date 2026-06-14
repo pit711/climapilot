@@ -2,6 +2,16 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.3.2] — 2026-06-14
+
+### 🇬🇧 English
+**Fixed**
+- Crash when starting the sleep timer on some devices (e.g. Xiaomi/HyperOS): the app now holds the USE_EXACT_ALARM permission and never crashes if exact alarms are unavailable.
+
+### 🇩🇪 Deutsch
+**Behoben**
+- Absturz beim Starten des Sleep-Timers auf manchen Geräten (z. B. Xiaomi/HyperOS): Die App hält jetzt die USE_EXACT_ALARM-Berechtigung und stürzt nie ab, falls exakte Alarme nicht verfügbar sind.
+
 ## [0.3.1] — 2026-06-14
 
 ### 🇬🇧 English

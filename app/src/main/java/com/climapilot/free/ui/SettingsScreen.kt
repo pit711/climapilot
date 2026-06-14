@@ -362,6 +362,10 @@ private fun ChangelogCard() {
                 Text(stringResource(R.string.changelog_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
             }
             Spacer(Modifier.height(14.dp))
+            Text(stringResource(R.string.changelog_0_3_2_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.changelog_0_3_2_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 22.sp)
+            Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.changelog_0_3_1_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
             Spacer(Modifier.height(6.dp))
             Text(stringResource(R.string.changelog_0_3_1_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 22.sp)

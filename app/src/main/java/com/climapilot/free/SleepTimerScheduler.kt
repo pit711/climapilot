@@ -44,7 +44,22 @@ object SleepTimerScheduler {
             ctx, REQUEST_CODE, Intent(ctx, MainActivity::class.java),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
-        am.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAt, show), pi)
+        // EN: setAlarmClock is the reliable, Doze-proof choice, but some OEMs (e.g. HyperOS/MIUI) still
+        //     throw if no exact-alarm permission is granted. Never let scheduling crash the app — fall
+        //     back to an allow-while-idle alarm (may be deferred in Doze, but the timer still works).
+        // DE: setAlarmClock ist die zuverlässige, Doze-feste Wahl, aber manche Hersteller (z. B.
+        //     HyperOS/MIUI) werfen ohne Exact-Alarm-Recht trotzdem. Das Planen darf die App nie zum
+        //     Absturz bringen — Fallback auf einen allow-while-idle-Alarm (ggf. im Doze verzögert, aber
+        //     der Timer funktioniert weiter).
+        try {
+            am.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAt, show), pi)
+        } catch (e: SecurityException) {
+            try {
+                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+            } catch (e2: SecurityException) {
+                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+            }
+        }
     }
 
     /** EN: Cancel the pending power-off (if any) and forget it. DE: Das ausstehende Ausschalten (falls vorhanden) abbrechen und vergessen. */

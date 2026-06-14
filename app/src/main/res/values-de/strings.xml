@@ -174,6 +174,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_3_2_title">Version 0.3.2</string>
+    <string name="changelog_0_3_2_body">•  Absturz beim Starten des Sleep-Timers auf manchen Geräten behoben (z. B. Xiaomi/HyperOS)</string>
     <string name="changelog_0_3_1_title">Version 0.3.1</string>
     <string name="changelog_0_3_1_body">•  Sleep-Timer schaltet die Klima jetzt pünktlich aus, auch bei geschlossener App und im Standby (Doze)</string>
     <string name="changelog_0_3_title">Version 0.3</string>
