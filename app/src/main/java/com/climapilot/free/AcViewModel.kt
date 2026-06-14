@@ -423,7 +423,20 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         sleepJob = viewModelScope.launch {
             while (true) {
                 val remaining = triggerAt - System.currentTimeMillis()
-                if (remaining <= 0) { sleepTimerMinutes = null; break }
+                if (remaining <= 0) {
+                    // EN: If the app is still connected at expiry, power off over the live session and
+                    //     cancel the alarm — the alarm receiver would otherwise open a second, conflicting
+                    //     connection to the same AC. When the app is closed, the alarm handles it instead.
+                    // DE: Ist die App bei Ablauf noch verbunden, über die offene Sitzung ausschalten und
+                    //     den Alarm abbrechen — sonst öffnet der Alarm-Receiver eine zweite, kollidierende
+                    //     Verbindung zur selben Klima. Bei geschlossener App übernimmt stattdessen der Alarm.
+                    if (session != null) {
+                        SleepTimerScheduler.cancel(getApplication())
+                        command({ powerOn = false }) { setPower(false) }
+                    }
+                    sleepTimerMinutes = null
+                    break
+                }
                 // EN: round up so "1m" shows until the last minute actually elapses. DE: aufrunden, damit „1m" bis zum tatsächlichen Ablauf der letzten Minute angezeigt wird.
                 sleepTimerMinutes = ((remaining + 59_999) / 60_000).toInt()
                 delay(1_000)

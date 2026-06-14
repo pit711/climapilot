@@ -2,6 +2,16 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.3.1] — 2026-06-14
+
+### 🇬🇧 English
+**Fixed**
+- Sleep timer reliability: the AC now powers off on time even when the app is closed and the phone is idle — the timer is scheduled as an exact alarm-clock that wakes the device from Doze. Previously the power-off could be deferred until you next opened the app.
+
+### 🇩🇪 Deutsch
+**Behoben**
+- Zuverlässigkeit des Sleep-Timers: Die Klima schaltet jetzt pünktlich aus, auch wenn die App geschlossen ist und das Handy im Standby ist — der Timer wird als exakter Wecker-Alarm geplant, der das Gerät aus dem Doze weckt. Vorher konnte das Ausschalten verzögert werden, bis man die App das nächste Mal öffnete.
+
 ## [0.3] — 2026-06-14
 
 ### 🇬🇧 English

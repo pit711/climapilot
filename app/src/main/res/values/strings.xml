@@ -177,6 +177,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_3_1_title">Version 0.3.1</string>
+    <string name="changelog_0_3_1_body">•  Sleep timer now powers the AC off on time even when the app is closed and the phone is idle (Doze)</string>
     <string name="changelog_0_3_title">Version 0.3</string>
     <string name="changelog_0_3_body">•  Fixed: a saved device could appear twice after a search\n•  Fixed: the sleep timer now powers the AC off even when the app is closed\n•  Widgets reorganised by function: separate power, temperature &amp; mode widgets + a redesigned all-in-one widget\n•  Mode widget: pick any mode directly from chips (active one highlighted) instead of cycling\n•  All-in-one widget redesigned: centered power button, connection light, temperature &amp; mode chips</string>
     <string name="changelog_0_2_title">Version 0.2</string>

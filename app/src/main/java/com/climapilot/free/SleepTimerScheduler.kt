@@ -4,22 +4,25 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 
 /**
  * EN: Schedules the sleep timer as an [AlarmManager] alarm so the unit still powers off after N
  *     minutes even when the app is closed and its ViewModel (with the old in-process countdown) is
  *     gone. The single pending power-off is persisted (target device id + absolute trigger time) so
  *     the UI can restore the remaining-time display when the app is reopened, and so it can be
- *     cancelled. Mirrors [SceneScheduler]: exact, allow-while-idle, with an inexact fallback if the
- *     OS won't grant exact alarms.
+ *     cancelled. Uses [AlarmManager.setAlarmClock] — exact, wakes the device out of Doze and needs no
+ *     SCHEDULE_EXACT_ALARM permission — which is the only thing that reliably fires while the phone is
+ *     idle (plain exact/allow-while-idle alarms get deferred and only fired when the phone next wakes,
+ *     e.g. when you reopen the app).
  *
  * DE: Plant den Sleep-Timer als [AlarmManager]-Alarm, damit das Gerät auch dann nach N Minuten
  *     ausschaltet, wenn die App geschlossen und ihr ViewModel (mit dem alten In-Prozess-Countdown)
  *     weg ist. Das einzelne ausstehende Ausschalten wird gespeichert (Ziel-Geräte-ID + absolute
  *     Auslösezeit), damit die UI beim erneuten Öffnen die Restzeit wiederherstellen und es abbrechen
- *     kann. Analog zu [SceneScheduler]: exakt, allow-while-idle, mit ungenauem Fallback, falls das
- *     System exakte Alarme verweigert.
+ *     kann. Nutzt [AlarmManager.setAlarmClock] — exakt, weckt das Gerät aus dem Doze und braucht keine
+ *     SCHEDULE_EXACT_ALARM-Berechtigung — das Einzige, das im Standby zuverlässig auslöst (einfache
+ *     exakte/allow-while-idle-Alarme werden verzögert und feuern erst beim nächsten Aufwachen des
+ *     Geräts, z. B. wenn man die App wieder öffnet).
  */
 object SleepTimerScheduler {
     const val ACTION_SLEEP_OFF = "com.climapilot.free.SLEEP_OFF"
@@ -36,16 +39,12 @@ object SleepTimerScheduler {
         prefs(ctx).edit().putLong(K_DEVICE, deviceId).putLong(K_TRIGGER, triggerAt).apply()
         val am = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val pi = pendingIntent(ctx, deviceId)
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !am.canScheduleExactAlarms()) {
-                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
-            } else {
-                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
-            }
-        } catch (e: SecurityException) {
-            // EN: Exact-alarm permission revoked at runtime → inexact fallback. DE: Exakt-Alarm-Recht zur Laufzeit entzogen → ungenauer Fallback.
-            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
-        }
+        // EN: Tapping the alarm-clock chip opens the app. DE: Ein Tippen auf das Wecker-Symbol öffnet die App.
+        val show = PendingIntent.getActivity(
+            ctx, REQUEST_CODE, Intent(ctx, MainActivity::class.java),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        am.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAt, show), pi)
     }
 
     /** EN: Cancel the pending power-off (if any) and forget it. DE: Das ausstehende Ausschalten (falls vorhanden) abbrechen und vergessen. */
