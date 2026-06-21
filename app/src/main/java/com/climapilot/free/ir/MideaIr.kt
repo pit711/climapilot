@@ -84,6 +84,7 @@ object MideaIr {
     fun quietOff() = patternRaw(intArrayOf(0xA2, 0x13, 0xFF, 0xFF, 0xFF, 0x6F))
     fun toggleTurbo() = patternRaw(intArrayOf(0xA2, 0x09, 0xFF, 0xFF, 0xFF, 0x74))
     fun toggleEcono() = patternRaw(intArrayOf(0xA2, 0x02, 0xFF, 0xFF, 0xFF, 0x7E))
+    fun toggleSwing() = patternRaw(intArrayOf(0xA2, 0x01, 0xFF, 0xFF, 0xFF, 0x7C))
 
     /**
      * EN: Map a ClimaPilot mode (MideaAc.MODE_*) to a Midea IR mode. Dry has no slot in the 2-bit IR mode

@@ -55,6 +55,7 @@
 
     <string name="section_fan">Fan speed</string>
     <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
     <string name="fan_silent">Silent</string>
     <string name="fan_low">Low</string>
     <string name="fan_medium">Medium</string>
@@ -177,6 +178,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_4_2_title">Version 0.4.2</string>
+    <string name="changelog_0_4_2_body">•  Fixed: the all-in-one home-screen widget failed to load (\"Problem loading widget\")\n•  IR remote: added Swing, Quiet, Turbo and Eco toggles — it now also remembers its last state\n•  Fan speed: added a 1% quick preset</string>
     <string name="changelog_0_4_1_title">Version 0.4.1</string>
     <string name="changelog_0_4_1_body">•  New: IR-remote mode (infrared) — control the AC like a remote on phones with an IR blaster, no Wi-Fi needed\n•  Fixed: the app could not be updated over an earlier version (the app signing key was restored)</string>
     <string name="changelog_0_4_title">Version 0.4</string>
@@ -270,6 +273,9 @@
     <string name="ir_remote_entry">IR remote (infrared)</string>
     <string name="ir_remote_subtitle">Infrared · send only</string>
     <string name="ir_no_emitter">This phone has no IR blaster</string>
+    <string name="option_quiet">Quiet</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Infrared is one-way — these switches show what was last sent, not the unit\'s actual state.</string>
 
     <!-- Bottom navigation -->
     <string name="nav_control">Control</string>

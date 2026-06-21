@@ -32,6 +32,8 @@ enum class Status { Idle, Discovering, Connecting, Connected, Error }
  */
 enum class FanPreset(val labelRes: Int, val value: Int) {
     Auto(R.string.fan_auto, 102),
+    // EN: 1% — the lowest possible setting, handy for "fan only + minimal airflow" testing. DE: 1% — die niedrigste mögliche Stufe, praktisch zum Testen mit „nur Lüften + minimalem Luftstrom".
+    Min(R.string.fan_min, 1),
     Silent(R.string.fan_silent, 20),
     Low(R.string.fan_low, 40),
     Medium(R.string.fan_medium, 60),
@@ -112,6 +114,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     var historyEnabled by mutableStateOf(false); private set
     // EN: IR-remote mode — transmit-only (IR blaster), no LAN session, no readback; the state shown is assumed. DE: IR-Fernbedienungs-Modus — nur senden (IR-Blaster), keine LAN-Sitzung, kein Readback; der gezeigte Zustand ist angenommen.
     var irMode by mutableStateOf(false); private set
+    // EN: IR special-command toggles. IR is one-way, so these reflect what was last sent, not a confirmed device state. DE: IR-Sonderbefehl-Umschalter. IR ist einweg, daher spiegeln sie das zuletzt Gesendete, nicht einen bestätigten Gerätezustand.
+    var irQuiet by mutableStateOf(false); private set
+    var irTurbo by mutableStateOf(false); private set
+    var irEcono by mutableStateOf(false); private set
+    var irSwing by mutableStateOf(false); private set
 
     // EN: Last custom sleep-timer duration, shown as a saved quick chip (0 = none).
     // DE: Letzte eigene Sleep-Timer-Dauer, als gespeicherter Schnell-Chip angezeigt (0 = keine).
@@ -364,13 +371,20 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         rateLevels = 0
         capAnion = false; capSelfClean = false; capOutSilent = false
         live = null; energy = null
-        // EN: Default assumed state. DE: Angenommener Standardzustand.
-        powerOn = true; mode = MideaAc.MODE_COOL; tempC = 24.0; fan = 102
+        // EN: Restore the last assumed IR state so the remote "remembers" what it last sent. We only
+        //     restore the on-screen state — nothing is transmitted on entry, so opening IR mode never
+        //     changes the unit by surprise. DE: Den zuletzt angenommenen IR-Zustand wiederherstellen,
+        //     damit sich die Fernbedienung das zuletzt Gesendete „merkt". Es wird nur der Bildschirm-
+        //     zustand wiederhergestellt — beim Eintritt wird nichts gesendet, das Öffnen des IR-Modus
+        //     verändert das Gerät also nie überraschend.
+        val s = IrStateRepo.load(ctx)
+        powerOn = s.powerOn; mode = s.mode; tempC = s.tempC; fan = s.fan
+        irQuiet = s.quiet; irTurbo = s.turbo; irEcono = s.econo; irSwing = s.swing
         error = null
         publishWidget()
     }
 
-    /** EN: Transmit the current assumed state as one Midea IR frame. DE: Den aktuellen angenommenen Zustand als einen Midea-IR-Frame senden. */
+    /** EN: Transmit the current assumed state as one Midea IR frame, then remember it. DE: Den aktuellen angenommenen Zustand als einen Midea-IR-Frame senden und ihn merken. */
     private fun transmitIrState() {
         val ctx = getApplication<Application>()
         val pattern = MideaIr.pattern(
@@ -384,7 +398,37 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
                 error = ctx.getString(R.string.ir_no_emitter)
             }
         }
+        persistIrState()
     }
+
+    /** EN: Transmit a raw IR special-command frame (Quiet/Turbo/Econo/Swing toggles). DE: Einen rohen IR-Sonderbefehl-Frame senden (Quiet/Turbo/Econo/Swing-Umschalter). */
+    private fun transmitIrRaw(pattern: IntArray) {
+        val ctx = getApplication<Application>()
+        viewModelScope.launch(Dispatchers.IO) {
+            if (!IrRemote.transmit(ctx, pattern)) {
+                error = ctx.getString(R.string.ir_no_emitter)
+            }
+        }
+    }
+
+    /** EN: Save the current assumed IR state so it survives leaving/re-entering IR mode and app restarts. DE: Den aktuellen angenommenen IR-Zustand speichern, damit er das Verlassen/erneute Betreten des IR-Modus und App-Neustarts überlebt. */
+    private fun persistIrState() {
+        IrStateRepo.save(getApplication(), IrStateRepo.IrState(
+            powerOn = powerOn, mode = mode, tempC = tempC, fan = fan,
+            quiet = irQuiet, turbo = irTurbo, econo = irEcono, swing = irSwing,
+        ))
+    }
+
+    // EN: IR special-command toggles. IR is one-way: Quiet has explicit on/off frames, while
+    //     Turbo/Econo/Swing are single toggle frames that flip the unit on every press. The shown
+    //     on/off is therefore our best guess, seeded from the last persisted state.
+    // DE: IR-Sonderbefehl-Umschalter. IR ist einweg: Quiet hat eigene An/Aus-Frames, Turbo/Econo/Swing
+    //     sind einzelne Toggle-Frames, die das Gerät bei jedem Druck umschalten. Die gezeigte An/Aus ist
+    //     daher die beste Annahme, aus dem zuletzt gespeicherten Zustand vorbelegt.
+    fun toggleIrQuiet() { irQuiet = !irQuiet; transmitIrRaw(if (irQuiet) MideaIr.quietOn() else MideaIr.quietOff()); persistIrState() }
+    fun toggleIrTurbo() { irTurbo = !irTurbo; transmitIrRaw(MideaIr.toggleTurbo()); persistIrState() }
+    fun toggleIrEcono() { irEcono = !irEcono; transmitIrRaw(MideaIr.toggleEcono()); persistIrState() }
+    fun toggleIrSwing() { irSwing = !irSwing; transmitIrRaw(MideaIr.toggleSwing()); persistIrState() }
 
     /**
      * EN: Copy device-reported state into the desired-state mirror so the UI matches reality.

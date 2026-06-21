@@ -21,12 +21,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <View
+        <!-- EN: Must be an ImageView, not a bare <View>: RemoteViews can only inflate @RemoteView-annotated
+             classes, so a plain View throws "Problem loading widget" in the launcher process.
+             DE: Muss eine ImageView sein, kein nacktes <View>: RemoteViews kann nur @RemoteView-annotierte
+             Klassen inflaten, ein einfaches View wirft „Problem beim Laden des Widgets" im Launcher-Prozess. -->
+        <ImageView
             android:id="@+id/widget_dot"
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_gravity="top|end"
             android:layout_marginTop="2dp"
+            android:contentDescription="@null"
             android:background="@drawable/widget_dot_off" />
 
         <ImageButton

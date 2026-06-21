@@ -137,6 +137,8 @@ fun ControlScreen(vm: AcViewModel) {
         item(key = "hero") { PowerHero(vm) }
         item(key = "mode") { ModeSelector(vm) }
         item(key = "fan") { FanCard(vm) }
+        // EN: IR mode shows no tabs, so its extra toggles live right here on the single screen. DE: Der IR-Modus hat keine Reiter, daher liegen seine Extra-Schalter direkt hier auf dem einen Bildschirm.
+        if (vm.irMode) item(key = "iropts") { IrOptionsCard(vm) }
         errorItem(vm)
     }
 }
@@ -505,6 +507,26 @@ private fun OptionsCard(vm: AcViewModel) {
         if (vm.capAnion) ToggleRow(Icons.Default.Spa, stringResource(R.string.option_anion), vm.anion) { vm.toggleAnion() }
         if (vm.capOutSilent) ToggleRow(Icons.Default.VolumeOff, stringResource(R.string.option_out_silent), vm.outSilent) { vm.toggleOutdoorSilent() }
         if (vm.capSelfClean) ToggleRow(Icons.Default.CleaningServices, stringResource(R.string.option_self_clean), vm.selfClean) { vm.toggleSelfClean() }
+    }
+}
+
+/**
+ * EN: IR-mode options — fire-and-forget special-command toggles (Swing/Quiet/Turbo/Econo). IR is
+ *     one-way, so a switch reflects what we last sent, not a confirmed device state; the hint says so.
+ * DE: IR-Modus-Optionen — Sonderbefehl-Umschalter ohne Rückmeldung (Swing/Leise/Turbo/Eco). IR ist
+ *     einweg, daher zeigt ein Schalter das zuletzt Gesendete, nicht einen bestätigten Gerätezustand;
+ *     der Hinweis sagt das.
+ */
+@Composable
+private fun IrOptionsCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    SectionCard(stringResource(R.string.section_options), Icons.Default.Eco) {
+        ToggleRow(Icons.Default.SwapVert, stringResource(R.string.option_swing), vm.irSwing) { vm.toggleIrSwing() }
+        ToggleRow(Icons.Default.VolumeOff, stringResource(R.string.option_quiet), vm.irQuiet) { vm.toggleIrQuiet() }
+        ToggleRow(Icons.Default.Bolt, stringResource(R.string.option_turbo), vm.irTurbo) { vm.toggleIrTurbo() }
+        ToggleRow(Icons.Default.Eco, stringResource(R.string.option_eco), vm.irEcono) { vm.toggleIrEcono() }
+        Spacer(Modifier.height(6.dp))
+        Text(stringResource(R.string.ir_options_hint), fontSize = 11.sp, color = cs.onSurfaceVariant)
     }
 }
 

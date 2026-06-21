@@ -52,6 +52,7 @@
 
     <string name="section_fan">Lüftergeschwindigkeit</string>
     <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
     <string name="fan_silent">Leise</string>
     <string name="fan_low">Niedrig</string>
     <string name="fan_medium">Mittel</string>
@@ -174,6 +175,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_4_2_title">Version 0.4.2</string>
+    <string name="changelog_0_4_2_body">•  Behoben: Das Alles-Widget auf dem Homescreen ließ sich nicht laden („Problem beim Laden des Widgets")\n•  IR-Fernbedienung: Swing-, Leise-, Turbo- und Eco-Schalter ergänzt — merkt sich jetzt zudem den zuletzt gesendeten Zustand\n•  Lüftergeschwindigkeit: 1%-Schnellwahl ergänzt</string>
     <string name="changelog_0_4_1_title">Version 0.4.1</string>
     <string name="changelog_0_4_1_body">•  Neu: IR-Fernbedienungs-Modus (Infrarot) — die Klima wie mit einer Fernbedienung steuern, auf Handys mit IR-Blaster, ohne WLAN\n•  Behoben: Die App ließ sich nicht über eine ältere Version aktualisieren (der App-Signatur-Key wurde wiederhergestellt)</string>
     <string name="changelog_0_4_title">Version 0.4</string>
@@ -267,6 +270,9 @@
     <string name="ir_remote_entry">IR-Fernbedienung (Infrarot)</string>
     <string name="ir_remote_subtitle">Infrarot · nur senden</string>
     <string name="ir_no_emitter">Dieses Handy hat keinen IR-Sender</string>
+    <string name="option_quiet">Leise</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Infrarot ist einweg — diese Schalter zeigen das zuletzt Gesendete, nicht den echten Gerätezustand.</string>
 
     <!-- Untere Navigationsleiste -->
     <string name="nav_control">Steuern</string>

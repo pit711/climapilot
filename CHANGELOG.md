@@ -2,53 +2,59 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.4.2] — 2026-06-22
+
+### 🇬🇧 English
+**Fixed**
+- The all-in-one home-screen widget failed to load ("Problem loading widget"): its connection dot was a bare `<View>`, which RemoteViews cannot inflate in the launcher process. It is now an `ImageView`.
+
+**Added**
+- IR remote: Swing, Quiet, Turbo and Eco toggles. The IR remote also remembers its last sent state (power, mode, temperature, fan and these toggles) and restores it when you re-enter IR mode.
+- Fan speed: a 1% quick preset for minimal airflow.
+
+### 🇩🇪 Deutsch
+**Behoben**
+- Das Alles-Widget auf dem Homescreen ließ sich nicht laden („Problem beim Laden des Widgets"): Der Verbindungspunkt war ein nacktes `<View>`, das RemoteViews im Launcher-Prozess nicht inflaten kann. Jetzt eine `ImageView`.
+
+**Neu**
+- IR-Fernbedienung: Swing-, Leise-, Turbo- und Eco-Schalter. Die IR-Fernbedienung merkt sich zudem ihren zuletzt gesendeten Zustand (Ein/Aus, Modus, Temperatur, Lüfter und diese Schalter) und stellt ihn beim erneuten Betreten des IR-Modus wieder her.
+- Lüftergeschwindigkeit: 1%-Schnellwahl für minimalen Luftstrom.
+
 ## [0.4.1] — 2026-06-21
 
 ### 🇬🇧 English
 **Added**
-- **IR-remote mode** (infrared) — on phones with an IR blaster, control the AC like a remote, no Wi-Fi needed. It's a separate transmit-only mode (no live readback).
+- IR-remote mode (infrared): control the AC like a remote on phones with an IR blaster — no Wi-Fi needed.
 
 **Fixed**
-- The app could not be updated over an earlier version (0.1–0.3.2): the 0.4 build was signed with a different key. 0.4.1 restores the original signing key so updates work again.
+- The app could not be updated over an earlier version; the app signing key was restored.
 
 ### 🇩🇪 Deutsch
 **Neu**
-- **IR-Fernbedienungs-Modus** (Infrarot) — auf Handys mit IR-Blaster die Klima wie mit einer Fernbedienung steuern, ohne WLAN. Ein eigener, reiner Sende-Modus (kein Live-Readback).
+- IR-Fernbedienungs-Modus (Infrarot): die Klima wie mit einer Fernbedienung steuern, auf Handys mit IR-Blaster — ohne WLAN.
 
 **Behoben**
-- Die App ließ sich nicht über eine ältere Version (0.1–0.3.2) aktualisieren: Der 0.4-Build war mit einem anderen Key signiert. 0.4.1 stellt den ursprünglichen Signatur-Key wieder her, sodass Updates wieder funktionieren.
+- Die App ließ sich nicht über eine ältere Version aktualisieren; der App-Signatur-Key wurde wiederhergestellt.
 
 ## [0.4] — 2026-06-21
 
 ### 🇬🇧 English
 **Added**
-- Tabbed navigation: **Control · Options · Scenes · Status · History** — adapts to a side navigation rail on tablets and in landscape.
-- **Energy & filter history with charts** — power, indoor/outdoor temperature and fan level, by hour / day / week / month or a chosen day, per AC; optional background recording every ~15 min (Wi-Fi only); filter-cleaning reminder.
-- **Wear OS companion app** — control the AC from your watch.
-- **Reliable off/sleep timer** — retries, survives a reboot, with a live countdown notification (off now / cancel).
-- **Auto power-off** after a maximum runtime.
-- **App lock** with fingerprint or PIN.
-- **Mode tile** for Quick Settings; launcher shortcuts (off / scene / demo).
-- “**Reliable timers**” setup helper (battery optimisation & manufacturer auto-start).
-
-**Changed**
-- Redesigned **ON/OFF slider** and more compact mode & fan controls.
-- Responsive layout for tablets and landscape (centered, max-width content).
+- Tabbed navigation: Control · Options · Scenes · Status · History (side rail on tablets/landscape).
+- Energy & filter history with charts (per hour/day/week/month or a chosen day, per AC); optional background recording (~15 min, Wi-Fi).
+- Wear OS companion app.
+- Reliable off/sleep timer with retries, reboot survival and a live countdown notification.
+- Auto power-off after a maximum runtime; app lock (fingerprint/PIN); Quick Settings mode tile; launcher shortcuts; "reliable timers" setup helper.
+- Redesigned ON/OFF slider and more compact mode & fan controls.
 
 ### 🇩🇪 Deutsch
 **Neu**
-- Reiter-Navigation: **Steuern · Optionen · Szenen · Status · Verlauf** — wird auf Tablets und im Querformat zur seitlichen Navigationsleiste.
-- **Energie- & Filter-Verlauf mit Charts** — Leistung, Innen-/Außentemperatur und Lüfterstufe, nach Stunde / Tag / Woche / Monat oder gewähltem Tag, pro Klima; optionale Hintergrund-Aufzeichnung etwa alle 15 min (nur WLAN); Filter-Reinigungs-Erinnerung.
-- **Wear-OS-App** — die Klima von der Uhr steuern.
-- **Zuverlässiger Aus-/Sleep-Timer** — mit Wiederholungen, übersteht Neustart, samt Live-Countdown-Benachrichtigung (Jetzt aus / Abbrechen).
-- **Auto-Aus** nach maximaler Laufzeit.
-- **App-Sperre** per Fingerabdruck oder PIN.
-- **Modus-Kachel** für Schnelleinstellungen; Launcher-Shortcuts (Aus / Szene / Demo).
-- „**Zuverlässige Timer**“-Hilfe (Akku-Optimierung & Hersteller-Autostart).
-
-**Geändert**
-- Neu gestalteter **EIN/AUS-Schieberegler** und kompaktere Modus- & Lüftersteuerung.
-- Responsives Layout für Tablets und Querformat (zentriert, maximale Breite).
+- Reiter-Navigation: Steuern · Optionen · Szenen · Status · Verlauf (Seitenleiste auf Tablets/im Querformat).
+- Energie- & Filter-Verlauf mit Diagrammen (pro Stunde/Tag/Woche/Monat oder gewähltem Tag, je Klima); optionale Hintergrund-Aufzeichnung (~15 min, WLAN).
+- Wear-OS-Begleit-App.
+- Zuverlässiger Aus-/Sleep-Timer mit Wiederholungen, Neustart-Überstehen und Live-Countdown-Benachrichtigung.
+- Auto-Aus nach maximaler Laufzeit; App-Sperre (Fingerabdruck/PIN); Schnelleinstellungen-Modus-Kachel; Launcher-Shortcuts; „Zuverlässige Timer"-Einrichtungshelfer.
+- Überarbeiteter EIN/AUS-Schieber und kompaktere Modus- & Lüfter-Steuerung.
 
 ## [0.3.2] — 2026-06-14
 
