@@ -177,6 +177,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_4_1_title">Version 0.4.1</string>
+    <string name="changelog_0_4_1_body">•  New: IR-remote mode (infrared) — control the AC like a remote on phones with an IR blaster, no Wi-Fi needed\n•  Fixed: the app could not be updated over an earlier version (the app signing key was restored)</string>
     <string name="changelog_0_4_title">Version 0.4</string>
     <string name="changelog_0_4_body">•  New tabbed navigation: Control · Options · Scenes · Status · History — adapts to a side rail on tablets and in landscape\n•  Energy &amp; filter history with charts — power, indoor/outdoor temperature and fan level, by hour / day / week / month or a chosen day, per AC; optional background recording every ~15 min (Wi-Fi)\n•  Wear OS companion app — control the AC from your watch\n•  Reliable off/sleep timer — retries, survives a reboot, with a live countdown notification (off now / cancel)\n•  Auto power-off after a maximum runtime\n•  App lock with fingerprint or PIN\n•  Mode tile for Quick Settings · launcher shortcuts (off / scene / demo)\n•  “Reliable timers” setup helper (battery optimisation &amp; manufacturer auto-start)\n•  Redesigned ON/OFF slider and more compact mode &amp; fan controls</string>
     <string name="changelog_0_3_2_title">Version 0.3.2</string>
@@ -262,6 +264,12 @@
     <string name="donate_prompt_body">ClimaPilot is free and ad-free. If it has earned its place on your phone, a small tip keeps it going — thank you!</string>
     <string name="donate_later">Maybe later</string>
     <string name="donate_already">Already supported</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR remote</string>
+    <string name="ir_remote_entry">IR remote (infrared)</string>
+    <string name="ir_remote_subtitle">Infrared · send only</string>
+    <string name="ir_no_emitter">This phone has no IR blaster</string>
 
     <!-- Bottom navigation -->
     <string name="nav_control">Control</string>

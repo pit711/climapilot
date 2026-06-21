@@ -168,7 +168,12 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
             },
             label = "screen",
         ) { control ->
-            if (control) ConnectedScaffold(vm) else DevicesScreen(vm, onOpenSettings = { showSettings = true })
+            if (control) {
+                // EN: IR mode is a focused, transmit-only screen (no tabs/readback). DE: Der IR-Modus ist ein fokussierter, reiner Sende-Bildschirm (keine Reiter/Readback).
+                if (vm.irMode) ControlScreen(vm) else ConnectedScaffold(vm)
+            } else {
+                DevicesScreen(vm, onOpenSettings = { showSettings = true })
+            }
         }
     }
 

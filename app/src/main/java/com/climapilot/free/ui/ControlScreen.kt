@@ -228,13 +228,16 @@ fun ConnectedTopBar(vm: AcViewModel) {
                 val connected = vm.status == Status.Connected
                 Box(
                     Modifier.size(8.dp).clip(CircleShape)
-                        .background(if (connected) Color(0xFF2ECC71) else cs.error)
+                        .background(if (vm.irMode) cs.primary else if (connected) Color(0xFF2ECC71) else cs.error)
                 )
                 Spacer(Modifier.width(6.dp))
                 Text(
-                    if (connected) stringResource(R.string.connected_to, vm.connectedDevice?.ip ?: "")
-                    else stringResource(R.string.disconnected),
-                    fontSize = 12.sp, color = cs.onSurfaceVariant,
+                    when {
+                        vm.irMode -> stringResource(R.string.ir_remote_subtitle)
+                        connected -> stringResource(R.string.connected_to, vm.connectedDevice?.ip ?: "")
+                        else -> stringResource(R.string.disconnected)
+                    },
+                    fontSize = 12.sp, color = if (vm.irMode) cs.primary else cs.onSurfaceVariant,
                 )
             }
         }
@@ -386,7 +389,8 @@ private fun ModeSelector(vm: AcViewModel) {
     val cs = MaterialTheme.colorScheme
     SectionCard(stringResource(R.string.section_mode), Icons.Default.Thermostat) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            MODES.forEach { m ->
+            // EN: IR can't address Dry (no slot in the 2-bit IR mode field), so hide it in IR mode. DE: IR kann Trocknen nicht ansteuern (kein Platz im 2-Bit-IR-Modusfeld), daher im IR-Modus ausblenden.
+            MODES.filter { !vm.irMode || it.id != MideaAc.MODE_DRY }.forEach { m ->
                 val selected = vm.mode == m.id
                 Column(
                     Modifier

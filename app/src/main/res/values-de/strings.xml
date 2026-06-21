@@ -174,6 +174,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_4_1_title">Version 0.4.1</string>
+    <string name="changelog_0_4_1_body">•  Neu: IR-Fernbedienungs-Modus (Infrarot) — die Klima wie mit einer Fernbedienung steuern, auf Handys mit IR-Blaster, ohne WLAN\n•  Behoben: Die App ließ sich nicht über eine ältere Version aktualisieren (der App-Signatur-Key wurde wiederhergestellt)</string>
     <string name="changelog_0_4_title">Version 0.4</string>
     <string name="changelog_0_4_body">•  Neue Reiter-Navigation: Steuern · Optionen · Szenen · Status · Verlauf — wird auf Tablets und im Querformat zur seitlichen Leiste\n•  Energie- &amp; Filter-Verlauf mit Charts — Leistung, Innen-/Außentemperatur und Lüfterstufe, nach Stunde / Tag / Woche / Monat oder gewähltem Tag, pro Klima; optionale Hintergrund-Aufzeichnung etwa alle 15 min (WLAN)\n•  Wear-OS-App — die Klima von der Uhr steuern\n•  Zuverlässiger Aus-/Sleep-Timer — mit Wiederholungen, übersteht Neustart, samt Live-Countdown-Benachrichtigung (Jetzt aus / Abbrechen)\n•  Auto-Aus nach maximaler Laufzeit\n•  App-Sperre per Fingerabdruck oder PIN\n•  Modus-Kachel für Schnelleinstellungen · Launcher-Shortcuts (Aus / Szene / Demo)\n•  „Zuverlässige Timer“-Hilfe (Akku-Optimierung &amp; Hersteller-Autostart)\n•  Neu gestalteter EIN/AUS-Schieberegler und kompaktere Modus- &amp; Lüftersteuerung</string>
     <string name="changelog_0_3_2_title">Version 0.3.2</string>
@@ -259,6 +261,12 @@
     <string name="donate_prompt_body">ClimaPilot ist kostenlos und werbefrei. Wenn es seinen Platz auf deinem Handy verdient hat, hält ein kleines Trinkgeld es am Leben — danke!</string>
     <string name="donate_later">Vielleicht später</string>
     <string name="donate_already">Schon unterstützt</string>
+
+    <!-- IR-Fernbedienungs-Modus -->
+    <string name="ir_remote_title">IR-Fernbedienung</string>
+    <string name="ir_remote_entry">IR-Fernbedienung (Infrarot)</string>
+    <string name="ir_remote_subtitle">Infrarot · nur senden</string>
+    <string name="ir_no_emitter">Dieses Handy hat keinen IR-Sender</string>
 
     <!-- Untere Navigationsleiste -->
     <string name="nav_control">Steuern</string>

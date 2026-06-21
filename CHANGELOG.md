@@ -2,6 +2,22 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.4.1] — 2026-06-21
+
+### 🇬🇧 English
+**Added**
+- **IR-remote mode** (infrared) — on phones with an IR blaster, control the AC like a remote, no Wi-Fi needed. It's a separate transmit-only mode (no live readback).
+
+**Fixed**
+- The app could not be updated over an earlier version (0.1–0.3.2): the 0.4 build was signed with a different key. 0.4.1 restores the original signing key so updates work again.
+
+### 🇩🇪 Deutsch
+**Neu**
+- **IR-Fernbedienungs-Modus** (Infrarot) — auf Handys mit IR-Blaster die Klima wie mit einer Fernbedienung steuern, ohne WLAN. Ein eigener, reiner Sende-Modus (kein Live-Readback).
+
+**Behoben**
+- Die App ließ sich nicht über eine ältere Version (0.1–0.3.2) aktualisieren: Der 0.4-Build war mit einem anderen Key signiert. 0.4.1 stellt den ursprünglichen Signatur-Key wieder her, sodass Updates wieder funktionieren.
+
 ## [0.4] — 2026-06-21
 
 ### 🇬🇧 English

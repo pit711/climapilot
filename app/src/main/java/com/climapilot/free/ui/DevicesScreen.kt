@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AcUnit
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.SettingsRemote
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -53,6 +54,7 @@ import androidx.compose.ui.unit.sp
 import com.climapilot.free.AcViewModel
 import com.climapilot.free.R
 import com.climapilot.free.Status
+import com.climapilot.free.ir.IrRemote
 import com.climapilot.free.TokenRepo
 import com.climapilot.free.midea.MideaDevice
 
@@ -129,6 +131,20 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
                     onClick = { vm.connectDemo() },
                     modifier = Modifier.fillMaxWidth(),
                 ) { Text(stringResource(R.string.demo_preview)) }
+            }
+
+            // EN: IR-remote entry — only on phones with an IR blaster. DE: IR-Fernbedienungs-Einstieg — nur auf Handys mit IR-Blaster.
+            if (IrRemote.hasEmitter(context)) {
+                item {
+                    OutlinedButton(
+                        onClick = { vm.enterIrMode() },
+                        modifier = Modifier.fillMaxWidth().height(52.dp),
+                    ) {
+                        Icon(Icons.Default.SettingsRemote, null, Modifier.size(18.dp))
+                        Spacer(Modifier.width(8.dp))
+                        Text(stringResource(R.string.ir_remote_entry))
+                    }
+                }
             }
 
             if (known.isNotEmpty()) {

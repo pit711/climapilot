@@ -13,12 +13,16 @@ import com.climapilot.free.midea.MideaAc
 import com.climapilot.free.midea.MideaAcSession
 import com.climapilot.free.midea.MideaDevice
 import com.climapilot.free.midea.MideaDiscovery
+import com.climapilot.free.ir.IrRemote
+import com.climapilot.free.ir.MideaIr
 import com.climapilot.free.widget.WidgetRepo
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlin.math.roundToInt
 
 enum class Status { Idle, Discovering, Connecting, Connected, Error }
 
@@ -106,6 +110,8 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     var maxRuntimeHours by mutableStateOf(0); private set
     // EN: Record the AC history + run the background poll (off by default). DE: Klima-Verlauf aufzeichnen + Hintergrund-Poll (standardmäßig aus).
     var historyEnabled by mutableStateOf(false); private set
+    // EN: IR-remote mode — transmit-only (IR blaster), no LAN session, no readback; the state shown is assumed. DE: IR-Fernbedienungs-Modus — nur senden (IR-Blaster), keine LAN-Sitzung, kein Readback; der gezeigte Zustand ist angenommen.
+    var irMode by mutableStateOf(false); private set
 
     // EN: Last custom sleep-timer duration, shown as a saved quick chip (0 = none).
     // DE: Letzte eigene Sleep-Timer-Dauer, als gespeicherter Schnell-Chip angezeigt (0 = keine).
@@ -328,10 +334,56 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         cancelSleepTimer()
         viewModelScope.launch { lock.withLock { session?.close() } }
         session = null
+        irMode = false
         connectedDevice = null
         live = null; energy = null
         status = Status.Idle
         publishWidget()
+    }
+
+    /**
+     * EN: Enter IR-remote mode: a transmit-only session that drives any Midea AC in line of sight via the
+     *     phone's IR blaster. No LAN, no token, no polling — the shown state is what we last commanded
+     *     (IR is one-way). Live readouts (indoor/outdoor/power) are unavailable here.
+     * DE: In den IR-Fernbedienungs-Modus wechseln: eine reine Sende-Sitzung, die jede Midea-Klima in
+     *     Sichtlinie über den IR-Blaster des Handys steuert. Kein LAN, kein Token, kein Polling — der
+     *     gezeigte Zustand ist das zuletzt Befohlene (IR ist Einweg). Live-Werte (Innen/Außen/Leistung) fehlen.
+     */
+    fun enterIrMode() {
+        stopRefresh()
+        cancelSleepTimer()
+        viewModelScope.launch { lock.withLock { session?.close() } }
+        session = null
+        irMode = true
+        val ctx = getApplication<Application>()
+        connectedDevice = MideaDevice(
+            ip = "IR", port = 0, id = -1L, sn = "", name = ctx.getString(R.string.ir_remote_title),
+            type = 0xAC, version = 3,
+        )
+        status = Status.Connected
+        rateLevels = 0
+        capAnion = false; capSelfClean = false; capOutSilent = false
+        live = null; energy = null
+        // EN: Default assumed state. DE: Angenommener Standardzustand.
+        powerOn = true; mode = MideaAc.MODE_COOL; tempC = 24.0; fan = 102
+        error = null
+        publishWidget()
+    }
+
+    /** EN: Transmit the current assumed state as one Midea IR frame. DE: Den aktuellen angenommenen Zustand als einen Midea-IR-Frame senden. */
+    private fun transmitIrState() {
+        val ctx = getApplication<Application>()
+        val pattern = MideaIr.pattern(
+            powerOn = powerOn,
+            mode = MideaIr.modeFromApp(mode),
+            tempC = tempC.roundToInt().coerceIn(17, 30),
+            fan = MideaIr.fanFromApp(fan),
+        )
+        viewModelScope.launch(Dispatchers.IO) {
+            if (!IrRemote.transmit(ctx, pattern)) {
+                error = ctx.getString(R.string.ir_no_emitter)
+            }
+        }
     }
 
     /**
@@ -355,6 +407,8 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     private fun command(optimistic: () -> Unit = {}, block: suspend MideaAcSession.() -> Unit) {
         optimistic()
         publishWidget()
+        // EN: IR mode: no LAN session — transmit the full assumed state over the IR blaster instead. DE: IR-Modus: keine LAN-Sitzung — stattdessen den vollen angenommenen Zustand über den IR-Blaster senden.
+        if (irMode) { transmitIrState(); return }
         val s = session ?: return
         viewModelScope.launch {
             busy = true
@@ -371,7 +425,13 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
 
     fun togglePower() { val v = !powerOn; command({ powerOn = v }) { setPower(v) }; if (v) maybeArmMaxRuntime() }
     fun applyMode(m: Int) = command({ mode = m }) { setMode(m) }
-    fun nudgeTemp(delta: Double) { val v = (tempC + delta).coerceIn(16.0, 30.0); command({ tempC = v }) { setTemp(v) } }
+    fun nudgeTemp(delta: Double) {
+        // EN: IR is integer-only (17–30 °C), so step by whole degrees in IR mode. DE: IR ist ganzzahlig (17–30 °C), daher im IR-Modus in ganzen Grad schritten.
+        val d = if (irMode) (if (delta > 0) 1.0 else -1.0) else delta
+        val range = if (irMode) 17.0..30.0 else 16.0..30.0
+        val v = (tempC + d).coerceIn(range.start, range.endInclusive)
+        command({ tempC = v }) { setTemp(v) }
+    }
     fun applyTemp(t: Double) { val v = t.coerceIn(16.0, 30.0); command({ tempC = v }) { setTemp(v) } }
     fun applyFan(value: Int) = command({ fan = value }) { setFan(value) }
     fun toggleSwing() { val v = !swing; command({ swing = v }) { setSwing(v) } }
