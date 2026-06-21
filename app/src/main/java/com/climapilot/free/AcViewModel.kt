@@ -59,6 +59,12 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
             powerW = energy?.powerW?.takeIf { !it.isNaN() },
             device = dev,
         )
+        // EN: Log a throttled usage sample (power/temps/fan) for the History charts — only when enabled. DE: Einen gedrosselten Messwert (Leistung/Temperaturen/Lüfter) für die Verlaufs-Charts aufzeichnen — nur wenn aktiviert.
+        if (dev != null && historyEnabled) {
+            UsageHistory.record(getApplication(), dev.id, energy?.powerW, energy?.totalKwh, powerOn, live?.indoorTemp, live?.outdoorTemp, fan)
+        }
+        // EN: Mirror the state to a paired Wear OS watch. DE: Den Zustand an eine gekoppelte Wear-OS-Uhr spiegeln.
+        WearSync.publish(getApplication(), dev != null, powerOn, tempC)
     }
 
     // EN: ---- discovery / connection ---- / DE: ---- Gerätesuche / Verbindung ----
@@ -96,6 +102,10 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     // EN: Display preferences. DE: Anzeige-Einstellungen.
     var useFahrenheit by mutableStateOf(false); private set
     var pricePerKwh by mutableStateOf(0.0); private set
+    // EN: Auto power-off after the AC runs this many hours (0 = off). DE: Auto-Aus, nachdem die Klima so viele Stunden läuft (0 = aus).
+    var maxRuntimeHours by mutableStateOf(0); private set
+    // EN: Record the AC history + run the background poll (off by default). DE: Klima-Verlauf aufzeichnen + Hintergrund-Poll (standardmäßig aus).
+    var historyEnabled by mutableStateOf(false); private set
 
     // EN: Last custom sleep-timer duration, shown as a saved quick chip (0 = none).
     // DE: Letzte eigene Sleep-Timer-Dauer, als gespeicherter Schnell-Chip angezeigt (0 = keine).
@@ -123,6 +133,8 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         useFahrenheit = SettingsRepo.useFahrenheit(ctx)
         pricePerKwh = SettingsRepo.pricePerKwh(ctx)
         sleepCustomMinutes = SettingsRepo.sleepCustomMinutes(ctx)
+        maxRuntimeHours = SettingsRepo.maxRuntimeHours(ctx)
+        historyEnabled = SettingsRepo.historyEnabled(ctx)
         // EN: If a sleep-timer alarm is still pending, resume its on-screen countdown. DE: Falls ein Sleep-Timer-Alarm noch aussteht, dessen Countdown-Anzeige fortsetzen.
         restoreSleepTimer()
     }
@@ -143,6 +155,34 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     fun updatePricePerKwh(value: Double) {
         pricePerKwh = value
         SettingsRepo.setPricePerKwh(getApplication(), value)
+    }
+
+    /** EN: Set the "auto power-off after N hours" safety duration and persist (0 = off). DE: Die „Auto-Aus nach N Stunden"-Sicherheitsdauer setzen und speichern (0 = aus). */
+    fun updateMaxRuntimeHours(value: Int) {
+        maxRuntimeHours = value.coerceIn(0, 24)
+        SettingsRepo.setMaxRuntimeHours(getApplication(), maxRuntimeHours)
+    }
+
+    /** EN: Toggle history recording + the ~15 min background poll, and persist. DE: Verlaufs-Aufzeichnung + ~15-min-Hintergrund-Poll umschalten und speichern. */
+    fun updateHistoryEnabled(value: Boolean) {
+        historyEnabled = value
+        SettingsRepo.setHistoryEnabled(getApplication(), value)
+        HistoryPollWorker.setEnabled(getApplication(), value)
+    }
+
+    /**
+     * EN: When the AC is switched on, arm a max-runtime off-timer if enabled and none is pending — the
+     *     local equivalent of "turn it off when I'm away" (a hard ceiling on how long it runs). Skipped
+     *     in demo (no real device) and if the user already set their own sleep timer.
+     * DE: Beim Einschalten der Klima einen Max-Laufzeit-Off-Timer aktivieren, falls eingeschaltet und
+     *     keiner aussteht — die lokale Entsprechung von „aus, wenn ich weg bin" (harte Obergrenze für die
+     *     Laufzeit). Im Demo (kein echtes Gerät) und bei bereits gesetztem eigenem Sleep-Timer übersprungen.
+     */
+    private fun maybeArmMaxRuntime() {
+        val dev = connectedDevice ?: return
+        if (dev.id == 0L || maxRuntimeHours <= 0) return
+        if (SleepTimerScheduler.triggerAt(getApplication()) != null) return
+        startSleepTimer(maxRuntimeHours * 60)
     }
 
     /**
@@ -329,7 +369,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun togglePower() { val v = !powerOn; command({ powerOn = v }) { setPower(v) } }
+    fun togglePower() { val v = !powerOn; command({ powerOn = v }) { setPower(v) }; if (v) maybeArmMaxRuntime() }
     fun applyMode(m: Int) = command({ mode = m }) { setMode(m) }
     fun nudgeTemp(delta: Double) { val v = (tempC + delta).coerceIn(16.0, 30.0); command({ tempC = v }) { setTemp(v) } }
     fun applyTemp(t: Double) { val v = t.coerceIn(16.0, 30.0); command({ tempC = v }) { setTemp(v) } }

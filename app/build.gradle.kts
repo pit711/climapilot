@@ -15,8 +15,8 @@ android {
         applicationId = "com.climapilot.free"
         minSdk = 26
         targetSdk = 36
-        versionCode = 6
-        versionName = "0.3.2"
+        versionCode = 7
+        versionName = "0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,6 +51,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.biometric)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.play.services.wearable)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

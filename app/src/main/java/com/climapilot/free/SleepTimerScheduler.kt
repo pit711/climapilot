@@ -60,18 +60,24 @@ object SleepTimerScheduler {
                 am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
             }
         }
+        // EN: Show the live countdown notification with off-now/cancel controls. DE: Die Live-Countdown-Benachrichtigung mit Jetzt-aus/Abbrechen-Steuerung zeigen.
+        TimerNotification.show(ctx, triggerAt)
     }
 
     /** EN: Cancel the pending power-off (if any) and forget it. DE: Das ausstehende Ausschalten (falls vorhanden) abbrechen und vergessen. */
     fun cancel(ctx: Context) {
         val am = ctx.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         am.cancel(pendingIntent(ctx, deviceId(ctx) ?: 0L))
+        // EN: Also drop a power-off that already fired and is still retrying in the background. DE: Auch ein bereits ausgelöstes, im Hintergrund noch wiederholendes Ausschalten verwerfen.
+        AcCommandWorker.cancelPowerOff(ctx)
         clear(ctx)
     }
 
     /** EN: Drop the persisted state (after the alarm fired or was cancelled). DE: Den gespeicherten Zustand verwerfen (nachdem der Alarm ausgelöst wurde oder abgebrochen ist). */
     fun clear(ctx: Context) {
         prefs(ctx).edit().remove(K_DEVICE).remove(K_TRIGGER).apply()
+        // EN: The timer is gone (fired or cancelled) — drop its notification. DE: Der Timer ist weg (ausgelöst oder abgebrochen) — seine Benachrichtigung entfernen.
+        TimerNotification.cancel(ctx)
     }
 
     /** EN: Absolute trigger time of the pending power-off, or null if none is armed. DE: Absolute Auslösezeit des ausstehenden Ausschaltens, oder null, falls keiner aktiv ist. */

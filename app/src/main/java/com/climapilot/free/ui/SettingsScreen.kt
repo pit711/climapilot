@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,12 +23,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AcUnit
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Coffee
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Payments
+import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -59,6 +64,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.climapilot.free.AcViewModel
 import com.climapilot.free.R
+import com.climapilot.free.ReliabilityHelper
+import com.climapilot.free.SettingsRepo
 import com.climapilot.free.TokenRepo
 
 // EN: Outbound links for the support and credits cards. / DE: Externe Links für die Unterstützungs- und Danksagungs-Karten.
@@ -82,9 +89,12 @@ fun SettingsScreen(vm: AcViewModel, onBack: () -> Unit) {
     val openUrl: (String) -> Unit = { url ->
         runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) }
     }
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
     LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxHeight()
+            .widthIn(max = 640.dp)
+            .fillMaxWidth()
             .padding(horizontal = 16.dp),
         contentPadding = PaddingValues(top = 48.dp, bottom = 40.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
@@ -103,10 +113,134 @@ fun SettingsScreen(vm: AcViewModel, onBack: () -> Unit) {
         }
         item { AppHeaderCard(version) }
         item { DisplayCard(vm) }
+        item { ReliabilityCard() }
+        item { AutoOffCard(vm) }
+        item { AppLockCard() }
         item { ExportTokenCard() }
         item { SupportCard(openUrl) }
         item { ChangelogCard() }
         item { CreditsCard(openUrl) }
+    }
+    }
+}
+
+/**
+ * EN: Background-reliability card: lets the user exempt the app from battery optimisation and the OEM
+ *     auto-start killer, so timers and scene schedules fire even when the app is closed.
+ * DE: Karte für Hintergrund-Zuverlässigkeit: nimmt die App von der Akku-Optimierung und dem
+ *     Autostart-Killer des Herstellers aus, damit Timer und Szenen auch bei geschlossener App auslösen.
+ */
+@Composable
+private fun ReliabilityCard() {
+    val cs = MaterialTheme.colorScheme
+    val context = LocalContext.current
+    val ignoring = ReliabilityHelper.isIgnoringBatteryOptimizations(context)
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = cs.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.BatteryAlert, null, tint = cs.primary, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.reliability_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
+            }
+            Spacer(Modifier.height(10.dp))
+            Text(stringResource(R.string.reliability_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 20.sp)
+            Spacer(Modifier.height(10.dp))
+            Text(
+                stringResource(if (ignoring) R.string.reliability_battery_ok else R.string.reliability_battery_warn),
+                fontSize = 13.sp,
+                color = if (ignoring) cs.primary else cs.error,
+                fontWeight = FontWeight.SemiBold,
+                lineHeight = 18.sp,
+            )
+            if (!ignoring) {
+                Spacer(Modifier.height(12.dp))
+                FilledTonalButton(onClick = { ReliabilityHelper.openBatteryOptimizationSettings(context) }, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.reliability_battery_action))
+                }
+            }
+            if (ReliabilityHelper.hasOemAutoStart()) {
+                Spacer(Modifier.height(8.dp))
+                OutlinedButton(onClick = { ReliabilityHelper.openAutoStartSettings(context) }, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.reliability_autostart_action))
+                }
+            }
+        }
+    }
+}
+
+/**
+ * EN: Auto power-off (max runtime): a local safety cut-off that switches the AC off after it has run
+ *     for N hours — the workable stand-in for an "off when away" timer on a LAN-only app.
+ * DE: Auto-Aus (Max-Laufzeit): eine lokale Sicherheits-Abschaltung, die die Klima nach N Stunden
+ *     Laufzeit ausschaltet — die praktikable Entsprechung eines „Aus, wenn weg"-Timers bei einer reinen LAN-App.
+ */
+@Composable
+private fun AutoOffCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    var hoursText by remember { mutableStateOf(if (vm.maxRuntimeHours > 0) vm.maxRuntimeHours.toString() else "") }
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = cs.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Timer, null, tint = cs.primary, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.autooff_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
+            }
+            Spacer(Modifier.height(10.dp))
+            Text(stringResource(R.string.autooff_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 20.sp)
+            Spacer(Modifier.height(12.dp))
+            OutlinedTextField(
+                value = hoursText,
+                onValueChange = { input ->
+                    hoursText = input.filter { it.isDigit() }.take(2)
+                    vm.updateMaxRuntimeHours(hoursText.toIntOrNull() ?: 0)
+                },
+                label = { Text(stringResource(R.string.autooff_hours_label)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
+}
+
+/**
+ * EN: App-lock card: a switch to require biometric/PIN unlock when opening the app, so only you can
+ *     control the AC. Reads/writes the flag directly; the gate itself lives in MainActivity.
+ * DE: App-Sperre-Karte: ein Schalter, der beim Öffnen der App Biometrie/PIN verlangt, sodass nur du die
+ *     Klima steuern kannst. Liest/schreibt das Flag direkt; die Sperre selbst sitzt in der MainActivity.
+ */
+@Composable
+private fun AppLockCard() {
+    val cs = MaterialTheme.colorScheme
+    val context = LocalContext.current
+    var enabled by remember { mutableStateOf(SettingsRepo.appLock(context)) }
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = cs.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Lock, null, tint = cs.primary, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.lock_card_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
+            }
+            Spacer(Modifier.height(10.dp))
+            Text(stringResource(R.string.lock_card_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 20.sp)
+            Spacer(Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.lock_card_switch), Modifier.weight(1f), color = cs.onSurface, fontSize = 15.sp)
+                Switch(checked = enabled, onCheckedChange = { v -> enabled = v; SettingsRepo.setAppLock(context, v) })
+            }
+        }
     }
 }
 
@@ -361,6 +495,10 @@ private fun ChangelogCard() {
                 Spacer(Modifier.width(8.dp))
                 Text(stringResource(R.string.changelog_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
             }
+            Spacer(Modifier.height(14.dp))
+            Text(stringResource(R.string.changelog_0_4_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.changelog_0_4_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 22.sp)
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.changelog_0_3_2_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
             Spacer(Modifier.height(6.dp))

@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -55,8 +56,15 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FilterChip
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -121,115 +129,80 @@ private val MODES = listOf(
  *     das [AcViewModel], damit die UI sowohl mit der Absicht des Nutzers als auch mit dem vom Gerät
  *     gemeldeten Zustand synchron bleibt.
  */
-@OptIn(ExperimentalFoundationApi::class)
+/** EN: Steuern tab — power, temperature, mode, fan. DE: Steuern-Reiter — Ein/Aus, Temperatur, Modus, Lüfter. */
 @Composable
 fun ControlScreen(vm: AcViewModel) {
-    val cs = MaterialTheme.colorScheme
-    val context = LocalContext.current
-    // EN: User-customisable card order. Long-press a card to drag it; the order is saved on device.
-    // DE: Vom Nutzer anpassbare Kartenreihenfolge. Karte lange drücken zum Ziehen; die Reihenfolge wird gespeichert.
-    val order = remember { mutableStateListOf<CardId>().also { it.addAll(CardOrderRepo.load(context)) } }
-    val listState = rememberLazyListState()
-    var draggingId by remember { mutableStateOf<CardId?>(null) }
-    var dragOffsetY by remember { mutableStateOf(0f) }
-
-    // EN: The Gear card exists only on units that support throttling; hidden cards keep their saved slot.
-    // DE: Die Gear-Karte gibt es nur bei drosselbaren Geräten; ausgeblendete Karten behalten ihren Platz.
-    val visible = order.filter { it != CardId.Gear || vm.rateLevels > 0 }
-
-    LazyColumn(
-        state = listState,
-        modifier = Modifier
-            .fillMaxSize()
-            .testTag("control_list")
-            .padding(horizontal = 16.dp),
-        contentPadding = PaddingValues(top = 48.dp, bottom = 40.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp),
-    ) {
-        // EN: TopBar + hero are pinned at the top and are not reorderable.
-        // DE: TopBar + Hero sind oben fixiert und nicht umsortierbar.
-        item(key = "topbar") { TopBar(vm) }
+    TabList {
+        item(key = "topbar") { ConnectedTopBar(vm) }
         item(key = "hero") { PowerHero(vm) }
+        item(key = "mode") { ModeSelector(vm) }
+        item(key = "fan") { FanCard(vm) }
+        errorItem(vm)
+    }
+}
 
-        items(visible, key = { it.name }) { id ->
-            val isDragging = id == draggingId
-            // EN: While dragging, lift the card (zIndex) and follow the finger (translationY); other
-            //     cards animate into their new place. DE: Beim Ziehen die Karte anheben (zIndex) und dem
-            //     Finger folgen (translationY); andere Karten animieren an ihre neue Stelle.
-            val cardModifier = if (isDragging) {
-                Modifier.zIndex(1f).graphicsLayer { translationY = dragOffsetY }
-            } else {
-                Modifier.animateItem()
-            }
-            // EN: Only the ≡ handle (top-right) starts a drag, so taps and the scene chips'
-            //     long-press-to-edit inside a card keep working. DE: Nur der ≡-Griff (oben rechts)
-            //     startet das Verschieben — Tippen und das Lang-drücken-zum-Bearbeiten der
-            //     Szenen-Chips in der Karte funktionieren weiter.
-            val handleModifier = Modifier.pointerInput(id) {
-                detectDragGesturesAfterLongPress(
-                    onDragStart = { draggingId = id; dragOffsetY = 0f },
-                    onDragEnd = {
-                        draggingId = null; dragOffsetY = 0f
-                        CardOrderRepo.save(context, order.toList())
-                    },
-                    onDragCancel = { draggingId = null; dragOffsetY = 0f },
-                    onDrag = { change, amount ->
-                        change.consume()
-                        dragOffsetY += amount.y
-                        val layout = listState.layoutInfo
-                        val dragged = layout.visibleItemsInfo.firstOrNull { it.key == id.name }
-                        if (dragged != null) {
-                            // EN: Center of the dragged card in viewport coordinates. DE: Mitte der gezogenen Karte in Viewport-Koordinaten.
-                            val center = dragged.offset + dragged.size / 2f + dragOffsetY
-                            val target = layout.visibleItemsInfo.firstOrNull { info ->
-                                val k = info.key
-                                k is String && k != id.name && CardId.entries.any { it.name == k } &&
-                                    center.toInt() in info.offset until (info.offset + info.size)
-                            }
-                            if (target != null) {
-                                val targetId = CardId.valueOf(target.key as String)
-                                val from = order.indexOf(id)
-                                val to = order.indexOf(targetId)
-                                if (from >= 0 && to >= 0 && from != to) {
-                                    order.add(to, order.removeAt(from))
-                                    // EN: keep the dragged card under the finger after the swap. DE: die gezogene Karte nach dem Tausch unter dem Finger halten.
-                                    dragOffsetY += (dragged.offset - target.offset)
-                                }
-                            }
-                        }
-                    },
-                )
-            }
-            Box(modifier = cardModifier) {
-                when (id) {
-                    CardId.Mode -> ModeSelector(vm)
-                    CardId.Fan -> FanCard(vm)
-                    CardId.Status -> LiveStatusCard(vm)
-                    CardId.Options -> OptionsCard(vm)
-                    CardId.Gear -> GearCard(vm)
-                    CardId.Scenes -> ScenesCard(vm)
-                    CardId.Sleep -> SleepTimerCard(vm)
-                }
-                // EN: Visible drag handle in the card's top-right corner. DE: Sichtbarer Zieh-Griff oben rechts in der Karte.
-                Icon(
-                    Icons.Default.DragHandle,
-                    contentDescription = stringResource(R.string.cd_reorder),
-                    tint = cs.onSurfaceVariant.copy(alpha = 0.6f),
-                    modifier = handleModifier
-                        .align(Alignment.TopEnd)
-                        .padding(top = 16.dp, end = 12.dp)
-                        .size(24.dp),
-                )
-            }
-        }
+/** EN: Status tab — live readouts (power, consumption, cost, error). DE: Status-Reiter — Live-Anzeigen (Leistung, Verbrauch, Kosten, Fehler). */
+@Composable
+fun StatusTab(vm: AcViewModel) {
+    TabList {
+        item(key = "topbar") { ConnectedTopBar(vm) }
+        item(key = "status") { LiveStatusCard(vm) }
+        errorItem(vm)
+    }
+}
 
-        vm.error?.let { msg ->
-            item(key = "error") {
-                Card(colors = CardDefaults.cardColors(containerColor = cs.errorContainer)) {
-                    Text(msg, Modifier.padding(16.dp), color = cs.onErrorContainer, fontSize = 13.sp)
-                }
-            }
-        }
+/** EN: Options tab — unit toggles + compressor throttle (where supported). DE: Optionen-Reiter — Geräteschalter + Kompressor-Drossel (wo unterstützt). */
+@Composable
+fun OptionsTab(vm: AcViewModel) {
+    TabList {
+        item(key = "topbar") { ConnectedTopBar(vm) }
+        item(key = "options") { OptionsCard(vm) }
+        if (vm.rateLevels > 0) item(key = "gear") { GearCard(vm) }
+        errorItem(vm)
+    }
+}
+
+/** EN: Scenes tab — quick scenes + sleep timer. DE: Szenen-Reiter — Schnell-Szenen + Sleep-Timer. */
+@Composable
+fun ScenesTab(vm: AcViewModel) {
+    TabList {
+        item(key = "topbar") { ConnectedTopBar(vm) }
+        item(key = "scenes") { ScenesCard(vm) }
+        item(key = "sleep") { SleepTimerCard(vm) }
+        errorItem(vm)
+    }
+}
+
+/** EN: Shared scrollable card list used by every control tab. DE: Geteilte scrollbare Kartenliste für jeden Steuer-Reiter. */
+@Composable
+private fun TabList(content: LazyListScope.() -> Unit) {
+    // EN: Centre + cap width so cards don't stretch absurdly wide on tablets / landscape. DE: Zentrieren + Breite begrenzen, damit Karten auf Tablets / im Querformat nicht absurd breit werden.
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxHeight()
+                .widthIn(max = 640.dp)
+                .fillMaxWidth()
+                .testTag("control_list")
+                .padding(horizontal = 16.dp),
+            contentPadding = PaddingValues(top = 40.dp, bottom = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            content = content,
+        )
+    }
+}
+
+/** EN: Append an inline error banner item when the last command failed. DE: Ein Inline-Fehlerbanner anhängen, falls der letzte Befehl fehlschlug. */
+private fun LazyListScope.errorItem(vm: AcViewModel) {
+    val msg = vm.error ?: return
+    item(key = "error") { ErrorBanner(msg) }
+}
+
+@Composable
+private fun ErrorBanner(msg: String) {
+    val cs = MaterialTheme.colorScheme
+    Card(colors = CardDefaults.cardColors(containerColor = cs.errorContainer)) {
+        Text(msg, Modifier.padding(16.dp), color = cs.onErrorContainer, fontSize = 13.sp)
     }
 }
 
@@ -238,7 +211,7 @@ fun ControlScreen(vm: AcViewModel) {
  * DE: Kopfzeile: Zurück (trennen), Gerätename + Verbindungsanzeige und ein manueller Aktualisieren-Knopf.
  */
 @Composable
-private fun TopBar(vm: AcViewModel) {
+fun ConnectedTopBar(vm: AcViewModel) {
     val cs = MaterialTheme.colorScheme
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
         IconButton(onClick = { vm.disconnect() }) {
@@ -290,29 +263,15 @@ private fun PowerHero(vm: AcViewModel) {
                 if (on) Brush.linearGradient(listOf(cs.primary, cs.secondary))
                 else Brush.linearGradient(listOf(bg, bg))
             )
-            .padding(24.dp)
+            .padding(horizontal = 20.dp, vertical = 16.dp)
     ) {
         Column {
-            // EN: Centered power control: state label above the power button. DE: Zentrierte Ein/Aus-Steuerung: Zustands-Label über dem Power-Knopf.
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    if (on) stringResource(R.string.state_on) else stringResource(R.string.state_off),
-                    color = fg, fontWeight = FontWeight.SemiBold, fontSize = 15.sp,
-                )
-                Spacer(Modifier.height(6.dp))
-                FilledIconButton(
-                    onClick = { vm.togglePower() },
-                    colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = if (on) cs.onPrimary.copy(alpha = 0.2f) else cs.primary,
-                        contentColor = cs.onPrimary,
-                    ),
-                ) { Icon(Icons.Default.PowerSettingsNew, stringResource(R.string.cd_power)) }
+            // EN: Centered EIN/AUS slider toggle — clearly labelled, reflects the real power state. DE: Zentrierter EIN/AUS-Schieberegler — klar beschriftet, spiegelt den echten Ein/Aus-Zustand.
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                PowerSlider(on = on, fg = fg, onToggle = { vm.togglePower() })
             }
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(8.dp))
 
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
                 RoundIconButton(Icons.Default.Remove, enabled = on, tint = fg) { vm.nudgeTemp(-0.5) }
@@ -320,7 +279,7 @@ private fun PowerHero(vm: AcViewModel) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         formatTemp(vm.tempC, vm.useFahrenheit),
-                        color = fg, fontSize = 64.sp, fontWeight = FontWeight.Bold,
+                        color = fg, fontSize = 52.sp, fontWeight = FontWeight.Bold,
                     )
                     Text(stringResource(R.string.target_temp), color = fg.copy(alpha = 0.8f), fontSize = 13.sp)
                 }
@@ -328,7 +287,7 @@ private fun PowerHero(vm: AcViewModel) {
                 RoundIconButton(Icons.Default.Add, enabled = on, tint = fg) { vm.nudgeTemp(0.5) }
             }
 
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(10.dp))
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                 MiniReadout(stringResource(R.string.readout_indoor), vm.live?.indoorTemp?.let { formatTemp(it, vm.useFahrenheit) } ?: "–", fg)
@@ -339,6 +298,58 @@ private fun PowerHero(vm: AcViewModel) {
                     stringResource(R.string.readout_power),
                     vm.energy?.powerW?.takeIf { !it.isNaN() }?.let { "${it.roundToInt()} W" } ?: "–",
                     fg,
+                )
+            }
+        }
+    }
+}
+
+/**
+ * EN: A clearly labelled EIN/AUS sliding toggle for power. A pill track with two halves (AUS | EIN); a
+ *     thumb slides to the active side (green when on, grey when off) and the active label sits on it in
+ *     white, the inactive one dimmed. Tapping anywhere toggles power. Reflects the device's real state.
+ * DE: Ein klar beschrifteter EIN/AUS-Schieberegler für Ein/Aus. Eine Pille mit zwei Hälften (AUS | EIN);
+ *     ein Knauf gleitet auf die aktive Seite (grün bei An, grau bei Aus), die aktive Beschriftung sitzt
+ *     in Weiß darauf, die inaktive gedimmt. Tippen schaltet um. Spiegelt den echten Gerätezustand.
+ */
+@Composable
+private fun PowerSlider(on: Boolean, fg: Color, onToggle: () -> Unit) {
+    val thumbBias by animateFloatAsState(if (on) 1f else -1f, label = "thumbBias")
+    val thumbColor by animateColorAsState(
+        if (on) Color(0xFF34C759) else Color(0xFF8E8E93), label = "thumbColor",
+    )
+    Box(
+        Modifier
+            .width(220.dp)
+            .height(52.dp)
+            .clip(RoundedCornerShape(26.dp))
+            .background(fg.copy(alpha = 0.18f))
+            .clickable { onToggle() },
+    ) {
+        // EN: Sliding thumb covering the active half. DE: Gleitender Knauf, der die aktive Hälfte abdeckt.
+        Box(
+            Modifier
+                .align(BiasAlignment(horizontalBias = thumbBias, verticalBias = 0f))
+                .fillMaxHeight()
+                .fillMaxWidth(0.5f)
+                .padding(4.dp)
+                .clip(RoundedCornerShape(22.dp))
+                .background(thumbColor),
+        )
+        // EN: Both labels; the active one (under the thumb) white, the other dimmed. DE: Beide Beschriftungen; die aktive (unter dem Knauf) weiß, die andere gedimmt.
+        Row(Modifier.fillMaxSize()) {
+            Box(Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.Center) {
+                Text(
+                    stringResource(R.string.state_off),
+                    color = if (!on) Color.White else fg.copy(alpha = 0.55f),
+                    fontWeight = FontWeight.Bold, fontSize = 16.sp,
+                )
+            }
+            Box(Modifier.weight(1f).fillMaxHeight(), contentAlignment = Alignment.Center) {
+                Text(
+                    stringResource(R.string.state_on),
+                    color = if (on) Color.White else fg.copy(alpha = 0.55f),
+                    fontWeight = FontWeight.Bold, fontSize = 16.sp,
                 )
             }
         }
@@ -369,23 +380,31 @@ private fun MiniReadout(label: String, value: String, fg: Color) {
     }
 }
 
-/** EN: Operating-mode chooser (auto/cool/dry/heat/fan). DE: Betriebsmodus-Auswahl (Auto/Kühlen/Trocknen/Heizen/Lüften). */
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+/** EN: Operating-mode chooser (auto/cool/dry/heat/fan) — a single compact row of icon+label segments. DE: Betriebsmodus-Auswahl (Auto/Kühlen/Trocknen/Heizen/Lüften) — eine kompakte Zeile aus Icon+Label-Segmenten. */
 @Composable
 private fun ModeSelector(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
     SectionCard(stringResource(R.string.section_mode), Icons.Default.Thermostat) {
-        FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             MODES.forEach { m ->
-                FilterChip(
-                    selected = vm.mode == m.id,
-                    onClick = { vm.applyMode(m.id) },
-                    label = { Text(stringResource(m.labelRes)) },
-                    leadingIcon = { Icon(m.icon, null, Modifier.size(18.dp)) },
-                )
+                val selected = vm.mode == m.id
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(if (selected) cs.primary else cs.surfaceVariant)
+                        .clickable { vm.applyMode(m.id) }
+                        .padding(vertical = 10.dp, horizontal = 2.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Icon(m.icon, null, Modifier.size(20.dp), tint = if (selected) cs.onPrimary else cs.onSurfaceVariant)
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        stringResource(m.labelRes),
+                        fontSize = 10.sp, maxLines = 1,
+                        color = if (selected) cs.onPrimary else cs.onSurfaceVariant,
+                    )
+                }
             }
         }
     }
@@ -395,35 +414,36 @@ private fun ModeSelector(vm: AcViewModel) {
  * EN: Fan control: named presets (auto/silent/…/turbo) plus a fine 1–100 % slider for exact speeds.
  * DE: Lüftersteuerung: benannte Vorgaben (Auto/Leise/…/Turbo) plus ein 1–100 %-Feinregler für exakte Stufen.
  */
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 private fun FanCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
     SectionCard(stringResource(R.string.section_fan), Icons.Default.Air) {
-        FlowRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth(),
-        ) {
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             FanPreset.entries.forEach { p ->
-                FilterChip(
-                    selected = vm.fan == p.value,
-                    onClick = { vm.applyFan(p.value) },
-                    label = { Text(stringResource(p.labelRes)) },
-                )
+                val selected = vm.fan == p.value
+                Box(
+                    Modifier
+                        .weight(1f)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(if (selected) cs.primary else cs.surfaceVariant)
+                        .clickable { vm.applyFan(p.value) }
+                        .padding(vertical = 10.dp, horizontal = 2.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        stringResource(p.labelRes),
+                        fontSize = 11.sp, maxLines = 1,
+                        color = if (selected) cs.onPrimary else cs.onSurfaceVariant,
+                    )
+                }
             }
         }
-        Spacer(Modifier.height(6.dp))
-        // EN: Fan byte > 100 is the protocol's "auto" sentinel (102). DE: Lüfter-Byte > 100 ist der „Auto"-Wert des Protokolls (102).
-        val isAuto = vm.fan > 100
-        Text(
-            if (isAuto) stringResource(R.string.fan_automatic) else stringResource(R.string.fan_level, vm.fan),
-            fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-        Slider(
-            value = (if (isAuto) 100 else vm.fan).toFloat(),
-            onValueChange = { vm.applyFan(it.roundToInt().coerceIn(1, 100)) },
-            valueRange = 1f..100f,
-        )
+        // EN: Show the exact level only when it's a non-preset custom value (keeps the card compact). DE: Die genaue Stufe nur bei einem Nicht-Preset-Wert zeigen (hält die Karte kompakt).
+        val isPreset = FanPreset.entries.any { it.value == vm.fan }
+        if (!isPreset && vm.fan in 1..100) {
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.fan_level, vm.fan), fontSize = 13.sp, color = cs.onSurfaceVariant)
+        }
     }
 }
 
@@ -891,13 +911,13 @@ private fun SectionCard(title: String, icon: ImageVector, content: @Composable (
         colors = CardDefaults.cardColors(containerColor = cs.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
-        Column(Modifier.padding(18.dp)) {
+        Column(Modifier.padding(14.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(icon, null, tint = cs.primary, modifier = Modifier.size(20.dp))
                 Spacer(Modifier.width(8.dp))
                 Text(title, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
             }
-            Spacer(Modifier.height(14.dp))
+            Spacer(Modifier.height(10.dp))
             content()
         }
     }

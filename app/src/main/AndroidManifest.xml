@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Live sleep-timer countdown notification with off-now/cancel actions (Android 13+) / Live-Countdown-Benachrichtigung des Sleep-Timers mit Jetzt-aus/Abbrechen (Android 13+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +34,15 @@
             </intent-filter>
         </activity>
 
+        <!-- Invisible trampoline for launcher shortcuts that perform an action (off / scene) / Unsichtbares Trampolin für Launcher-Shortcuts, die eine Aktion ausführen (Aus / Szene) -->
+        <activity
+            android:name=".ShortcutActionActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <!-- Applies a scheduled scene when its daily alarm fires / Wendet eine geplante Szene an, wenn ihr Tagesalarm auslöst -->
         <receiver
             android:name=".SceneAlarmReceiver"
@@ -40,6 +51,11 @@
         <!-- Powers the unit off when the sleep timer fires, even with the app closed / Schaltet das Gerät aus, wenn der Sleep-Timer auslöst, auch bei geschlossener App -->
         <receiver
             android:name=".SleepTimerReceiver"
+            android:exported="false" />
+
+        <!-- Handles the off-now / cancel buttons on the sleep-timer countdown notification / Verarbeitet die Jetzt-aus/Abbrechen-Knöpfe der Sleep-Timer-Countdown-Benachrichtigung -->
+        <receiver
+            android:name=".TimerActionReceiver"
             android:exported="false" />
 
         <!-- Re-arms scene schedules after a reboot / Stellt Szenen-Zeitpläne nach einem Neustart wieder her -->
@@ -109,12 +125,34 @@
                 android:resource="@xml/widget_mode_info" />
         </receiver>
 
+        <!-- Receives control commands from the Wear OS watch app over the Data Layer / Empfängt Steuerbefehle der Wear-OS-Watch-App über den Data-Layer -->
+        <service
+            android:name=".WearListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/climapilot" />
+            </intent-filter>
+        </service>
+
         <!-- Quick Settings tile: toggle AC power from the shade, offline / Schnelleinstellungen-Kachel: Klima aus der Statusleiste ein/aus, offline -->
         <service
             android:name=".PowerTileService"
             android:exported="true"
             android:icon="@drawable/ic_w_power"
             android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- Quick Settings tile: cycle the AC mode from the shade, offline / Schnelleinstellungen-Kachel: Klima-Modus aus der Statusleiste durchschalten, offline -->
+        <service
+            android:name=".ModeTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_w_mode"
+            android:label="@string/tile_mode_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

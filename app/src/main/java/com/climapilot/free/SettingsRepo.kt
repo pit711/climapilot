@@ -13,6 +13,9 @@ object SettingsRepo {
     private const val K_FAHRENHEIT = "fahrenheit"
     private const val K_PRICE = "price_per_kwh"
     private const val K_SLEEP_CUSTOM = "sleep_custom_minutes"
+    private const val K_MAX_RUNTIME = "max_runtime_hours"
+    private const val K_APP_LOCK = "app_lock"
+    private const val K_HISTORY = "history_enabled"
 
     /** EN: true = show temperatures in °F. DE: true = Temperaturen in °F anzeigen. */
     fun useFahrenheit(ctx: Context): Boolean = prefs(ctx).getBoolean(K_FAHRENHEIT, false)
@@ -31,6 +34,24 @@ object SettingsRepo {
 
     fun setSleepCustomMinutes(ctx: Context, value: Int) =
         prefs(ctx).edit().putInt(K_SLEEP_CUSTOM, value).apply()
+
+    /** EN: Auto power-off after the AC has been running this many hours (0 = off). DE: Auto-Aus, nachdem die Klima so viele Stunden läuft (0 = aus). */
+    fun maxRuntimeHours(ctx: Context): Int = prefs(ctx).getInt(K_MAX_RUNTIME, 0)
+
+    fun setMaxRuntimeHours(ctx: Context, value: Int) =
+        prefs(ctx).edit().putInt(K_MAX_RUNTIME, value).apply()
+
+    /** EN: Require biometric/PIN unlock when opening the app. DE: Beim Öffnen der App per Biometrie/PIN entsperren verlangen. */
+    fun appLock(ctx: Context): Boolean = prefs(ctx).getBoolean(K_APP_LOCK, false)
+
+    fun setAppLock(ctx: Context, value: Boolean) =
+        prefs(ctx).edit().putBoolean(K_APP_LOCK, value).apply()
+
+    /** EN: Record the AC history + run the ~15 min background poll (off by default — opt-in). DE: Klima-Verlauf aufzeichnen + den ~15-min-Hintergrund-Poll laufen lassen (standardmäßig aus — Opt-in). */
+    fun historyEnabled(ctx: Context): Boolean = prefs(ctx).getBoolean(K_HISTORY, false)
+
+    fun setHistoryEnabled(ctx: Context, value: Boolean) =
+        prefs(ctx).edit().putBoolean(K_HISTORY, value).apply()
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 }

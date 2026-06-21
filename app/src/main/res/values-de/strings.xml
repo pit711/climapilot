@@ -174,6 +174,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_4_title">Version 0.4</string>
+    <string name="changelog_0_4_body">•  Neue Reiter-Navigation: Steuern · Optionen · Szenen · Status · Verlauf — wird auf Tablets und im Querformat zur seitlichen Leiste\n•  Energie- &amp; Filter-Verlauf mit Charts — Leistung, Innen-/Außentemperatur und Lüfterstufe, nach Stunde / Tag / Woche / Monat oder gewähltem Tag, pro Klima; optionale Hintergrund-Aufzeichnung etwa alle 15 min (WLAN)\n•  Wear-OS-App — die Klima von der Uhr steuern\n•  Zuverlässiger Aus-/Sleep-Timer — mit Wiederholungen, übersteht Neustart, samt Live-Countdown-Benachrichtigung (Jetzt aus / Abbrechen)\n•  Auto-Aus nach maximaler Laufzeit\n•  App-Sperre per Fingerabdruck oder PIN\n•  Modus-Kachel für Schnelleinstellungen · Launcher-Shortcuts (Aus / Szene / Demo)\n•  „Zuverlässige Timer“-Hilfe (Akku-Optimierung &amp; Hersteller-Autostart)\n•  Neu gestalteter EIN/AUS-Schieberegler und kompaktere Modus- &amp; Lüftersteuerung</string>
     <string name="changelog_0_3_2_title">Version 0.3.2</string>
     <string name="changelog_0_3_2_body">•  Absturz beim Starten des Sleep-Timers auf manchen Geräten behoben (z. B. Xiaomi/HyperOS)</string>
     <string name="changelog_0_3_1_title">Version 0.3.1</string>
@@ -184,4 +186,84 @@
     <string name="changelog_0_2_body">•  Schnell-Szenen mit Editor &amp; Tagesplan\n•  Live-Status: Leistung, Gesamtverbrauch &amp; geschätzte Kosten\n•  Optionen: Swing, Eco, Signalton — plus Ionisierer, Außen-Leise &amp; Selbstreinigung, wo unterstützt\n•  Kompressor-Drossel; Sleep-Timer mit eigener, gespeicherter Dauer\n•  Offline-Token-Caching — Internet nur beim ersten Verbinden; Token exportieren &amp; importieren\n•  Gespeicherte Geräte für sofortiges Offline-Wiederverbinden\n•  Karten per Zieh-Griff umsortieren\n•  Homescreen-Widget in 1×1 / 2×2 / 4×2 (Ein/Aus, Temperatur, Modus) + Schnelleinstellungen-Kachel\n•  °C/°F-Umschaltung und Preis pro kWh</string>
     <string name="changelog_0_1_title">Version 0.1</string>
     <string name="changelog_0_1_body">•  Erste Veröffentlichung\n•  Lokale Steuerung von Midea-Klimageräten über WLAN\n•  Modus, Temperatur, Lüfter, Swing, Eco &amp; Signalton\n•  Live-Status: Innen-/Außentemperatur, Leistung, Verbrauch, Fehlercode\n•  Schnell-Szenen &amp; Sleep-Timer\n•  Kompressor-Drossel\n•  Demo-Modus ohne Gerät</string>
+
+    <!-- Hintergrund-Zuverlässigkeit (Akku / Hersteller-Autostart) -->
+    <string name="reliability_title">Zuverlässige Timer</string>
+    <string name="reliability_body">Damit Sleep-Timer und Szenen-Zeitpläne auch bei geschlossener App auslösen, erlaube ClimaPilot, im Hintergrund zu laufen.</string>
+    <string name="reliability_battery_ok">Akku-Optimierung: aus ✓</string>
+    <string name="reliability_battery_warn">Akku-Optimierung ist an — Timer können verspätet sein oder ausfallen.</string>
+    <string name="reliability_battery_action">Hintergrund erlauben (Akku)</string>
+    <string name="reliability_autostart_action">Autostart erlauben (Hersteller)</string>
+
+    <!-- Launcher-Shortcuts -->
+    <string name="shortcut_off">Ausschalten</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Anwenden: %1$s</string>
+
+    <!-- Auto-Aus (Max-Laufzeit) -->
+    <string name="autooff_title">Auto-Aus</string>
+    <string name="autooff_body">Sicherheits-Abschaltung: Läuft die Klima länger, schaltet sie sich automatisch aus — die lokale Entsprechung eines Abwesenheits-Timers (außerhalb des WLANs erreichst du die Klima nicht mehr). 0 = aus.</string>
+    <string name="autooff_hours_label">Ausschalten nach (Stunden)</string>
+
+    <!-- Sleep-Timer-Countdown-Benachrichtigung -->
+    <string name="notif_channel_timer">Sleep-Timer</string>
+    <string name="notif_timer_title">Sleep-Timer läuft</string>
+    <string name="notif_timer_text">Die Klima schaltet sich am Ende des Countdowns aus.</string>
+    <string name="notif_timer_off_now">Jetzt aus</string>
+    <string name="notif_timer_cancel">Abbrechen</string>
+
+    <!-- App-Sperre (Biometrie) -->
+    <string name="lock_card_title">App-Sperre</string>
+    <string name="lock_card_body">Verlange Fingerabdruck, Gesicht oder Bildschirm-PIN, um ClimaPilot zu öffnen — damit niemand sonst deine Klima steuern kann.</string>
+    <string name="lock_card_switch">Zum Öffnen entsperren</string>
+    <string name="lock_title">ClimaPilot entsperren</string>
+    <string name="lock_subtitle">Zum Steuern der Klima authentifizieren</string>
+    <string name="lock_unlock">Entsperren</string>
+
+    <!-- Modus-Schnelleinstellungen-Kachel -->
+    <string name="tile_mode_label">Klima-Modus</string>
+
+    <!-- Energie- & Filter-Verlauf -->
+    <string name="history_title">Verlauf</string>
+    <string name="history_card_title">Energie &amp; Filter</string>
+    <string name="history_card_body">Leistungsverlauf und Gesamtverbrauch sehen und verfolgen, wann der Filter gereinigt werden muss.</string>
+    <string name="history_card_open">Verlauf öffnen</string>
+    <string name="history_power_title">Leistung (24 h)</string>
+    <string name="history_empty">Noch zu wenig Daten — nutze die Klima eine Weile und schau wieder vorbei.</string>
+    <string name="history_peak">Spitze: %1$d W</string>
+    <string name="history_totals_title">Verbrauch</string>
+    <string name="history_total_kwh">Gesamt: %1$.1f kWh</string>
+    <string name="history_total_cost">Geschätzte Kosten: %1$.2f €</string>
+    <string name="history_filter_title">Filter</string>
+    <string name="history_filter_runtime">Laufzeit seit letzter Reinigung: %1$d h von %2$d h</string>
+    <string name="history_filter_due">Zeit, den Filter zu reinigen.</string>
+    <string name="history_filter_reset">Filter gereinigt (zurücksetzen)</string>
+    <string name="history_record_title">Verlauf aufzeichnen</string>
+    <string name="history_record_body">Wenn an, protokolliert ClimaPilot Leistung, Temperaturen und Lüfter und fragt die Klima etwa alle 15 min im Hintergrund ab (nur WLAN). Standardmäßig aus.</string>
+    <string name="history_record_switch">Klima-Daten aufzeichnen</string>
+    <string name="history_indoor_title">Innentemperatur (24 h)</string>
+    <string name="history_outdoor_title">Außentemperatur (24 h)</string>
+    <string name="history_fan_title">Lüfterstufe (24 h)</string>
+    <string name="history_metric_summary">Jetzt %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Stunde</string>
+    <string name="range_day">Tag</string>
+    <string name="range_week">Woche</string>
+    <string name="range_month">Monat</string>
+    <string name="history_pick_day">Tag wählen</string>
+    <string name="history_day">Tag: %1$s</string>
+    <string name="history_range_kwh">In diesem Zeitraum: %1$.1f kWh</string>
+    <string name="history_range_cost">Geschätzte Kosten: %1$.2f €</string>
+
+    <!-- Spenden-Hinweis -->
+    <string name="donate_prompt_title">Gefällt dir ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot ist kostenlos und werbefrei. Wenn es seinen Platz auf deinem Handy verdient hat, hält ein kleines Trinkgeld es am Leben — danke!</string>
+    <string name="donate_later">Vielleicht später</string>
+    <string name="donate_already">Schon unterstützt</string>
+
+    <!-- Untere Navigationsleiste -->
+    <string name="nav_control">Steuern</string>
+    <string name="nav_status">Status</string>
+    <string name="nav_options">Optionen</string>
+    <string name="nav_scenes">Szenen</string>
+    <string name="nav_history">Verlauf</string>
 </resources>

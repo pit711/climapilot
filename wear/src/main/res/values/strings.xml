@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+    <string name="wear_power">Power</string>
+    <string name="wear_mode">Mode</string>
+    <string name="wear_no_phone">Open ClimaPilot on your phone</string>
+    <string name="wear_temp_placeholder">--°</string>
+</resources>

@@ -177,6 +177,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_4_title">Version 0.4</string>
+    <string name="changelog_0_4_body">•  New tabbed navigation: Control · Options · Scenes · Status · History — adapts to a side rail on tablets and in landscape\n•  Energy &amp; filter history with charts — power, indoor/outdoor temperature and fan level, by hour / day / week / month or a chosen day, per AC; optional background recording every ~15 min (Wi-Fi)\n•  Wear OS companion app — control the AC from your watch\n•  Reliable off/sleep timer — retries, survives a reboot, with a live countdown notification (off now / cancel)\n•  Auto power-off after a maximum runtime\n•  App lock with fingerprint or PIN\n•  Mode tile for Quick Settings · launcher shortcuts (off / scene / demo)\n•  “Reliable timers” setup helper (battery optimisation &amp; manufacturer auto-start)\n•  Redesigned ON/OFF slider and more compact mode &amp; fan controls</string>
     <string name="changelog_0_3_2_title">Version 0.3.2</string>
     <string name="changelog_0_3_2_body">•  Fixed a crash when starting the sleep timer on some devices (e.g. Xiaomi/HyperOS)</string>
     <string name="changelog_0_3_1_title">Version 0.3.1</string>
@@ -187,4 +189,84 @@
     <string name="changelog_0_2_body">•  Quick scenes with full editor &amp; daily schedule\n•  Live status: power, total consumption &amp; estimated cost\n•  Options: swing, eco, beep — plus ionizer, outdoor-silent &amp; self-clean where the unit supports them\n•  Compressor throttle; sleep timer with custom, saved durations\n•  Offline token caching — internet only on the first connect; export &amp; import tokens\n•  Saved devices for instant offline reconnect\n•  Reorder the control cards via the drag handle\n•  Home-screen widget in 1×1 / 2×2 / 4×2 (power, temperature, mode) + Quick Settings tile\n•  °C/°F switch and price per kWh</string>
     <string name="changelog_0_1_title">Version 0.1</string>
     <string name="changelog_0_1_body">•  Initial release\n•  Local control of Midea air conditioners over Wi-Fi\n•  Mode, temperature, fan, swing, eco &amp; beep\n•  Live status: indoor/outdoor temperature, power, consumption, error code\n•  Quick scenes &amp; sleep timer\n•  Compressor throttle\n•  Demo mode without a device</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Reliable timers</string>
+    <string name="reliability_body">So the sleep timer and scene schedules fire even when the app is closed, allow ClimaPilot to run in the background.</string>
+    <string name="reliability_battery_ok">Battery optimisation: off ✓</string>
+    <string name="reliability_battery_warn">Battery optimisation is on — timers may be delayed or skipped.</string>
+    <string name="reliability_battery_action">Allow background (battery)</string>
+    <string name="reliability_autostart_action">Allow auto-start (manufacturer)</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Turn off</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Apply: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Auto power-off</string>
+    <string name="autooff_body">A safety cut-off: if the AC runs longer than this, it switches off automatically — the local stand-in for an away-timer (your phone can\'t reach the AC once you leave the Wi-Fi). 0 = off.</string>
+    <string name="autooff_hours_label">Switch off after (hours)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Sleep timer</string>
+    <string name="notif_timer_title">Sleep timer running</string>
+    <string name="notif_timer_text">The AC switches off when the countdown ends.</string>
+    <string name="notif_timer_off_now">Off now</string>
+    <string name="notif_timer_cancel">Cancel</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">App lock</string>
+    <string name="lock_card_body">Require your fingerprint, face or screen PIN to open ClimaPilot — so no one else can control your AC.</string>
+    <string name="lock_card_switch">Require unlock to open</string>
+    <string name="lock_title">Unlock ClimaPilot</string>
+    <string name="lock_subtitle">Authenticate to control your AC</string>
+    <string name="lock_unlock">Unlock</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">AC mode</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">History</string>
+    <string name="history_card_title">Energy &amp; filter</string>
+    <string name="history_card_body">See recent power use and total consumption, and track when the filter needs cleaning.</string>
+    <string name="history_card_open">Open history</string>
+    <string name="history_power_title">Power (24 h)</string>
+    <string name="history_empty">Not enough data yet — use the AC for a while and check back.</string>
+    <string name="history_peak">Peak: %1$d W</string>
+    <string name="history_totals_title">Consumption</string>
+    <string name="history_total_kwh">Total: %1$.1f kWh</string>
+    <string name="history_total_cost">Estimated cost: %1$.2f €</string>
+    <string name="history_filter_title">Filter</string>
+    <string name="history_filter_runtime">Runtime since last clean: %1$d h of %2$d h</string>
+    <string name="history_filter_due">Time to clean the filter.</string>
+    <string name="history_filter_reset">Filter cleaned (reset)</string>
+    <string name="history_record_title">Record history</string>
+    <string name="history_record_body">When on, ClimaPilot logs power, temperatures and fan, and polls the AC about every 15 min in the background (Wi-Fi only). Off by default.</string>
+    <string name="history_record_switch">Record AC data</string>
+    <string name="history_indoor_title">Indoor temperature (24 h)</string>
+    <string name="history_outdoor_title">Outdoor temperature (24 h)</string>
+    <string name="history_fan_title">Fan level (24 h)</string>
+    <string name="history_metric_summary">Now %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Hour</string>
+    <string name="range_day">Day</string>
+    <string name="range_week">Week</string>
+    <string name="range_month">Month</string>
+    <string name="history_pick_day">Pick a day</string>
+    <string name="history_day">Day: %1$s</string>
+    <string name="history_range_kwh">In this period: %1$.1f kWh</string>
+    <string name="history_range_cost">Estimated cost: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Enjoying ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot is free and ad-free. If it has earned its place on your phone, a small tip keeps it going — thank you!</string>
+    <string name="donate_later">Maybe later</string>
+    <string name="donate_already">Already supported</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Control</string>
+    <string name="nav_status">Status</string>
+    <string name="nav_options">Options</string>
+    <string name="nav_scenes">Scenes</string>
+    <string name="nav_history">History</string>
 </resources>

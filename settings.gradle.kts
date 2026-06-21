@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ClimaPilotFree"
 include(":app")
+include(":wear")

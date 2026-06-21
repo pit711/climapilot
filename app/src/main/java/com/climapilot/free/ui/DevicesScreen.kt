@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -78,9 +80,13 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
     val discovered = vm.devices.filterNot { it.id in knownIds || it.ip in knownIps }
 
     Scaffold { inner ->
+      // EN: Centre + cap width so the hero/buttons don't stretch across a tablet / landscape. DE: Zentrieren + Breite begrenzen, damit Hero/Buttons auf Tablet / im Querformat nicht über die ganze Breite gehen.
+      Box(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxHeight()
+                .widthIn(max = 640.dp)
+                .fillMaxWidth()
                 .padding(horizontal = 20.dp),
             contentPadding = PaddingValues(top = inner.calculateTopPadding() + 8.dp, bottom = 32.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
@@ -162,6 +168,7 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
                 DeviceCard(dev, connecting = vm.status == Status.Connecting) { vm.connect(dev) }
             }
         }
+      }
     }
 
     if (showManual) {
