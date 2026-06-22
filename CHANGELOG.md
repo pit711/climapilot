@@ -2,6 +2,26 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.5] — 2026-06-22
+
+### 🇬🇧 English
+**Added**
+- **Weekly day-planner** — assign scenes to recurring weekday + time windows (e.g. max cooling on Mondays, 6–18) on a visual week calendar. Each window applies its scene at the start and can switch the AC off at the end; enable/disable per window. The plan runs in the background even while the phone is idle on Wi-Fi (Doze-proof alarm-clock), survives reboots, and after a missed transition (deep sleep / phone off) it reconciles to the state the plan says should be active now.
+
+**Notes / trade-offs**
+- While a plan is active, Android shows the alarm-clock icon in the status bar (the cost of reliable, Doze-proof timing).
+- For dependable firing, allow ClimaPilot in the background / disable battery optimisation (Settings ▸ Reliable timers), especially on Samsung/Xiaomi.
+- The plan acts on your first/primary connected AC; saving or editing a plan never sends a command — windows only act at their scheduled times.
+
+### 🇩🇪 Deutsch
+**Neu**
+- **Wochen-Tagesplaner** — Szenen wiederkehrenden Wochentag-+Zeit-Fenstern zuweisen (z. B. maximal kühlen montags 6–18) auf einem visuellen Wochenkalender. Jedes Fenster wendet beim Start seine Szene an und kann die Klima am Ende ausschalten; pro Fenster aktivierbar/deaktivierbar. Der Plan läuft im Hintergrund, auch wenn das Handy im WLAN ruht (Doze-fester Wecker-Alarm), übersteht Neustarts, und nach einer verpassten Umschaltung (Tiefschlaf / Handy aus) gleicht er auf den Zustand ab, den der Plan jetzt vorsieht.
+
+**Hinweise / Trade-offs**
+- Solange ein Plan aktiv ist, zeigt Android das Wecker-Symbol in der Statusleiste (Preis für zuverlässiges, Doze-festes Timing).
+- Für verlässliches Auslösen die App im Hintergrund erlauben / Akku-Optimierung deaktivieren (Einstellungen ▸ Zuverlässige Timer), besonders bei Samsung/Xiaomi.
+- Der Plan wirkt auf die erste/primäre verbundene Klima; Speichern oder Bearbeiten sendet nie einen Befehl — Fenster wirken nur zu ihren geplanten Zeiten.
+
 ## [0.4.2] — 2026-06-22
 
 ### 🇬🇧 English

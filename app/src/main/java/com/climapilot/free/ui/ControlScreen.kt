@@ -1,6 +1,7 @@
 package com.climapilot.free.ui
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -36,6 +37,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Autorenew
 import androidx.compose.material.icons.filled.Bedtime
 import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DragHandle
 import androidx.compose.material.icons.filled.Eco
@@ -84,6 +86,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -100,12 +105,16 @@ import androidx.compose.ui.unit.sp
 import com.climapilot.free.AcViewModel
 import com.climapilot.free.CardId
 import com.climapilot.free.CardOrderRepo
+import com.climapilot.free.EndAction
 import com.climapilot.free.FanPreset
+import com.climapilot.free.PlanEntry
 import com.climapilot.free.SettingsRepo
 import com.climapilot.free.R
 import com.climapilot.free.Scene
 import com.climapilot.free.Status
 import com.climapilot.free.midea.MideaAc
+import java.text.DateFormatSymbols
+import java.util.Calendar
 import kotlin.math.roundToInt
 
 // EN: One selectable operating mode + the icon/label shown for it in the mode chips.
@@ -164,12 +173,13 @@ fun OptionsTab(vm: AcViewModel) {
     }
 }
 
-/** EN: Scenes tab — quick scenes + sleep timer. DE: Szenen-Reiter — Schnell-Szenen + Sleep-Timer. */
+/** EN: Scenes tab — quick scenes, weekly plan + sleep timer. DE: Szenen-Reiter — Schnell-Szenen, Wochenplan + Sleep-Timer. */
 @Composable
 fun ScenesTab(vm: AcViewModel) {
     TabList {
         item(key = "topbar") { ConnectedTopBar(vm) }
         item(key = "scenes") { ScenesCard(vm) }
+        item(key = "plan") { PlanCard(vm) }
         item(key = "sleep") { SleepTimerCard(vm) }
         errorItem(vm)
     }
@@ -923,6 +933,305 @@ private fun EditSceneDialog(
             }
         },
     )
+}
+
+// ===========================================================================================
+// EN: Weekly day-planner — assign scenes to recurring weekday + time windows (e.g. "max cooling
+//     Mondays 6–18"). The plan runs in the background via PlanScheduler even while the phone is idle.
+// DE: Wochen-Tagesplaner — Szenen wiederkehrenden Wochentag-/Zeit-Fenstern zuweisen (z. B. „maximal
+//     kühlen montags 6–18"). Der Plan läuft über PlanScheduler im Hintergrund, auch wenn das Handy ruht.
+// ===========================================================================================
+
+/**
+ * EN: The weekly plan card: a visual week calendar on top, the editable list of windows below, plus an
+ *     "add" action. Each window applies a chosen scene when it starts and (optionally) powers the unit
+ *     off when it ends. Editing is non-destructive to a running unit — saving never sends a command; the
+ *     plan only acts at its scheduled boundaries.
+ * DE: Die Wochenplan-Karte: oben ein visueller Wochenkalender, darunter die editierbare Liste der
+ *     Fenster plus „Hinzufügen". Jedes Fenster wendet beim Start eine gewählte Szene an und schaltet das
+ *     Gerät beim Ende (optional) aus. Das Bearbeiten ist für ein laufendes Gerät unkritisch — Speichern
+ *     sendet nie einen Befehl; der Plan wirkt nur an seinen geplanten Grenzen.
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun PlanCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    var adding by remember { mutableStateOf(false) }
+    var editing by remember { mutableStateOf<PlanEntry?>(null) }
+    SectionCard(stringResource(R.string.section_plan), Icons.Default.CalendarMonth) {
+        // EN: Visual week overview — coloured blocks where a window is active each day. DE: Visuelle Wochenübersicht — farbige Blöcke, wo täglich ein Fenster aktiv ist.
+        WeekCalendar(vm.plan, vm.scenes)
+        Spacer(Modifier.height(12.dp))
+
+        if (vm.plan.isEmpty()) {
+            Text(stringResource(R.string.plan_empty), fontSize = 13.sp, color = cs.onSurfaceVariant)
+        } else {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                vm.plan.forEach { entry ->
+                    PlanRow(
+                        entry = entry,
+                        scene = vm.scenes.firstOrNull { it.id == entry.sceneId },
+                        onClick = { editing = entry },
+                        onToggle = { vm.setPlanEntryEnabled(entry.id, it) },
+                    )
+                }
+            }
+        }
+
+        Spacer(Modifier.height(10.dp))
+        AssistChip(
+            onClick = { adding = true },
+            enabled = vm.scenes.isNotEmpty(),
+            leadingIcon = { Icon(Icons.Default.Add, null, Modifier.size(18.dp)) },
+            label = { Text(stringResource(R.string.plan_add)) },
+        )
+        if (vm.scenes.isEmpty()) {
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.plan_need_scene), fontSize = 12.sp, color = cs.onSurfaceVariant)
+        }
+        Spacer(Modifier.height(8.dp))
+        Text(stringResource(R.string.plan_hint), fontSize = 12.sp, color = cs.onSurfaceVariant)
+    }
+
+    if (adding) {
+        PlanEntryDialog(
+            entry = null,
+            scenes = vm.scenes,
+            onDismiss = { adding = false },
+            onSave = { vm.savePlanEntry(it); adding = false },
+            onDelete = null,
+        )
+    }
+    editing?.let { e ->
+        PlanEntryDialog(
+            entry = e,
+            scenes = vm.scenes,
+            onDismiss = { editing = null },
+            onSave = { vm.savePlanEntry(it); editing = null },
+            onDelete = { vm.deletePlanEntry(e.id); editing = null },
+        )
+    }
+}
+
+/**
+ * EN: A compact seven-row week timetable. Each row is a 24-hour track with a coloured block for every
+ *     active window on that weekday, giving the plan a calendar-like feel at a glance.
+ * DE: Eine kompakte Wochen-Stundenplan-Ansicht mit sieben Zeilen. Jede Zeile ist eine 24-Stunden-Spur
+ *     mit einem farbigen Block je aktivem Fenster an diesem Wochentag — der Plan wirkt auf einen Blick
+ *     wie ein Kalender.
+ */
+@Composable
+private fun WeekCalendar(plan: List<PlanEntry>, scenes: List<Scene>) {
+    val cs = MaterialTheme.colorScheme
+    val track = cs.surfaceVariant
+    val fill = cs.primary
+    val sceneIds = scenes.map { it.id }.toHashSet()
+    val active = plan.filter { it.enabled && it.sceneId in sceneIds }
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp), modifier = Modifier.fillMaxWidth()) {
+        for (iso in 1..7) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+                Text(dayShort(iso), Modifier.width(36.dp), fontSize = 12.sp, color = cs.onSurfaceVariant)
+                Canvas(Modifier.weight(1f).height(14.dp)) {
+                    val r = size.height / 2f
+                    drawRoundRect(color = track, cornerRadius = CornerRadius(r, r))
+                    active.filter { iso in it.days }.forEach { e ->
+                        windowSegments(e.startMinutes, e.endMinutes).forEach { (a, b) ->
+                            val x0 = (a / 1440f) * size.width
+                            val w = ((b - a) / 1440f * size.width).coerceAtLeast(3f)
+                            drawRoundRect(
+                                color = fill,
+                                topLeft = Offset(x0, 0f),
+                                size = Size(w, size.height),
+                                cornerRadius = CornerRadius(r, r),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/** EN: One window split into drawable [start,end] minute spans (two when it crosses midnight). DE: Ein Fenster in zeichenbare [Start,Ende]-Minuten-Spannen zerlegt (zwei bei Mitternachtsüberlauf). */
+private fun windowSegments(start: Int, end: Int): List<Pair<Int, Int>> =
+    if (end > start) listOf(start to end) else listOf(start to 1440, 0 to end)
+
+/** EN: A plan window row: scene + days + time range, with an on/off switch; tap to edit. DE: Eine Plan-Fenster-Zeile: Szene + Tage + Zeitspanne, mit Ein/Aus-Schalter; Tippen zum Bearbeiten. */
+@Composable
+private fun PlanRow(entry: PlanEntry, scene: Scene?, onClick: () -> Unit, onToggle: (Boolean) -> Unit) {
+    val cs = MaterialTheme.colorScheme
+    val faded = if (entry.enabled) 1f else 0.5f
+    Surface(
+        shape = RoundedCornerShape(10.dp),
+        color = cs.surfaceVariant.copy(alpha = 0.5f),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(10.dp))
+            .clickable(onClick = onClick),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+        ) {
+            Icon(
+                scene?.let { sceneIcon(it) } ?: Icons.Default.CalendarMonth,
+                null,
+                Modifier.size(20.dp).graphicsLayer { alpha = faded },
+                tint = cs.primary,
+            )
+            Spacer(Modifier.width(10.dp))
+            Column(Modifier.weight(1f).graphicsLayer { alpha = faded }) {
+                Text(
+                    scene?.name ?: "—",
+                    fontSize = 15.sp, fontWeight = FontWeight.Medium, color = cs.onSurface,
+                )
+                val days = daysLabel(entry.days)
+                val time = timeRangeLabel(entry.startMinutes, entry.endMinutes)
+                val tail = if (entry.endAction == EndAction.OFF) " · " + stringResource(R.string.plan_to_off) else ""
+                val paused = if (!entry.enabled) " · " + stringResource(R.string.plan_disabled) else ""
+                Text(
+                    "$days · $time$tail$paused",
+                    fontSize = 12.sp, color = cs.onSurfaceVariant,
+                )
+            }
+            Switch(checked = entry.enabled, onCheckedChange = onToggle)
+        }
+    }
+}
+
+/**
+ * EN: Add/edit one plan window: pick the scene, the weekdays, the from/to times and the end behaviour.
+ *     The native time picker keeps time entry simple and locale-correct, as in the scene editor.
+ * DE: Ein Plan-Fenster anlegen/bearbeiten: Szene, Wochentage, Von-/Bis-Zeiten und Endverhalten wählen.
+ *     Der native Zeitwähler hält die Eingabe einfach und gebietsschema-korrekt, wie im Szenen-Editor.
+ */
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@Composable
+private fun PlanEntryDialog(
+    entry: PlanEntry?,
+    scenes: List<Scene>,
+    onDismiss: () -> Unit,
+    onSave: (PlanEntry) -> Unit,
+    onDelete: (() -> Unit)?,
+) {
+    val cs = MaterialTheme.colorScheme
+    val context = LocalContext.current
+    var sceneId by remember { mutableStateOf(entry?.sceneId ?: scenes.firstOrNull()?.id ?: "") }
+    var days by remember { mutableStateOf(entry?.days ?: setOf(1, 2, 3, 4, 5)) }
+    var start by remember { mutableStateOf(entry?.startMinutes ?: 6 * 60) }
+    var end by remember { mutableStateOf(entry?.endMinutes ?: 18 * 60) }
+    var endOff by remember { mutableStateOf((entry?.endAction ?: EndAction.OFF) == EndAction.OFF) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        icon = { Icon(Icons.Default.CalendarMonth, null) },
+        title = { Text(stringResource(if (entry == null) R.string.plan_new_title else R.string.plan_edit_title)) },
+        text = {
+            Column(Modifier.verticalScroll(rememberScrollState())) {
+                // EN: Scene picker. DE: Szenen-Auswahl.
+                Text(stringResource(R.string.plan_scene_label), color = cs.onSurfaceVariant, fontSize = 13.sp)
+                Spacer(Modifier.height(6.dp))
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    scenes.forEach { s ->
+                        FilterChip(
+                            selected = sceneId == s.id,
+                            onClick = { sceneId = s.id },
+                            label = { Text(s.name) },
+                            leadingIcon = { Icon(sceneIcon(s), null, Modifier.size(18.dp)) },
+                        )
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+
+                // EN: Weekday multi-select. DE: Wochentag-Mehrfachauswahl.
+                Text(stringResource(R.string.plan_days_label), color = cs.onSurfaceVariant, fontSize = 13.sp)
+                Spacer(Modifier.height(6.dp))
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    for (iso in 1..7) {
+                        FilterChip(
+                            selected = iso in days,
+                            onClick = { days = if (iso in days) days - iso else days + iso },
+                            label = { Text(dayShort(iso)) },
+                        )
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+
+                // EN: From / to times. DE: Von-/Bis-Zeiten.
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    TextButton(onClick = {
+                        android.app.TimePickerDialog(context, { _, h, m -> start = h * 60 + m }, start / 60, start % 60, true).show()
+                    }) { Text(stringResource(R.string.plan_from) + "  " + minutesLabel(start)) }
+                    TextButton(onClick = {
+                        android.app.TimePickerDialog(context, { _, h, m -> end = h * 60 + m }, end / 60, end % 60, true).show()
+                    }) { Text(stringResource(R.string.plan_to) + "  " + minutesLabel(end)) }
+                    if (end <= start) {
+                        Text(stringResource(R.string.plan_overnight), fontSize = 12.sp, color = cs.onSurfaceVariant)
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
+
+                // EN: End behaviour. DE: Endverhalten.
+                Text(stringResource(R.string.plan_end_label), color = cs.onSurfaceVariant, fontSize = 13.sp)
+                Spacer(Modifier.height(6.dp))
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = endOff, onClick = { endOff = true }, label = { Text(stringResource(R.string.plan_end_off)) })
+                    FilterChip(selected = !endOff, onClick = { endOff = false }, label = { Text(stringResource(R.string.plan_end_leave)) })
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                enabled = sceneId.isNotEmpty() && days.isNotEmpty(),
+                onClick = {
+                    val base = entry ?: PlanEntry(sceneId = sceneId, days = days, startMinutes = start, endMinutes = end)
+                    onSave(
+                        base.copy(
+                            sceneId = sceneId,
+                            days = days,
+                            startMinutes = start,
+                            endMinutes = end,
+                            endAction = if (endOff) EndAction.OFF else EndAction.LEAVE,
+                        )
+                    )
+                },
+            ) { Text(stringResource(R.string.scene_save)) }
+        },
+        dismissButton = {
+            Row {
+                if (onDelete != null) {
+                    TextButton(onClick = onDelete) { Text(stringResource(R.string.scene_delete), color = cs.error) }
+                }
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_cancel)) }
+            }
+        },
+    )
+}
+
+/** EN: "HH:mm" for minutes-since-midnight. DE: „HH:mm" für Minuten seit Mitternacht. */
+private fun minutesLabel(min: Int): String = "%02d:%02d".format(min / 60, min % 60)
+
+/** EN: "06:00–18:00" (+1 day suffix when the window crosses midnight). DE: „06:00–18:00" (+1-Tag-Zusatz bei Mitternachtsüberlauf). */
+@Composable
+private fun timeRangeLabel(start: Int, end: Int): String {
+    val base = "${minutesLabel(start)}–${minutesLabel(end)}"
+    return if (end <= start) "$base (${stringResource(R.string.plan_overnight)})" else base
+}
+
+/** EN: Localised day list, collapsed to "Every day" when all seven are picked. DE: Lokalisierte Tagesliste, zu „Täglich" zusammengefasst, wenn alle sieben gewählt sind. */
+@Composable
+private fun daysLabel(days: Set<Int>): String =
+    if (days.size >= 7) stringResource(R.string.plan_every_day)
+    else days.sorted().joinToString(" ") { dayShort(it) }
+
+/** EN: Short localised weekday name for ISO day 1=Mon … 7=Sun. DE: Kurzer, lokalisierter Wochentagsname für ISO-Tag 1=Mo … 7=So. */
+private fun dayShort(iso: Int): String {
+    // EN: DateFormatSymbols.shortWeekdays is indexed by Calendar day (1=Sun … 7=Sat). DE: DateFormatSymbols.shortWeekdays ist nach Calendar-Tag indiziert (1=So … 7=Sa).
+    val calIdx = if (iso == 7) Calendar.SUNDAY else iso + 1
+    return DateFormatSymbols.getInstance().shortWeekdays.getOrNull(calIdx)
+        ?.trimEnd('.', ' ')
+        ?.ifBlank { iso.toString() }
+        ?: iso.toString()
 }
 
 /**

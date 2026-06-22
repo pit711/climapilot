@@ -119,7 +119,7 @@ class AcCommandWorker(appContext: Context, params: WorkerParameters) :
         try {
             session.connect()
             when (op) {
-                OP_POWER_OFF -> {
+                OP_POWER_OFF, OP_POWER_OFF_PLAN -> {
                     // EN: Carry over the current mode/temp/fan so the off command doesn't reset them. DE: Aktuellen Modus/Temp/Lüfter übernehmen, damit der Aus-Befehl sie nicht zurücksetzt.
                     session.queryState()?.let { s ->
                         s.mode.takeIf { it in 1..5 }?.let { session.mode = it }
@@ -147,12 +147,16 @@ class AcCommandWorker(appContext: Context, params: WorkerParameters) :
 
     companion object {
         const val OP_POWER_OFF = "POWER_OFF"
+        // EN: Like OP_POWER_OFF but driven by the weekly plan — must NOT clear the sleep-timer state. DE: Wie OP_POWER_OFF, aber vom Wochenplan ausgelöst — darf den Sleep-Timer-Zustand NICHT löschen.
+        const val OP_POWER_OFF_PLAN = "POWER_OFF_PLAN"
         const val OP_APPLY_SCENE = "APPLY_SCENE"
         private const val KEY_OP = "op"
         private const val KEY_DEVICE_ID = "device_id"
         private const val KEY_SCENE_ID = "scene_id"
         // EN: Unique-work name for the sleep-timer power-off (one at a time). DE: Eindeutiger Work-Name für das Sleep-Timer-Ausschalten (immer nur eins).
         private const val WORK_SLEEP_OFF = "ac_sleep_off"
+        // EN: Unique-work name for plan actions (a plan firing runs exactly one action at a time). DE: Eindeutiger Work-Name für Plan-Aktionen (ein Plan-Auslösen führt genau eine Aktion aus).
+        private const val WORK_PLAN = "ac_plan"
         // EN: doWork runs up to this many times (initial + retries) before giving up. DE: doWork läuft bis zu so oft (erster Versuch + Retries), bevor aufgegeben wird.
         private const val MAX_ATTEMPTS = 5
 
@@ -172,6 +176,19 @@ class AcCommandWorker(appContext: Context, params: WorkerParameters) :
             ctx, "ac_scene_$sceneId",
             Data.Builder().putString(KEY_OP, OP_APPLY_SCENE).putLong(KEY_DEVICE_ID, 0L)
                 .putString(KEY_SCENE_ID, sceneId).build(),
+        )
+
+        /** EN: Weekly plan: robustly apply scene [sceneId] when a window starts. DE: Wochenplan: Szene [sceneId] beim Fensterbeginn zuverlässig anwenden. */
+        fun enqueuePlanScene(ctx: Context, sceneId: String) = enqueue(
+            ctx, WORK_PLAN,
+            Data.Builder().putString(KEY_OP, OP_APPLY_SCENE).putLong(KEY_DEVICE_ID, 0L)
+                .putString(KEY_SCENE_ID, sceneId).build(),
+        )
+
+        /** EN: Weekly plan: robustly power off the first cached device when a window ends. DE: Wochenplan: das erste gecachte Gerät beim Fensterende zuverlässig ausschalten. */
+        fun enqueuePlanPowerOff(ctx: Context) = enqueue(
+            ctx, WORK_PLAN,
+            Data.Builder().putString(KEY_OP, OP_POWER_OFF_PLAN).putLong(KEY_DEVICE_ID, 0L).build(),
         )
 
         private fun enqueue(ctx: Context, uniqueName: String, data: Data) {

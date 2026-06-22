@@ -3,20 +3,22 @@
 **Control your Midea air conditioner locally over Wi-Fi — no cloud account required.**
 **Steuere deine Midea-Klimaanlage lokal im WLAN — ganz ohne Cloud-Konto.**
 
-[![Version](https://img.shields.io/badge/version-0.4.1-blue)](https://github.com/pit711/climapilot/releases)
+[![Version](https://img.shields.io/badge/version-0.5-blue)](https://github.com/pit711/climapilot/releases)
 [![Platform](https://img.shields.io/badge/platform-Android%208%2B-green)](#)
 [![Wear OS](https://img.shields.io/badge/Wear%20OS-companion-4285F4?logo=wearos&logoColor=white)](#)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-support-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/711it)
 [![PayPal](https://img.shields.io/badge/PayPal-tip-00457C?logo=paypal&logoColor=white)](https://paypal.me/711IT)
 
 <p align="center">
-  <img src="docs/screenshot-control.png" width="24%" alt="Control">
+  <img src="docs/screenshot-control.png" width="19%" alt="Control">
   &nbsp;
-  <img src="docs/screenshot-options.png" width="24%" alt="Options">
+  <img src="docs/screenshot-scenes.png" width="19%" alt="Scenes">
   &nbsp;
-  <img src="docs/screenshot-scenes.png" width="24%" alt="Scenes">
+  <img src="docs/screenshot-plan.png" width="19%" alt="Weekly plan">
   &nbsp;
-  <img src="docs/screenshot-history.png" width="24%" alt="History &amp; charts">
+  <img src="docs/screenshot-options.png" width="19%" alt="Options">
+  &nbsp;
+  <img src="docs/screenshot-history.png" width="19%" alt="History &amp; charts">
 </p>
 
 🇬🇧 [English](#english) · 🇩🇪 [Deutsch](#deutsch)
@@ -35,7 +37,10 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 - 🌬️ Device-specific modes where supported: ionizer, outdoor-silent, self-clean
 - 📊 Live status: indoor / outdoor temperature, power draw, consumption, **estimated cost** (price per kWh)
 - ⚡ Quick scenes with a full editor & **daily schedule**
+- 📅 **Weekly day-planner** — assign scenes to recurring weekday + time windows (e.g. *max cooling on Mondays, 6–18*) on a visual week calendar; each window applies its scene at the start and can switch the AC off at the end. Runs in the background even while the phone is idle on Wi-Fi.
 - 🧊 Compressor throttle (where supported) · reliable sleep/off timer (survives reboot) with a live countdown notification · auto power-off after a max runtime
+
+> **Background reliability & trade-offs.** The weekly planner (like the sleep/off timer) uses a Doze-proof alarm-clock so windows fire on time even in standby. As a side effect, Android shows the **alarm-clock icon** in the status bar while a plan is active. For dependable timing, allow ClimaPilot to run in the background / disable battery optimisation — **Settings ▸ Reliable timers** — especially on aggressive vendors (Samsung, Xiaomi). The plan acts on your **first/primary connected** AC, and saving or editing a plan never sends a command — windows only act at their scheduled start/end times.
 - 📑 **Tabbed layout** — Control · Options · Scenes · Status · History — adapts to a side navigation rail on tablets and in landscape
 - 📈 **Energy & filter history with charts** — power, indoor/outdoor temperature and fan level, by hour / day / week / month or a chosen day, per AC; optional background recording every ~15 min (Wi-Fi)
 - ⌚ **Wear OS companion app** — control the AC from your watch
@@ -46,7 +51,7 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 - 👀 Demo mode — explore the UI without a device
 
 ### Install
-1. Download the latest `climapilot-0.4.1.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
+1. Download the latest `climapilot-0.5.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
 2. On your phone, allow installing from unknown sources when prompted.
 3. Open the app, tap **Search devices** (phone must be on the same Wi-Fi as the AC), and connect.
 
@@ -77,7 +82,10 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 - 🌬️ Gerätespezifische Modi, wo unterstützt: Ionisierer, Außen-Leise, Selbstreinigung
 - 📊 Live-Status: Innen-/Außentemperatur, Leistung, Verbrauch, **geschätzte Kosten** (Preis pro kWh)
 - ⚡ Schnell-Szenen mit vollem Editor & **Tagesplan**
+- 📅 **Wochen-Tagesplaner** — Szenen wiederkehrenden Wochentag-+Zeit-Fenstern zuweisen (z. B. *maximal kühlen montags 6–18*) auf einem visuellen Wochenkalender; jedes Fenster wendet beim Start seine Szene an und kann die Klima am Ende ausschalten. Läuft im Hintergrund, auch wenn das Handy im WLAN ruht.
 - 🧊 Kompressor-Drossel (wo unterstützt) · zuverlässiger Sleep-/Aus-Timer (übersteht Neustart) mit Live-Countdown-Benachrichtigung · Auto-Aus nach maximaler Laufzeit
+
+> **Hintergrund-Zuverlässigkeit & Trade-offs.** Der Wochenplaner nutzt (wie der Sleep-/Aus-Timer) einen Doze-festen Wecker-Alarm, damit Fenster auch im Standby pünktlich auslösen. Als Nebeneffekt zeigt Android das **Wecker-Symbol** in der Statusleiste, solange ein Plan aktiv ist. Für verlässliches Timing die App im Hintergrund erlauben / Akku-Optimierung deaktivieren — **Einstellungen ▸ Zuverlässige Timer** — besonders bei aggressiven Herstellern (Samsung, Xiaomi). Der Plan wirkt auf deine **erste/primäre verbundene** Klima, und das Speichern oder Bearbeiten eines Plans sendet nie einen Befehl — Fenster wirken nur zu ihren geplanten Start-/Endzeiten.
 - 📑 **Reiter-Layout** — Steuern · Optionen · Szenen · Status · Verlauf — wird auf Tablets und im Querformat zur seitlichen Navigationsleiste
 - 📈 **Energie- & Filter-Verlauf mit Charts** — Leistung, Innen-/Außentemperatur und Lüfterstufe, nach Stunde / Tag / Woche / Monat oder gewähltem Tag, pro Klima; optionale Hintergrund-Aufzeichnung etwa alle 15 min (WLAN)
 - ⌚ **Wear-OS-App** — die Klima von der Uhr steuern
@@ -88,7 +96,7 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 - 👀 Demo-Modus — UI ohne Gerät ausprobieren
 
 ### Installation
-1. Lade die aktuelle `climapilot-0.4.1.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
+1. Lade die aktuelle `climapilot-0.5.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
 2. Erlaube auf dem Handy bei der Nachfrage die Installation aus unbekannten Quellen.
 3. Öffne die App, tippe auf **Geräte suchen** (Handy im selben WLAN wie die Klima) und verbinde dich.
 

@@ -128,6 +128,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     // DE: ---- Schnell-Szenen ---- Ein-Tipp-Vorlagen des gesamten Steuerzustands, lokal gespeichert.
     var scenes by mutableStateOf<List<Scene>>(emptyList()); private set
 
+    // EN: ---- weekly plan ---- recurring "apply scene X on these weekdays from–to" windows, run in the
+    //     background even while idle (see PlanScheduler). DE: ---- Wochenplan ---- wiederkehrende Fenster
+    //     „Szene X an diesen Wochentagen von–bis", laufen auch im Standby im Hintergrund (siehe PlanScheduler).
+    var plan by mutableStateOf<List<PlanEntry>>(emptyList()); private set
+
     // ---- sleep timer ----
     var sleepTimerMinutes by mutableStateOf<Int?>(null); private set
     private var sleepJob: Job? = null
@@ -143,6 +148,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         scenes = SceneRepo.load(ctx) ?: seedScenes(ctx).also { SceneRepo.save(ctx, it) }
         // EN: Make sure any saved daily scene times are armed on every app start. DE: Sicherstellen, dass gespeicherte tägliche Szenenzeiten bei jedem App-Start aktiv sind.
         SceneScheduler.rescheduleAll(ctx, scenes)
+        // EN: Load the weekly plan and re-arm its next event (arm only — opening the app never switches
+        //     the AC). DE: Den Wochenplan laden und sein nächstes Ereignis neu setzen (nur setzen — das
+        //     Öffnen der App schaltet die Klima nie).
+        plan = PlanRepo.load(ctx) ?: emptyList()
+        PlanScheduler.reschedule(ctx)
         useFahrenheit = SettingsRepo.useFahrenheit(ctx)
         pricePerKwh = SettingsRepo.pricePerKwh(ctx)
         sleepCustomMinutes = SettingsRepo.sleepCustomMinutes(ctx)
@@ -230,6 +240,9 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         scenes = scenes.filterNot { it.id == id }
         SceneRepo.save(getApplication(), scenes)
         SceneScheduler.rescheduleAll(getApplication(), scenes)
+        // EN: Plan entries that referenced this scene now resolve to nothing — re-arm so they drop out.
+        // DE: Plan-Einträge, die diese Szene nutzten, laufen jetzt ins Leere — neu setzen, damit sie wegfallen.
+        PlanScheduler.reschedule(getApplication())
     }
 
     /**
@@ -240,6 +253,42 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         scenes = scenes.map { if (it.id == scene.id) scene else it }
         SceneRepo.save(getApplication(), scenes)
         SceneScheduler.rescheduleAll(getApplication(), scenes)
+        // EN: A scene's settings may have changed — re-arm the plan so it picks up the edit. DE: Die
+        //     Einstellungen einer Szene können sich geändert haben — den Plan neu setzen, damit er die Änderung übernimmt.
+        PlanScheduler.reschedule(getApplication())
+    }
+
+    /**
+     * EN: Add a new weekly-plan entry or replace an existing one (matched by id), persist it and re-arm
+     *     the next plan event. Saving never sends a command to the AC — the plan only acts at its
+     *     scheduled window boundaries — so editing the plan can never switch a running unit by surprise.
+     * DE: Einen neuen Wochenplan-Eintrag hinzufügen oder einen bestehenden (per ID) ersetzen, speichern
+     *     und das nächste Plan-Ereignis neu setzen. Das Speichern sendet nie einen Befehl an die Klima —
+     *     der Plan wirkt nur an seinen geplanten Fenstergrenzen — ein laufendes Gerät kann durch das
+     *     Bearbeiten also nie überraschend geschaltet werden.
+     */
+    fun savePlanEntry(entry: PlanEntry) {
+        plan = if (plan.any { it.id == entry.id }) {
+            plan.map { if (it.id == entry.id) entry else it }
+        } else {
+            plan + entry
+        }
+        PlanRepo.save(getApplication(), plan)
+        PlanScheduler.reschedule(getApplication())
+    }
+
+    /** EN: Delete a weekly-plan entry by id, persist and re-arm. DE: Einen Wochenplan-Eintrag per ID löschen, speichern und neu setzen. */
+    fun deletePlanEntry(id: String) {
+        plan = plan.filterNot { it.id == id }
+        PlanRepo.save(getApplication(), plan)
+        PlanScheduler.reschedule(getApplication())
+    }
+
+    /** EN: Enable/disable a plan entry (kept in the list either way) and re-arm. DE: Einen Plan-Eintrag aktivieren/deaktivieren (bleibt so oder so in der Liste) und neu setzen. */
+    fun setPlanEntryEnabled(id: String, enabled: Boolean) {
+        plan = plan.map { if (it.id == id) it.copy(enabled = enabled) else it }
+        PlanRepo.save(getApplication(), plan)
+        PlanScheduler.reschedule(getApplication())
     }
 
     fun discover() {

@@ -51,6 +51,11 @@
             android:name=".SceneAlarmReceiver"
             android:exported="false" />
 
+        <!-- Runs the weekly day-planner: applies/ends scene windows at their start/end times, even idle / Führt den Wochen-Tagesplaner aus: wendet Szenen-Fenster zu Beginn/Ende an, auch im Standby -->
+        <receiver
+            android:name=".PlanAlarmReceiver"
+            android:exported="false" />
+
         <!-- Powers the unit off when the sleep timer fires, even with the app closed / Schaltet das Gerät aus, wenn der Sleep-Timer auslöst, auch bei geschlossener App -->
         <receiver
             android:name=".SleepTimerReceiver"

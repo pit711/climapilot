@@ -22,6 +22,11 @@ class BootReceiver : BroadcastReceiver() {
         // EN: Re-arm all daily scene schedules. DE: Alle täglichen Szenen-Zeitpläne neu setzen.
         SceneRepo.load(appCtx)?.let { SceneScheduler.rescheduleAll(appCtx, it) }
 
+        // EN: Re-arm the weekly plan and apply whatever it should be doing right now (a boundary may have
+        //     been crossed while the phone was off). DE: Den Wochenplan neu setzen und anwenden, was er
+        //     gerade vorsehen sollte (eine Grenze wurde evtl. überschritten, während das Handy aus war).
+        PlanScheduler.reconcileAndReschedule(appCtx)
+
         // EN: Re-arm a pending sleep timer from its persisted absolute trigger time. DE: Einen ausstehenden Sleep-Timer aus seiner gespeicherten absoluten Auslösezeit neu setzen.
         val triggerAt = SleepTimerScheduler.triggerAt(appCtx)
         val deviceId = SleepTimerScheduler.deviceId(appCtx)

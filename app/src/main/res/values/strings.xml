@@ -20,6 +20,26 @@
     <string name="scene_delete_title">Delete scene?</string>
     <string name="scene_delete_msg">“%1$s” will be removed.</string>
 
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Weekly plan</string>
+    <string name="plan_empty">No windows yet. Add one to run a scene automatically — e.g. max cooling on Mondays, 6 to 18.</string>
+    <string name="plan_need_scene">Create a scene first — the plan runs your scenes.</string>
+    <string name="plan_add">Add window</string>
+    <string name="plan_hint">Windows run in the background, even when the phone is idle on Wi-Fi. For reliable timing, allow ClimaPilot to run in the background (Settings ▸ Reliable timers).</string>
+    <string name="plan_new_title">New window</string>
+    <string name="plan_edit_title">Edit window</string>
+    <string name="plan_scene_label">Scene</string>
+    <string name="plan_days_label">Days</string>
+    <string name="plan_from">From</string>
+    <string name="plan_to">To</string>
+    <string name="plan_end_label">When it ends</string>
+    <string name="plan_end_off">Turn off</string>
+    <string name="plan_end_leave">Keep running</string>
+    <string name="plan_overnight">+1 day</string>
+    <string name="plan_every_day">Every day</string>
+    <string name="plan_disabled">paused</string>
+    <string name="plan_to_off">→ off</string>
+
     <!-- Devices screen -->
     <string name="hero_subtitle">Your air conditioner on Wi-Fi</string>
     <string name="action_discover">Search devices</string>
@@ -178,6 +198,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_5_title">Version 0.5</string>
+    <string name="changelog_0_5_body">•  New: Weekly day-planner — assign scenes to recurring weekday + time windows (e.g. max cooling on Mondays, 6–18) on a visual week calendar; off or keep-running at the end\n•  Runs in the background even while the phone is idle on Wi-Fi (Doze-proof), survives reboots\n•  Note: while a plan is active Android shows the alarm-clock icon; for reliable timing allow background use under Settings ▸ Reliable timers</string>
     <string name="changelog_0_4_2_title">Version 0.4.2</string>
     <string name="changelog_0_4_2_body">•  Fixed: the all-in-one home-screen widget failed to load (\"Problem loading widget\")\n•  IR remote: added Swing, Quiet, Turbo and Eco toggles — it now also remembers its last state\n•  Fan speed: added a 1% quick preset</string>
     <string name="changelog_0_4_1_title">Version 0.4.1</string>

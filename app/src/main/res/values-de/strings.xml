@@ -18,6 +18,26 @@
     <string name="scene_delete_title">Szene löschen?</string>
     <string name="scene_delete_msg">„%1$s“ wird entfernt.</string>
 
+    <!-- Wochen-Tagesplaner -->
+    <string name="section_plan">Wochenplan</string>
+    <string name="plan_empty">Noch keine Fenster. Füge eins hinzu, um eine Szene automatisch auszuführen — z. B. maximal kühlen montags von 6 bis 18 Uhr.</string>
+    <string name="plan_need_scene">Lege zuerst eine Szene an — der Plan führt deine Szenen aus.</string>
+    <string name="plan_add">Fenster hinzufügen</string>
+    <string name="plan_hint">Fenster laufen im Hintergrund, auch wenn das Handy im WLAN im Standby ist. Für zuverlässiges Timing die App im Hintergrund erlauben (Einstellungen ▸ Zuverlässige Timer).</string>
+    <string name="plan_new_title">Neues Fenster</string>
+    <string name="plan_edit_title">Fenster bearbeiten</string>
+    <string name="plan_scene_label">Szene</string>
+    <string name="plan_days_label">Tage</string>
+    <string name="plan_from">Von</string>
+    <string name="plan_to">Bis</string>
+    <string name="plan_end_label">Am Ende</string>
+    <string name="plan_end_off">Ausschalten</string>
+    <string name="plan_end_leave">Weiterlaufen</string>
+    <string name="plan_overnight">+1 Tag</string>
+    <string name="plan_every_day">Täglich</string>
+    <string name="plan_disabled">pausiert</string>
+    <string name="plan_to_off">→ aus</string>
+
     <!-- Devices screen -->
     <string name="hero_subtitle">Deine Klimaanlage im WLAN</string>
     <string name="action_discover">Geräte suchen</string>
@@ -175,6 +195,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_5_title">Version 0.5</string>
+    <string name="changelog_0_5_body">•  Neu: Wochen-Tagesplaner — Szenen wiederkehrenden Wochentag-+Zeit-Fenstern zuweisen (z. B. maximal kühlen montags 6–18) auf einem visuellen Wochenkalender; am Ende ausschalten oder weiterlaufen\n•  Läuft im Hintergrund, auch wenn das Handy im WLAN ruht (Doze-fest), übersteht Neustarts\n•  Hinweis: solange ein Plan aktiv ist, zeigt Android das Wecker-Symbol; für zuverlässiges Timing den Hintergrund unter Einstellungen ▸ Zuverlässige Timer erlauben</string>
     <string name="changelog_0_4_2_title">Version 0.4.2</string>
     <string name="changelog_0_4_2_body">•  Behoben: Das Alles-Widget auf dem Homescreen ließ sich nicht laden („Problem beim Laden des Widgets")\n•  IR-Fernbedienung: Swing-, Leise-, Turbo- und Eco-Schalter ergänzt — merkt sich jetzt zudem den zuletzt gesendeten Zustand\n•  Lüftergeschwindigkeit: 1%-Schnellwahl ergänzt</string>
     <string name="changelog_0_4_1_title">Version 0.4.1</string>
