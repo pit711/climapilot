@@ -107,6 +107,7 @@
     <string name="option_anion">Ionizer</string>
     <string name="option_out_silent">Outdoor silent</string>
     <string name="option_self_clean">Self-clean</string>
+    <string name="option_display">Display / LED</string>
 
     <string name="section_gear">Compressor throttle</string>
     <string name="gear_full">Full</string>
@@ -198,6 +199,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_6_title">Version 0.6</string>
+    <string name="changelog_0_6_body">•  New: in-app updater — checks GitHub for newer versions and installs them with one tap (you confirm each install). Auto-check on launch can be turned off in Settings\n•  New: Display / LED toggle in Options — turn the indoor unit\'s panel light on/off</string>
     <string name="changelog_0_5_title">Version 0.5</string>
     <string name="changelog_0_5_body">•  New: Weekly day-planner — assign scenes to recurring weekday + time windows (e.g. max cooling on Mondays, 6–18) on a visual week calendar; off or keep-running at the end\n•  Runs in the background even while the phone is idle on Wi-Fi (Doze-proof), survives reboots\n•  Note: while a plan is active Android shows the alarm-clock icon; for reliable timing allow background use under Settings ▸ Reliable timers</string>
     <string name="changelog_0_4_2_title">Version 0.4.2</string>
@@ -224,6 +227,24 @@
     <string name="reliability_battery_warn">Battery optimisation is on — timers may be delayed or skipped.</string>
     <string name="reliability_battery_action">Allow background (battery)</string>
     <string name="reliability_autostart_action">Allow auto-start (manufacturer)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">App updates</string>
+    <string name="update_body">New versions are fetched from GitHub. You always confirm the install.</string>
+    <string name="update_current">Installed: %1$s</string>
+    <string name="update_auto_label">Check automatically on launch</string>
+    <string name="update_check_button">Check for updates</string>
+    <string name="update_checking">Checking…</string>
+    <string name="update_uptodate">You\'re on the latest version (%1$s).</string>
+    <string name="update_error">Couldn\'t check for updates. Check your connection and try again.</string>
+    <string name="update_available_title">Update available</string>
+    <string name="update_available_body">Version %1$s is available — you\'re on %2$s.</string>
+    <string name="update_install">Update</string>
+    <string name="update_downloading">Downloading… %1$d%%</string>
+    <string name="update_later">Later</string>
+    <string name="update_failed">Download failed. Please try again later.</string>
+    <string name="update_verify_failed">The download failed the security check and was not installed.</string>
+    <string name="update_need_permission">Allow ClimaPilot to install apps, then tap Update again.</string>
 
     <!-- Launcher shortcuts -->
     <string name="shortcut_off">Turn off</string>

@@ -104,6 +104,12 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     var anion by mutableStateOf(false); private set
     var selfClean by mutableStateOf(false); private set
     var outSilent by mutableStateOf(false); private set
+    // EN: Assumed LED-display state. The Midea display command is toggle-only with no readable state, so
+    //     this mirrors what we last sent (like the IR toggles); a switch starts "on" (units usually do).
+    // DE: Angenommener LED-Anzeige-Zustand. Der Midea-Display-Befehl ist nur ein Umschalter ohne
+    //     auslesbaren Zustand, daher spiegelt dies das zuletzt Gesendete (wie die IR-Schalter); der Schalter
+    //     startet „an" (Geräte meist auch).
+    var display by mutableStateOf(true); private set
 
     // EN: Display preferences. DE: Anzeige-Einstellungen.
     var useFahrenheit by mutableStateOf(false); private set
@@ -133,6 +139,19 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     //     „Szene X an diesen Wochentagen von–bis", laufen auch im Standby im Hintergrund (siehe PlanScheduler).
     var plan by mutableStateOf<List<PlanEntry>>(emptyList()); private set
 
+    // EN: ---- in-app updater (GitHub build) ---- a newer release found on GitHub, plus check/download
+    //     UI state. DE: ---- In-App-Updater (GitHub-Build) ---- ein auf GitHub gefundenes neueres Release plus
+    //     Prüf-/Download-Zustand für die UI.
+    var autoUpdateCheck by mutableStateOf(true); private set
+    var updateChecking by mutableStateOf(false); private set
+    var updateAvailable by mutableStateOf<UpdateChecker.Release?>(null); private set
+    // EN: -1 = idle, 0..100 = download progress. DE: -1 = untätig, 0..100 = Download-Fortschritt.
+    var updateProgress by mutableStateOf(-1); private set
+    // EN: A short user-facing result line (up-to-date / error / hint). DE: Eine kurze Ergebniszeile für den Nutzer (aktuell / Fehler / Hinweis).
+    var updateMessage by mutableStateOf<String?>(null); private set
+    // EN: Don't keep re-popping the auto dialog after the user dismissed it this session. DE: Den Auto-Dialog nach dem Schließen in dieser Sitzung nicht erneut zeigen.
+    private var updateDismissed = false
+
     // ---- sleep timer ----
     var sleepTimerMinutes by mutableStateOf<Int?>(null); private set
     private var sleepJob: Job? = null
@@ -153,6 +172,9 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         //     Öffnen der App schaltet die Klima nie).
         plan = PlanRepo.load(ctx) ?: emptyList()
         PlanScheduler.reschedule(ctx)
+        // EN: Quietly check GitHub for a newer build on launch (throttled, opt-out). DE: Beim Start leise auf GitHub nach einem neueren Build prüfen (gedrosselt, abschaltbar).
+        autoUpdateCheck = SettingsRepo.autoUpdateCheck(ctx)
+        maybeAutoCheckUpdate()
         useFahrenheit = SettingsRepo.useFahrenheit(ctx)
         pricePerKwh = SettingsRepo.pricePerKwh(ctx)
         sleepCustomMinutes = SettingsRepo.sleepCustomMinutes(ctx)
@@ -191,6 +213,78 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         historyEnabled = value
         SettingsRepo.setHistoryEnabled(getApplication(), value)
         HistoryPollWorker.setEnabled(getApplication(), value)
+    }
+
+    /** EN: Toggle the automatic update check on launch and persist (named update* to avoid the JVM setter clash). DE: Den automatischen Update-Check beim Start umschalten und speichern (update*-Name wegen JVM-Setter-Kollision). */
+    fun updateAutoUpdateCheck(value: Boolean) {
+        autoUpdateCheck = value
+        SettingsRepo.setAutoUpdateCheck(getApplication(), value)
+    }
+
+    /** EN: Auto-check at most once every 12 h; never nags about being up to date or about errors. DE: Auto-Check höchstens alle 12 h; meldet nie „aktuell" oder Fehler. */
+    private fun maybeAutoCheckUpdate() {
+        if (!autoUpdateCheck || updateDismissed) return
+        val last = SettingsRepo.lastUpdateCheck(getApplication())
+        if (System.currentTimeMillis() - last < 12 * 60 * 60 * 1000L) return
+        checkForUpdates(manual = false)
+    }
+
+    /**
+     * EN: Check GitHub for a newer release. When [manual] is true (the Settings button) the result is
+     *     always reported (up to date / error); an auto-check stays silent unless an update is found.
+     * DE: GitHub auf ein neueres Release prüfen. Bei [manual] = true (Einstellungen-Knopf) wird das
+     *     Ergebnis immer gemeldet (aktuell / Fehler); ein Auto-Check bleibt still, außer es gibt ein Update.
+     */
+    fun checkForUpdates(manual: Boolean) {
+        if (updateChecking) return
+        val ctx = getApplication<Application>()
+        updateChecking = true
+        updateMessage = null
+        viewModelScope.launch {
+            when (val r = UpdateChecker.check(ctx)) {
+                is UpdateChecker.CheckResult.Available -> updateAvailable = r.release
+                is UpdateChecker.CheckResult.UpToDate ->
+                    if (manual) updateMessage = ctx.getString(R.string.update_uptodate, UpdateChecker.installedVersion(ctx))
+                is UpdateChecker.CheckResult.Failed ->
+                    if (manual) updateMessage = ctx.getString(R.string.update_error)
+            }
+            updateChecking = false
+            SettingsRepo.setLastUpdateCheck(ctx, System.currentTimeMillis())
+        }
+    }
+
+    /** EN: Dismiss the available-update prompt for this session. DE: Den Update-Hinweis für diese Sitzung schließen. */
+    fun dismissUpdate() {
+        updateAvailable = null
+        updateDismissed = true
+    }
+
+    /**
+     * EN: Download the available update and hand it to the system installer. Verifies the APK signer
+     *     before installing; if "install unknown apps" isn't granted yet, sends the user to that setting.
+     * DE: Das verfügbare Update laden und an den System-Installer übergeben. Prüft den APK-Signierer vor
+     *     der Installation; ist „Unbekannte Apps installieren" noch nicht erteilt, wird der Nutzer dorthin geführt.
+     */
+    fun downloadAndInstallUpdate() {
+        val release = updateAvailable ?: return
+        if (updateProgress >= 0) return
+        val ctx = getApplication<Application>()
+        if (!UpdateChecker.canInstall(ctx)) {
+            updateMessage = ctx.getString(R.string.update_need_permission)
+            UpdateChecker.requestInstallPermission(ctx)
+            return
+        }
+        updateMessage = null
+        updateProgress = 0
+        viewModelScope.launch {
+            val file = UpdateChecker.download(ctx, release) { p -> updateProgress = p }
+            updateProgress = -1
+            when {
+                file == null -> updateMessage = ctx.getString(R.string.update_failed)
+                !UpdateChecker.verifyApk(ctx, file) -> updateMessage = ctx.getString(R.string.update_verify_failed)
+                else -> UpdateChecker.installApk(ctx, file)
+            }
+        }
     }
 
     /**
@@ -375,7 +469,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         rateLevels = 2
         // EN: Show all optional toggles in demo so the UI can be explored. DE: In der Demo alle optionalen Schalter zeigen, damit die UI erkundbar ist.
         capAnion = true; capSelfClean = true; capOutSilent = true
-        anion = false; selfClean = false; outSilent = false
+        anion = false; selfClean = false; outSilent = false; display = true
         live = AcState(
             powerOn = true, mode = MideaAc.MODE_COOL, targetTemp = 24.0, fanSpeed = 60,
             indoorTemp = 23.5, outdoorTemp = 29.0, errorCode = 0,
@@ -531,6 +625,8 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     fun toggleEco() { val v = !eco; command({ eco = v }) { setEco(v) } }
     fun applyBeep(on: Boolean) = command({ beep = on; session?.beep = on }) { setBuzzer(on) }
     fun applyRate(value: Int) = command({ rate = value }) { setRate(value) }
+    /** EN: Flip the indoor unit's LED display panel; the switch reflects what we last sent. DE: Die LED-Anzeige des Innengeräts umschalten; der Schalter zeigt das zuletzt Gesendete. */
+    fun toggleDisplay() { val v = !display; command({ display = v }) { toggleDisplay() } }
     fun toggleAnion() { val v = !anion; command({ anion = v }) { setAnion(v) } }
     fun toggleSelfClean() { val v = !selfClean; command({ selfClean = v }) { setSelfClean(v) } }
     fun toggleOutdoorSilent() { val v = !outSilent; command({ outSilent = v }) { setOutdoorSilent(v) } }

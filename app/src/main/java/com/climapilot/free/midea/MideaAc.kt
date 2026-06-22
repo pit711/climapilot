@@ -170,6 +170,25 @@ object MideaAc {
         return frame(FRAME_QUERY, data)
     }
 
+    /**
+     * EN: Build a "toggle display" command (port of msmart ToggleDisplayCommand). It is structured like
+     *     GetState but with the display-request marker (byte 1 = 0x61), and it *flips* the indoor unit's
+     *     LED panel on/off — there is no separate on/off, only a toggle, and the state isn't reliably
+     *     readable. Sent as a QUERY frame.
+     * DE: Einen „Display umschalten"-Befehl bauen (Portierung von msmart ToggleDisplayCommand). Aufgebaut
+     *     wie GetState, aber mit der Display-Anforderungs-Markierung (Byte 1 = 0x61); er *kippt* die
+     *     LED-Anzeige des Innengeräts ein/aus — es gibt kein separates Ein/Aus, nur ein Umschalten, und der
+     *     Zustand ist nicht zuverlässig auslesbar. Wird als QUERY-Frame gesendet.
+     */
+    fun buildToggleDisplay(): ByteArray {
+        val data = byteArrayOf(
+            0x41, 0x61, 0x00, 0xFF.toByte(), 0x02, 0x00, 0x02,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x03,
+        )
+        return frame(FRAME_QUERY, data)
+    }
+
     private fun parseTemp(data: Int, decimals: Double, fahrenheit: Boolean): Double? {
         if (data == 0xFF) return null
         val t = (data - 50) / 2.0
@@ -467,6 +486,11 @@ class MideaAcSession(
     /** EN: Outdoor-unit silent mode on/off. DE: Leise-Modus des Außengeräts ein/aus. */
     suspend fun setOutdoorSilent(on: Boolean) {
         send(MideaAc.buildSetProperties(listOf(MideaAc.PROP_OUT_SILENT to if (on) 1 else 0, MideaAc.PROP_BUZZER to 0)))
+    }
+
+    /** EN: Flip the indoor unit's LED display panel on/off (toggle-only; no readable state). DE: Die LED-Anzeige des Innengeräts ein-/ausschalten (nur Umschalten; kein auslesbarer Zustand). */
+    suspend fun toggleDisplay() {
+        send(MideaAc.buildToggleDisplay())
     }
 
     /**

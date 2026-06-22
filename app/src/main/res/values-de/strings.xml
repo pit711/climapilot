@@ -104,6 +104,7 @@
     <string name="option_anion">Ionisierer</string>
     <string name="option_out_silent">Außengerät leise</string>
     <string name="option_self_clean">Selbstreinigung</string>
+    <string name="option_display">Anzeige / LED</string>
 
     <string name="section_gear">Kompressor-Drossel</string>
     <string name="gear_full">Voll</string>
@@ -195,6 +196,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_6_title">Version 0.6</string>
+    <string name="changelog_0_6_body">•  Neu: In-App-Updater — prüft GitHub auf neuere Versionen und installiert sie mit einem Tipp (Installation bestätigst du selbst). Auto-Prüfung beim Start in den Einstellungen abschaltbar\n•  Neu: Anzeige-/LED-Schalter in den Optionen — die Anzeige am Innengerät ein-/ausschalten</string>
     <string name="changelog_0_5_title">Version 0.5</string>
     <string name="changelog_0_5_body">•  Neu: Wochen-Tagesplaner — Szenen wiederkehrenden Wochentag-+Zeit-Fenstern zuweisen (z. B. maximal kühlen montags 6–18) auf einem visuellen Wochenkalender; am Ende ausschalten oder weiterlaufen\n•  Läuft im Hintergrund, auch wenn das Handy im WLAN ruht (Doze-fest), übersteht Neustarts\n•  Hinweis: solange ein Plan aktiv ist, zeigt Android das Wecker-Symbol; für zuverlässiges Timing den Hintergrund unter Einstellungen ▸ Zuverlässige Timer erlauben</string>
     <string name="changelog_0_4_2_title">Version 0.4.2</string>
@@ -221,6 +224,24 @@
     <string name="reliability_battery_warn">Akku-Optimierung ist an — Timer können verspätet sein oder ausfallen.</string>
     <string name="reliability_battery_action">Hintergrund erlauben (Akku)</string>
     <string name="reliability_autostart_action">Autostart erlauben (Hersteller)</string>
+
+    <!-- In-App-Updater (GitHub-/Sideload-Build) -->
+    <string name="update_title">App-Updates</string>
+    <string name="update_body">Neue Versionen werden von GitHub geladen. Die Installation bestätigst du immer selbst.</string>
+    <string name="update_current">Installiert: %1$s</string>
+    <string name="update_auto_label">Beim Start automatisch prüfen</string>
+    <string name="update_check_button">Nach Updates suchen</string>
+    <string name="update_checking">Suche…</string>
+    <string name="update_uptodate">Du hast die neueste Version (%1$s).</string>
+    <string name="update_error">Update-Prüfung fehlgeschlagen. Verbindung prüfen und erneut versuchen.</string>
+    <string name="update_available_title">Update verfügbar</string>
+    <string name="update_available_body">Version %1$s ist verfügbar — du hast %2$s.</string>
+    <string name="update_install">Aktualisieren</string>
+    <string name="update_downloading">Lädt… %1$d%%</string>
+    <string name="update_later">Später</string>
+    <string name="update_failed">Download fehlgeschlagen. Bitte später erneut versuchen.</string>
+    <string name="update_verify_failed">Der Download hat die Sicherheitsprüfung nicht bestanden und wurde nicht installiert.</string>
+    <string name="update_need_permission">Erlaube ClimaPilot das Installieren von Apps und tippe dann erneut auf Aktualisieren.</string>
 
     <!-- Launcher-Shortcuts -->
     <string name="shortcut_off">Ausschalten</string>

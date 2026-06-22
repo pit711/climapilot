@@ -18,6 +18,10 @@
     <!-- IR blaster (optional) for controlling the AC like a remote on phones that have one / IR-Blaster (optional) zum Steuern der Klima wie eine Fernbedienung, auf Handys mit IR -->
     <uses-feature android:name="android.hardware.consumerir" android:required="false" />
     <uses-permission android:name="android.permission.TRANSMIT_IR" />
+    <!-- In-app updater (GitHub/sideload build only): download a newer APK and hand it to the system
+         installer. Not used by the Play variant. / In-App-Updater (nur GitHub-/Sideload-Build): ein neueres
+         APK laden und an den System-Installer übergeben. In der Play-Variante nicht enthalten. -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -65,6 +69,17 @@
         <receiver
             android:name=".TimerActionReceiver"
             android:exported="false" />
+
+        <!-- Serves the downloaded update APK to the system installer via a content:// URI / Stellt das geladene Update-APK dem System-Installer über eine content://-URI bereit -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <!-- Re-arms scene schedules after a reboot / Stellt Szenen-Zeitpläne nach einem Neustart wieder her -->
         <receiver

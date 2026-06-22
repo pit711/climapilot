@@ -31,11 +31,13 @@ import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Payments
+import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -112,6 +114,7 @@ fun SettingsScreen(vm: AcViewModel, onBack: () -> Unit) {
             }
         }
         item { AppHeaderCard(version) }
+        item { UpdateCard(vm) }
         item { DisplayCard(vm) }
         item { ReliabilityCard() }
         item { AutoOffCard(vm) }
@@ -121,6 +124,69 @@ fun SettingsScreen(vm: AcViewModel, onBack: () -> Unit) {
         item { ChangelogCard() }
         item { CreditsCard(openUrl) }
     }
+    }
+}
+
+/**
+ * EN: In-app updater card (GitHub/sideload build): shows the installed version, a "check now" button
+ *     and an auto-check toggle. When a newer release is found, the prompt to download & install it is
+ *     the app-wide dialog (see [com.climapilot.free.MainActivity]); this card only drives the check.
+ * DE: In-App-Updater-Karte (GitHub-/Sideload-Build): zeigt die installierte Version, einen „Jetzt
+ *     prüfen"-Knopf und einen Auto-Check-Schalter. Wird ein neueres Release gefunden, erscheint der
+ *     Lade-&-Installieren-Hinweis als app-weiter Dialog (siehe [com.climapilot.free.MainActivity]);
+ *     diese Karte stößt nur die Prüfung an.
+ */
+@Composable
+private fun UpdateCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    val context = LocalContext.current
+    val version = remember {
+        runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }
+            .getOrNull().orEmpty()
+    }
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = cs.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.SystemUpdate, null, tint = cs.primary, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.update_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
+            }
+            Spacer(Modifier.height(10.dp))
+            Text(stringResource(R.string.update_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 20.sp)
+            Spacer(Modifier.height(8.dp))
+            Text(stringResource(R.string.update_current, version), fontSize = 13.sp, color = cs.onSurfaceVariant)
+
+            // EN: A result line for the manual check (up to date / error / permission hint). DE: Ergebniszeile für die manuelle Prüfung (aktuell / Fehler / Berechtigungs-Hinweis).
+            vm.updateMessage?.let { msg ->
+                Spacer(Modifier.height(8.dp))
+                Text(msg, fontSize = 13.sp, color = cs.primary, fontWeight = FontWeight.SemiBold, lineHeight = 18.sp)
+            }
+
+            Spacer(Modifier.height(12.dp))
+            FilledTonalButton(
+                onClick = { vm.checkForUpdates(manual = true) },
+                enabled = !vm.updateChecking,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                if (vm.updateChecking) {
+                    CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp)
+                    Spacer(Modifier.width(8.dp))
+                    Text(stringResource(R.string.update_checking))
+                } else {
+                    Text(stringResource(R.string.update_check_button))
+                }
+            }
+
+            Spacer(Modifier.height(6.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(stringResource(R.string.update_auto_label), Modifier.weight(1f), fontSize = 14.sp, color = cs.onSurface)
+                Switch(checked = vm.autoUpdateCheck, onCheckedChange = { vm.updateAutoUpdateCheck(it) })
+            }
+        }
     }
 }
 
@@ -495,6 +561,10 @@ private fun ChangelogCard() {
                 Spacer(Modifier.width(8.dp))
                 Text(stringResource(R.string.changelog_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
             }
+            Spacer(Modifier.height(14.dp))
+            Text(stringResource(R.string.changelog_0_6_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.changelog_0_6_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 22.sp)
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.changelog_0_5_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
             Spacer(Modifier.height(6.dp))

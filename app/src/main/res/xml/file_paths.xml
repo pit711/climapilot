@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN: Exposes the app-specific external "updates" folder so the downloaded APK can be shared with
+     the system package installer via FileProvider. DE: Gibt den app-spezifischen externen Ordner
+     „updates" frei, damit das geladene APK über FileProvider an den System-Installer übergeben werden kann. -->
+<paths>
+    <external-files-path name="updates" path="updates/" />
+</paths>

@@ -41,6 +41,7 @@ import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DragHandle
 import androidx.compose.material.icons.filled.Eco
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material.icons.filled.PowerSettingsNew
 import androidx.compose.material.icons.filled.Refresh
@@ -512,6 +513,11 @@ private fun OptionsCard(vm: AcViewModel) {
         ToggleRow(Icons.Default.SwapVert, stringResource(R.string.option_swing), vm.swing) { vm.toggleSwing() }
         ToggleRow(Icons.Default.Eco, stringResource(R.string.option_eco), vm.eco) { vm.toggleEco() }
         ToggleRow(Icons.Default.NotificationsActive, stringResource(R.string.option_beep), vm.beep) { vm.applyBeep(it) }
+        // EN: LED display panel. The Midea command is toggle-only with no readable state, so the switch
+        //     reflects what we last sent (like the IR toggles), not a confirmed device state.
+        // DE: LED-Anzeige. Der Midea-Befehl ist nur ein Umschalter ohne auslesbaren Zustand, daher zeigt
+        //     der Schalter das zuletzt Gesendete (wie die IR-Schalter), keinen bestätigten Gerätezustand.
+        ToggleRow(Icons.Default.LightMode, stringResource(R.string.option_display), vm.display) { vm.toggleDisplay() }
         // EN: Device-specific toggles — only shown when the unit reported the capability (B5).
         // DE: Gerätespezifische Schalter — nur sichtbar, wenn das Gerät die Fähigkeit gemeldet hat (B5).
         if (vm.capAnion) ToggleRow(Icons.Default.Spa, stringResource(R.string.option_anion), vm.anion) { vm.toggleAnion() }

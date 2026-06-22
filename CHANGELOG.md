@@ -2,6 +2,18 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6] — 2026-06-22
+
+### 🇬🇧 English
+**Added**
+- **In-app updater** — ClimaPilot now checks GitHub for newer versions and installs them with a single tap (you confirm every install yourself — no silent updates). The automatic check on launch can be turned off under Settings.
+- **Display / LED toggle** in Options — turn the indoor unit's panel light on or off.
+
+### 🇩🇪 Deutsch
+**Neu**
+- **In-App-Updater** — ClimaPilot prüft jetzt GitHub auf neuere Versionen und installiert sie mit einem Tipp (jede Installation bestätigst du selbst — keine stillen Updates). Die automatische Prüfung beim Start lässt sich in den Einstellungen abschalten.
+- **Anzeige-/LED-Schalter** in den Optionen — die Anzeige am Innengerät ein- oder ausschalten.
+
 ## [0.5] — 2026-06-22
 
 ### 🇬🇧 English

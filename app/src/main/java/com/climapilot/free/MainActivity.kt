@@ -15,17 +15,27 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.ShowChart
+import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material.icons.filled.Thermostat
 import androidx.compose.material.icons.filled.Tune
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -33,6 +43,7 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,6 +55,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.climapilot.free.ui.ControlScreen
 import com.climapilot.free.ui.DevicesScreen
@@ -155,6 +167,8 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
             onNever = { DonationPrompt.markNever(context); showDonation = false },
         )
     }
+    // EN: App-wide "update available" prompt (download + confirm install). DE: App-weiter „Update verfügbar"-Hinweis (laden + Installation bestätigen).
+    UpdateDialog(vm)
     when {
         showSettings -> SettingsScreen(vm = vm, onBack = { showSettings = false })
         else -> AnimatedContent(
@@ -243,6 +257,58 @@ private fun ConnectedScaffold(vm: AcViewModel) {
             }
         }
     }
+}
+
+/**
+ * EN: The "update available" dialog, shown over any screen when the updater finds a newer GitHub
+ *     release. Tapping Update downloads the APK (progress shown inline) and hands it to the system
+ *     installer; the install itself is always confirmed by the user in the system UI.
+ * DE: Der „Update verfügbar"-Dialog, über jedem Bildschirm gezeigt, wenn der Updater ein neueres
+ *     GitHub-Release findet. Ein Tipp auf Aktualisieren lädt das APK (Fortschritt inline) und übergibt es
+ *     dem System-Installer; die Installation bestätigt der Nutzer immer selbst in der System-Oberfläche.
+ */
+@Composable
+private fun UpdateDialog(vm: AcViewModel) {
+    val release = vm.updateAvailable ?: return
+    val context = LocalContext.current
+    val installed = remember { UpdateChecker.installedVersion(context) }
+    val downloading = vm.updateProgress >= 0
+    AlertDialog(
+        onDismissRequest = { if (!downloading) vm.dismissUpdate() },
+        icon = { Icon(Icons.Default.SystemUpdate, null) },
+        title = { Text(stringResource(R.string.update_available_title)) },
+        text = {
+            Column(Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.update_available_body, release.versionName, installed))
+                if (release.notes.isNotBlank()) {
+                    Spacer(Modifier.height(10.dp))
+                    Box(Modifier.heightIn(max = 220.dp).verticalScroll(rememberScrollState())) {
+                        Text(release.notes, style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+                if (downloading) {
+                    Spacer(Modifier.height(14.dp))
+                    LinearProgressIndicator(
+                        progress = { vm.updateProgress / 100f },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = { vm.downloadAndInstallUpdate() }, enabled = !downloading) {
+                Text(
+                    if (downloading) stringResource(R.string.update_downloading, vm.updateProgress)
+                    else stringResource(R.string.update_install),
+                )
+            }
+        },
+        dismissButton = {
+            if (!downloading) {
+                TextButton(onClick = { vm.dismissUpdate() }) { Text(stringResource(R.string.update_later)) }
+            }
+        },
+    )
 }
 
 /** EN: Renders the content for the selected connected tab. DE: Rendert den Inhalt für den gewählten verbundenen Reiter. */

@@ -16,6 +16,8 @@ object SettingsRepo {
     private const val K_MAX_RUNTIME = "max_runtime_hours"
     private const val K_APP_LOCK = "app_lock"
     private const val K_HISTORY = "history_enabled"
+    private const val K_AUTO_UPDATE = "auto_update_check"
+    private const val K_LAST_UPDATE_CHECK = "last_update_check"
 
     /** EN: true = show temperatures in °F. DE: true = Temperaturen in °F anzeigen. */
     fun useFahrenheit(ctx: Context): Boolean = prefs(ctx).getBoolean(K_FAHRENHEIT, false)
@@ -52,6 +54,18 @@ object SettingsRepo {
 
     fun setHistoryEnabled(ctx: Context, value: Boolean) =
         prefs(ctx).edit().putBoolean(K_HISTORY, value).apply()
+
+    /** EN: Auto-check GitHub for a newer release on launch (GitHub/sideload build; on by default). DE: Beim Start automatisch auf GitHub nach einem neueren Release prüfen (GitHub-/Sideload-Build; standardmäßig an). */
+    fun autoUpdateCheck(ctx: Context): Boolean = prefs(ctx).getBoolean(K_AUTO_UPDATE, true)
+
+    fun setAutoUpdateCheck(ctx: Context, value: Boolean) =
+        prefs(ctx).edit().putBoolean(K_AUTO_UPDATE, value).apply()
+
+    /** EN: Epoch millis of the last update check (0 = never), used to throttle the auto-check. DE: Epoch-Millis der letzten Update-Prüfung (0 = nie), drosselt den Auto-Check. */
+    fun lastUpdateCheck(ctx: Context): Long = prefs(ctx).getLong(K_LAST_UPDATE_CHECK, 0L)
+
+    fun setLastUpdateCheck(ctx: Context, value: Long) =
+        prefs(ctx).edit().putLong(K_LAST_UPDATE_CHECK, value).apply()
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 }
