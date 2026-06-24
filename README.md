@@ -61,6 +61,7 @@ If automatic discovery fails, you can add a device by hand via **Manual** (IP, p
 ClimaPilot is free and ad-free. If it saves you a trip to the remote, a small tip keeps it going:
 - ☕ **Ko-fi:** https://ko-fi.com/711it
 - 💸 **PayPal:** https://paypal.me/711IT
+- iOS App funding pool https://www.paypal.com/pool/9qgPDj7E0L?sr=wccr
 
 ### Credits
 Huge thanks to **[@mill1000](https://github.com/mill1000)** and the **[midea-msmart](https://github.com/mill1000/midea-msmart)** project. ClimaPilot's entire local Midea protocol — LAN handshake, encryption, command framing and the NetHome Plus cloud token exchange — is a Kotlin port of their excellent, meticulously reverse-engineered work. Without it, this app simply wouldn't exist. ❤️
@@ -106,6 +107,7 @@ Falls die automatische Suche scheitert, kannst du ein Gerät per **Manuell** von
 ClimaPilot ist kostenlos und werbefrei. Wenn es dir den Weg zur Fernbedienung erspart, hält ein kleines Trinkgeld es am Leben:
 - ☕ **Ko-fi:** https://ko-fi.com/711it
 - 💸 **PayPal:** https://paypal.me/711IT
+- iOS App Sammelpool für Hardware https://www.paypal.com/pool/9qgPDj7E0L?sr=wccr
 
 ### Danksagung
 Riesigen Dank an **[@mill1000](https://github.com/mill1000)** und das Projekt **[midea-msmart](https://github.com/mill1000/midea-msmart)**. Das komplette lokale Midea-Protokoll von ClimaPilot — LAN-Handshake, Verschlüsselung, Befehls-Framing und der NetHome-Plus-Cloud-Token-Austausch — ist eine Kotlin-Portierung ihrer hervorragenden, akribisch reverse-engineerten Arbeit. Ohne sie würde es diese App nicht geben. ❤️
