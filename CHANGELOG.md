@@ -2,6 +2,28 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.1] — 2026-06-28
+
+### 🇬🇧 English
+**Fixed**
+- **Fan "Auto"** no longer jumps to full speed — selecting Auto now stays on Auto (and survives temperature/mode changes).
+- **Ionizer** is no longer switched off whenever you change temperature, mode or apply a scene — its state is now carried in every command.
+- **Swing, Display/LED and Ionizer** now reflect the unit's real state, read back from the AC (including changes you make on the physical remote), instead of a default guess.
+
+**Changed**
+- **Eco**: enabling eco now raises the target to 24 °C if it's lower, because the unit only accepts eco from 24 °C upward (this matches the Midea remote/app).
+- **Filter reminder** clarified as an in-app run-time reminder — it does not read or reset the unit's own filter indicator (the local protocol has no such command).
+
+### 🇩🇪 Deutsch
+**Behoben**
+- **Lüfter „Auto"** springt nicht mehr auf Volllast — „Auto" bleibt jetzt auf Auto (und überlebt Temperatur-/Modus-Änderungen).
+- **Ionisierer** wird nicht mehr ausgeschaltet, wenn du Temperatur/Modus änderst oder eine Szene anwendest — sein Zustand wird jetzt in jedem Befehl mitgeführt.
+- **Swing, Anzeige/LED und Ionisierer** zeigen jetzt den echten Gerätezustand, vom Gerät zurückgelesen (auch Änderungen an der Fernbedienung), statt einer Default-Annahme.
+
+**Geändert**
+- **Eco**: Beim Einschalten wird das Soll auf 24 °C angehoben, falls niedriger — das Gerät akzeptiert Eco erst ab 24 °C (wie die Midea-Fernbedienung/-App).
+- **Filter-Erinnerung** als App-interner Laufzeit-Reminder klargestellt — sie liest/löscht nicht die Filteranzeige des Geräts (das lokale Protokoll hat dafür keinen Befehl).
+
 ## [0.6] — 2026-06-22
 
 ### 🇬🇧 English

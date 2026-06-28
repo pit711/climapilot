@@ -104,11 +104,10 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     var anion by mutableStateOf(false); private set
     var selfClean by mutableStateOf(false); private set
     var outSilent by mutableStateOf(false); private set
-    // EN: Assumed LED-display state. The Midea display command is toggle-only with no readable state, so
-    //     this mirrors what we last sent (like the IR toggles); a switch starts "on" (units usually do).
-    // DE: Angenommener LED-Anzeige-Zustand. Der Midea-Display-Befehl ist nur ein Umschalter ohne
-    //     auslesbaren Zustand, daher spiegelt dies das zuletzt Gesendete (wie die IR-Schalter); der Schalter
-    //     startet „an" (Geräte meist auch).
+    // EN: LED-display state. The display command is toggle-only, but the on/off state is reported in the
+    //     state frame, so this is read back from the device on connect + refresh (default "on" until read).
+    // DE: LED-Anzeige-Zustand. Der Display-Befehl ist nur ein Umschalter, aber der Ein/Aus-Zustand wird im
+    //     State-Frame gemeldet, daher wird er bei Connect + Refresh vom Gerät zurückgelesen (Vorgabe „an" bis gelesen).
     var display by mutableStateOf(true); private set
 
     // EN: Display preferences. DE: Anzeige-Einstellungen.
@@ -582,7 +581,30 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         mode = s.mode.takeIf { it in 1..5 } ?: mode
         tempC = s.targetTemp
         fan = s.fanSpeed.takeIf { it in 1..102 } ?: fan
+        syncOptionsFromState(s)
         session?.let { it.powerOn = powerOn; it.mode = mode; it.tempC = tempC; it.fan = fan }
+    }
+
+    /**
+     * EN: Copy the device-reported option states (swing/eco/ionizer/display) into the UI + session, so the
+     *     toggles always match the unit — including changes made on the physical remote. The ionizer is
+     *     only adopted when the unit reports the capability. Self-clean / outdoor-silent / gear aren't in
+     *     the basic state frame, so they stay best-effort assumed.
+     * DE: Die vom Gerät gemeldeten Optionszustände (Swing/Eco/Ionisierer/Display) in UI + Sitzung
+     *     übernehmen, damit die Schalter immer zum Gerät passen — auch bei Änderungen an der Fernbedienung.
+     *     Der Ionisierer wird nur übernommen, wenn das Gerät die Fähigkeit meldet. Selbstreinigung /
+     *     Außen-Leise / Gang stehen nicht im Basis-Frame und bleiben daher Best-Effort-Annahme.
+     */
+    private fun syncOptionsFromState(s: AcState) {
+        swing = s.swingOn
+        eco = s.eco
+        display = s.displayOn
+        if (capAnion) anion = s.anion
+        session?.let {
+            it.swing = if (swing) 0x3F else 0
+            it.eco = eco
+            it.anion = anion
+        }
     }
 
     // EN: ---- control actions ----
@@ -622,7 +644,25 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     fun applyTemp(t: Double) { val v = t.coerceIn(16.0, 30.0); command({ tempC = v }) { setTemp(v) } }
     fun applyFan(value: Int) = command({ fan = value }) { setFan(value) }
     fun toggleSwing() { val v = !swing; command({ swing = v }) { setSwing(v) } }
-    fun toggleEco() { val v = !eco; command({ eco = v }) { setEco(v) } }
+    /**
+     * EN: Toggle eco/energy-saving. The unit only accepts eco at a target temperature of >= 24 °C
+     *     (energy-saving lock); below that it silently ignores the eco bit and the toggle would snap back
+     *     off on the next refresh. So when enabling eco we raise the setpoint to 24 °C if it's lower —
+     *     exactly what the Midea remote/app does — so eco actually takes effect.
+     * DE: Eco/Energiesparen umschalten. Das Gerät akzeptiert Eco nur bei Solltemperatur >= 24 °C
+     *     (Energiespar-Sperre); darunter ignoriert es das Eco-Bit still und der Schalter würde beim
+     *     nächsten Refresh zurückspringen. Beim Einschalten heben wir das Soll daher auf 24 °C an, falls
+     *     niedriger — genau wie die Midea-Fernbedienung/-App — damit Eco wirklich greift.
+     */
+    fun toggleEco() {
+        val v = !eco
+        val bumpTemp = v && tempC < 24.0
+        command({ eco = v; if (bumpTemp) tempC = 24.0 }) {
+            eco = v
+            if (bumpTemp) tempC = 24.0
+            apply()
+        }
+    }
     fun applyBeep(on: Boolean) = command({ beep = on; session?.beep = on }) { setBuzzer(on) }
     fun applyRate(value: Int) = command({ rate = value }) { setRate(value) }
     /** EN: Flip the indoor unit's LED display panel; the switch reflects what we last sent. DE: Die LED-Anzeige des Innengeräts umschalten; der Schalter zeigt das zuletzt Gesendete. */
@@ -654,7 +694,8 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     private suspend fun refreshOnce() {
         val s = session ?: return
         lock.withLock {
-            s.queryState()?.let { live = it }
+            // EN: Reflect device-reported option states too (also catches physical-remote changes). DE: Auch die vom Gerät gemeldeten Optionszustände spiegeln (erfasst auch Fernbedienungs-Änderungen).
+            s.queryState()?.let { live = it; syncOptionsFromState(it) }
             s.queryEnergy()?.let { energy = it }
         }
         publishWidget()

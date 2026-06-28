@@ -513,10 +513,10 @@ private fun OptionsCard(vm: AcViewModel) {
         ToggleRow(Icons.Default.SwapVert, stringResource(R.string.option_swing), vm.swing) { vm.toggleSwing() }
         ToggleRow(Icons.Default.Eco, stringResource(R.string.option_eco), vm.eco) { vm.toggleEco() }
         ToggleRow(Icons.Default.NotificationsActive, stringResource(R.string.option_beep), vm.beep) { vm.applyBeep(it) }
-        // EN: LED display panel. The Midea command is toggle-only with no readable state, so the switch
-        //     reflects what we last sent (like the IR toggles), not a confirmed device state.
-        // DE: LED-Anzeige. Der Midea-Befehl ist nur ein Umschalter ohne auslesbaren Zustand, daher zeigt
-        //     der Schalter das zuletzt Gesendete (wie die IR-Schalter), keinen bestätigten Gerätezustand.
+        // EN: LED display panel. The command is toggle-only, but the on/off state IS reported in the state
+        //     frame, so the switch reflects the unit's real display state (read back on connect + refresh).
+        // DE: LED-Anzeige. Der Befehl ist nur ein Umschalter, aber der Ein/Aus-Zustand WIRD im State-Frame
+        //     gemeldet, daher zeigt der Schalter den echten Display-Zustand (bei Connect + Refresh zurückgelesen).
         ToggleRow(Icons.Default.LightMode, stringResource(R.string.option_display), vm.display) { vm.toggleDisplay() }
         // EN: Device-specific toggles — only shown when the unit reported the capability (B5).
         // DE: Gerätespezifische Schalter — nur sichtbar, wenn das Gerät die Fähigkeit gemeldet hat (B5).

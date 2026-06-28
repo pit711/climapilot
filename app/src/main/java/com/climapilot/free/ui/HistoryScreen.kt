@@ -325,6 +325,12 @@ private fun FilterCard(filterHours: Double, onReset: () -> Unit) {
         OutlinedButton(onClick = onReset, modifier = Modifier.fillMaxWidth()) {
             Text(stringResource(R.string.history_filter_reset))
         }
+        Spacer(Modifier.height(8.dp))
+        // EN: Make clear this is a local run-time reminder, not the unit's own filter indicator (the
+        //     Midea LAN protocol has no filter-reset command). DE: Klarstellen, dass dies ein lokaler
+        //     Laufzeit-Reminder ist, nicht die Filteranzeige des Geräts (das Midea-LAN-Protokoll hat
+        //     keinen Filter-Reset-Befehl).
+        Text(stringResource(R.string.history_filter_hint), fontSize = 12.sp, color = cs.onSurfaceVariant, lineHeight = 16.sp)
     }
 }
 

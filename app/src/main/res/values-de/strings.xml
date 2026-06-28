@@ -149,7 +149,7 @@
     <string name="import_error">Token-Block nicht lesbar</string>
 
     <!-- Bekannte (gecachte) Geräte in der Geräteliste -->
-    <string name="known_devices">Gespeicherte Geräte (offline)</string>
+    <string name="known_devices">Gespeicherte Geräte</string>
 
     <!-- Schnelleinstellungen-Kachel -->
     <string name="tile_label">Klima Ein/Aus</string>
@@ -196,6 +196,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_6_1_title">Version 0.6.1</string>
+    <string name="changelog_0_6_1_body">•  Behoben: Lüfter „Auto\" springt nicht mehr auf Hoch — bleibt jetzt auf Auto\n•  Behoben: Der Ionisierer wird nicht mehr ausgeschaltet, wenn du Temperatur/Modus änderst oder eine Szene anwendest\n•  Behoben: Swing, Anzeige/LED und Ionisierer zeigen jetzt den echten Gerätezustand (vom Gerät zurückgelesen), auch Änderungen an der Fernbedienung\n•  Eco: Beim Einschalten wird das Soll auf 24 °C angehoben, falls niedriger — das Gerät erlaubt Eco erst ab 24 °C</string>
     <string name="changelog_0_6_title">Version 0.6</string>
     <string name="changelog_0_6_body">•  Neu: In-App-Updater — prüft GitHub auf neuere Versionen und installiert sie mit einem Tipp (Installation bestätigst du selbst). Auto-Prüfung beim Start in den Einstellungen abschaltbar\n•  Neu: Anzeige-/LED-Schalter in den Optionen — die Anzeige am Innengerät ein-/ausschalten</string>
     <string name="changelog_0_5_title">Version 0.5</string>
@@ -286,6 +288,7 @@
     <string name="history_filter_runtime">Laufzeit seit letzter Reinigung: %1$d h von %2$d h</string>
     <string name="history_filter_due">Zeit, den Filter zu reinigen.</string>
     <string name="history_filter_reset">Filter gereinigt (zurücksetzen)</string>
+    <string name="history_filter_hint">Dies ist ein App-interner Wartungs-Reminder auf Basis der Laufzeit. Er liest oder löscht NICHT die Filteranzeige des Geräts — die setzt du am Gerät selbst zurück.</string>
     <string name="history_record_title">Verlauf aufzeichnen</string>
     <string name="history_record_body">Wenn an, protokolliert ClimaPilot Leistung, Temperaturen und Lüfter und fragt die Klima etwa alle 15 min im Hintergrund ab (nur WLAN). Standardmäßig aus.</string>
     <string name="history_record_switch">Klima-Daten aufzeichnen</string>

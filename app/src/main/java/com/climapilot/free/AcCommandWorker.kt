@@ -120,17 +120,26 @@ class AcCommandWorker(appContext: Context, params: WorkerParameters) :
             session.connect()
             when (op) {
                 OP_POWER_OFF, OP_POWER_OFF_PLAN -> {
-                    // EN: Carry over the current mode/temp/fan so the off command doesn't reset them. DE: Aktuellen Modus/Temp/Lüfter übernehmen, damit der Aus-Befehl sie nicht zurücksetzt.
+                    // EN: Carry over the current mode/temp/fan/options so the off command doesn't reset them
+                    //     (and doesn't clear the ionizer). DE: Aktuellen Modus/Temp/Lüfter/Optionen übernehmen,
+                    //     damit der Aus-Befehl sie nicht zurücksetzt (und den Ionisierer nicht löscht).
                     session.queryState()?.let { s ->
                         s.mode.takeIf { it in 1..5 }?.let { session.mode = it }
                         session.tempC = s.targetTemp
                         s.fanSpeed.takeIf { it in 1..102 }?.let { session.fan = it }
+                        session.swing = if (s.swingOn) 0x3F else 0
+                        session.eco = s.eco
+                        session.anion = s.anion
                     }
                     session.setPower(false)
                 }
                 OP_APPLY_SCENE -> {
                     val sceneId = inputData.getString(KEY_SCENE_ID)
                     val scene = SceneRepo.load(applicationContext)?.firstOrNull { it.id == sceneId } ?: return
+                    // EN: Scenes don't capture the ionizer — keep the unit's current state so applying a scene
+                    //     doesn't switch it off. DE: Szenen erfassen den Ionisierer nicht — den aktuellen
+                    //     Gerätezustand behalten, damit eine Szene ihn nicht ausschaltet.
+                    session.anion = session.queryState()?.anion ?: false
                     session.powerOn = scene.powerOn
                     session.mode = scene.mode
                     session.tempC = scene.tempC

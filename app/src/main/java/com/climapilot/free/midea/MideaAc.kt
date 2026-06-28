@@ -92,6 +92,7 @@ object MideaAc {
         swing: Int = 0,
         beep: Boolean = false,
         eco: Boolean = false,
+        anion: Boolean = false,
     ): ByteArray {
         val beepBit = if (beep) 0x40 else 0
         val powerBit = if (powerOn) 0x1 else 0
@@ -112,6 +113,13 @@ object MideaAc {
         val modeBits = (mode and 0x7) shl 5
         val swingMode = 0x30 or (swing and 0x3F)
         val ecoBit = if (eco) 0x80 else 0
+        // EN: Ionizer/purifier lives in the same byte as eco (msmart SetStateCommand: purifier = 0x20). We
+        //     MUST carry the current state in every SetState, otherwise each command (temp/mode/scene)
+        //     would clear it and silently switch the ionizer off.
+        // DE: Ionisierer/Purifier sitzt im selben Byte wie Eco (msmart SetStateCommand: purifier = 0x20).
+        //     Wir MÜSSEN den aktuellen Zustand in jedem SetState mitschicken, sonst löscht ihn jeder Befehl
+        //     (Temp/Modus/Szene) und schaltet den Ionisierer still aus.
+        val purifierBit = if (anion) 0x20 else 0
         val humidity = 40 and 0x7F
 
         // EN: Fixed 25-byte SetState payload. Each byte's meaning is noted EN/DE on the right.
@@ -124,7 +132,7 @@ object MideaAc {
             0x7F, 0x7F, 0x00,                                 // EN: on/off timer (disabled) / DE: Ein-/Aus-Timer (deaktiviert)
             swingMode.toByte(),                               // EN: swing / DE: Swing (Lamellen)
             0x00,                                             // EN: follow-me / alt turbo / DE: Follow-me / alt. Turbo
-            ecoBit.toByte(),                                  // EN: eco/purifier/aux / DE: Eco/Luftreiniger/Zusatz
+            (ecoBit or purifierBit).toByte(),                 // EN: eco (0x80) + purifier/ionizer (0x20) / DE: Eco (0x80) + Purifier/Ionisierer (0x20)
             0x00,                                             // EN: sleep/turbo/Fahrenheit (we use Celsius) / DE: Sleep/Turbo/Fahrenheit (wir nutzen Celsius)
             0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00,
@@ -216,7 +224,16 @@ object MideaAc {
         val fan = b(3) and 0x7F
         val indoor = parseTemp(b(11), (b(15) and 0xF) / 10.0, fahrenheit)
         val outdoor = parseTemp(b(12), (b(15) shr 4) / 10.0, fahrenheit)
-        return AcState(powerOn, mode, targetTemp, fan, indoor, outdoor, b(16))
+        // EN: Option states are reported in the same frame — read them so the UI toggles reflect reality
+        //     (swing byte 7, eco/purifier byte 9, display byte 14, filter alert byte 13). Indices match msmart.
+        // DE: Die Optionszustände stehen im selben Frame — auslesen, damit die UI-Schalter die Realität
+        //     zeigen (Swing Byte 7, Eco/Purifier Byte 9, Display Byte 14, Filter-Alarm Byte 13). Indizes wie msmart.
+        val swingOn = (b(7) and 0xF) != 0
+        val ecoOn = (b(9) and 0x10) != 0
+        val anionOn = (b(9) and 0x20) != 0
+        val displayOn = b(14) != 0x70
+        val filterAlert = (b(13) and 0x20) != 0
+        return AcState(powerOn, mode, targetTemp, fan, indoor, outdoor, b(16), swingOn, ecoOn, anionOn, displayOn, filterAlert)
     }
 
     /**
@@ -317,6 +334,13 @@ data class AcState(
     val indoorTemp: Double?,
     val outdoorTemp: Double?,
     val errorCode: Int,
+    // EN: Device-reported option states (read back so the UI toggles match the unit / physical remote).
+    // DE: Vom Gerät gemeldete Optionszustände (zurückgelesen, damit die UI-Schalter zum Gerät / zur Fernbedienung passen).
+    val swingOn: Boolean = false,
+    val eco: Boolean = false,
+    val anion: Boolean = false,
+    val displayOn: Boolean = true,
+    val filterAlert: Boolean = false,
 )
 
 /**
@@ -366,6 +390,7 @@ class MideaAcSession(
     var fan = 60
     var swing = 0
     var eco = false
+    var anion = false   // EN: ionizer/purifier — carried in every SetState so it isn't cleared / DE: Ionisierer/Purifier — in jedem SetState mitgeführt, damit er nicht gelöscht wird
     var beep = false   // EN: when true, the unit chirps on every command / DE: wenn true, piept das Gerät bei jedem Befehl
 
     val authenticated: Boolean get() = lan.authenticated
@@ -444,7 +469,7 @@ class MideaAcSession(
      * DE: Den kompletten aktuellen Zustand in einem SetState-Frame an das Gerät senden.
      */
     suspend fun apply() {
-        send(MideaAc.buildSetState(powerOn, mode, tempC, fan, swing, beep = beep, eco = eco))
+        send(MideaAc.buildSetState(powerOn, mode, tempC, fan, swing, beep = beep, eco = eco, anion = anion))
     }
 
     // EN: Convenience setters — update one field, then re-send the whole state.
@@ -453,7 +478,9 @@ class MideaAcSession(
     suspend fun setMode(m: Int) { mode = m; apply() }
     suspend fun setTemp(temp: Double) { tempC = temp.coerceIn(16.0, 30.0); apply() }
     suspend fun setCool(temp: Double) { mode = MideaAc.MODE_COOL; tempC = temp; apply() }
-    suspend fun setFan(level: Int) { fan = level.coerceIn(1, 100); apply() }
+    // EN: 1–100 = explicit speed, 102 = auto. Must NOT clamp to 100 or "Auto" collapses to full speed.
+    // DE: 1–100 = feste Stufe, 102 = Auto. Darf NICHT auf 100 begrenzt werden, sonst wird „Auto" zu Volllast.
+    suspend fun setFan(level: Int) { fan = level.coerceIn(1, 102); apply() }
     suspend fun setSwing(on: Boolean) { swing = if (on) 0x3F else 0; apply() }
     suspend fun setEco(on: Boolean) { eco = on; apply() }
 
@@ -473,10 +500,15 @@ class MideaAcSession(
         send(MideaAc.buildSetProperties(listOf(MideaAc.PROP_BUZZER to if (on) 1 else 0)))
     }
 
-    /** EN: Ionizer / air purifier on/off (only on units that report it). DE: Ionisierer / Luftreiniger ein/aus (nur bei Geräten, die ihn melden). */
-    suspend fun setAnion(on: Boolean) {
-        send(MideaAc.buildSetProperties(listOf(MideaAc.PROP_ANION to if (on) 1 else 0, MideaAc.PROP_BUZZER to 0)))
-    }
+    /**
+     * EN: Ionizer / air purifier on/off (only on units that report it). Sent via SetState (the purifier
+     *     bit) like msmart — this both sets it and keeps it carried in every later SetState, so changing
+     *     temp/mode no longer turns it off.
+     * DE: Ionisierer / Luftreiniger ein/aus (nur bei Geräten, die ihn melden). Wird über SetState (das
+     *     Purifier-Bit) gesendet wie msmart — das setzt ihn und führt ihn in jedem späteren SetState mit,
+     *     sodass Temp-/Modus-Änderungen ihn nicht mehr ausschalten.
+     */
+    suspend fun setAnion(on: Boolean) { anion = on; apply() }
 
     /** EN: Start/stop the self-clean cycle. DE: Den Selbstreinigungs-Zyklus starten/stoppen. */
     suspend fun setSelfClean(on: Boolean) {
