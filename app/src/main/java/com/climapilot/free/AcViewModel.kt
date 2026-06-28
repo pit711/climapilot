@@ -179,6 +179,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         sleepCustomMinutes = SettingsRepo.sleepCustomMinutes(ctx)
         maxRuntimeHours = SettingsRepo.maxRuntimeHours(ctx)
         historyEnabled = SettingsRepo.historyEnabled(ctx)
+        beep = SettingsRepo.beep(ctx)
         // EN: If a sleep-timer alarm is still pending, resume its on-screen countdown. DE: Falls ein Sleep-Timer-Alarm noch aussteht, dessen Countdown-Anzeige fortsetzen.
         restoreSleepTimer()
     }
@@ -429,6 +430,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
                     onCredsFetched = { t, k -> TokenRepo.save(ctx, device.id, device.name, device.ip, device.port, t, k) },
                 )
                 s.connect()
+                // EN: Carry the persisted beep preference into the new session so power on/off keeps
+                //     chirping after a (re)connect — otherwise a fresh session always starts silent.
+                // DE: Die gespeicherte Beep-Einstellung in die neue Sitzung übernehmen, damit Ein/Aus auch
+                //     nach einem (Neu-)Connect quittiert — sonst startet eine frische Sitzung immer stumm.
+                s.beep = beep
                 session = s
                 connectedDevice = device
                 status = Status.Connected
@@ -663,7 +669,15 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
             apply()
         }
     }
-    fun applyBeep(on: Boolean) = command({ beep = on; session?.beep = on }) { setBuzzer(on) }
+    /**
+     * EN: Toggle the prompt tone. The beep is carried as a bit on control commands; on many units (e.g.
+     *     the PortaSplit) the AC only actually chirps on power on/off, not on parameter changes. We persist
+     *     the choice and also push the buzzer property for units that use it.
+     * DE: Den Signalton umschalten. Der Beep wird als Bit auf Steuerbefehlen mitgeschickt; bei vielen
+     *     Geräten (z. B. der PortaSplit) quittiert die Klima nur bei Ein/Aus, nicht bei Parameter-Änderungen.
+     *     Wir speichern die Wahl und senden zusätzlich die Buzzer-Property für Geräte, die sie nutzen.
+     */
+    fun applyBeep(on: Boolean) = command({ beep = on; session?.beep = on; SettingsRepo.setBeep(getApplication(), on) }) { setBuzzer(on) }
     fun applyRate(value: Int) = command({ rate = value }) { setRate(value) }
     /** EN: Flip the indoor unit's LED display panel; the switch reflects what we last sent. DE: Die LED-Anzeige des Innengeräts umschalten; der Schalter zeigt das zuletzt Gesendete. */
     fun toggleDisplay() { val v = !display; command({ display = v }) { toggleDisplay() } }

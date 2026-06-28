@@ -3,7 +3,7 @@
 **Control your Midea air conditioner locally over Wi-Fi — no cloud account required.**
 **Steuere deine Midea-Klimaanlage lokal im WLAN — ganz ohne Cloud-Konto.**
 
-[![Version](https://img.shields.io/badge/version-0.6.1-blue)](https://github.com/pit711/climapilot/releases)
+[![Version](https://img.shields.io/badge/version-0.6.2-blue)](https://github.com/pit711/climapilot/releases)
 [![Platform](https://img.shields.io/badge/platform-Android%208%2B-green)](#)
 [![Wear OS](https://img.shields.io/badge/Wear%20OS-companion-4285F4?logo=wearos&logoColor=white)](#)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-support-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/711it)
@@ -51,7 +51,7 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 - 👀 Demo mode — explore the UI without a device
 
 ### Install
-1. Download the latest `climapilot-0.6.1.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
+1. Download the latest `climapilot-0.6.2.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
 2. On your phone, allow installing from unknown sources when prompted.
 3. Open the app, tap **Search devices** (phone must be on the same Wi-Fi as the AC), and connect.
 
@@ -97,7 +97,7 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 - 👀 Demo-Modus — UI ohne Gerät ausprobieren
 
 ### Installation
-1. Lade die aktuelle `climapilot-0.6.1.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
+1. Lade die aktuelle `climapilot-0.6.2.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
 2. Erlaube auf dem Handy bei der Nachfrage die Installation aus unbekannten Quellen.
 3. Öffne die App, tippe auf **Geräte suchen** (Handy im selben WLAN wie die Klima) und verbinde dich.
 

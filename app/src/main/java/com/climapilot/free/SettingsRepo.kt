@@ -18,6 +18,7 @@ object SettingsRepo {
     private const val K_HISTORY = "history_enabled"
     private const val K_AUTO_UPDATE = "auto_update_check"
     private const val K_LAST_UPDATE_CHECK = "last_update_check"
+    private const val K_BEEP = "beep"
 
     /** EN: true = show temperatures in °F. DE: true = Temperaturen in °F anzeigen. */
     fun useFahrenheit(ctx: Context): Boolean = prefs(ctx).getBoolean(K_FAHRENHEIT, false)
@@ -66,6 +67,12 @@ object SettingsRepo {
 
     fun setLastUpdateCheck(ctx: Context, value: Long) =
         prefs(ctx).edit().putLong(K_LAST_UPDATE_CHECK, value).apply()
+
+    /** EN: Prompt tone — when on, control commands carry the beep bit so the AC chirps (on many units only on power on/off). DE: Signalton — wenn an, tragen Steuerbefehle das Beep-Bit, sodass die Klima quittiert (bei vielen Geräten nur bei Ein/Aus). */
+    fun beep(ctx: Context): Boolean = prefs(ctx).getBoolean(K_BEEP, false)
+
+    fun setBeep(ctx: Context, value: Boolean) =
+        prefs(ctx).edit().putBoolean(K_BEEP, value).apply()
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 }

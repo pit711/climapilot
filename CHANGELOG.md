@@ -2,6 +2,22 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.2] — 2026-06-28
+
+### 🇬🇧 English
+**Fixed**
+- **Beep / prompt tone** was lost after reconnecting (the toggle showed on, but the unit stayed silent). The setting is now saved and reapplied to every new connection.
+
+**Changed**
+- Added a note under the Beep toggle clarifying that many units (incl. the PortaSplit) only chirp when turning on/off, not on other changes.
+
+### 🇩🇪 Deutsch
+**Behoben**
+- **Signalton** ging nach dem Neuverbinden verloren (der Schalter zeigte „an", das Gerät blieb aber stumm). Die Einstellung wird jetzt gespeichert und auf jede neue Verbindung angewendet.
+
+**Geändert**
+- Hinweis unter dem Beep-Schalter ergänzt: Viele Geräte (auch die PortaSplit) piepen nur beim Ein-/Ausschalten, nicht bei anderen Änderungen.
+
 ## [0.6.1] — 2026-06-28
 
 ### 🇬🇧 English

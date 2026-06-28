@@ -199,6 +199,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_6_2_title">Version 0.6.2</string>
+    <string name="changelog_0_6_2_body">•  Fixed: the beep / prompt tone was lost after reconnecting — it is now saved and reapplied\n•  Added a note that many units only beep when turning on/off, not on other changes</string>
     <string name="changelog_0_6_1_title">Version 0.6.1</string>
     <string name="changelog_0_6_1_body">•  Fixed: fan \"Auto\" no longer jumps to high — it now stays on Auto\n•  Fixed: the ionizer is no longer switched off when you change temperature, mode or apply a scene\n•  Fixed: Swing, Display/LED and Ionizer now show the unit\'s real state (read back from the AC), including changes made on the physical remote\n•  Eco: enabling eco now raises the target to 24 °C if lower, because the unit only allows eco from 24 °C upward</string>
     <string name="changelog_0_6_title">Version 0.6</string>
@@ -292,6 +294,7 @@
     <string name="history_filter_due">Time to clean the filter.</string>
     <string name="history_filter_reset">Filter cleaned (reset)</string>
     <string name="history_filter_hint">This is an in-app maintenance reminder based on run time. It does not read or reset the unit\'s own filter indicator — reset that on the AC itself.</string>
+    <string name="option_beep_hint">Confirmation tone. Many units only beep when turning on/off, not on other changes.</string>
     <string name="history_record_title">Record history</string>
     <string name="history_record_body">When on, ClimaPilot logs power, temperatures and fan, and polls the AC about every 15 min in the background (Wi-Fi only). Off by default.</string>
     <string name="history_record_switch">Record AC data</string>

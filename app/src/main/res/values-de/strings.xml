@@ -196,6 +196,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_6_2_title">Version 0.6.2</string>
+    <string name="changelog_0_6_2_body">•  Behoben: Der Signalton ging nach dem Neuverbinden verloren — er wird jetzt gespeichert und wieder angewendet\n•  Hinweis ergänzt, dass viele Geräte nur beim Ein-/Ausschalten piepen, nicht bei anderen Änderungen</string>
     <string name="changelog_0_6_1_title">Version 0.6.1</string>
     <string name="changelog_0_6_1_body">•  Behoben: Lüfter „Auto\" springt nicht mehr auf Hoch — bleibt jetzt auf Auto\n•  Behoben: Der Ionisierer wird nicht mehr ausgeschaltet, wenn du Temperatur/Modus änderst oder eine Szene anwendest\n•  Behoben: Swing, Anzeige/LED und Ionisierer zeigen jetzt den echten Gerätezustand (vom Gerät zurückgelesen), auch Änderungen an der Fernbedienung\n•  Eco: Beim Einschalten wird das Soll auf 24 °C angehoben, falls niedriger — das Gerät erlaubt Eco erst ab 24 °C</string>
     <string name="changelog_0_6_title">Version 0.6</string>
@@ -289,6 +291,7 @@
     <string name="history_filter_due">Zeit, den Filter zu reinigen.</string>
     <string name="history_filter_reset">Filter gereinigt (zurücksetzen)</string>
     <string name="history_filter_hint">Dies ist ein App-interner Wartungs-Reminder auf Basis der Laufzeit. Er liest oder löscht NICHT die Filteranzeige des Geräts — die setzt du am Gerät selbst zurück.</string>
+    <string name="option_beep_hint">Quittungston. Viele Geräte piepen nur beim Ein-/Ausschalten, nicht bei anderen Änderungen.</string>
     <string name="history_record_title">Verlauf aufzeichnen</string>
     <string name="history_record_body">Wenn an, protokolliert ClimaPilot Leistung, Temperaturen und Lüfter und fragt die Klima etwa alle 15 min im Hintergrund ab (nur WLAN). Standardmäßig aus.</string>
     <string name="history_record_switch">Klima-Daten aufzeichnen</string>

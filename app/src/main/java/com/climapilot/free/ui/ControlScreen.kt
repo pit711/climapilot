@@ -513,6 +513,16 @@ private fun OptionsCard(vm: AcViewModel) {
         ToggleRow(Icons.Default.SwapVert, stringResource(R.string.option_swing), vm.swing) { vm.toggleSwing() }
         ToggleRow(Icons.Default.Eco, stringResource(R.string.option_eco), vm.eco) { vm.toggleEco() }
         ToggleRow(Icons.Default.NotificationsActive, stringResource(R.string.option_beep), vm.beep) { vm.applyBeep(it) }
+        // EN: The prompt tone is per-command; on many units (incl. the PortaSplit) the AC only chirps on
+        //     power on/off, so set expectations. DE: Der Quittungston ist pro Befehl; viele Geräte (auch
+        //     die PortaSplit) piepen nur bei Ein/Aus — Erwartung klarstellen.
+        Text(
+            stringResource(R.string.option_beep_hint),
+            fontSize = 11.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            lineHeight = 14.sp,
+            modifier = Modifier.padding(start = 32.dp, bottom = 4.dp),
+        )
         // EN: LED display panel. The command is toggle-only, but the on/off state IS reported in the state
         //     frame, so the switch reflects the unit's real display state (read back on connect + refresh).
         // DE: LED-Anzeige. Der Befehl ist nur ein Umschalter, aber der Ein/Aus-Zustand WIRD im State-Frame
