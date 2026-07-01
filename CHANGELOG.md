@@ -2,6 +2,16 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.3] — 2026-07-01
+
+### 🇬🇧 English
+**Fixed**
+- **Outdoor Silent** toggle now actually takes effect ([#6](https://github.com/pit711/climapilot/issues/6)). The app sent the wrong on-value for the outdoor-silent property, which the unit silently discarded — turning it on did nothing (no beep), while turning it off worked. It now sends the value the device expects (same as msmart-ng).
+
+### 🇩🇪 Deutsch
+**Behoben**
+- **Außengerät leise** wirkt jetzt tatsächlich ([#6](https://github.com/pit711/climapilot/issues/6)). Die App sendete den falschen Ein-Wert für die Leise-Eigenschaft, den das Gerät stumm verwarf — Einschalten bewirkte nichts (kein Piep), Ausschalten funktionierte. Jetzt wird der vom Gerät erwartete Wert gesendet (wie msmart-ng).
+
 ## [0.6.2] — 2026-06-28
 
 ### 🇬🇧 English

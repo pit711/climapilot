@@ -515,9 +515,14 @@ class MideaAcSession(
         send(MideaAc.buildSetProperties(listOf(MideaAc.PROP_SELF_CLEAN to if (on) 1 else 0, MideaAc.PROP_BUZZER to 0)))
     }
 
-    /** EN: Outdoor-unit silent mode on/off. DE: Leise-Modus des Außengeräts ein/aus. */
+    /**
+     * EN: Outdoor-unit silent mode on/off. The device expects value 3 for "on" and 0 for "off" (like
+     *     msmart-ng); value 1 is silently discarded by the unit.
+     * DE: Leise-Modus des Außengeräts ein/aus. Das Gerät erwartet Wert 3 für „an" und 0 für „aus" (wie
+     *     msmart-ng); Wert 1 wird vom Gerät stumm verworfen.
+     */
     suspend fun setOutdoorSilent(on: Boolean) {
-        send(MideaAc.buildSetProperties(listOf(MideaAc.PROP_OUT_SILENT to if (on) 1 else 0, MideaAc.PROP_BUZZER to 0)))
+        send(MideaAc.buildSetProperties(listOf(MideaAc.PROP_OUT_SILENT to if (on) 3 else 0, MideaAc.PROP_BUZZER to 0)))
     }
 
     /** EN: Flip the indoor unit's LED display panel on/off (toggle-only; no readable state). DE: Die LED-Anzeige des Innengeräts ein-/ausschalten (nur Umschalten; kein auslesbarer Zustand). */
