@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClimaPilot – Support / Hilfe</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         color: #1c1c1e; background: #f5f5f7; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 1.9rem; margin: .2em 0 .1em; }
+  h2 { font-size: 1.2rem; margin: 1.6em 0 .3em; }
+  .sub { color: #6b6b70; margin-top: 0; }
+  .card { background: #fff; border-radius: 16px; padding: 20px 24px; margin: 22px 0;
+          box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  a { color: #0a84ff; }
+  .mail { font-size: 1.1rem; font-weight: 600; }
+  details { margin: .5em 0; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin: .5em 0 1em; }
+  .lang { color: #6b6b70; font-size: .95rem; }
+  hr { border: none; border-top: 1px solid #e2e2e6; margin: 40px 0; }
+  @media (prefers-color-scheme: dark) {
+    body { color: #f2f2f7; background: #000; }
+    .card { background: #1c1c1e; box-shadow: none; }
+    .sub, .lang { color: #98989f; }
+    hr { border-top-color: #333; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ClimaPilot – Support</h1>
+  <p class="sub">Steuere deine Midea-Klimaanlage lokal im WLAN – ohne Cloud-Konto.</p>
+
+  <div class="card">
+    <p>Fragen, Feedback oder ein Problem? Schreib uns:</p>
+    <p class="mail"><a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
+    <p class="sub">Wir antworten in der Regel innerhalb weniger Tage.</p>
+  </div>
+
+  <h2>Häufige Fragen</h2>
+
+  <details open>
+    <summary>Wie verbinde ich meine Anlage?</summary>
+    <p>Öffne die App und tippe auf „Im WLAN suchen" oder gib die IP-Adresse der Anlage ein. iPhone und Klimaanlage
+       müssen im selben WLAN sein. Erlaube die Abfrage „Lokales Netzwerk", sonst kann die App die Anlage nicht finden.</p>
+  </details>
+
+  <details>
+    <summary>Welche Geräte werden unterstützt?</summary>
+    <p>Viele Midea-basierte Klimageräte mit lokaler WLAN-Steuerung (z. B. PortaSplit). Beim ersten Verbinden holt die
+       App einmalig ein Zugriffs-Token; danach läuft alles lokal.</p>
+  </details>
+
+  <details>
+    <summary>Was bedeutet der einmalige Token-Abruf?</summary>
+    <p>Beim ersten Verbinden wird ein Geräte-Token über Midea's Cloud abgerufen (kein Login nötig). Danach ist keine
+       Internetverbindung mehr erforderlich – die Steuerung läuft rein lokal. Details in der
+       <a href="privacy.html">Datenschutzerklärung</a>.</p>
+  </details>
+
+  <details>
+    <summary>Wie sichere/übertrage ich meine Einrichtung?</summary>
+    <p>Unter Einstellungen → „Token &amp; Backup" kannst du „In iCloud sichern" aktivieren oder ein Backup als Datei
+       exportieren/importieren. Auf einem neuen iPhone einfach „Aus iCloud wiederherstellen" – Geräte, Token und
+       Szenen kommen zurück.</p>
+  </details>
+
+  <details>
+    <summary>Das Widget reagiert nicht / die Anlage antwortet nicht.</summary>
+    <p>Öffne die App einmal und verbinde dich mit der Anlage (dabei wird die Lokalnetz-Freigabe erteilt). Prüfe, dass
+       iPhone und Anlage im selben WLAN sind. Bei anhaltenden Problemen: <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
+  </details>
+
+  <p><em>Hinweis: ClimaPilot ist eine unabhängige App und steht in keiner Verbindung zu Midea.</em></p>
+
+  <hr>
+
+  <h1>ClimaPilot – Support <span class="lang">(English)</span></h1>
+  <div class="card">
+    <p>Questions, feedback or an issue? Email us:</p>
+    <p class="mail"><a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
+  </div>
+  <p>ClimaPilot controls your Midea air conditioner locally over Wi-Fi, with no cloud account. Make sure your iPhone
+     and the unit are on the same Wi-Fi and allow the "Local Network" permission. Backup &amp; transfer via iCloud or
+     an export file (Settings → "Token &amp; Backup"). See the <a href="privacy.html">Privacy Policy</a>.
+     Independent app, not affiliated with Midea.</p>
+</div>
+</body>
+</html>
