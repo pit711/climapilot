@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AcUnit
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Autorenew
 import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Coffee
@@ -39,6 +40,8 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -117,6 +120,7 @@ fun SettingsScreen(vm: AcViewModel, onBack: () -> Unit) {
         item { AppHeaderCard(version) }
         item { UpdateCard(vm) }
         item { DisplayCard(vm) }
+        item { PollingCard(vm) }
         item { BetaCard(vm) }
         item { ReliabilityCard() }
         item { AutoOffCard(vm) }
@@ -550,6 +554,46 @@ private fun DisplayCard(vm: AcViewModel) {
 }
 
 /**
+ * EN: Poll-interval card — how often the app queries state/energy/diagnostics while connected.
+ *     Preset chips (2/6/10/30 s); the refresh loop picks a change up on its next cycle. Shorter
+ *     intervals mean more LAN traffic and slightly higher battery use while the app is open.
+ * DE: Poll-Intervall-Karte — wie oft die App Zustand/Energie/Diagnose abfragt, solange sie verbunden
+ *     ist. Vorgabe-Chips (2/6/10/30 s); die Refresh-Schleife übernimmt eine Änderung im nächsten
+ *     Zyklus. Kürzere Intervalle bedeuten mehr LAN-Verkehr und etwas mehr Akkuverbrauch bei offener App.
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun PollingCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = cs.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Autorenew, null, tint = cs.primary, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.settings_poll), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
+            }
+            Spacer(Modifier.height(4.dp))
+            Text(stringResource(R.string.settings_poll_hint), fontSize = 12.sp, color = cs.onSurfaceVariant, lineHeight = 16.sp)
+            Spacer(Modifier.height(10.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
+                listOf(2, 6, 10, 30).forEach { sec ->
+                    FilterChip(
+                        selected = vm.pollIntervalSec == sec,
+                        onClick = { vm.updatePollInterval(sec) },
+                        label = { Text(stringResource(R.string.poll_seconds, sec), fontSize = 13.sp) },
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
  * EN: Beta card — opt-in experimental diagnostics ported from midea-msmart PR #278. Each switch enables
  *     one extra "group data" query per refresh (compressor performance, indoor fan/pump, outdoor power).
  *     Off by default; not every unit answers these — hence "beta". Values appear on the Status tab.
@@ -619,6 +663,10 @@ private fun ChangelogCard() {
                 Spacer(Modifier.width(8.dp))
                 Text(stringResource(R.string.changelog_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
             }
+            Spacer(Modifier.height(14.dp))
+            Text(stringResource(R.string.changelog_0_6_5_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.changelog_0_6_5_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 22.sp)
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.changelog_0_6_4_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
             Spacer(Modifier.height(6.dp))

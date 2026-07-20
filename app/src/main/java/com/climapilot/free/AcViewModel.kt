@@ -68,9 +68,17 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
             powerW = energy?.powerW?.takeIf { !it.isNaN() },
             device = dev,
         )
-        // EN: Log a throttled usage sample (power/temps/fan) for the History charts — only when enabled. DE: Einen gedrosselten Messwert (Leistung/Temperaturen/Lüfter) für die Verlaufs-Charts aufzeichnen — nur wenn aktiviert.
+        // EN: Log a throttled usage sample (power/temps/fan + enabled beta diagnostics) for the History
+        //     charts — only when enabled. DE: Einen gedrosselten Messwert (Leistung/Temperaturen/Lüfter +
+        //     aktivierte Beta-Diagnose) für die Verlaufs-Charts aufzeichnen — nur wenn aktiviert.
         if (dev != null && historyEnabled) {
-            UsageHistory.record(getApplication(), dev.id, energy?.powerW, energy?.totalKwh, powerOn, live?.indoorTemp, live?.outdoorTemp, fan)
+            UsageHistory.record(
+                getApplication(), dev.id, energy?.powerW, energy?.totalKwh, powerOn,
+                live?.indoorTemp, live?.outdoorTemp, fan,
+                compressorHz = group1?.compressorFrequency?.toDouble(),
+                compressorW = group7?.compressorPower,
+                fanRpm = group2?.indoorFanSpeed,
+            )
         }
         // EN: Mirror the state to a paired Wear OS watch. DE: Den Zustand an eine gekoppelte Wear-OS-Uhr spiegeln.
         WearSync.publish(getApplication(), dev != null, powerOn, tempC)
@@ -107,9 +115,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     var group2 by mutableStateOf<Group2Data?>(null); private set
     var group7 by mutableStateOf<Group7Data?>(null); private set
     // EN: Enable flags mirrored from SettingsRepo so the refresh loop + UI react immediately. DE: Aus SettingsRepo gespiegelte Schalter, damit Refresh-Schleife + UI sofort reagieren.
-    var diagGroup1 by mutableStateOf(false); private set
-    var diagGroup2 by mutableStateOf(false); private set
-    var diagGroup7 by mutableStateOf(false); private set
+    var diagGroup1 by mutableStateOf(true); private set
+    var diagGroup2 by mutableStateOf(true); private set
+    var diagGroup7 by mutableStateOf(true); private set
+    // EN: Live-refresh poll interval in seconds (2–60, default 6); read by the refresh loop each cycle. DE: Poll-Intervall der Live-Aktualisierung in Sekunden (2–60, Standard 6); wird von der Refresh-Schleife je Zyklus gelesen.
+    var pollIntervalSec by mutableStateOf(6); private set
 
     // EN: Device-specific capabilities (whether to show the toggle) + their current desired state.
     // DE: Gerätespezifische Fähigkeiten (ob der Schalter gezeigt wird) + ihr aktueller Soll-Zustand.
@@ -198,6 +208,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         diagGroup1 = SettingsRepo.diagGroup1(ctx)
         diagGroup2 = SettingsRepo.diagGroup2(ctx)
         diagGroup7 = SettingsRepo.diagGroup7(ctx)
+        pollIntervalSec = SettingsRepo.pollIntervalSec(ctx)
         // EN: If a sleep-timer alarm is still pending, resume its on-screen countdown. DE: Falls ein Sleep-Timer-Alarm noch aussteht, dessen Countdown-Anzeige fortsetzen.
         restoreSleepTimer()
     }
@@ -252,6 +263,12 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         diagGroup7 = value
         SettingsRepo.setDiagGroup7(getApplication(), value)
         if (!value) group7 = null
+    }
+
+    /** EN: Set the live-refresh poll interval (seconds, 2–60) and persist; the loop picks it up next cycle. DE: Das Poll-Intervall der Live-Aktualisierung setzen (Sekunden, 2–60) und speichern; die Schleife übernimmt es im nächsten Zyklus. */
+    fun updatePollInterval(value: Int) {
+        pollIntervalSec = value.coerceIn(2, 60)
+        SettingsRepo.setPollIntervalSec(getApplication(), pollIntervalSec)
     }
 
     /** EN: Toggle the automatic update check on launch and persist (named update* to avoid the JVM setter clash). DE: Den automatischen Update-Check beim Start umschalten und speichern (update*-Name wegen JVM-Setter-Kollision). */
@@ -780,7 +797,9 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         stopRefresh()
         refreshJob = viewModelScope.launch {
             while (true) {
-                delay(6000)
+                // EN: Interval is user-configurable (Settings); re-read each cycle so changes apply live.
+                // DE: Intervall ist vom Nutzer konfigurierbar (Einstellungen); je Zyklus neu gelesen, damit Änderungen sofort greifen.
+                delay(pollIntervalSec * 1000L)
                 runCatching { refreshOnce() }
             }
         }

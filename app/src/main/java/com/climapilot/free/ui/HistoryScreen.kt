@@ -175,6 +175,26 @@ fun HistoryScreen(vm: AcViewModel) {
             Spacer(Modifier.height(14.dp))
             MetricChartCard(Icons.Default.Air, stringResource(R.string.history_fan_title), "", Color(0xFF59C36A),
                 samples.map { it.ts to it.fanSpeed.toDouble() }, timeFmt)
+            // EN: Beta-diagnostics charts — only when samples with that data exist (group enabled + device answered).
+            // DE: Beta-Diagnose-Charts — nur wenn Messwerte mit diesen Daten existieren (Gruppe aktiv + Gerät antwortete).
+            val hzData = samples.mapNotNull { s -> s.compressorHz?.let { s.ts to it } }
+            if (hzData.isNotEmpty()) {
+                Spacer(Modifier.height(14.dp))
+                MetricChartCard(Icons.Default.ShowChart, stringResource(R.string.history_comp_hz_title), "Hz", Color(0xFFB388FF),
+                    hzData, timeFmt)
+            }
+            val compWData = samples.mapNotNull { s -> s.compressorW?.let { s.ts to it } }
+            if (compWData.isNotEmpty()) {
+                Spacer(Modifier.height(14.dp))
+                MetricChartCard(Icons.Default.Bolt, stringResource(R.string.history_comp_w_title), "W", Color(0xFFFFD54F),
+                    compWData, timeFmt)
+            }
+            val rpmData = samples.mapNotNull { s -> s.fanRpm?.let { s.ts to it.toDouble() } }
+            if (rpmData.isNotEmpty()) {
+                Spacer(Modifier.height(14.dp))
+                MetricChartCard(Icons.Default.Air, stringResource(R.string.history_fan_rpm_title), "rpm", Color(0xFF4DD0E1),
+                    rpmData, timeFmt)
+            }
             Spacer(Modifier.height(14.dp))
             TotalsCard(samples, vm.pricePerKwh)
         }

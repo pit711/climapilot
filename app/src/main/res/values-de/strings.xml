@@ -121,7 +121,12 @@
 
     <!-- Einstellungen: Beta / experimentelle Diagnose -->
     <string name="settings_beta">Beta-Funktionen</string>
-    <string name="settings_beta_hint">Experimentelle Zusatz-Diagnose. Jede Option fügt eine Abfrage pro Aktualisierung hinzu; nicht alle Geräte unterstützen sie. Werte erscheinen im Status-Reiter.</string>
+    <string name="settings_beta_hint">Experimentelle Zusatz-Diagnose, standardmäßig an — jede Option fügt eine Abfrage pro Aktualisierung hinzu und lässt sich hier abschalten. Nicht alle Geräte unterstützen sie. Werte erscheinen im Status-Reiter und werden im Verlauf aufgezeichnet (wenn die Verlaufsaufzeichnung an ist).</string>
+
+    <!-- Einstellungen: Poll-Intervall -->
+    <string name="settings_poll">Aktualisierungsintervall</string>
+    <string name="settings_poll_hint">Wie oft Zustand, Energie und Diagnose abgefragt werden, solange die App verbunden ist. Kürzere Intervalle aktualisieren schneller, erzeugen aber mehr WLAN-Verkehr.</string>
+    <string name="poll_seconds">%1$d s</string>
     <string name="beta_group1">Kompressor-Diagnose</string>
     <string name="beta_group1_desc">Frequenz, Strom, Spannung &amp; Kältekreis-Temperaturen (T1–T4, Druckrohr)</string>
     <string name="beta_group2">Innenlüfter &amp; Pumpe</string>
@@ -228,6 +233,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_6_5_title">Version 0.6.5</string>
+    <string name="changelog_0_6_5_body">•  Neu: konfigurierbares Aktualisierungsintervall (2/6/10/30 s) in den Einstellungen\n•  Neu: Diagnose wird im Verlauf aufgezeichnet, mit drei neuen Charts — Kompressorfrequenz, Leistung Außengerät, Innenlüfterdrehzahl\n•  Geändert: Beta-Diagnose ist jetzt standardmäßig an (weiterhin je Gruppe abschaltbar)</string>
     <string name="changelog_0_6_4_title">Version 0.6.4</string>
     <string name="changelog_0_6_4_body">•  Neu: Diagnose (Beta) im Status-Reiter — Kompressor-Frequenz/-Strom/-Spannung, Kältekreis-Temperaturen (T1–T4, Druckrohr), Innenlüfterdrehzahl, Kondensatpumpe und Leistung des Außengeräts. Je Gruppe unter Einstellungen → Beta-Funktionen aktivierbar\n•  Behoben: Ausschalten von „Außengerät leise" hebt die Kompressor-Drehzahlbegrenzung sofort wieder auf\n•  Behoben: der „Außengerät leise"-Schalter zeigt nach dem Neuverbinden den echten Gerätezustand\n•  Behoben: Kompressor-Drossel — „50%" und „75%" waren vertauscht; „50%" ist jetzt wirklich die stärkere Begrenzung\n•  Behoben: aus msmart-ng importierte Tokens verbinden offline statt neu aus der Cloud zu laden\n•  Verbessert: die Gerätesuche nutzt zusätzlich Subnetz-Broadcasts für Router, die den globalen blockieren</string>
     <string name="changelog_0_6_3_title">Version 0.6.3</string>
@@ -334,6 +341,9 @@
     <string name="history_indoor_title">Innentemperatur (24 h)</string>
     <string name="history_outdoor_title">Außentemperatur (24 h)</string>
     <string name="history_fan_title">Lüfterstufe (24 h)</string>
+    <string name="history_comp_hz_title">Kompressorfrequenz (Beta)</string>
+    <string name="history_comp_w_title">Leistung Außengerät (Beta)</string>
+    <string name="history_fan_rpm_title">Innenlüfterdrehzahl (Beta)</string>
     <string name="history_metric_summary">Jetzt %1$s%2$s · min %3$s · max %4$s%5$s</string>
     <string name="range_hour">Stunde</string>
     <string name="range_day">Tag</string>

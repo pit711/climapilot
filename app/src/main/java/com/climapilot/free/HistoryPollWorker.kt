@@ -41,10 +41,19 @@ class HistoryPollWorker(appContext: Context, params: WorkerParameters) :
                     session.connect()
                     val st = session.queryState()
                     val en = session.queryEnergy()
+                    // EN: Also sample the enabled beta-diagnostics groups so their history keeps filling
+                    //     while the app is closed. DE: Auch die aktivierten Beta-Diagnose-Gruppen erfassen,
+                    //     damit deren Verlauf auch bei geschlossener App weiterläuft.
+                    val g1 = if (SettingsRepo.diagGroup1(applicationContext)) session.queryGroup1() else null
+                    val g2 = if (SettingsRepo.diagGroup2(applicationContext)) session.queryGroup2() else null
+                    val g7 = if (SettingsRepo.diagGroup7(applicationContext)) session.queryGroup7() else null
                     UsageHistory.record(
                         applicationContext, dev.id,
                         en?.powerW, en?.totalKwh, st?.powerOn ?: false,
                         st?.indoorTemp, st?.outdoorTemp, st?.fanSpeed ?: 0,
+                        compressorHz = g1?.compressorFrequency?.toDouble(),
+                        compressorW = g7?.compressorPower,
+                        fanRpm = g2?.indoorFanSpeed,
                     )
                 } finally {
                     session.close()

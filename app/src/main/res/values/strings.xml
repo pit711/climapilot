@@ -122,9 +122,14 @@
     <string name="price_per_kwh">Price per kWh</string>
     <string name="price_hint">Used to estimate the total cost from consumption.</string>
 
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Update interval</string>
+    <string name="settings_poll_hint">How often state, energy and diagnostics are queried while the app is connected. Shorter intervals update faster but cause more Wi-Fi traffic.</string>
+    <string name="poll_seconds">%1$d s</string>
+
     <!-- Settings: beta / experimental diagnostics -->
     <string name="settings_beta">Beta features</string>
-    <string name="settings_beta_hint">Experimental extra diagnostics. Each option adds a query per refresh; not all units support them. Values show on the Status tab.</string>
+    <string name="settings_beta_hint">Experimental extra diagnostics, on by default — each option adds a query per refresh and can be turned off here. Not all units support them. Values show on the Status tab and are recorded in the History (when history recording is on).</string>
     <string name="beta_group1">Compressor diagnostics</string>
     <string name="beta_group1_desc">Frequency, current, voltage &amp; refrigerant temperatures (T1–T4, discharge pipe)</string>
     <string name="beta_group2">Indoor fan &amp; pump</string>
@@ -231,6 +236,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_6_5_title">Version 0.6.5</string>
+    <string name="changelog_0_6_5_body">•  New: configurable update interval (2/6/10/30 s) under Settings\n•  New: diagnostics are recorded in the History with three new charts — compressor frequency, outdoor-unit power, indoor fan speed\n•  Changed: beta diagnostics are now on by default (still switchable per group)</string>
     <string name="changelog_0_6_4_title">Version 0.6.4</string>
     <string name="changelog_0_6_4_body">•  New: Diagnostics (beta) on the Status tab — compressor frequency/current/voltage, refrigerant temperatures (T1–T4, discharge pipe), indoor fan speed, condensate pump and outdoor-unit power. Enable per group under Settings → Beta features\n•  Fixed: turning Outdoor Silent off releases the compressor speed limit again immediately\n•  Fixed: the Outdoor Silent toggle shows the unit\'s real state after reconnecting\n•  Fixed: compressor throttle — \"50%\" and \"75%\" were swapped; \"50%\" is now really the stronger limit\n•  Fixed: tokens imported from msmart-ng now connect offline instead of re-fetching from the cloud\n•  Improved: device search also uses subnet broadcasts for routers that block the global one</string>
     <string name="changelog_0_6_3_title">Version 0.6.3</string>
@@ -337,6 +344,9 @@
     <string name="history_indoor_title">Indoor temperature (24 h)</string>
     <string name="history_outdoor_title">Outdoor temperature (24 h)</string>
     <string name="history_fan_title">Fan level (24 h)</string>
+    <string name="history_comp_hz_title">Compressor frequency (beta)</string>
+    <string name="history_comp_w_title">Outdoor unit power (beta)</string>
+    <string name="history_fan_rpm_title">Indoor fan speed (beta)</string>
     <string name="history_metric_summary">Now %1$s%2$s · min %3$s · max %4$s%5$s</string>
     <string name="range_hour">Hour</string>
     <string name="range_day">Day</string>

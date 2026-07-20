@@ -22,6 +22,7 @@ object SettingsRepo {
     private const val K_DIAG_GROUP1 = "diag_group1"
     private const val K_DIAG_GROUP2 = "diag_group2"
     private const val K_DIAG_GROUP7 = "diag_group7"
+    private const val K_POLL_INTERVAL = "poll_interval_sec"
 
     /** EN: true = show temperatures in °F. DE: true = Temperaturen in °F anzeigen. */
     fun useFahrenheit(ctx: Context): Boolean = prefs(ctx).getBoolean(K_FAHRENHEIT, false)
@@ -77,28 +78,42 @@ object SettingsRepo {
     fun setBeep(ctx: Context, value: Boolean) =
         prefs(ctx).edit().putBoolean(K_BEEP, value).apply()
 
-    // EN: ---- Beta: extra diagnostics (midea-msmart PR #278 group data). Opt-in, off by default. Each
-    //     enables an extra per-refresh query, so we only poll a group when the user turned it on.
-    // DE: ---- Beta: Zusatz-Diagnose (midea-msmart PR #278 Gruppendaten). Opt-in, standardmäßig aus. Jede
-    //     aktiviert eine Extra-Abfrage pro Refresh, daher fragen wir eine Gruppe nur ab, wenn eingeschaltet.
+    // EN: ---- Beta: extra diagnostics (midea-msmart PR #278 group data). ON by default (user request);
+    //     each adds one query per refresh and can be turned off per group. Enabled groups are also
+    //     recorded into the usage history.
+    // DE: ---- Beta: Zusatz-Diagnose (midea-msmart PR #278 Gruppendaten). Standardmäßig AN
+    //     (User-Wunsch); jede fügt eine Abfrage pro Refresh hinzu und ist einzeln abschaltbar.
+    //     Aktivierte Gruppen werden zusätzlich im Verlauf aufgezeichnet.
 
     /** EN: Group 1 — compressor + refrigerant-circuit temperatures. DE: Gruppe 1 — Kompressor + Kältekreis-Temperaturen. */
-    fun diagGroup1(ctx: Context): Boolean = prefs(ctx).getBoolean(K_DIAG_GROUP1, false)
+    fun diagGroup1(ctx: Context): Boolean = prefs(ctx).getBoolean(K_DIAG_GROUP1, true)
 
     fun setDiagGroup1(ctx: Context, value: Boolean) =
         prefs(ctx).edit().putBoolean(K_DIAG_GROUP1, value).apply()
 
     /** EN: Group 2 — indoor fan speed + condensate pump. DE: Gruppe 2 — Innenlüfterdrehzahl + Kondensatpumpe. */
-    fun diagGroup2(ctx: Context): Boolean = prefs(ctx).getBoolean(K_DIAG_GROUP2, false)
+    fun diagGroup2(ctx: Context): Boolean = prefs(ctx).getBoolean(K_DIAG_GROUP2, true)
 
     fun setDiagGroup2(ctx: Context, value: Boolean) =
         prefs(ctx).edit().putBoolean(K_DIAG_GROUP2, value).apply()
 
     /** EN: Group 7 — outdoor-unit power (W). DE: Gruppe 7 — Außengerät-Leistung (W). */
-    fun diagGroup7(ctx: Context): Boolean = prefs(ctx).getBoolean(K_DIAG_GROUP7, false)
+    fun diagGroup7(ctx: Context): Boolean = prefs(ctx).getBoolean(K_DIAG_GROUP7, true)
 
     fun setDiagGroup7(ctx: Context, value: Boolean) =
         prefs(ctx).edit().putBoolean(K_DIAG_GROUP7, value).apply()
+
+    /**
+     * EN: Live-refresh poll interval in seconds (how often state/energy/diagnostics are queried while
+     *     the app is connected). Clamped to 2–60; default 6 (the pre-0.6.5 fixed value).
+     * DE: Poll-Intervall der Live-Aktualisierung in Sekunden (wie oft Zustand/Energie/Diagnose
+     *     abgefragt werden, solange die App verbunden ist). Begrenzt auf 2–60; Standard 6 (der feste
+     *     Wert vor 0.6.5).
+     */
+    fun pollIntervalSec(ctx: Context): Int = prefs(ctx).getInt(K_POLL_INTERVAL, 6).coerceIn(2, 60)
+
+    fun setPollIntervalSec(ctx: Context, value: Int) =
+        prefs(ctx).edit().putInt(K_POLL_INTERVAL, value.coerceIn(2, 60)).apply()
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 }

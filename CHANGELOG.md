@@ -2,6 +2,24 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.5] — 2026-07-20
+
+### 🇬🇧 English
+**New**
+- **Configurable update interval** (Settings → Update interval): choose how often state, energy and diagnostics are polled while connected — 2/6/10/30 s (default 6 s, as before).
+- **Diagnostics history (beta)** — when history recording is on, enabled diagnostic groups are recorded too, with three new charts on the History tab: compressor frequency, outdoor-unit power and indoor fan speed. Also sampled by the ~15-min background poll. Existing history data is preserved.
+
+**Changed**
+- **Beta diagnostics are now on by default** (each group can still be turned off under Settings → Beta features).
+
+### 🇩🇪 Deutsch
+**Neu**
+- **Konfigurierbares Aktualisierungsintervall** (Einstellungen → Aktualisierungsintervall): wählbar, wie oft Zustand, Energie und Diagnose bei bestehender Verbindung abgefragt werden — 2/6/10/30 s (Standard 6 s, wie bisher).
+- **Diagnose-Verlauf (Beta)** — bei aktiver Verlaufsaufzeichnung werden aktivierte Diagnose-Gruppen mit aufgezeichnet, mit drei neuen Charts im Verlauf-Reiter: Kompressorfrequenz, Leistung Außengerät und Innenlüfterdrehzahl. Wird auch vom ~15-min-Hintergrund-Poll erfasst. Bestehende Verlaufsdaten bleiben erhalten.
+
+**Geändert**
+- **Beta-Diagnose ist jetzt standardmäßig an** (jede Gruppe bleibt unter Einstellungen → Beta-Funktionen abschaltbar).
+
 ## [0.6.4] — 2026-07-20
 
 ### 🇬🇧 English

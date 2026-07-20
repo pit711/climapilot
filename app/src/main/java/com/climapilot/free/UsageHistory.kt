@@ -19,7 +19,7 @@ import android.database.sqlite.SQLiteOpenHelper
  */
 object UsageHistory {
     private const val DB = "climapilot_usage.db"
-    private const val DB_VERSION = 4 // bump wipes the earlier demo-seeded samples
+    private const val DB_VERSION = 5 // v5 adds beta-diagnostics columns (comp_hz/comp_w/fan_rpm) via ALTER — data preserved
     private const val TABLE = "samples"
     private const val PREFS = "climapilot_usage"
     private const val MIN_INTERVAL_MS = 55_000L
@@ -36,16 +36,30 @@ object UsageHistory {
         val indoorTemp: Double?,
         val outdoorTemp: Double?,
         val fanSpeed: Int,
+        // EN: Beta diagnostics (null when the group wasn't enabled / didn't answer at sample time).
+        // DE: Beta-Diagnose (null, wenn die Gruppe beim Messzeitpunkt aus war / nicht antwortete).
+        val compressorHz: Double? = null,
+        val compressorW: Double? = null,
+        val fanRpm: Int? = null,
     )
 
     private class Helper(ctx: Context) : SQLiteOpenHelper(ctx, DB, null, DB_VERSION) {
         override fun onCreate(db: SQLiteDatabase) {
             db.execSQL(
                 "CREATE TABLE $TABLE (device_id INTEGER, ts INTEGER, power_w REAL, total_kwh REAL, " +
-                    "power_on INTEGER, indoor REAL, outdoor REAL, fan INTEGER, PRIMARY KEY(device_id, ts))",
+                    "power_on INTEGER, indoor REAL, outdoor REAL, fan INTEGER, " +
+                    "comp_hz REAL, comp_w REAL, fan_rpm INTEGER, PRIMARY KEY(device_id, ts))",
             )
         }
         override fun onUpgrade(db: SQLiteDatabase, old: Int, new: Int) {
+            if (old == 4) {
+                // EN: v4 → v5: append the diagnostics columns, keeping all recorded samples.
+                // DE: v4 → v5: Diagnose-Spalten anhängen, alle aufgezeichneten Messwerte bleiben erhalten.
+                db.execSQL("ALTER TABLE $TABLE ADD COLUMN comp_hz REAL")
+                db.execSQL("ALTER TABLE $TABLE ADD COLUMN comp_w REAL")
+                db.execSQL("ALTER TABLE $TABLE ADD COLUMN fan_rpm INTEGER")
+                return
+            }
             db.execSQL("DROP TABLE IF EXISTS $TABLE"); onCreate(db)
         }
     }
@@ -69,6 +83,9 @@ object UsageHistory {
         indoorTemp: Double?,
         outdoorTemp: Double?,
         fanSpeed: Int,
+        compressorHz: Double? = null,
+        compressorW: Double? = null,
+        fanRpm: Int? = null,
     ) {
         val now = System.currentTimeMillis()
         val p = prefs(ctx)
@@ -90,6 +107,11 @@ object UsageHistory {
                 put("indoor", indoorTemp ?: Double.NaN)
                 put("outdoor", outdoorTemp ?: Double.NaN)
                 put("fan", fanSpeed)
+                // EN: Diagnostics stay NULL when unavailable, so charts can skip those samples cleanly.
+                // DE: Diagnose bleibt NULL, wenn nicht verfügbar — Charts überspringen solche Messwerte sauber.
+                if (compressorHz != null) put("comp_hz", compressorHz) else putNull("comp_hz")
+                if (compressorW != null) put("comp_w", compressorW) else putNull("comp_w")
+                if (fanRpm != null) put("fan_rpm", fanRpm) else putNull("fan_rpm")
             }, SQLiteDatabase.CONFLICT_REPLACE)
         }
     }
@@ -101,7 +123,12 @@ object UsageHistory {
                 while (c.moveToNext()) {
                     val indoor = c.getDouble(5).takeIf { !it.isNaN() }
                     val outdoor = c.getDouble(6).takeIf { !it.isNaN() }
-                    add(Sample(c.getLong(1), c.getDouble(2), c.getDouble(3), c.getInt(4) == 1, indoor, outdoor, c.getInt(7)))
+                    add(Sample(
+                        c.getLong(1), c.getDouble(2), c.getDouble(3), c.getInt(4) == 1, indoor, outdoor, c.getInt(7),
+                        compressorHz = if (c.isNull(8)) null else c.getDouble(8),
+                        compressorW = if (c.isNull(9)) null else c.getDouble(9),
+                        fanRpm = if (c.isNull(10)) null else c.getInt(10),
+                    ))
                 }
             }
         }
