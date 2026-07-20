@@ -10,15 +10,17 @@
 [![PayPal](https://img.shields.io/badge/PayPal-tip-00457C?logo=paypal&logoColor=white)](https://paypal.me/711IT)
 
 <p align="center">
-  <img src="docs/screenshot-control.png" width="19%" alt="Control">
+  <img src="docs/screenshot-control.png" width="16%" alt="Control">
   &nbsp;
-  <img src="docs/screenshot-scenes.png" width="19%" alt="Scenes">
+  <img src="docs/screenshot-scenes.png" width="16%" alt="Scenes">
   &nbsp;
-  <img src="docs/screenshot-plan.png" width="19%" alt="Weekly plan">
+  <img src="docs/screenshot-plan.png" width="16%" alt="Weekly plan">
   &nbsp;
-  <img src="docs/screenshot-options.png" width="19%" alt="Options">
+  <img src="docs/screenshot-options.png" width="16%" alt="Options">
   &nbsp;
-  <img src="docs/screenshot-history.png" width="19%" alt="History &amp; charts">
+  <img src="docs/screenshot-history.png" width="16%" alt="History &amp; charts">
+  &nbsp;
+  <img src="docs/screenshot-diagnostics.png" width="16%" alt="Diagnostics (beta)">
 </p>
 
 🇬🇧 [English](#english) · 🇩🇪 [Deutsch](#deutsch)
@@ -36,6 +38,7 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 - 💨 Fan speed presets + fine slider, swing, eco mode, beep
 - 🌬️ Device-specific modes where supported: ionizer, outdoor-silent, self-clean
 - 📊 Live status: indoor / outdoor temperature, power draw, consumption, **estimated cost** (price per kWh)
+- 🔬 **Diagnostics (beta)** — compressor frequency, current & voltage, refrigerant-circuit temperatures (T1–T4, discharge pipe), indoor fan rpm, condensate pump and outdoor-unit watts; opt-in per group under Settings → Beta features
 - ⚡ Quick scenes with a full editor & **daily schedule**
 - 📅 **Weekly day-planner** — assign scenes to recurring weekday + time windows (e.g. *max cooling on Mondays, 6–18*) on a visual week calendar; each window applies its scene at the start and can switch the AC off at the end. Runs in the background even while the phone is idle on Wi-Fi.
 - 🧊 Compressor throttle (where supported) · reliable sleep/off timer (survives reboot) with a live countdown notification · auto power-off after a max runtime
@@ -82,6 +85,7 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 - 💨 Lüfter-Presets + Feinregler, Swing, Eco-Modus, Signalton
 - 🌬️ Gerätespezifische Modi, wo unterstützt: Ionisierer, Außen-Leise, Selbstreinigung
 - 📊 Live-Status: Innen-/Außentemperatur, Leistung, Verbrauch, **geschätzte Kosten** (Preis pro kWh)
+- 🔬 **Diagnose (Beta)** — Kompressor-Frequenz, -Strom & -Spannung, Kältekreis-Temperaturen (T1–T4, Druckrohr), Innenlüfterdrehzahl, Kondensatpumpe und Watt des Außengeräts; je Gruppe unter Einstellungen → Beta-Funktionen aktivierbar
 - ⚡ Schnell-Szenen mit vollem Editor & **Tagesplan**
 - 📅 **Wochen-Tagesplaner** — Szenen wiederkehrenden Wochentag-+Zeit-Fenstern zuweisen (z. B. *maximal kühlen montags 6–18*) auf einem visuellen Wochenkalender; jedes Fenster wendet beim Start seine Szene an und kann die Klima am Ende ausschalten. Läuft im Hintergrund, auch wenn das Handy im WLAN ruht.
 - 🧊 Kompressor-Drossel (wo unterstützt) · zuverlässiger Sleep-/Aus-Timer (übersteht Neustart) mit Live-Countdown-Benachrichtigung · Auto-Aus nach maximaler Laufzeit
