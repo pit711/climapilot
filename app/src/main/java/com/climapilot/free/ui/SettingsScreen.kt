@@ -31,6 +31,7 @@ import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Payments
+import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.filled.Tune
@@ -116,6 +117,7 @@ fun SettingsScreen(vm: AcViewModel, onBack: () -> Unit) {
         item { AppHeaderCard(version) }
         item { UpdateCard(vm) }
         item { DisplayCard(vm) }
+        item { BetaCard(vm) }
         item { ReliabilityCard() }
         item { AutoOffCard(vm) }
         item { AppLockCard() }
@@ -547,6 +549,62 @@ private fun DisplayCard(vm: AcViewModel) {
     }
 }
 
+/**
+ * EN: Beta card — opt-in experimental diagnostics ported from midea-msmart PR #278. Each switch enables
+ *     one extra "group data" query per refresh (compressor performance, indoor fan/pump, outdoor power).
+ *     Off by default; not every unit answers these — hence "beta". Values appear on the Status tab.
+ * DE: Beta-Karte — freiwillige experimentelle Diagnose, portiert aus midea-msmart PR #278. Jeder Schalter
+ *     aktiviert eine zusätzliche „Gruppendaten"-Abfrage pro Refresh (Kompressor-Leistung, Innenlüfter/Pumpe,
+ *     Außengerät-Leistung). Standardmäßig aus; nicht jedes Gerät antwortet darauf — daher „Beta". Die Werte
+ *     erscheinen im Status-Reiter.
+ */
+@Composable
+private fun BetaCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = cs.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+    ) {
+        Column(Modifier.padding(18.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Science, null, tint = cs.primary, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(8.dp))
+                Text(stringResource(R.string.settings_beta), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
+            }
+            Spacer(Modifier.height(4.dp))
+            Text(stringResource(R.string.settings_beta_hint), fontSize = 12.sp, color = cs.onSurfaceVariant, lineHeight = 16.sp)
+            Spacer(Modifier.height(10.dp))
+            BetaSwitchRow(
+                stringResource(R.string.beta_group1), stringResource(R.string.beta_group1_desc),
+                vm.diagGroup1,
+            ) { vm.updateDiagGroup1(it) }
+            BetaSwitchRow(
+                stringResource(R.string.beta_group2), stringResource(R.string.beta_group2_desc),
+                vm.diagGroup2,
+            ) { vm.updateDiagGroup2(it) }
+            BetaSwitchRow(
+                stringResource(R.string.beta_group7), stringResource(R.string.beta_group7_desc),
+                vm.diagGroup7,
+            ) { vm.updateDiagGroup7(it) }
+        }
+    }
+}
+
+/** EN: A labelled switch with a small description line, used by the beta card. DE: Ein beschrifteter Schalter mit kleiner Beschreibungszeile, für die Beta-Karte. */
+@Composable
+private fun BetaSwitchRow(title: String, desc: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+    val cs = MaterialTheme.colorScheme
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+        Column(Modifier.weight(1f)) {
+            Text(title, color = cs.onSurface, fontSize = 15.sp)
+            Text(desc, color = cs.onSurfaceVariant, fontSize = 12.sp, lineHeight = 15.sp)
+        }
+        Spacer(Modifier.width(8.dp))
+        Switch(checked = checked, onCheckedChange = onCheckedChange)
+    }
+}
+
 @Composable
 private fun ChangelogCard() {
     val cs = MaterialTheme.colorScheme
@@ -561,6 +619,14 @@ private fun ChangelogCard() {
                 Spacer(Modifier.width(8.dp))
                 Text(stringResource(R.string.changelog_title), fontWeight = FontWeight.Bold, fontSize = 16.sp, color = cs.onSurface)
             }
+            Spacer(Modifier.height(14.dp))
+            Text(stringResource(R.string.changelog_0_6_4_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.changelog_0_6_4_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 22.sp)
+            Spacer(Modifier.height(14.dp))
+            Text(stringResource(R.string.changelog_0_6_3_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
+            Spacer(Modifier.height(6.dp))
+            Text(stringResource(R.string.changelog_0_6_3_body), fontSize = 14.sp, color = cs.onSurfaceVariant, lineHeight = 22.sp)
             Spacer(Modifier.height(14.dp))
             Text(stringResource(R.string.changelog_0_6_2_title), fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = cs.onSurface)
             Spacer(Modifier.height(6.dp))

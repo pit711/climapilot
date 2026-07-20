@@ -42,6 +42,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DragHandle
 import androidx.compose.material.icons.filled.Eco
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.MonitorHeart
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material.icons.filled.PowerSettingsNew
 import androidx.compose.material.icons.filled.Refresh
@@ -159,6 +160,8 @@ fun StatusTab(vm: AcViewModel) {
     TabList {
         item(key = "topbar") { ConnectedTopBar(vm) }
         item(key = "status") { LiveStatusCard(vm) }
+        // EN: Beta diagnostics (PR #278) — only shown when at least one group is enabled in Settings. DE: Beta-Diagnose (PR #278) — nur sichtbar, wenn in den Einstellungen mindestens eine Gruppe aktiviert ist.
+        if (vm.diagGroup1 || vm.diagGroup2 || vm.diagGroup7) item(key = "diagnostics") { DiagnosticsCard(vm) }
         errorItem(vm)
     }
 }
@@ -491,6 +494,68 @@ private fun LiveStatusCard(vm: AcViewModel) {
             if (err == 0) stringResource(R.string.status_error_none) else stringResource(R.string.status_error_code, err),
         )
     }
+}
+
+/**
+ * EN: Beta diagnostics card (midea-msmart PR #278 group data). Renders only the groups the user opted
+ *     into (Settings → Beta). Each sub-section shows "–" until the first successful read. Values are
+ *     read-only telemetry: compressor frequency/current/voltage + refrigerant temps (T1–T4, TP), indoor
+ *     fan speed + condensate pump, and outdoor-unit power in Watts.
+ * DE: Beta-Diagnose-Karte (midea-msmart PR #278 Gruppendaten). Zeigt nur die vom Nutzer aktivierten
+ *     Gruppen (Einstellungen → Beta). Jeder Abschnitt zeigt „–", bis zum ersten erfolgreichen Lesen.
+ *     Werte sind schreibgeschützte Telemetrie: Kompressor-Frequenz/-Strom/-Spannung + Kältekreis-
+ *     Temperaturen (T1–T4, TP), Innenlüfterdrehzahl + Kondensatpumpe und Außengerät-Leistung in Watt.
+ */
+@Composable
+private fun DiagnosticsCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    val dash = "–"
+    SectionCard(stringResource(R.string.section_diagnostics), Icons.Default.MonitorHeart) {
+        Text(
+            stringResource(R.string.diag_beta_hint),
+            fontSize = 11.sp, color = cs.onSurfaceVariant, lineHeight = 15.sp,
+            modifier = Modifier.padding(bottom = 6.dp),
+        )
+        // EN: Group 1 — compressor + refrigerant circuit. DE: Gruppe 1 — Kompressor + Kältekreis.
+        if (vm.diagGroup1) {
+            val g = vm.group1
+            DiagSubHeader(stringResource(R.string.diag_group1_title))
+            StatusRow(stringResource(R.string.diag_compressor_freq), g?.compressorFrequency?.let { "$it Hz" } ?: dash)
+            StatusRow(stringResource(R.string.diag_compressor_freq_target), g?.targetCompressorFrequency?.let { "$it Hz" } ?: dash)
+            StatusRow(stringResource(R.string.diag_compressor_current), g?.compressorCurrent?.let { "$it A" } ?: dash)
+            StatusRow(stringResource(R.string.diag_compressor_voltage), g?.compressorVoltage?.let { "$it V" } ?: dash)
+            StatusRow(stringResource(R.string.diag_temp_t1), g?.tempIndoorCoil?.let { formatTemp(it, vm.useFahrenheit) } ?: dash)
+            StatusRow(stringResource(R.string.diag_temp_t2), g?.tempEvaporator?.let { formatTemp(it, vm.useFahrenheit) } ?: dash)
+            StatusRow(stringResource(R.string.diag_temp_t3), g?.tempCondenser?.let { formatTemp(it, vm.useFahrenheit) } ?: dash)
+            StatusRow(stringResource(R.string.diag_temp_t4), g?.tempOutdoor?.let { formatTemp(it, vm.useFahrenheit) } ?: dash)
+            StatusRow(stringResource(R.string.diag_temp_tp), g?.tempDischargePipe?.let { formatTemp(it.toDouble(), vm.useFahrenheit) } ?: dash)
+        }
+        // EN: Group 2 — indoor fan + condensate pump. DE: Gruppe 2 — Innenlüfter + Kondensatpumpe.
+        if (vm.diagGroup2) {
+            val g = vm.group2
+            DiagSubHeader(stringResource(R.string.diag_group2_title))
+            StatusRow(stringResource(R.string.diag_fan_speed), g?.indoorFanSpeed?.let { "$it rpm" } ?: dash)
+            StatusRow(stringResource(R.string.diag_fan_speed_target), g?.targetIndoorFanSpeed?.let { "$it rpm" } ?: dash)
+            StatusRow(
+                stringResource(R.string.diag_water_pump),
+                g?.waterPumpRunning?.let { stringResource(if (it) R.string.diag_pump_on else R.string.diag_pump_off) } ?: dash,
+            )
+        }
+        // EN: Group 7 — outdoor-unit power. DE: Gruppe 7 — Außengerät-Leistung.
+        if (vm.diagGroup7) {
+            val g = vm.group7
+            DiagSubHeader(stringResource(R.string.diag_group7_title))
+            StatusRow(stringResource(R.string.diag_compressor_power), g?.compressorPower?.let { "${it.roundToInt()} W" } ?: dash)
+        }
+    }
+}
+
+/** EN: Small sub-section header inside the diagnostics card. DE: Kleine Abschnittsüberschrift in der Diagnose-Karte. */
+@Composable
+private fun DiagSubHeader(title: String) {
+    val cs = MaterialTheme.colorScheme
+    Spacer(Modifier.height(6.dp))
+    Text(title, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = cs.primary, modifier = Modifier.padding(top = 2.dp, bottom = 2.dp))
 }
 
 /** EN: A single label-left / value-right row in the status card. DE: Eine Zeile (Label links / Wert rechts) in der Status-Karte. */

@@ -30,14 +30,20 @@ object MideaAc {
     // DE: Kompressor-Drossel-Eigenschaft (rate-select). Werte: 100 = aus/voll, 75, 50.
     const val PROP_RATE_SELECT = 0x0048
     const val RATE_OFF = 100
-    // EN: On the Portasplit the byte value is INVERSE to compressor power (verified vs a Shelly plug):
-    //     byte 75 → ~50 % power, byte 50 → ~75 % power. We name the gears by their real effect and
-    //     send the byte that actually produces it.
-    // DE: Bei der Portasplit ist der Byte-Wert UMGEKEHRT zur Kompressorleistung (gegen eine
-    //     Shelly-Steckdose verifiziert): Byte 75 → ~50 % Leistung, Byte 50 → ~75 % Leistung. Wir
-    //     benennen die Gänge nach ihrer echten Wirkung und senden das Byte, das sie tatsächlich erzeugt.
-    const val RATE_GEAR75 = 50   // EN: ≈ 75 % compressor power / DE: ≈ 75 % Kompressorleistung
-    const val RATE_GEAR50 = 75   // EN: ≈ 50 % compressor power / DE: ≈ 50 % Kompressorleistung
+    // EN: Byte values follow msmart-ng's RateSelect (GEAR_50 = 50, GEAR_75 = 75). Re-measured on a
+    //     PortaSplit with the Group-1 compressor-frequency readout + a Shelly plug (issue #9,
+    //     2026-07-20): byte 50 is the STRONG throttle (compressor capped ~42 Hz, ~507 W) and byte 75
+    //     the mild one (~56 Hz, ~662 W ≈ unthrottled at that demand). An earlier session concluded the
+    //     inverse from power alone and swapped these constants — that made the "50 %" button send the
+    //     mild throttle, which users noticed as "50 % behaves like 75 %".
+    // DE: Byte-Werte folgen msmart-ngs RateSelect (GEAR_50 = 50, GEAR_75 = 75). An einer PortaSplit mit
+    //     der Group-1-Kompressorfrequenz + Shelly-Steckdose nachgemessen (Issue #9, 2026-07-20): Byte 50
+    //     ist die STARKE Drossel (Kompressor ~42 Hz, ~507 W), Byte 75 die milde (~56 Hz, ~662 W ≈
+    //     ungedrosselt bei diesem Bedarf). Eine frühere Session hatte aus der Leistung allein das
+    //     Gegenteil gefolgert und die Konstanten vertauscht — dadurch sendete der „50 %"-Knopf die milde
+    //     Drossel, von Nutzern bemerkt als „50 % verhält sich wie 75 %".
+    const val RATE_GEAR75 = 75   // EN: mild throttle (≈ 75 % compressor power) / DE: milde Drossel (≈ 75 % Kompressorleistung)
+    const val RATE_GEAR50 = 50   // EN: strong throttle (≈ 50 % compressor power) / DE: starke Drossel (≈ 50 % Kompressorleistung)
 
     // EN: Buzzer / prompt-tone property. 0 = silent, 1 = beep. (device.py always sends it.)
     // DE: Eigenschaft für Signalton/Quittungston. 0 = stumm, 1 = Piepton. (device.py sendet sie immer.)
@@ -165,6 +171,53 @@ object MideaAc {
     fun buildSetProperty(propId: Int, value: Int): ByteArray = buildSetProperties(listOf(propId to value))
 
     /**
+     * EN: Build a GetProperties query (port of GetPropertiesCommand, 0xB1) that asks the device for the
+     *     CURRENT value of specific properties. Payload: 0xB1, count, then each propId as LE16. Needed to
+     *     read back capability-gated states (e.g. outdoor-silent) that are NOT in the basic StateResponse.
+     * DE: Eine GetProperties-Abfrage bauen (Portierung von GetPropertiesCommand, 0xB1), die das Gerät nach
+     *     dem AKTUELLEN Wert bestimmter Eigenschaften fragt. Nutzlast: 0xB1, Anzahl, dann je propId als
+     *     LE16. Nötig, um kapazitätsabhängige Zustände (z. B. Außengerät-Leise) zurückzulesen, die NICHT
+     *     im Basis-StateResponse stehen.
+     */
+    fun buildGetProperties(props: List<Int>): ByteArray {
+        val out = ArrayList<Byte>()
+        out.add(0xB1.toByte()); out.add(props.size.toByte())
+        for (id in props) {
+            out.add((id and 0xFF).toByte()); out.add(((id shr 8) and 0xFF).toByte())
+        }
+        return frame(FRAME_QUERY, out.toByteArray())
+    }
+
+    /**
+     * EN: Parse a PropertiesResponse (0xB1) into a map of propId → first value byte, or null if not a
+     *     properties frame. Layout after the 0xB1/count header: per property [id LE16][result][size][value…].
+     *     Mirrors msmart's PropertiesResponse._parse (skips zero-size entries; result bit 0x10 = error).
+     * DE: Eine PropertiesResponse (0xB1) in eine Map propId → erstes Wert-Byte parsen, sonst null.
+     *     Aufbau nach dem 0xB1/Anzahl-Kopf: je Eigenschaft [id LE16][Ergebnis][Größe][Wert…]. Entspricht
+     *     msmarts PropertiesResponse._parse (leere Einträge überspringen; Ergebnis-Bit 0x10 = Fehler).
+     */
+    fun parseProperties(frame: ByteArray): Map<Int, Int>? {
+        if (frame.size < 12) return null
+        val p = frame.copyOfRange(10, frame.size - 2)
+        if (p.size < 2 || (p[0].toInt() and 0xFF) != 0xB1) return null
+        val count = p[1].toInt() and 0xFF
+        val result = HashMap<Int, Int>()
+        var i = 2
+        var n = 0
+        while (n < count && i + 4 <= p.size) {
+            val id = (p[i].toInt() and 0xFF) or ((p[i + 1].toInt() and 0xFF) shl 8)
+            // p[i+2] = result (bit 0x10 = error), p[i+3] = size
+            val size = p[i + 3].toInt() and 0xFF
+            if (size == 0) { i += 4; n++; continue }
+            if (i + 4 + size > p.size) break
+            val error = (p[i + 2].toInt() and 0x10) != 0
+            if (!error) result[id] = p[i + 4].toInt() and 0xFF
+            i += 4 + size; n++
+        }
+        return result
+    }
+
+    /**
      * EN: Build a query for the basic state (port of GetStateCommand).
      * DE: Eine Abfrage des Basiszustands bauen (Portierung von GetStateCommand).
      */
@@ -247,6 +300,22 @@ object MideaAc {
     }
 
     /**
+     * EN: Generic group-data query (port of midea-msmart PR #278 GetGroupCommand). Same request shape
+     *     as the energy query, but byte[3] selects the group: 0x40 | group. Groups we use: 1 = outdoor
+     *     unit performance, 2 = indoor fan/pump, 5 = humidity/defrost, 7 = outdoor unit power.
+     *     (Group 4 = energy is still sent via buildGetEnergyUsage.)
+     * DE: Generische Gruppendaten-Abfrage (Portierung von midea-msmart PR #278 GetGroupCommand). Gleiche
+     *     Anfrage-Form wie die Energie-Abfrage, aber Byte[3] wählt die Gruppe: 0x40 | group. Genutzte
+     *     Gruppen: 1 = Außengerät-Leistung, 2 = Innenlüfter/Pumpe, 5 = Feuchte/Abtauen, 7 = Außengerät-Leistung (W).
+     *     (Gruppe 4 = Energie geht weiterhin über buildGetEnergyUsage.)
+     */
+    fun buildGetGroup(group: Int): ByteArray {
+        val data = ByteArray(20)
+        data[0] = 0x41; data[1] = 0x21; data[2] = 0x01; data[3] = (0x40 or (group and 0xF)).toByte()
+        return frame(FRAME_QUERY, data)
+    }
+
+    /**
      * EN: Parse energy usage from an EnergyUsageResponse (group-data 4), or null.
      * DE: Energieverbrauch aus einer EnergyUsageResponse (Gruppendaten 4) parsen, sonst null.
      */
@@ -268,6 +337,77 @@ object MideaAc {
         // EN: Treat all-zero as "no energy monitoring". / DE: Komplett null = „keine Energiemessung".
         if (power == 0.0 && total == 0.0 && current == 0.0) return EnergyUsage(Double.NaN, Double.NaN, Double.NaN)
         return EnergyUsage(power, total, current)
+    }
+
+    /**
+     * EN: Strip the 10-byte header + 2 trailing bytes and verify this is a group-data response (0xC1)
+     *     for the requested [group]. Returns the inner payload (payload[0] = 0xC1, payload[3] = group
+     *     byte) or null. Shared by all Group1/2/7 parsers.
+     * DE: Den 10-Byte-Kopf + 2 Endbytes entfernen und prüfen, dass dies ein Gruppendaten-Response (0xC1)
+     *     für die angeforderte [group] ist. Liefert die innere Nutzlast (payload[0] = 0xC1,
+     *     payload[3] = Gruppen-Byte) oder null. Von allen Group1/2/7-Parsern genutzt.
+     */
+    private fun groupPayload(frame: ByteArray, group: Int, minSize: Int): ByteArray? {
+        if (frame.size < 12) return null
+        val p = frame.copyOfRange(10, frame.size - 2)
+        if (p.size < minSize) return null
+        if ((p[0].toInt() and 0xFF) != 0xC1) return null      // group-data response
+        if ((p[3].toInt() and 0xF) != group) return null      // requested group
+        return p
+    }
+
+    /**
+     * EN: Parse Group 1 — outdoor-unit performance (port of PR #278 Group1Response): compressor
+     *     frequency/current/voltage and the refrigerant-circuit temperatures T1–T4 + discharge pipe TP.
+     * DE: Gruppe 1 parsen — Außengerät-Leistung (Portierung von PR #278 Group1Response):
+     *     Kompressor-Frequenz/-Strom/-Spannung und die Kältekreis-Temperaturen T1–T4 + Druckrohr TP.
+     */
+    fun parseGroup1(frame: ByteArray): Group1Data? {
+        val p = groupPayload(frame, 1, 15) ?: return null
+        fun b(i: Int) = p[i].toInt() and 0xFF
+        return Group1Data(
+            compressorFrequency = b(4),
+            targetCompressorFrequency = b(5),
+            compressorCurrent = b(7),
+            compressorVoltage = b(8),
+            // EN: T1/T2 use offset 30: (raw - 30) / 2. DE: T1/T2 nutzen Offset 30: (raw - 30) / 2.
+            tempIndoorCoil = (b(10) - 30) / 2.0,
+            tempEvaporator = (b(11) - 30) / 2.0,
+            // EN: T3/T4 use offset 50: (raw - 50) / 2. DE: T3/T4 nutzen Offset 50: (raw - 50) / 2.
+            tempCondenser = (b(12) - 50) / 2.0,
+            tempOutdoor = (b(13) - 50) / 2.0,
+            // EN: TP raw byte is a direct °C reading. DE: TP-Rohbyte ist ein direkter °C-Wert.
+            tempDischargePipe = b(14),
+        )
+    }
+
+    /**
+     * EN: Parse Group 2 — indoor-unit fan data (port of PR #278 Group2Response): actual/target indoor
+     *     fan speed (raw × 8, RPM-equivalent) and the condensate water-pump state (byte 8, bit 4).
+     * DE: Gruppe 2 parsen — Innengerät-Lüfterdaten (Portierung von PR #278 Group2Response): Ist-/Soll-
+     *     Innenlüfterdrehzahl (roh × 8, RPM-äquivalent) und der Kondensat-Pumpen-Zustand (Byte 8, Bit 4).
+     */
+    fun parseGroup2(frame: ByteArray): Group2Data? {
+        val p = groupPayload(frame, 2, 9) ?: return null
+        fun b(i: Int) = p[i].toInt() and 0xFF
+        return Group2Data(
+            targetIndoorFanSpeed = b(4) * 8,
+            indoorFanSpeed = b(5) * 8,
+            // EN: Bit 4 of byte 8 = condensate pump running (or float-switch "tank full"). DE: Bit 4 von Byte 8 = Kondensatpumpe läuft (oder Schwimmerschalter „Tank voll").
+            waterPumpRunning = (b(8) and 0x10) != 0,
+        )
+    }
+
+    /**
+     * EN: Parse Group 7 — outdoor-unit real-time power in Watts (port of PR #278 Group7Response):
+     *     two-byte little-endian value at bytes 10/11.
+     * DE: Gruppe 7 parsen — Echtzeit-Leistung des Außengeräts in Watt (Portierung von PR #278
+     *     Group7Response): Zwei-Byte-Little-Endian-Wert an Byte 10/11.
+     */
+    fun parseGroup7(frame: ByteArray): Group7Data? {
+        val p = groupPayload(frame, 7, 12) ?: return null
+        fun b(i: Int) = p[i].toInt() and 0xFF
+        return Group7Data(compressorPower = (b(10) + 256 * b(11)).toDouble())
     }
 
     /**
@@ -321,6 +461,42 @@ object MideaAc {
  * DE: Energieverbrauch der Klima (W und kWh). NaN = nicht verfügbar / Gerät hat keine Energiemessung.
  */
 data class EnergyUsage(val powerW: Double, val totalKwh: Double, val currentKwh: Double)
+
+/**
+ * EN: Group 1 diagnostics — outdoor-unit performance: compressor frequency (Hz), current (A), voltage
+ *     (V) and the refrigerant-circuit temperatures (°C). Naming follows PR #278 (compressor_* rather
+ *     than outdoor_unit_* — on the PortaSplit the compressor sits in the indoor unit). Beta feature.
+ * DE: Gruppe-1-Diagnose — Außengerät-Leistung: Kompressor-Frequenz (Hz), -Strom (A), -Spannung (V) und
+ *     die Kältekreis-Temperaturen (°C). Benennung wie PR #278 (compressor_* statt outdoor_unit_* — bei
+ *     der PortaSplit sitzt der Kompressor im Innengerät). Beta-Funktion.
+ */
+data class Group1Data(
+    val compressorFrequency: Int?,
+    val targetCompressorFrequency: Int?,
+    val compressorCurrent: Int?,
+    val compressorVoltage: Int?,
+    val tempIndoorCoil: Double?,     // EN: T1 / DE: T1
+    val tempEvaporator: Double?,     // EN: T2 / DE: T2
+    val tempCondenser: Double?,      // EN: T3 / DE: T3
+    val tempOutdoor: Double?,        // EN: T4 / DE: T4
+    val tempDischargePipe: Int?,     // EN: TP / DE: TP
+)
+
+/**
+ * EN: Group 2 diagnostics — indoor-unit fan speed (RPM-equivalent) + condensate water-pump state. Beta.
+ * DE: Gruppe-2-Diagnose — Innenlüfterdrehzahl (RPM-äquivalent) + Kondensat-Pumpen-Zustand. Beta.
+ */
+data class Group2Data(
+    val targetIndoorFanSpeed: Int?,
+    val indoorFanSpeed: Int?,
+    val waterPumpRunning: Boolean?,
+)
+
+/**
+ * EN: Group 7 diagnostics — outdoor-unit real-time power draw in Watts. Beta.
+ * DE: Gruppe-7-Diagnose — Echtzeit-Leistungsaufnahme des Außengeräts in Watt. Beta.
+ */
+data class Group7Data(val compressorPower: Double?)
 
 /**
  * EN: Live device state read back from the AC (the snapshot driving the UI readouts).
@@ -518,11 +694,26 @@ class MideaAcSession(
     /**
      * EN: Outdoor-unit silent mode on/off. The device expects value 3 for "on" and 0 for "off" (like
      *     msmart-ng); value 1 is silently discarded by the unit.
+     *
+     *     IMPORTANT (verified on a PortaSplit with the Group-1 compressor-frequency readout, 2026-07-20):
+     *     turning silent mode ON caps the compressor target frequency (e.g. 78 → 29 Hz), but sending the
+     *     OFF property (value 0) does NOT release that cap — the compressor stays throttled until the unit
+     *     re-evaluates on a SetState frame. So on OFF we additionally re-assert the full state (apply),
+     *     which lets the compressor ramp back to normal immediately. On ON we do NOT send SetState, or it
+     *     would re-evaluate and undo the cap we just requested.
      * DE: Leise-Modus des Außengeräts ein/aus. Das Gerät erwartet Wert 3 für „an" und 0 für „aus" (wie
      *     msmart-ng); Wert 1 wird vom Gerät stumm verworfen.
+     *
+     *     WICHTIG (an einer PortaSplit mit der Group-1-Kompressorfrequenz verifiziert, 2026-07-20):
+     *     Leise-Modus AN begrenzt die Soll-Kompressorfrequenz (z. B. 78 → 29 Hz), aber das OFF-Property
+     *     (Wert 0) hebt die Begrenzung NICHT auf — der Kompressor bleibt gedrosselt, bis das Gerät bei
+     *     einem SetState-Frame neu bewertet. Deshalb senden wir bei OFF zusätzlich den vollen Zustand
+     *     (apply), damit der Kompressor sofort wieder normal hochfahren kann. Bei ON senden wir KEIN
+     *     SetState, sonst würde die gerade gesetzte Begrenzung wieder aufgehoben.
      */
     suspend fun setOutdoorSilent(on: Boolean) {
         send(MideaAc.buildSetProperties(listOf(MideaAc.PROP_OUT_SILENT to if (on) 3 else 0, MideaAc.PROP_BUZZER to 0)))
+        if (!on) apply()   // EN: re-assert state so the compressor cap is released / DE: Zustand neu setzen, damit die Kompressor-Begrenzung fällt
     }
 
     /** EN: Flip the indoor unit's LED display panel on/off (toggle-only; no readable state). DE: Die LED-Anzeige des Innengeräts ein-/ausschalten (nur Umschalten; kein auslesbarer Zustand). */
@@ -541,6 +732,24 @@ class MideaAcSession(
     }
 
     /**
+     * EN: Read the current outdoor-silent state from the device (issue #6). Returns true/false, or null
+     *     if the query failed or the device didn't report it. Unlike swing/eco/etc, out_silent is a
+     *     capability-gated property that is NOT in the basic StateResponse, so we read it via GetProperties.
+     * DE: Den aktuellen Außengerät-Leise-Zustand vom Gerät lesen (Issue #6). true/false, oder null, wenn
+     *     die Abfrage fehlschlug oder das Gerät ihn nicht meldet. Anders als Swing/Eco/… ist out_silent
+     *     eine kapazitätsabhängige Eigenschaft, die NICHT im Basis-StateResponse steht — daher GetProperties.
+     */
+    suspend fun queryOutdoorSilent(): Boolean? {
+        val props = try {
+            MideaAc.parseProperties(lan.sendCommand(MideaAc.buildGetProperties(listOf(MideaAc.PROP_OUT_SILENT))))
+        } catch (e: Exception) {
+            runCatching { reauth(); MideaAc.parseProperties(lan.sendCommand(MideaAc.buildGetProperties(listOf(MideaAc.PROP_OUT_SILENT)))) }.getOrNull()
+        }
+        // EN: msmart decodes out_silent as value == 3 (on). / DE: msmart dekodiert out_silent als Wert == 3 (an).
+        return props?.get(MideaAc.PROP_OUT_SILENT)?.let { it == 3 }
+    }
+
+    /**
      * EN: Read energy usage (power W + kWh). Best indicator whether the compressor runs.
      * DE: Energieverbrauch lesen (Leistung W + kWh). Bester Indikator, ob der Kompressor läuft.
      */
@@ -548,6 +757,36 @@ class MideaAcSession(
         MideaAc.parseEnergyUsage(lan.sendCommand(MideaAc.buildGetEnergyUsage()))
     } catch (e: Exception) {
         runCatching { reauth(); MideaAc.parseEnergyUsage(lan.sendCommand(MideaAc.buildGetEnergyUsage())) }.getOrNull()
+    }
+
+    /**
+     * EN: Read Group 1 diagnostics (compressor + refrigerant temps). Beta — not all units answer. Null on failure.
+     * DE: Gruppe-1-Diagnose lesen (Kompressor + Kältekreis-Temperaturen). Beta — nicht jedes Gerät antwortet. Null bei Fehler.
+     */
+    suspend fun queryGroup1(): Group1Data? = try {
+        MideaAc.parseGroup1(lan.sendCommand(MideaAc.buildGetGroup(1)))
+    } catch (e: Exception) {
+        runCatching { reauth(); MideaAc.parseGroup1(lan.sendCommand(MideaAc.buildGetGroup(1))) }.getOrNull()
+    }
+
+    /**
+     * EN: Read Group 2 diagnostics (indoor fan speed + water pump). Beta. Null on failure.
+     * DE: Gruppe-2-Diagnose lesen (Innenlüfterdrehzahl + Wasserpumpe). Beta. Null bei Fehler.
+     */
+    suspend fun queryGroup2(): Group2Data? = try {
+        MideaAc.parseGroup2(lan.sendCommand(MideaAc.buildGetGroup(2)))
+    } catch (e: Exception) {
+        runCatching { reauth(); MideaAc.parseGroup2(lan.sendCommand(MideaAc.buildGetGroup(2))) }.getOrNull()
+    }
+
+    /**
+     * EN: Read Group 7 diagnostics (outdoor-unit power in W). Beta. Null on failure.
+     * DE: Gruppe-7-Diagnose lesen (Außengerät-Leistung in W). Beta. Null bei Fehler.
+     */
+    suspend fun queryGroup7(): Group7Data? = try {
+        MideaAc.parseGroup7(lan.sendCommand(MideaAc.buildGetGroup(7)))
+    } catch (e: Exception) {
+        runCatching { reauth(); MideaAc.parseGroup7(lan.sendCommand(MideaAc.buildGetGroup(7))) }.getOrNull()
     }
 
     /**

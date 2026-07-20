@@ -34,11 +34,23 @@ object TokenRepo {
     )
 
     /**
-     * EN: Load the cached (token, key) for a device id, or null if we've never connected online yet.
-     * DE: Das gecachte (Token, Key) für eine Geräte-ID laden, oder null, wenn noch nie online verbunden wurde.
+     * EN: Load the cached (token, key) for a device, or null if we've never connected online yet.
+     *     Matches by id first, then falls back to [ip] when given. The ip fallback fixes offline reuse of
+     *     an IMPORTED token (issue #8): an msmart-ng export can carry the device id in a different byte
+     *     encoding than the one we derive at connect time, so an id-only lookup misses and we'd needlessly
+     *     re-fetch from the cloud. Since a unit has exactly one ip, matching on ip recovers the creds.
+     * DE: Das gecachte (Token, Key) für ein Gerät laden, oder null, wenn noch nie online verbunden wurde.
+     *     Zuerst per ID, dann – falls [ip] angegeben – per IP. Der IP-Fallback repariert die Offline-
+     *     Wiederverwendung eines IMPORTIERTEN Tokens (Issue #8): ein msmart-ng-Export kann die Geräte-ID in
+     *     einer anderen Byte-Kodierung tragen als die, die wir beim Verbinden ableiten, sodass eine reine
+     *     ID-Suche fehlschlägt und wir unnötig aus der Cloud nachladen würden. Da ein Gerät genau eine IP
+     *     hat, findet der IP-Abgleich die Zugangsdaten.
      */
-    fun load(ctx: Context, deviceId: Long): Pair<String, String>? {
-        val e = list(ctx).firstOrNull { it.id == deviceId } ?: return null
+    fun load(ctx: Context, deviceId: Long, ip: String? = null): Pair<String, String>? {
+        val entries = list(ctx)
+        val e = entries.firstOrNull { it.id == deviceId }
+            ?: ip?.let { p -> entries.firstOrNull { it.ip == p } }
+            ?: return null
         return e.token to e.key
     }
 

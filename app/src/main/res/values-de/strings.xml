@@ -91,11 +91,43 @@
     <string name="status_error_code">#%1$d</string>
     <string name="status_cost">Kosten gesamt</string>
 
+    <!-- Beta-Diagnose (midea-msmart PR #278 Gruppendaten) -->
+    <string name="section_diagnostics">Diagnose (Beta)</string>
+    <string name="diag_beta_hint">Experimentelle Telemetrie. Nicht jedes Gerät liefert diese Werte — Felder können leer bleiben.</string>
+    <string name="diag_group1_title">Kompressor &amp; Kältekreis</string>
+    <string name="diag_compressor_freq">Kompressor-Frequenz</string>
+    <string name="diag_compressor_freq_target">Soll-Frequenz</string>
+    <string name="diag_compressor_current">Stromaufnahme</string>
+    <string name="diag_compressor_voltage">Versorgungsspannung</string>
+    <string name="diag_temp_t1">Innen-Wärmetauscher (T1)</string>
+    <string name="diag_temp_t2">Verdampfer (T2)</string>
+    <string name="diag_temp_t3">Verflüssiger (T3)</string>
+    <string name="diag_temp_t4">Außen (T4)</string>
+    <string name="diag_temp_tp">Druckrohr (TP)</string>
+    <string name="diag_group2_title">Innenlüfter &amp; Pumpe</string>
+    <string name="diag_fan_speed">Lüfterdrehzahl</string>
+    <string name="diag_fan_speed_target">Soll-Drehzahl</string>
+    <string name="diag_water_pump">Kondensatpumpe</string>
+    <string name="diag_pump_on">läuft</string>
+    <string name="diag_pump_off">aus</string>
+    <string name="diag_group7_title">Leistung Außengerät</string>
+    <string name="diag_compressor_power">Leistungsaufnahme</string>
+
     <!-- Einstellungen: Anzeige &amp; Preis -->
     <string name="settings_display">Anzeige &amp; Preis</string>
     <string name="unit_fahrenheit">°F (Fahrenheit) anzeigen</string>
     <string name="price_per_kwh">Preis pro kWh</string>
     <string name="price_hint">Für die Schätzung der Gesamtkosten aus dem Verbrauch.</string>
+
+    <!-- Einstellungen: Beta / experimentelle Diagnose -->
+    <string name="settings_beta">Beta-Funktionen</string>
+    <string name="settings_beta_hint">Experimentelle Zusatz-Diagnose. Jede Option fügt eine Abfrage pro Aktualisierung hinzu; nicht alle Geräte unterstützen sie. Werte erscheinen im Status-Reiter.</string>
+    <string name="beta_group1">Kompressor-Diagnose</string>
+    <string name="beta_group1_desc">Frequenz, Strom, Spannung &amp; Kältekreis-Temperaturen (T1–T4, Druckrohr)</string>
+    <string name="beta_group2">Innenlüfter &amp; Pumpe</string>
+    <string name="beta_group2_desc">Tatsächliche Innenlüfterdrehzahl und Zustand der Kondensatpumpe</string>
+    <string name="beta_group7">Leistung Außengerät</string>
+    <string name="beta_group7_desc">Echtzeit-Leistungsaufnahme des Außengeräts in Watt</string>
 
     <string name="section_options">Optionen</string>
     <string name="option_swing">Swing (Lamellen)</string>
@@ -196,6 +228,10 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_6_4_title">Version 0.6.4</string>
+    <string name="changelog_0_6_4_body">•  Neu: Diagnose (Beta) im Status-Reiter — Kompressor-Frequenz/-Strom/-Spannung, Kältekreis-Temperaturen (T1–T4, Druckrohr), Innenlüfterdrehzahl, Kondensatpumpe und Leistung des Außengeräts. Je Gruppe unter Einstellungen → Beta-Funktionen aktivierbar\n•  Behoben: Ausschalten von „Außengerät leise" hebt die Kompressor-Drehzahlbegrenzung sofort wieder auf\n•  Behoben: der „Außengerät leise"-Schalter zeigt nach dem Neuverbinden den echten Gerätezustand\n•  Behoben: Kompressor-Drossel — „50%" und „75%" waren vertauscht; „50%" ist jetzt wirklich die stärkere Begrenzung\n•  Behoben: aus msmart-ng importierte Tokens verbinden offline statt neu aus der Cloud zu laden\n•  Verbessert: die Gerätesuche nutzt zusätzlich Subnetz-Broadcasts für Router, die den globalen blockieren</string>
+    <string name="changelog_0_6_3_title">Version 0.6.3</string>
+    <string name="changelog_0_6_3_body">•  Behoben: „Außengerät leise" wirkt jetzt tatsächlich — die App sendete einen Ein-Wert, den das Gerät stumm verwarf; jetzt wird der erwartete Wert gesendet (wie msmart-ng)</string>
     <string name="changelog_0_6_2_title">Version 0.6.2</string>
     <string name="changelog_0_6_2_body">•  Behoben: Der Signalton ging nach dem Neuverbinden verloren — er wird jetzt gespeichert und wieder angewendet\n•  Hinweis ergänzt, dass viele Geräte nur beim Ein-/Ausschalten piepen, nicht bei anderen Änderungen</string>
     <string name="changelog_0_6_1_title">Version 0.6.1</string>

@@ -94,11 +94,43 @@
     <string name="status_error_code">#%1$d</string>
     <string name="status_cost">Total cost</string>
 
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Diagnostics (beta)</string>
+    <string name="diag_beta_hint">Experimental telemetry. Not every unit reports these — values may stay empty.</string>
+    <string name="diag_group1_title">Compressor &amp; refrigerant</string>
+    <string name="diag_compressor_freq">Compressor frequency</string>
+    <string name="diag_compressor_freq_target">Target frequency</string>
+    <string name="diag_compressor_current">Current draw</string>
+    <string name="diag_compressor_voltage">Supply voltage</string>
+    <string name="diag_temp_t1">Indoor coil (T1)</string>
+    <string name="diag_temp_t2">Evaporator (T2)</string>
+    <string name="diag_temp_t3">Condenser (T3)</string>
+    <string name="diag_temp_t4">Outdoor (T4)</string>
+    <string name="diag_temp_tp">Discharge pipe (TP)</string>
+    <string name="diag_group2_title">Indoor fan &amp; pump</string>
+    <string name="diag_fan_speed">Fan speed</string>
+    <string name="diag_fan_speed_target">Target fan speed</string>
+    <string name="diag_water_pump">Condensate pump</string>
+    <string name="diag_pump_on">running</string>
+    <string name="diag_pump_off">off</string>
+    <string name="diag_group7_title">Outdoor unit power</string>
+    <string name="diag_compressor_power">Power draw</string>
+
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Display &amp; price</string>
     <string name="unit_fahrenheit">Show °F (Fahrenheit)</string>
     <string name="price_per_kwh">Price per kWh</string>
     <string name="price_hint">Used to estimate the total cost from consumption.</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Beta features</string>
+    <string name="settings_beta_hint">Experimental extra diagnostics. Each option adds a query per refresh; not all units support them. Values show on the Status tab.</string>
+    <string name="beta_group1">Compressor diagnostics</string>
+    <string name="beta_group1_desc">Frequency, current, voltage &amp; refrigerant temperatures (T1–T4, discharge pipe)</string>
+    <string name="beta_group2">Indoor fan &amp; pump</string>
+    <string name="beta_group2_desc">Actual indoor fan speed and condensate pump state</string>
+    <string name="beta_group7">Outdoor unit power</string>
+    <string name="beta_group7_desc">Real-time power draw of the outdoor unit in watts</string>
 
     <string name="section_options">Options</string>
     <string name="option_swing">Swing (louvers)</string>
@@ -199,6 +231,10 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_6_4_title">Version 0.6.4</string>
+    <string name="changelog_0_6_4_body">•  New: Diagnostics (beta) on the Status tab — compressor frequency/current/voltage, refrigerant temperatures (T1–T4, discharge pipe), indoor fan speed, condensate pump and outdoor-unit power. Enable per group under Settings → Beta features\n•  Fixed: turning Outdoor Silent off releases the compressor speed limit again immediately\n•  Fixed: the Outdoor Silent toggle shows the unit\'s real state after reconnecting\n•  Fixed: compressor throttle — \"50%\" and \"75%\" were swapped; \"50%\" is now really the stronger limit\n•  Fixed: tokens imported from msmart-ng now connect offline instead of re-fetching from the cloud\n•  Improved: device search also uses subnet broadcasts for routers that block the global one</string>
+    <string name="changelog_0_6_3_title">Version 0.6.3</string>
+    <string name="changelog_0_6_3_body">•  Fixed: Outdoor Silent now actually takes effect — the app sent an on-value the unit silently rejected; it now sends the value the device expects (like msmart-ng)</string>
     <string name="changelog_0_6_2_title">Version 0.6.2</string>
     <string name="changelog_0_6_2_body">•  Fixed: the beep / prompt tone was lost after reconnecting — it is now saved and reapplied\n•  Added a note that many units only beep when turning on/off, not on other changes</string>
     <string name="changelog_0_6_1_title">Version 0.6.1</string>

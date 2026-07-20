@@ -91,6 +91,131 @@ class MideaProtocolTest {
     }
 
     @Test
+    fun buildGetGroup_encodesGroupInByte3() {
+        // payload byte[3] (frame byte 13) should be 0x40 | group
+        for (group in intArrayOf(1, 2, 4, 5, 7)) {
+            val f = MideaAc.buildGetGroup(group)
+            assertEquals("frame type query", 0x03, u(f[9]))
+            assertEquals("group $group byte", 0x40 or group, u(f[13]))
+        }
+    }
+
+    @Test
+    fun parseGroup1_decodesCompressorAndTemps() {
+        val p = ByteArray(20)
+        p[0] = 0xC1.toByte()          // group-data response
+        p[3] = 0x41                   // group byte -> 0x41 & 0xF = 1
+        p[4] = 28                     // compressor_frequency = 28 Hz
+        p[5] = 25                     // target_compressor_frequency = 25 Hz
+        p[7] = 1                      // compressor_current = 1 A
+        p[8] = 232.toByte()           // compressor_voltage = 232 V
+        p[10] = 71                    // T1 = (71-30)/2 = 20.5
+        p[11] = 38                    // T2 = (38-30)/2 = 4.0
+        p[12] = 102                   // T3 = (102-50)/2 = 26.0
+        p[13] = 88                    // T4 = (88-50)/2 = 19.0
+        p[14] = 36                    // TP = 36 °C
+        val frame = ByteArray(10) + p + ByteArray(2)
+
+        val g = MideaAc.parseGroup1(frame)
+        assertNotNull(g)
+        g!!
+        assertEquals(28, g.compressorFrequency)
+        assertEquals(25, g.targetCompressorFrequency)
+        assertEquals(1, g.compressorCurrent)
+        assertEquals(232, g.compressorVoltage)
+        assertEquals(20.5, g.tempIndoorCoil!!, 0.001)
+        assertEquals(4.0, g.tempEvaporator!!, 0.001)
+        assertEquals(26.0, g.tempCondenser!!, 0.001)
+        assertEquals(19.0, g.tempOutdoor!!, 0.001)
+        assertEquals(36, g.tempDischargePipe)
+    }
+
+    @Test
+    fun parseGroup2_decodesFanAndPump() {
+        val p = ByteArray(20)
+        p[0] = 0xC1.toByte()
+        p[3] = 0x42                   // group 2
+        p[4] = 52                     // target fan = 52 * 8 = 416
+        p[5] = 53                     // actual fan = 53 * 8 = 424
+        p[8] = 0x10                   // bit 4 set -> pump running
+        val frame = ByteArray(10) + p + ByteArray(2)
+
+        val g = MideaAc.parseGroup2(frame)
+        assertNotNull(g)
+        g!!
+        assertEquals(416, g.targetIndoorFanSpeed)
+        assertEquals(424, g.indoorFanSpeed)
+        assertTrue(g.waterPumpRunning!!)
+    }
+
+    @Test
+    fun parseGroup7_decodesPowerLittleEndian() {
+        val p = ByteArray(20)
+        p[0] = 0xC1.toByte()
+        p[3] = 0x47                   // group 7
+        p[10] = 13; p[11] = 1         // power = 13 + 256*1 = 269 W
+        val frame = ByteArray(10) + p + ByteArray(2)
+
+        val g = MideaAc.parseGroup7(frame)
+        assertNotNull(g)
+        assertEquals(269.0, g!!.compressorPower!!, 0.001)
+    }
+
+    @Test
+    fun parseGroup_rejectsWrongGroup() {
+        // A group-7 frame must not parse as group 1.
+        val p = ByteArray(20).also { it[0] = 0xC1.toByte(); it[3] = 0x47 }
+        val frame = ByteArray(10) + p + ByteArray(2)
+        assertEquals(null, MideaAc.parseGroup1(frame))
+        assertEquals(null, MideaAc.parseGroup2(frame))
+        assertNotNull(MideaAc.parseGroup7(frame))
+    }
+
+    @Test
+    fun buildGetProperties_encodesHeaderAndIds() {
+        val f = MideaAc.buildGetProperties(listOf(MideaAc.PROP_OUT_SILENT))
+        assertEquals("frame type query", 0x03, u(f[9]))
+        assertEquals("0xB1 opcode", 0xB1, u(f[10]))
+        assertEquals("count 1", 1, u(f[11]))
+        assertEquals("prop id lo", 0xCD, u(f[12]))
+        assertEquals("prop id hi", 0x00, u(f[13]))
+    }
+
+    @Test
+    fun parseProperties_decodesOutSilentValue() {
+        // 0xB1 response: header, count=1, then [id LE16][result][size][value]
+        val p = ByteArray(10)
+        p[0] = 0xB1.toByte()
+        p[1] = 1                       // one property
+        p[2] = 0xCD.toByte(); p[3] = 0x00   // PROP_OUT_SILENT (0x00CD)
+        p[4] = 0x00                    // result ok
+        p[5] = 1                       // size
+        p[6] = 3                       // value 3 = on
+        val frame = ByteArray(10) + p + ByteArray(2)
+
+        val props = MideaAc.parseProperties(frame)
+        assertNotNull(props)
+        assertEquals(3, props!![MideaAc.PROP_OUT_SILENT])
+    }
+
+    @Test
+    fun parseProperties_skipsErrorResult() {
+        // result bit 0x10 marks a failed property — value must not be reported
+        val p = ByteArray(10)
+        p[0] = 0xB1.toByte()
+        p[1] = 1
+        p[2] = 0xCD.toByte(); p[3] = 0x00
+        p[4] = 0x11                    // error result
+        p[5] = 1
+        p[6] = 3
+        val frame = ByteArray(10) + p + ByteArray(2)
+
+        val props = MideaAc.parseProperties(frame)
+        assertNotNull(props)
+        assertEquals(null, props!![MideaAc.PROP_OUT_SILENT])
+    }
+
+    @Test
     fun parseState_rejectsNonStateFrame() {
         val p = ByteArray(20).also { it[0] = 0x00 }
         assertEquals(null, MideaAc.parseState(ByteArray(10) + p + ByteArray(2)))

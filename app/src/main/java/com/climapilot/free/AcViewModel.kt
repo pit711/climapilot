@@ -9,6 +9,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.climapilot.free.midea.AcState
 import com.climapilot.free.midea.EnergyUsage
+import com.climapilot.free.midea.Group1Data
+import com.climapilot.free.midea.Group2Data
+import com.climapilot.free.midea.Group7Data
 import com.climapilot.free.midea.MideaAc
 import com.climapilot.free.midea.MideaAcSession
 import com.climapilot.free.midea.MideaDevice
@@ -96,6 +99,18 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     var energy by mutableStateOf<EnergyUsage?>(null); private set
     var rateLevels by mutableStateOf(0); private set     // EN: 0 = no gear support, 2, or 5 / DE: 0 = keine Gang-Unterstützung, 2 oder 5
 
+    // EN: ---- Beta diagnostics (midea-msmart PR #278 group data) ---- opt-in extra telemetry, each
+    //     gated by its own setting; null until first successfully read. DE: ---- Beta-Diagnose
+    //     (midea-msmart PR #278 Gruppendaten) ---- freiwillige Zusatz-Telemetrie, je durch eine eigene
+    //     Einstellung gesteuert; null, bis zum ersten erfolgreichen Lesen.
+    var group1 by mutableStateOf<Group1Data?>(null); private set
+    var group2 by mutableStateOf<Group2Data?>(null); private set
+    var group7 by mutableStateOf<Group7Data?>(null); private set
+    // EN: Enable flags mirrored from SettingsRepo so the refresh loop + UI react immediately. DE: Aus SettingsRepo gespiegelte Schalter, damit Refresh-Schleife + UI sofort reagieren.
+    var diagGroup1 by mutableStateOf(false); private set
+    var diagGroup2 by mutableStateOf(false); private set
+    var diagGroup7 by mutableStateOf(false); private set
+
     // EN: Device-specific capabilities (whether to show the toggle) + their current desired state.
     // DE: Gerätespezifische Fähigkeiten (ob der Schalter gezeigt wird) + ihr aktueller Soll-Zustand.
     var capAnion by mutableStateOf(false); private set
@@ -180,6 +195,9 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         maxRuntimeHours = SettingsRepo.maxRuntimeHours(ctx)
         historyEnabled = SettingsRepo.historyEnabled(ctx)
         beep = SettingsRepo.beep(ctx)
+        diagGroup1 = SettingsRepo.diagGroup1(ctx)
+        diagGroup2 = SettingsRepo.diagGroup2(ctx)
+        diagGroup7 = SettingsRepo.diagGroup7(ctx)
         // EN: If a sleep-timer alarm is still pending, resume its on-screen countdown. DE: Falls ein Sleep-Timer-Alarm noch aussteht, dessen Countdown-Anzeige fortsetzen.
         restoreSleepTimer()
     }
@@ -213,6 +231,27 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         historyEnabled = value
         SettingsRepo.setHistoryEnabled(getApplication(), value)
         HistoryPollWorker.setEnabled(getApplication(), value)
+    }
+
+    /** EN: Toggle Group 1 beta diagnostics (compressor + refrigerant temps) and persist; clears stale data when off. DE: Gruppe-1-Beta-Diagnose (Kompressor + Kältekreis-Temp.) umschalten und speichern; löscht alte Daten beim Ausschalten. */
+    fun updateDiagGroup1(value: Boolean) {
+        diagGroup1 = value
+        SettingsRepo.setDiagGroup1(getApplication(), value)
+        if (!value) group1 = null
+    }
+
+    /** EN: Toggle Group 2 beta diagnostics (indoor fan + water pump) and persist. DE: Gruppe-2-Beta-Diagnose (Innenlüfter + Wasserpumpe) umschalten und speichern. */
+    fun updateDiagGroup2(value: Boolean) {
+        diagGroup2 = value
+        SettingsRepo.setDiagGroup2(getApplication(), value)
+        if (!value) group2 = null
+    }
+
+    /** EN: Toggle Group 7 beta diagnostics (outdoor-unit power) and persist. DE: Gruppe-7-Beta-Diagnose (Außengerät-Leistung) umschalten und speichern. */
+    fun updateDiagGroup7(value: Boolean) {
+        diagGroup7 = value
+        SettingsRepo.setDiagGroup7(getApplication(), value)
+        if (!value) group7 = null
     }
 
     /** EN: Toggle the automatic update check on launch and persist (named update* to avoid the JVM setter clash). DE: Den automatischen Update-Check beim Start umschalten und speichern (update*-Name wegen JVM-Setter-Kollision). */
@@ -426,7 +465,8 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
                 val ctx = getApplication<Application>()
                 val s = MideaAcSession(
                     device,
-                    cachedCreds = TokenRepo.load(ctx, device.id),
+                    // EN: Match cached creds by id OR ip (issue #8: imported tokens may use a different id encoding). DE: Gecachte Zugangsdaten per ID ODER IP finden (Issue #8: importierte Tokens nutzen evtl. eine andere ID-Kodierung).
+                    cachedCreds = TokenRepo.load(ctx, device.id, device.ip),
                     onCredsFetched = { t, k -> TokenRepo.save(ctx, device.id, device.name, device.ip, device.port, t, k) },
                 )
                 s.connect()
@@ -444,6 +484,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
                 capAnion = caps?.anion == true
                 capSelfClean = caps?.selfClean == true
                 capOutSilent = caps?.outSilent == true
+                // EN: Read back the ACTUAL outdoor-silent state so the toggle matches the device after a
+                //     (re)connect (issue #6). It's a capability-gated property, not part of the basic state.
+                // DE: Den ECHTEN Außengerät-Leise-Zustand zurücklesen, damit der Schalter nach einem
+                //     (Neu-)Connect zum Gerät passt (Issue #6). Kapazitätsabhängige Eigenschaft, nicht im Basiszustand.
+                if (capOutSilent) s.queryOutdoorSilent()?.let { outSilent = it }
                 refreshOnce()
                 live?.let { syncFromState(it) }
                 startRefresh()
@@ -480,6 +525,16 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
             indoorTemp = 23.5, outdoorTemp = 29.0, errorCode = 0,
         )
         energy = EnergyUsage(powerW = 420.0, totalKwh = 137.4, currentKwh = 1.2)
+        // EN: Plausible beta-diagnostics sample so the Status card can be explored once a group is enabled.
+        // DE: Plausible Beta-Diagnose-Beispielwerte, damit die Status-Karte bei aktivierter Gruppe erkundbar ist.
+        group1 = Group1Data(
+            compressorFrequency = 28, targetCompressorFrequency = 25,
+            compressorCurrent = 1, compressorVoltage = 232,
+            tempIndoorCoil = 20.5, tempEvaporator = 4.0,
+            tempCondenser = 26.0, tempOutdoor = 19.0, tempDischargePipe = 36,
+        )
+        group2 = Group2Data(targetIndoorFanSpeed = 416, indoorFanSpeed = 424, waterPumpRunning = false)
+        group7 = Group7Data(compressorPower = 268.0)
         powerOn = true; mode = MideaAc.MODE_COOL; tempC = 24.0; fan = 60
         publishWidget()
     }
@@ -492,6 +547,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         irMode = false
         connectedDevice = null
         live = null; energy = null
+        group1 = null; group2 = null; group7 = null
         status = Status.Idle
         publishWidget()
     }
@@ -711,6 +767,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
             // EN: Reflect device-reported option states too (also catches physical-remote changes). DE: Auch die vom Gerät gemeldeten Optionszustände spiegeln (erfasst auch Fernbedienungs-Änderungen).
             s.queryState()?.let { live = it; syncOptionsFromState(it) }
             s.queryEnergy()?.let { energy = it }
+            // EN: Beta diagnostics (PR #278) — only poll a group when the user enabled it (extra round-trips).
+            // DE: Beta-Diagnose (PR #278) — eine Gruppe nur abfragen, wenn der Nutzer sie aktiviert hat (Extra-Round-Trips).
+            if (diagGroup1) s.queryGroup1()?.let { group1 = it }
+            if (diagGroup2) s.queryGroup2()?.let { group2 = it }
+            if (diagGroup7) s.queryGroup7()?.let { group7 = it }
         }
         publishWidget()
     }

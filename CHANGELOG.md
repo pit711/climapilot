@@ -2,6 +2,34 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.4] — 2026-07-20
+
+### 🇬🇧 English
+**New**
+- **Diagnostics (beta)** — opt-in extra telemetry on the Status tab, enabled per group under Settings → Beta features: compressor frequency/current/voltage + refrigerant-circuit temperatures (T1–T4, discharge pipe), actual indoor fan speed + condensate-pump state, and real-time outdoor-unit power in watts. Ported from [midea-msmart PR #278](https://github.com/mill1000/midea-msmart/pull/278); verified on a PortaSplit. Not every unit reports these values.
+
+**Fixed**
+- **Outdoor Silent releases the compressor again** — turning silent mode off left the compressor capped at its low silent frequency until some other command was sent; the unit only re-evaluates the cap on a full state command, so the app now re-asserts the state when disabling silent mode ([#6](https://github.com/pit711/climapilot/issues/6)).
+- **Outdoor Silent state is read back on connect** ([#6](https://github.com/pit711/climapilot/issues/6)) — the toggle now shows the unit's real silent-mode state after (re)connecting, instead of always starting at "off".
+- **Compressor throttle 50 % / 75 % were swapped** ([#9](https://github.com/pit711/climapilot/issues/9)) — "50 %" sent the mild throttle and "75 %" the strong one. Re-measured against the compressor frequency and a power meter; the buttons now match msmart-ng's mapping, so "50 %" really is the stronger limit.
+- **Imported tokens connect offline** ([#8](https://github.com/pit711/climapilot/issues/8)) — credentials imported from an msmart-ng export could be missed at connect time (different device-id encoding), causing a needless cloud fetch. Cached credentials are now also matched by IP.
+
+**Changed**
+- **Device search reaches more networks** ([#8](https://github.com/pit711/climapilot/issues/8)) — discovery now also sends subnet-directed broadcasts (e.g. 192.168.1.255) for routers that drop the global broadcast.
+
+### 🇩🇪 Deutsch
+**Neu**
+- **Diagnose (Beta)** — freiwillige Zusatz-Telemetrie im Status-Reiter, je Gruppe unter Einstellungen → Beta-Funktionen aktivierbar: Kompressor-Frequenz/-Strom/-Spannung + Kältekreis-Temperaturen (T1–T4, Druckrohr), tatsächliche Innenlüfterdrehzahl + Kondensatpumpen-Status und Echtzeit-Leistung des Außengeräts in Watt. Portiert aus [midea-msmart PR #278](https://github.com/mill1000/midea-msmart/pull/278); an einer PortaSplit verifiziert. Nicht jedes Gerät liefert diese Werte.
+
+**Behoben**
+- **Außengerät leise gibt den Kompressor wieder frei** — nach dem Ausschalten des Leise-Modus blieb der Kompressor auf der niedrigen Leise-Frequenz begrenzt, bis irgendein anderer Befehl gesendet wurde; das Gerät bewertet die Begrenzung erst bei einem vollständigen Zustandsbefehl neu, daher sendet die App diesen beim Deaktivieren jetzt mit ([#6](https://github.com/pit711/climapilot/issues/6)).
+- **Außengerät-leise-Zustand wird beim Verbinden zurückgelesen** ([#6](https://github.com/pit711/climapilot/issues/6)) — der Schalter zeigt nach dem (Neu-)Verbinden den echten Zustand des Geräts statt immer „aus".
+- **Kompressor-Drossel 50 % / 75 % waren vertauscht** ([#9](https://github.com/pit711/climapilot/issues/9)) — „50 %" sendete die milde Drossel und „75 %" die starke. Gegen die Kompressorfrequenz und ein Leistungsmessgerät nachgemessen; die Knöpfe folgen jetzt msmart-ngs Zuordnung, „50 %" ist also wirklich die stärkere Begrenzung.
+- **Importierte Tokens verbinden offline** ([#8](https://github.com/pit711/climapilot/issues/8)) — aus einem msmart-ng-Export importierte Zugangsdaten wurden beim Verbinden teils nicht gefunden (andere Geräte-ID-Kodierung) und unnötig aus der Cloud nachgeladen. Gecachte Zugangsdaten werden jetzt auch per IP zugeordnet.
+
+**Geändert**
+- **Gerätesuche erreicht mehr Netzwerke** ([#8](https://github.com/pit711/climapilot/issues/8)) — die Suche sendet zusätzlich subnetz-gerichtete Broadcasts (z. B. 192.168.1.255) für Router, die den globalen Broadcast verwerfen.
+
 ## [0.6.3] — 2026-07-01
 
 ### 🇬🇧 English
