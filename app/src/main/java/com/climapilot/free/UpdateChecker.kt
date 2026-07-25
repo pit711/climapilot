@@ -49,6 +49,29 @@ object UpdateChecker {
     private const val EXPECTED_CERT_SHA256 =
         "6ca6ec754a57b41e4186f358315766ea85802827c055aa6a1e9639910bba2f09"
 
+    /**
+     * EN: Turn a GitHub release body (Markdown) into readable plain text for the update dialog: drop
+     *     heading hashes and horizontal rules, keep only the label of a link, unwrap bold/italic/code
+     *     and turn list dashes into the bullet the in-app changelog already uses. Deliberately a
+     *     stripper rather than a renderer — the dialog is a few lines of preview, not a document view.
+     * DE: Einen GitHub-Release-Text (Markdown) in lesbaren Klartext für den Update-Dialog verwandeln:
+     *     Überschriften-Rauten und Trennlinien entfernen, von einem Link nur die Beschriftung behalten,
+     *     Fett/Kursiv/Code auspacken und Listenstriche in denselben Aufzählungspunkt überführen, den der
+     *     In-App-Changelog schon nutzt. Bewusst nur Entfernen statt Rendern — der Dialog ist eine kurze
+     *     Vorschau, keine Dokumentansicht.
+     */
+    internal fun plainText(markdown: String): String = markdown
+        .replace(Regex("""(?m)^[ \t]*(?:-{3,}|\*{3,}|_{3,})[ \t]*$"""), "")
+        .replace(Regex("""(?m)^[ \t]{0,3}#{1,6}[ \t]*"""), "")
+        .replace(Regex("""\[([^\]\n]+)]\([^)\n]*\)"""), "$1")
+        .replace("**", "")
+        .replace("__", "")
+        .replace(Regex("""(?m)^[ \t]{0,3}[-+][ \t]+"""), "•  ")
+        .replace(Regex("""(?<![\w*])\*([^*\n]+)\*(?![\w*])"""), "$1")
+        .replace("`", "")
+        .replace(Regex("\n{3,}"), "\n\n")
+        .trim()
+
     /** EN: A newer release found on GitHub. DE: Ein neueres auf GitHub gefundenes Release. */
     data class Release(
         val versionName: String,
@@ -96,7 +119,11 @@ object UpdateChecker {
             if (conn.responseCode != 200) throw IllegalStateException("HTTP ${conn.responseCode}")
             val o = JSONObject(conn.inputStream.bufferedReader().use { it.readText() })
             val tag = o.optString("tag_name").ifBlank { return null }
-            val notes = o.optString("body", "")
+            // EN: GitHub hands us the release body as Markdown; the dialog renders plain text, so strip
+            //     the markup instead of showing "### New" and "**bold**" to the user.
+            // DE: GitHub liefert den Release-Text als Markdown; der Dialog zeigt reinen Text, daher die
+            //     Auszeichnung entfernen, statt dem Nutzer „### New" und „**fett**" vorzusetzen.
+            val notes = plainText(o.optString("body", ""))
             val assets = o.optJSONArray("assets") ?: return null
             for (i in 0 until assets.length()) {
                 val a = assets.getJSONObject(i)

@@ -64,6 +64,9 @@ class AcWidgetProvider : AppWidgetProvider() {
             try {
                 val session = MideaAcSession(device, cachedCreds = TokenRepo.load(ctx, device.id))
                 session.connect()
+                // EN: Keep temperature, fan and the option toggles as they are — only power + mode change.
+                // DE: Temperatur, Lüfter und die Options-Schalter unverändert lassen — nur Ein/Aus + Modus ändern.
+                session.adoptCurrentState()
                 session.powerOn = true
                 session.mode = mode
                 session.apply()
@@ -76,6 +79,27 @@ class AcWidgetProvider : AppWidgetProvider() {
     }
 
     private enum class Action { POWER, UP, DOWN, MODE }
+
+    /**
+     * EN: Pull the unit's current state into the session before changing a single field. [MideaAcSession.connect]
+     *     does not read state, and every command sends the *whole* state frame — so any field we don't set
+     *     goes out as a session default. Without this, a widget tap that only meant to change the mode also
+     *     forced 24 °C, fan 60, swing off, eco off and the ionizer off.
+     * DE: Den aktuellen Gerätezustand in die Sitzung übernehmen, bevor ein einzelnes Feld geändert wird.
+     *     [MideaAcSession.connect] liest keinen Zustand, und jeder Befehl sendet den *gesamten* State-Frame —
+     *     jedes nicht gesetzte Feld geht also als Sitzungs-Vorgabe hinaus. Ohne das erzwang ein Widget-Tipp,
+     *     der nur den Modus ändern sollte, zusätzlich 24 °C, Lüfter 60, Swing aus, Eco aus und Ionisierer aus.
+     */
+    private suspend fun MideaAcSession.adoptCurrentState() {
+        val s = queryState() ?: return
+        powerOn = s.powerOn
+        s.mode.takeIf { it in 1..5 }?.let { mode = it }
+        tempC = s.targetTemp
+        s.fanSpeed.takeIf { it in 1..102 }?.let { fan = it }
+        swing = if (s.swingOn) 0x3F else 0
+        eco = s.eco
+        anion = s.anion
+    }
 
     private fun control(ctx: Context, action: Action) {
         val snap = WidgetRepo.load(ctx)
@@ -112,6 +136,7 @@ class AcWidgetProvider : AppWidgetProvider() {
                 // EN: Cached token → connect offline, no cloud. DE: Gecachtes Token → offline verbinden, ohne Cloud.
                 val session = MideaAcSession(device, cachedCreds = TokenRepo.load(ctx, device.id))
                 session.connect()
+                session.adoptCurrentState()
                 when (action) {
                     Action.POWER -> session.setPower(newPower)
                     // EN: The widget shows the room temperature the user wants; the unit gets it shifted by

@@ -2,6 +2,18 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.7] — 2026-07-25
+
+### 🇬🇧 English
+**Fixed**
+- **Widget and watch no longer reset your other settings.** Every LAN command sends the *whole* state frame, and the session never read the unit's current state — so any field a widget tap didn't set went out as a default. Changing the mode from the home screen also forced 24 °C, fan 60 and switched swing, eco and the ionizer off. The widget now reads the current state first and changes only what you tapped.
+- **The update prompt showed raw Markdown** from the GitHub release notes (`### New`, `**bold**`, link syntax). Release notes are now converted to plain text before they are displayed.
+
+### 🇩🇪 Deutsch
+**Behoben**
+- **Widget und Uhr setzen die übrigen Einstellungen nicht mehr zurück.** Jeder LAN-Befehl sendet den *gesamten* Zustands-Frame, und die Sitzung las den aktuellen Gerätezustand nie aus — jedes Feld, das ein Widget-Tipp nicht setzte, ging als Vorgabe hinaus. Ein Moduswechsel vom Homescreen erzwang deshalb zusätzlich 24 °C, Lüfter 60 und schaltete Swing, Eco und Ionisierer aus. Das Widget liest jetzt zuerst den aktuellen Zustand und ändert nur das Angetippte.
+- **Der Update-Hinweis zeigte rohes Markdown** aus den GitHub-Release-Notes (`### New`, `**fett**`, Link-Syntax). Die Release-Notes werden vor der Anzeige in Klartext umgewandelt.
+
 ## [0.6.6] — 2026-07-25
 
 ### 🇬🇧 English
