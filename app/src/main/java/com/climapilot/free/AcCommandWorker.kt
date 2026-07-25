@@ -17,6 +17,7 @@ import com.climapilot.free.midea.MideaDevice
 import com.climapilot.free.midea.MideaDiscovery
 import kotlinx.coroutines.delay
 import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
 /**
  * EN: Performs a one-shot AC command (sleep-timer power-off or scheduled scene) in the background,
@@ -142,7 +143,16 @@ class AcCommandWorker(appContext: Context, params: WorkerParameters) :
                     session.anion = session.queryState()?.anion ?: false
                     session.powerOn = scene.powerOn
                     session.mode = scene.mode
-                    session.tempC = scene.tempC
+                    // EN: Whole degrees only — the unit ignores the protocol's half-degree bit, and scenes
+                    //     saved by an older build may still hold a ".5". The scene holds the room
+                    //     temperature the user wants, so it is shifted by the indoor calibration before it
+                    //     goes out, matching what the app does in the foreground.
+                    // DE: Nur ganze Grad — das Gerät ignoriert das Halbgrad-Bit des Protokolls, und von
+                    //     älteren Builds gespeicherte Szenen können noch ein „,5" enthalten. Die Szene hält
+                    //     die vom Nutzer gewünschte Raumtemperatur und wird daher vor dem Senden um die
+                    //     Innenraum-Kalibrierung verschoben — genau wie im Vordergrund.
+                    val shift = SettingsRepo.indoorOffset(applicationContext, device.id).roundToInt()
+                    session.tempC = (scene.tempC.roundToInt() - shift).toDouble().coerceIn(16.0, 30.0)
                     session.fan = scene.fan
                     session.eco = scene.eco
                     session.swing = if (scene.swing) 0x3F else 0

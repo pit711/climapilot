@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Cenários</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Noite eco</string>
+    <string name="scene_comfort">Conforto</string>
+    <string name="scene_save">Guardar</string>
+    <string name="scene_save_title">Guardar cenário</string>
+    <string name="scene_name_label">Nome do cenário</string>
+    <string name="scene_default_name">Cenário</string>
+    <string name="scene_hint">Toque para aplicar · toque longo para editar</string>
+    <string name="scene_edit_title">Editar cenário</string>
+    <string name="scene_schedule">Executar diariamente</string>
+    <string name="scene_schedule_at">Hora: %1$s</string>
+    <string name="scene_schedule_note">Aplica-se automaticamente todos os dias. A aplicação tem de ter permissão para funcionar em segundo plano.</string>
+    <string name="scene_delete">Eliminar</string>
+    <string name="scene_delete_title">Eliminar o cenário?</string>
+    <string name="scene_delete_msg">«%1$s» será removido.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Plano semanal</string>
+    <string name="plan_empty">Ainda não há intervalos. Adicione um para executar um cenário automaticamente — por exemplo, arrefecimento máximo às segundas, das 6 às 18.</string>
+    <string name="plan_need_scene">Crie primeiro um cenário — o plano executa os seus cenários.</string>
+    <string name="plan_add">Adicionar intervalo</string>
+    <string name="plan_hint">Os intervalos são executados em segundo plano, mesmo com o telemóvel inativo na rede Wi-Fi. Para horários fiáveis, permita que o ClimaPilot funcione em segundo plano (Definições ▸ Temporizadores fiáveis).</string>
+    <string name="plan_new_title">Novo intervalo</string>
+    <string name="plan_edit_title">Editar intervalo</string>
+    <string name="plan_scene_label">Cenário</string>
+    <string name="plan_days_label">Dias</string>
+    <string name="plan_from">Das</string>
+    <string name="plan_to">Às</string>
+    <string name="plan_end_label">No fim</string>
+    <string name="plan_end_off">Desligar</string>
+    <string name="plan_end_leave">Manter ligado</string>
+    <string name="plan_overnight">+1 dia</string>
+    <string name="plan_every_day">Todos os dias</string>
+    <string name="plan_disabled">em pausa</string>
+    <string name="plan_to_off">→ desligar</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">O seu ar condicionado por Wi-Fi</string>
+    <string name="action_discover">Procurar dispositivos</string>
+    <string name="action_discovering">A procurar…</string>
+    <string name="action_manual">Manual</string>
+    <string name="demo_preview">Pré-visualização sem dispositivo (demo)</string>
+    <string name="empty_title">Ainda não há dispositivos</string>
+    <string name="empty_body">Toque em «Procurar dispositivos». O telemóvel tem de estar na mesma rede Wi-Fi do ar condicionado.</string>
+    <string name="error_no_devices">Nenhum dispositivo encontrado. Mesma rede Wi-Fi? Caso contrário, adicione manualmente.</string>
+    <string name="action_connect">Ligar</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Voltar</string>
+    <string name="cd_refresh">Atualizar</string>
+    <string name="cd_power">Ligar/desligar</string>
+    <string name="cd_reorder">Arraste para reordenar</string>
+    <string name="connected_to">Ligado · %1$s</string>
+    <string name="disconnected">Desligado</string>
+    <string name="state_on">LIG.</string>
+    <string name="state_off">DESL.</string>
+    <string name="target_temp">Temperatura pretendida</string>
+    <string name="readout_indoor">Interior</string>
+    <string name="readout_outdoor">Exterior</string>
+    <string name="readout_power">Potência</string>
+
+    <string name="section_mode">Modo</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Frio</string>
+    <string name="mode_dry">Desum.</string>
+    <string name="mode_heat">Calor</string>
+    <string name="mode_fan">Vent.</string>
+
+    <string name="section_fan">Velocidade da ventoinha</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1 %</string>
+    <string name="fan_silent">Silencioso</string>
+    <string name="fan_low">Baixa</string>
+    <string name="fan_medium">Média</string>
+    <string name="fan_high">Alta</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automática</string>
+    <string name="fan_level">Nível: %1$d %%</string>
+
+    <string name="section_status">Estado em direto</string>
+    <string name="status_indoor">Temperatura interior</string>
+    <string name="status_outdoor">Temperatura exterior</string>
+    <string name="status_power">Potência</string>
+    <string name="status_total">Consumo total</string>
+    <string name="status_error">Código de erro</string>
+    <string name="status_error_none">nenhum</string>
+    <string name="status_error_code">n.º %1$d</string>
+    <string name="status_cost">Custo total</string>
+
+    <!-- Beta diagnostics -->
+    <string name="section_diagnostics">Diagnóstico (beta)</string>
+    <string name="diag_beta_hint">Telemetria experimental. Nem todos os aparelhos a transmitem — os valores podem ficar vazios.</string>
+    <string name="diag_group1_title">Compressor e refrigerante</string>
+    <string name="diag_compressor_freq">Frequência do compressor</string>
+    <string name="diag_compressor_freq_target">Frequência pretendida</string>
+    <string name="diag_compressor_current">Corrente consumida</string>
+    <string name="diag_compressor_voltage">Tensão de alimentação</string>
+    <string name="diag_temp_t1">Bateria interior (T1)</string>
+    <string name="diag_temp_t2">Evaporador (T2)</string>
+    <string name="diag_temp_t3">Condensador (T3)</string>
+    <string name="diag_temp_t4">Exterior (T4)</string>
+    <string name="diag_temp_tp">Tubo de descarga (TP)</string>
+    <string name="diag_group2_title">Ventoinha interior e bomba</string>
+    <string name="diag_fan_speed">Velocidade da ventoinha</string>
+    <string name="diag_fan_speed_target">Velocidade pretendida</string>
+    <string name="diag_water_pump">Bomba de condensados</string>
+    <string name="diag_pump_on">em funcionamento</string>
+    <string name="diag_pump_off">parada</string>
+    <string name="diag_group7_title">Potência da unidade exterior</string>
+    <string name="diag_compressor_power">Potência consumida</string>
+
+    <!-- Settings: display & price -->
+    <string name="settings_display">Visualização e preço</string>
+    <string name="unit_fahrenheit">Mostrar °F (Fahrenheit)</string>
+    <string name="price_per_kwh">Preço por kWh</string>
+    <string name="price_hint">Serve para estimar o custo total a partir do consumo.</string>
+
+    <!-- Indoor-temperature calibration -->
+    <string name="section_calibration">Calibração da temperatura interior</string>
+    <string name="calibration_hint">Muitos aparelhos medem um ou dois graus ao lado da temperatura real da divisão. Compare com um termómetro de ambiente e corrija aqui o valor. A aplicação passa a mostrar em todo o lado o valor corrigido, assinalado com um pequeno delta âmbar, e desloca nos mesmos graus inteiros o valor enviado ao aparelho — para que a divisão atinja realmente o que definiu. Guardado para este dispositivo.</string>
+    <string name="calibration_none">sem correção</string>
+    <string name="calibration_preview">Medido %1$s → mostrado %2$s</string>
+    <string name="calibration_device_target">Enviado ao aparelho: %1$s — objetivo %2$s</string>
+    <string name="calibration_no_reading">A aguardar a primeira leitura…</string>
+    <string name="calibration_reset">Repor a 0</string>
+    <string name="calibration_less">Reduzir a correção</string>
+    <string name="calibration_more">Aumentar a correção</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Intervalo de atualização</string>
+    <string name="settings_poll_hint">Com que frequência o estado, a energia e o diagnóstico são consultados enquanto a aplicação está ligada. Intervalos mais curtos atualizam mais depressa, mas geram mais tráfego Wi-Fi.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta -->
+    <string name="settings_beta">Funcionalidades beta</string>
+    <string name="settings_beta_hint">Diagnóstico adicional experimental, ativado por predefinição — cada opção acrescenta uma consulta por atualização e pode ser desativada aqui. Nem todos os aparelhos o suportam. Os valores surgem no separador Estado e são registados no histórico (se o registo estiver ativo).</string>
+    <string name="beta_group1">Diagnóstico do compressor</string>
+    <string name="beta_group1_desc">Frequência, corrente, tensão e temperaturas do circuito frigorífico (T1–T4, tubo de descarga)</string>
+    <string name="beta_group2">Ventoinha interior e bomba</string>
+    <string name="beta_group2_desc">Velocidade real da ventoinha interior e estado da bomba de condensados</string>
+    <string name="beta_group7">Potência da unidade exterior</string>
+    <string name="beta_group7_desc">Potência consumida em tempo real da unidade exterior, em watts</string>
+
+    <string name="section_options">Opções</string>
+    <string name="option_swing">Oscilação (lâminas)</string>
+    <string name="option_eco">Modo eco</string>
+    <string name="option_beep">Sinal sonoro</string>
+    <string name="option_anion">Ionizador</string>
+    <string name="option_out_silent">Exterior silencioso</string>
+    <string name="option_self_clean">Autolimpeza</string>
+    <string name="option_display">Ecrã / LED</string>
+
+    <string name="section_gear">Limite do compressor</string>
+    <string name="gear_full">Máx.</string>
+    <string name="gear_75">75 %</string>
+    <string name="gear_50">50 %</string>
+
+    <string name="section_sleep">Temporizador de desligar</string>
+    <string name="sleep_active">Desliga em %1$d min</string>
+    <string name="sleep_cancel">Cancelar temporizador</string>
+    <string name="sleep_custom">Personalizado…</string>
+    <string name="sleep_custom_title">Temporizador de desligar</string>
+    <string name="sleep_custom_label">Minutos</string>
+    <string name="action_start">Iniciar</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Dica: mantenha um cartão premido para o arrastar para outra posição.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Adicionar dispositivo manualmente</string>
+    <string name="manual_hint">Para ligações sem deteção por difusão. Encontra o ID na aplicação Midea/SmartHome ou através de uma análise de rede.</string>
+    <string name="field_ip">Endereço IP</string>
+    <string name="field_port">Porta</string>
+    <string name="field_id">ID do dispositivo (decimal)</string>
+    <string name="field_name">Nome (opcional)</string>
+    <string name="action_add">Adicionar</string>
+    <string name="action_cancel">Cancelar</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Exportar token</string>
+    <string name="export_title">Exportar token</string>
+    <string name="export_hint">Estas credenciais permitem controlar este dispositivo localmente sem a nuvem — guarde-as ou utilize-as noutras ferramentas. Mantenha-as privadas.</string>
+    <string name="export_none">Ainda não há token. Ligue-se uma vez ao dispositivo estando online e depois exporte.</string>
+    <string name="export_copy">Copiar</string>
+    <string name="export_share">Partilhar</string>
+    <string name="export_copied">Copiado para a área de transferência</string>
+    <string name="action_close">Fechar</string>
+    <string name="import_button">Importar</string>
+    <string name="import_title">Importar token</string>
+    <string name="import_hint">Cole um bloco de token (da exportação, do msmart, …). O dispositivo passa a funcionar offline.</string>
+    <string name="import_field">Bloco de token</string>
+    <string name="import_ok">Token importado</string>
+    <string name="import_error">Não foi possível ler esse bloco de token</string>
+
+    <!-- Known (cached) devices -->
+    <string name="known_devices">Dispositivos guardados</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">AC ligar/desligar</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Pré-visualização (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Falha na ligação: %1$s</string>
+    <string name="error_command">Falha no comando: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Antes de começar</string>
+    <string name="disclaimer_body">O ClimaPilot é uma aplicação independente, sem qualquer ligação à Midea nem apoiada ou suportada por esta. Controla aparelhos de ar condicionado compatíveis através da sua rede Wi-Fi local.\n\nAntes de enviar comandos, certifique-se de que o aparelho está corretamente instalado e é seguro de utilizar. Utiliza esta aplicação por sua conta e risco; os autores não assumem qualquer responsabilidade por danos ou perdas.\n\nOs valores medidos, como a potência, são fornecidos pelo aparelho e podem ser imprecisos.\n\nNota: na primeira ligação a um dispositivo, o ClimaPilot obtém um token de acesso único do servidor da Midea (não é preciso conta). Depois disso, o controlo é totalmente local — pode até negar à aplicação o acesso à internet.</string>
+    <string name="disclaimer_accept">Compreendi</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Controlo rápido do AC</string>
+    <string name="widget_not_connected">Sem ligação</string>
+    <string name="widget_off">Desligado</string>
+    <string name="widget_on">Ligado</string>
+    <string name="widget_indoor">Interior %1$s</string>
+    <string name="widget_power">Ligar/desligar</string>
+    <string name="widget_cool_down">Mais frio</string>
+    <string name="widget_warm_up">Mais quente</string>
+    <string name="widget_mode">Modo</string>
+    <string name="widget_all_label">AC — todos os controlos</string>
+    <string name="widget_power_label">AC — ligar/desligar</string>
+    <string name="widget_temp_label">AC — temperatura</string>
+    <string name="widget_mode_label">AC — modo</string>
+    <string name="widget_all_desc">Nome, temperatura, ligar/desligar e modo</string>
+    <string name="widget_power_desc">Ligar/desligar o ar condicionado</string>
+    <string name="widget_temp_desc">Aumentar ou baixar a temperatura</string>
+    <string name="widget_mode_desc">Mudar o modo de funcionamento</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Definições</string>
+    <string name="cd_settings">Definições</string>
+    <string name="settings_version">Versão %1$s</string>
+    <string name="changelog_title">Novidades</string>
+    <string name="support_title">Apoiar o desenvolvimento</string>
+    <string name="support_body">O ClimaPilot é gratuito e sem publicidade. Se lhe é útil, uma pequena contribuição ajuda a mantê-lo — obrigado!</string>
+    <string name="support_kofi">Ofereça-me um café (Ko-fi)</string>
+    <string name="support_paypal">Contribuir via PayPal</string>
+    <string name="credits_title">Agradecimentos</string>
+    <string name="credits_body">O protocolo Midea local do ClimaPilot é uma adaptação em Kotlin do excelente projeto midea-msmart de @mill1000. Muito obrigado — sem ele esta aplicação não existiria.</string>
+    <string name="credits_link">midea-msmart no GitHub</string>
+    <string name="changelog_0_6_6_title">Versão 0.6.6</string>
+    <string name="changelog_0_6_6_body">•  Novo: calibração da temperatura interior (separador Opções) — corrige um sensor que se desvia até ±5 K. O valor corrigido é mostrado e registado em todo o lado, assinalado com um pequeno delta âmbar, e o valor enviado ao aparelho é deslocado nos mesmos graus inteiros, para que a divisão atinja realmente o que definiu\n•  Corrigido: a temperatura pretendida avança agora em graus inteiros — os aparelhos Midea ignoram valores de meio grau e arredondavam-nos em silêncio, pelo que um toque de «,5» recuava na atualização seguinte\n•  Novo: traduzida para alemão, espanhol, francês, italiano, neerlandês e português; o idioma da aplicação pode ser escolhido separadamente do idioma do telemóvel</string>
+    <string name="changelog_0_6_5_title">Versão 0.6.5</string>
+    <string name="changelog_0_6_5_body">•  Novo: intervalo de atualização configurável (2/6/10/30 s) nas definições\n•  Novo: o diagnóstico é registado no histórico com três novos gráficos — frequência do compressor, potência da unidade exterior e velocidade da ventoinha interior\n•  Alterado: o diagnóstico beta está agora ativo por predefinição (continua a poder ser desativado por grupo)</string>
+    <string name="changelog_0_6_4_title">Versão 0.6.4</string>
+    <string name="changelog_0_6_4_body">•  Novo: diagnóstico (beta) no separador Estado — frequência/corrente/tensão do compressor, temperaturas do circuito frigorífico (T1–T4, tubo de descarga), velocidade da ventoinha interior, bomba de condensados e potência da unidade exterior. Ative por grupos em Definições → Funcionalidades beta\n•  Corrigido: desativar o modo silencioso exterior liberta de novo imediatamente o limite de velocidade do compressor\n•  Corrigido: o interruptor do modo silencioso exterior mostra o estado real do aparelho após uma nova ligação\n•  Corrigido: limite do compressor — «50 %» e «75 %» estavam trocados; agora «50 %» é realmente o limite mais forte\n•  Corrigido: os tokens importados do msmart-ng ligam-se offline em vez de serem novamente obtidos na nuvem\n•  Melhorado: a procura de dispositivos usa também difusões de sub-rede para routers que bloqueiam a difusão global</string>
+    <string name="changelog_0_6_3_title">Versão 0.6.3</string>
+    <string name="changelog_0_6_3_body">•  Corrigido: o modo silencioso exterior funciona finalmente — a aplicação enviava um valor de ativação que o aparelho rejeitava em silêncio; agora envia o valor esperado (como o msmart-ng)</string>
+    <string name="changelog_0_6_2_title">Versão 0.6.2</string>
+    <string name="changelog_0_6_2_body">•  Corrigido: o sinal sonoro perdia-se após uma nova ligação — passa a ser guardado e reaplicado\n•  Acrescentada uma nota: muitos aparelhos só emitem o sinal ao ligar/desligar, não noutras alterações</string>
+    <string name="changelog_0_6_1_title">Versão 0.6.1</string>
+    <string name="changelog_0_6_1_body">•  Corrigido: a ventoinha «Auto» já não salta para velocidade alta — mantém-se em Auto\n•  Corrigido: o ionizador já não é desligado ao mudar a temperatura ou o modo, nem ao aplicar um cenário\n•  Corrigido: oscilação, ecrã/LED e ionizador mostram o estado real do aparelho (relido do ar condicionado), incluindo alterações feitas no comando físico\n•  Eco: ativar o modo eco sobe agora a temperatura pretendida para 24 °C se for inferior, porque o aparelho só permite eco a partir de 24 °C</string>
+    <string name="changelog_0_6_title">Versão 0.6</string>
+    <string name="changelog_0_6_body">•  Novo: atualizador integrado — procura versões mais recentes no GitHub e instala-as com um toque (confirma cada instalação). A verificação automática no arranque pode ser desativada nas definições\n•  Novo: interruptor Ecrã / LED nas opções — ligar ou desligar a luz do painel da unidade interior</string>
+    <string name="changelog_0_5_title">Versão 0.5</string>
+    <string name="changelog_0_5_body">•  Novo: plano semanal — associe cenários a intervalos recorrentes de dia + hora (por ex. arrefecimento máximo às segundas, 6–18) num calendário visual; desligar ou manter ligado no fim\n•  Funciona em segundo plano mesmo com o telemóvel inativo na rede Wi-Fi (à prova de Doze) e sobrevive a reinícios\n•  Nota: enquanto um plano está ativo, o Android mostra o ícone de alarme; para horários fiáveis, permita o uso em segundo plano em Definições ▸ Temporizadores fiáveis</string>
+    <string name="changelog_0_4_2_title">Versão 0.4.2</string>
+    <string name="changelog_0_4_2_body">•  Corrigido: o widget tudo-em-um não carregava («Problema ao carregar o widget»)\n•  Comando IR: acrescentados os interruptores Oscilação, Silencioso, Turbo e Eco — passa também a memorizar o último estado\n•  Velocidade da ventoinha: acrescentada a predefinição rápida de 1 %</string>
+    <string name="changelog_0_4_1_title">Versão 0.4.1</string>
+    <string name="changelog_0_4_1_body">•  Novo: modo comando IR (infravermelhos) — controle o ar condicionado como um comando em telemóveis com emissor IR, sem Wi-Fi\n•  Corrigido: a aplicação não podia ser atualizada sobre uma versão anterior (a chave de assinatura foi reposta)</string>
+    <string name="changelog_0_4_title">Versão 0.4</string>
+    <string name="changelog_0_4_body">•  Nova navegação por separadores: Controlo · Opções · Cenários · Estado · Histórico — adapta-se a uma barra lateral em tablets e na horizontal\n•  Histórico de energia e filtro com gráficos — potência, temperatura interior/exterior e nível da ventoinha, por hora / dia / semana / mês ou um dia escolhido, por aparelho; registo opcional em segundo plano a cada ~15 min (Wi-Fi)\n•  Aplicação para Wear OS — controle o ar condicionado a partir do relógio\n•  Temporizador de desligar fiável — com novas tentativas, sobrevive a um reinício, com notificação de contagem decrescente (desligar já / cancelar)\n•  Desligar automático após um tempo máximo de funcionamento\n•  Bloqueio da aplicação com impressão digital ou PIN\n•  Mosaico de modo nas Definições rápidas · atalhos do ecrã principal (desligar / cenário / demo)\n•  Assistente «Temporizadores fiáveis» (otimização da bateria e arranque automático do fabricante)\n•  Botão deslizante LIG./DESL. redesenhado e controlos de modo e ventoinha mais compactos</string>
+    <string name="changelog_0_3_2_title">Versão 0.3.2</string>
+    <string name="changelog_0_3_2_body">•  Corrigida uma falha ao iniciar o temporizador de desligar em alguns dispositivos (por ex. Xiaomi/HyperOS)</string>
+    <string name="changelog_0_3_1_title">Versão 0.3.1</string>
+    <string name="changelog_0_3_1_body">•  O temporizador de desligar passa a desligar o ar condicionado a horas mesmo com a aplicação fechada e o telemóvel inativo (Doze)</string>
+    <string name="changelog_0_3_title">Versão 0.3</string>
+    <string name="changelog_0_3_body">•  Corrigido: um dispositivo guardado podia aparecer duas vezes após uma procura\n•  Corrigido: o temporizador de desligar desliga o ar condicionado mesmo com a aplicação fechada\n•  Widgets reorganizados por função: widgets separados para ligar/desligar, temperatura e modo, mais um widget tudo-em-um redesenhado\n•  Widget de modo: escolha qualquer modo diretamente nos chips (o ativo é realçado) em vez de percorrer\n•  Widget tudo-em-um redesenhado: botão de ligar centrado, luz de ligação e chips de temperatura e modo</string>
+    <string name="changelog_0_2_title">Versão 0.2</string>
+    <string name="changelog_0_2_body">•  Cenários rápidos com editor completo e agendamento diário\n•  Estado em direto: potência, consumo total e custo estimado\n•  Opções: oscilação, eco e sinal sonoro — mais ionizador, silencioso exterior e autolimpeza onde o aparelho os suporte\n•  Limite do compressor; temporizador de desligar com durações personalizadas guardadas\n•  Cache offline de tokens — internet apenas na primeira ligação; exportação e importação de tokens\n•  Dispositivos guardados para nova ligação offline imediata\n•  Reordene os cartões de controlo pelo puxador de arrasto\n•  Widget para o ecrã principal em 1×1 / 2×2 / 4×2 (ligar/desligar, temperatura, modo) e mosaico nas Definições rápidas\n•  Interruptor °C/°F e preço por kWh</string>
+    <string name="changelog_0_1_title">Versão 0.1</string>
+    <string name="changelog_0_1_body">•  Primeira versão\n•  Controlo local de aparelhos de ar condicionado Midea por Wi-Fi\n•  Modo, temperatura, ventoinha, oscilação, eco e sinal sonoro\n•  Estado em direto: temperatura interior/exterior, potência, consumo e código de erro\n•  Cenários rápidos e temporizador de desligar\n•  Limite do compressor\n•  Modo demo sem dispositivo</string>
+
+    <!-- Background reliability -->
+    <string name="reliability_title">Temporizadores fiáveis</string>
+    <string name="reliability_body">Para que o temporizador de desligar e os agendamentos de cenários funcionem mesmo com a aplicação fechada, permita que o ClimaPilot funcione em segundo plano.</string>
+    <string name="reliability_battery_ok">Otimização da bateria: desativada ✓</string>
+    <string name="reliability_battery_warn">A otimização da bateria está ativa — os temporizadores podem atrasar-se ou falhar.</string>
+    <string name="reliability_battery_action">Permitir segundo plano (bateria)</string>
+    <string name="reliability_autostart_action">Permitir arranque automático (fabricante)</string>
+
+    <!-- In-app updater -->
+    <string name="update_title">Atualizações da aplicação</string>
+    <string name="update_body">As novas versões são obtidas do GitHub. A instalação é sempre confirmada por si.</string>
+    <string name="update_current">Instalada: %1$s</string>
+    <string name="update_auto_label">Verificar automaticamente no arranque</string>
+    <string name="update_check_button">Procurar atualizações</string>
+    <string name="update_checking">A verificar…</string>
+    <string name="update_uptodate">Já tem a versão mais recente (%1$s).</string>
+    <string name="update_error">Não foi possível procurar atualizações. Verifique a ligação e tente novamente.</string>
+    <string name="update_available_title">Atualização disponível</string>
+    <string name="update_available_body">A versão %1$s está disponível — tem a %2$s.</string>
+    <string name="update_install">Atualizar</string>
+    <string name="update_downloading">A transferir… %1$d %%</string>
+    <string name="update_later">Mais tarde</string>
+    <string name="update_failed">Falha na transferência. Tente novamente mais tarde.</string>
+    <string name="update_verify_failed">A transferência não passou na verificação de segurança e não foi instalada.</string>
+    <string name="update_need_permission">Permita que o ClimaPilot instale aplicações e toque novamente em Atualizar.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Desligar</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Aplicar: %1$s</string>
+
+    <!-- Auto power-off -->
+    <string name="autooff_title">Desligar automático</string>
+    <string name="autooff_body">Um corte de segurança: se o ar condicionado funcionar mais tempo do que isto, desliga-se sozinho — o substituto local de um temporizador de ausência (o telemóvel deixa de alcançar o aparelho assim que sai da rede Wi-Fi). 0 = desativado.</string>
+    <string name="autooff_hours_label">Desligar após (horas)</string>
+
+    <!-- Sleep-timer notification -->
+    <string name="notif_channel_timer">Temporizador de desligar</string>
+    <string name="notif_timer_title">Temporizador de desligar ativo</string>
+    <string name="notif_timer_text">O ar condicionado desliga-se no fim da contagem decrescente.</string>
+    <string name="notif_timer_off_now">Desligar já</string>
+    <string name="notif_timer_cancel">Cancelar</string>
+
+    <!-- App lock -->
+    <string name="lock_card_title">Bloqueio da aplicação</string>
+    <string name="lock_card_body">Exija a sua impressão digital, o rosto ou o PIN do ecrã para abrir o ClimaPilot — para que mais ninguém controle o seu ar condicionado.</string>
+    <string name="lock_card_switch">Exigir desbloqueio ao abrir</string>
+    <string name="lock_title">Desbloquear o ClimaPilot</string>
+    <string name="lock_subtitle">Autentique-se para controlar o ar condicionado</string>
+    <string name="lock_unlock">Desbloquear</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Modo do AC</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Histórico</string>
+    <string name="history_card_title">Energia e filtro</string>
+    <string name="history_card_body">Veja o consumo recente e total e acompanhe quando o filtro precisa de limpeza.</string>
+    <string name="history_card_open">Abrir histórico</string>
+    <string name="history_power_title">Potência (24 h)</string>
+    <string name="history_empty">Ainda não há dados suficientes — utilize o ar condicionado durante algum tempo e volte.</string>
+    <string name="history_peak">Pico: %1$d W</string>
+    <string name="history_totals_title">Consumo</string>
+    <string name="history_total_kwh">Total: %1$.1f kWh</string>
+    <string name="history_total_cost">Custo estimado: %1$.2f €</string>
+    <string name="history_filter_title">Filtro</string>
+    <string name="history_filter_runtime">Funcionamento desde a última limpeza: %1$d h de %2$d h</string>
+    <string name="history_filter_due">Está na altura de limpar o filtro.</string>
+    <string name="history_filter_reset">Filtro limpo (repor)</string>
+    <string name="history_filter_hint">Este é um lembrete de manutenção interno da aplicação, baseado no tempo de funcionamento. Não lê nem repõe o indicador de filtro do próprio aparelho — reponha-o no ar condicionado.</string>
+    <string name="option_beep_hint">Tom de confirmação. Muitos aparelhos só emitem o sinal ao ligar/desligar, não noutras alterações.</string>
+    <string name="history_record_title">Registar histórico</string>
+    <string name="history_record_body">Quando ativo, o ClimaPilot regista potência, temperaturas e ventoinha e consulta o ar condicionado cerca de cada 15 min em segundo plano (só Wi-Fi). Desativado por predefinição.</string>
+    <string name="history_record_switch">Registar dados do AC</string>
+    <string name="history_indoor_title">Temperatura interior (24 h)</string>
+    <string name="history_outdoor_title">Temperatura exterior (24 h)</string>
+    <string name="history_fan_title">Nível da ventoinha (24 h)</string>
+    <string name="history_comp_hz_title">Frequência do compressor (beta)</string>
+    <string name="history_comp_w_title">Potência da unidade exterior (beta)</string>
+    <string name="history_fan_rpm_title">Velocidade da ventoinha interior (beta)</string>
+    <string name="history_metric_summary">Agora %1$s%2$s · mín. %3$s · máx. %4$s%5$s</string>
+    <string name="range_hour">Hora</string>
+    <string name="range_day">Dia</string>
+    <string name="range_week">Semana</string>
+    <string name="range_month">Mês</string>
+    <string name="history_pick_day">Escolher um dia</string>
+    <string name="history_day">Dia: %1$s</string>
+    <string name="history_range_kwh">Neste período: %1$.1f kWh</string>
+    <string name="history_range_cost">Custo estimado: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Gosta do ClimaPilot?</string>
+    <string name="donate_prompt_body">O ClimaPilot é gratuito e sem publicidade. Se conquistou um lugar no seu telemóvel, uma pequena contribuição ajuda a mantê-lo — obrigado!</string>
+    <string name="donate_later">Talvez mais tarde</string>
+    <string name="donate_already">Já contribuí</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">Comando IR</string>
+    <string name="ir_remote_entry">Comando IR (infravermelhos)</string>
+    <string name="ir_remote_subtitle">Infravermelhos · apenas envio</string>
+    <string name="ir_no_emitter">Este telemóvel não tem emissor de infravermelhos</string>
+    <string name="option_quiet">Silencioso</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">O infravermelho é unidirecional — estes interruptores mostram o último comando enviado, não o estado real do aparelho.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Controlo</string>
+    <string name="nav_status">Estado</string>
+    <string name="nav_options">Opções</string>
+    <string name="nav_scenes">Cenários</string>
+    <string name="nav_history">Histórico</string>
+</resources>

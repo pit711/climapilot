@@ -85,8 +85,12 @@ object MideaAc {
      * EN: Build a SetState control frame (power/mode/temperature/fan/swing/beep/eco in one packet).
      * DE: Einen SetState-Steuer-Frame bauen (Ein-Aus/Modus/Temperatur/Lüfter/Swing/Signalton/Eco in einem Paket).
      *
-     * @param tempC EN: target temperature in °C (17–30 primary range, supports .5 steps) /
-     *              DE: Zieltemperatur in °C (Hauptbereich 17–30, .5-Schritte möglich)
+     * @param tempC EN: target temperature in °C (17–30 primary range). The frame carries a half-degree
+     *              bit, but units round the setpoint to whole degrees and report it back rounded, so the
+     *              app only ever sends whole degrees (see AcViewModel.snapTemp). /
+     *              DE: Zieltemperatur in °C (Hauptbereich 17–30). Der Frame führt ein Halbgrad-Bit mit,
+     *              Geräte runden den Sollwert aber auf ganze Grad und melden ihn gerundet zurück — die App
+     *              sendet daher nur ganze Grad (siehe AcViewModel.snapTemp).
      * @param fan EN: fan speed 1–100 (custom) or a named value (e.g. 20/40/60/80/100) /
      *            DE: Lüfterstufe 1–100 (frei) oder ein benannter Wert (z. B. 20/40/60/80/100)
      */

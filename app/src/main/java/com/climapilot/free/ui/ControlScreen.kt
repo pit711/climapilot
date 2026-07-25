@@ -48,6 +48,7 @@ import androidx.compose.material.icons.filled.PowerSettingsNew
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.Speed
+import androidx.compose.material.icons.filled.Straighten
 import androidx.compose.material.icons.filled.CleaningServices
 import androidx.compose.material.icons.filled.Spa
 import androidx.compose.material.icons.filled.SwapVert
@@ -67,6 +68,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.material3.Icon
@@ -94,6 +96,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -101,6 +104,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.zIndex
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -117,6 +121,7 @@ import com.climapilot.free.Status
 import com.climapilot.free.midea.MideaAc
 import java.text.DateFormatSymbols
 import java.util.Calendar
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 // EN: One selectable operating mode + the icon/label shown for it in the mode chips.
@@ -173,6 +178,11 @@ fun OptionsTab(vm: AcViewModel) {
         item(key = "topbar") { ConnectedTopBar(vm) }
         item(key = "options") { OptionsCard(vm) }
         if (vm.rateLevels > 0) item(key = "gear") { GearCard(vm) }
+        // EN: Calibration needs a live reading to dial against, so it lives with the connected device
+        //     rather than in the app-wide settings (which are only reachable once disconnected).
+        // DE: Die Kalibrierung braucht einen Live-Messwert zum Abgleichen und wohnt daher beim verbundenen
+        //     Gerät statt in den app-weiten Einstellungen (die erst nach dem Trennen erreichbar sind).
+        item(key = "calibration") { CalibrationCard(vm) }
         errorItem(vm)
     }
 }
@@ -309,7 +319,21 @@ private fun PowerHero(vm: AcViewModel) {
             Spacer(Modifier.height(10.dp))
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                MiniReadout(stringResource(R.string.readout_indoor), vm.live?.indoorTemp?.let { formatTemp(it, vm.useFahrenheit) } ?: "–", fg)
+                // EN: When the indoor sensor is calibrated, the correction rides along as a small coloured
+                //     delta — visible enough to explain why this number differs from the unit's own display,
+                //     quiet enough not to compete with the reading itself.
+                // DE: Ist der Innenfühler kalibriert, läuft die Korrektur als kleines farbiges Delta mit —
+                //     sichtbar genug, um zu erklären, warum diese Zahl von der Geräteanzeige abweicht, und
+                //     leise genug, um dem Messwert nicht die Show zu stehlen.
+                MiniReadout(
+                    stringResource(R.string.readout_indoor),
+                    vm.live?.indoorTemp?.let { formatTemp(it, vm.useFahrenheit) } ?: "–",
+                    fg,
+                    badge = vm.indoorOffset
+                        .takeIf { it != 0.0 && vm.live?.indoorTemp != null }
+                        ?.let { formatOffset(it, vm.useFahrenheit) },
+                    badgeSurface = if (on) cs.primary else cs.surfaceVariant,
+                )
                 MiniReadout(stringResource(R.string.readout_outdoor), vm.live?.outdoorTemp?.let { formatTemp(it, vm.useFahrenheit) } ?: "–", fg)
                 // EN: NaN power means the unit has no energy monitoring → show a dash.
                 // DE: NaN-Leistung bedeutet, das Gerät hat keine Energiemessung → Strich anzeigen.
@@ -390,14 +414,51 @@ private fun RoundIconButton(icon: ImageVector, enabled: Boolean, tint: Color, on
     ) { Icon(icon, null, modifier = Modifier.size(28.dp)) }
 }
 
-/** EN: A small value-over-label readout used inside the hero. DE: Kleine Wert-über-Label-Anzeige in der Hero-Karte. */
+/**
+ * EN: A small value-over-label readout used inside the hero. An optional [badge] rides beside the value
+ *     in small bold amber — used for the indoor-temperature calibration, so a corrected reading is
+ *     always recognisable as corrected without shouting over the reading itself.
+ * DE: Kleine Wert-über-Label-Anzeige in der Hero-Karte. Ein optionales [badge] steht klein und fett in
+ *     Bernstein neben dem Wert — genutzt für die Innentemperatur-Kalibrierung, damit ein korrigierter
+ *     Wert immer als korrigiert erkennbar ist, ohne den Messwert zu übertönen.
+ */
 @Composable
-private fun MiniReadout(label: String, value: String, fg: Color) {
+private fun MiniReadout(
+    label: String,
+    value: String,
+    fg: Color,
+    badge: String? = null,
+    badgeSurface: Color = Color.Transparent,
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, color = fg, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+        Row(verticalAlignment = Alignment.Top) {
+            Text(value, color = fg, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            if (badge != null) {
+                Spacer(Modifier.width(3.dp))
+                Text(
+                    badge,
+                    color = calibrationAccent(badgeSurface),
+                    fontWeight = FontWeight.Bold, fontSize = 11.sp,
+                    modifier = Modifier.padding(top = 1.dp),
+                )
+            }
+        }
         Text(label, color = fg.copy(alpha = 0.8f), fontSize = 12.sp)
     }
 }
+
+/**
+ * EN: Pick an amber that stays readable on whatever the badge sits on: a deep burnt amber on light
+ *     surfaces, a bright one on dark. Chosen from the surface's luminance rather than hard-coded, so it
+ *     also holds up under Android 12's wallpaper-derived dynamic colours, where the hero gradient can be
+ *     any hue.
+ * DE: Ein Bernstein wählen, das auf dem jeweiligen Untergrund lesbar bleibt: ein dunkles, gebranntes
+ *     Bernstein auf hellen Flächen, ein helles auf dunklen. Aus der Helligkeit der Fläche abgeleitet
+ *     statt fest verdrahtet, damit es auch unter den vom Hintergrundbild abgeleiteten dynamischen Farben
+ *     (Android 12) trägt, wo der Hero-Verlauf jeden Farbton haben kann.
+ */
+private fun calibrationAccent(surface: Color): Color =
+    if (surface.luminance() > 0.4f) Color(0xFF8A3D00) else Color(0xFFFFC24D)
 
 /** EN: Operating-mode chooser (auto/cool/dry/heat/fan) — a single compact row of icon+label segments. DE: Betriebsmodus-Auswahl (Auto/Kühlen/Trocknen/Heizen/Lüften) — eine kompakte Zeile aus Icon+Label-Segmenten. */
 @Composable
@@ -493,6 +554,84 @@ private fun LiveStatusCard(vm: AcViewModel) {
             stringResource(R.string.status_error),
             if (err == 0) stringResource(R.string.status_error_none) else stringResource(R.string.status_error_code, err),
         )
+    }
+}
+
+/**
+ * EN: Indoor-temperature calibration card. A unit's built-in sensor often reads a degree or two off the
+ *     real room temperature; here the correction is dialled in against a room thermometer (±5 K in 0.5 K
+ *     steps) — no trip to the remote or iSense needed. The "measured → shown" line makes the effect
+ *     concrete while dialling, and the correction is saved for this device only. The AC keeps regulating
+ *     by its own sensor: what this fixes is the reading you judge the setpoint by.
+ * DE: Karte zur Innentemperatur-Kalibrierung. Der eingebaute Fühler eines Geräts liegt oft ein bis zwei
+ *     Grad neben der echten Raumtemperatur; hier wird die Korrektur gegen ein Raumthermometer eingestellt
+ *     (±5 K in 0,5-K-Schritten) — ohne Umweg über Fernbedienung oder iSense. Die Zeile „gemessen →
+ *     angezeigt" macht die Wirkung beim Einstellen greifbar, und die Korrektur gilt nur für dieses Gerät.
+ *     Die Klima regelt weiter nach ihrem eigenen Fühler: korrigiert wird der Wert, an dem man den
+ *     Sollwert bemisst.
+ */
+@Composable
+private fun CalibrationCard(vm: AcViewModel) {
+    val cs = MaterialTheme.colorScheme
+    val step = SettingsRepo.INDOOR_OFFSET_STEP
+    val max = SettingsRepo.INDOOR_OFFSET_MAX
+    val offset = vm.indoorOffset
+    SectionCard(stringResource(R.string.section_calibration), Icons.Default.Straighten) {
+        Text(
+            stringResource(R.string.calibration_hint),
+            fontSize = 12.sp, color = cs.onSurfaceVariant, lineHeight = 16.sp,
+        )
+        Spacer(Modifier.height(10.dp))
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            FilledTonalIconButton(
+                onClick = { vm.updateIndoorOffset(offset - step) },
+                enabled = offset > -max,
+            ) { Icon(Icons.Default.Remove, stringResource(R.string.calibration_less)) }
+            Text(
+                if (offset == 0.0) stringResource(R.string.calibration_none)
+                else formatOffset(offset, vm.useFahrenheit),
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                fontSize = if (offset == 0.0) 15.sp else 22.sp,
+                color = if (offset == 0.0) cs.onSurfaceVariant else cs.primary,
+            )
+            FilledTonalIconButton(
+                onClick = { vm.updateIndoorOffset(offset + step) },
+                enabled = offset < max,
+            ) { Icon(Icons.Default.Add, stringResource(R.string.calibration_more)) }
+        }
+        Spacer(Modifier.height(8.dp))
+        val raw = vm.indoorTempRaw
+        Text(
+            if (raw == null) stringResource(R.string.calibration_no_reading)
+            else stringResource(
+                R.string.calibration_preview,
+                formatTemp(raw, vm.useFahrenheit),
+                formatTemp(raw + offset, vm.useFahrenheit),
+            ),
+            fontSize = 13.sp, color = cs.onSurfaceVariant, lineHeight = 17.sp,
+        )
+        // EN: Show the shifted setpoint the unit is actually holding — the correction changes what the AC
+        //     does, not just what the app prints, and that should be visible rather than implied.
+        // DE: Den verschobenen Sollwert zeigen, auf den das Gerät tatsächlich regelt — die Korrektur
+        //     verändert das Verhalten der Klima, nicht nur die Anzeige, und das gehört sichtbar gemacht.
+        if (vm.deviceTargetTemp != vm.tempC) {
+            Text(
+                stringResource(
+                    R.string.calibration_device_target,
+                    formatTemp(vm.deviceTargetTemp, vm.useFahrenheit),
+                    formatTemp(vm.tempC, vm.useFahrenheit),
+                ),
+                fontSize = 13.sp, color = cs.onSurfaceVariant, lineHeight = 17.sp,
+            )
+        }
+        if (offset != 0.0) {
+            TextButton(
+                onClick = { vm.updateIndoorOffset(0.0) },
+                contentPadding = PaddingValues(horizontal = 0.dp, vertical = 4.dp),
+            ) { Text(stringResource(R.string.calibration_reset), fontSize = 13.sp) }
+        }
     }
 }
 
@@ -943,9 +1082,11 @@ private fun EditSceneDialog(
                 // EN: Target temperature stepper. DE: Zieltemperatur-Regler.
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(stringResource(R.string.target_temp), Modifier.weight(1f), color = cs.onSurface, fontSize = 15.sp)
-                    IconButton(onClick = { tempC = (tempC - 0.5).coerceIn(16.0, 30.0) }) { Icon(Icons.Default.Remove, null) }
+                    // EN: Whole degrees — the unit ignores half-degree setpoints (see AcViewModel.snapTemp).
+                    // DE: Ganze Grad — das Gerät ignoriert Halbgrad-Sollwerte (siehe AcViewModel.snapTemp).
+                    IconButton(onClick = { tempC = (tempC.roundToInt() - 1).toDouble().coerceIn(16.0, 30.0) }) { Icon(Icons.Default.Remove, null) }
                     Text(formatTemp(tempC, fahrenheit), fontWeight = FontWeight.Bold, color = cs.onSurface)
-                    IconButton(onClick = { tempC = (tempC + 0.5).coerceIn(16.0, 30.0) }) { Icon(Icons.Default.Add, null) }
+                    IconButton(onClick = { tempC = (tempC.roundToInt() + 1).toDouble().coerceIn(16.0, 30.0) }) { Icon(Icons.Default.Add, null) }
                 }
                 Spacer(Modifier.height(4.dp))
 
@@ -1340,10 +1481,23 @@ private fun SectionCard(title: String, icon: ImageVector, content: @Composable (
 }
 
 /** EN: Format a temperature, dropping the ".0" for whole degrees. DE: Temperatur formatieren, „.0" bei ganzen Graden weglassen. */
-private fun formatTemp(t: Double, fahrenheit: Boolean = false): String {
+internal fun formatTemp(t: Double, fahrenheit: Boolean = false): String {
     // EN: Values are stored in °C; convert only for display when the user picked °F.
     // DE: Werte liegen in °C vor; nur für die Anzeige in °F umrechnen, wenn der Nutzer °F gewählt hat.
     val v = if (fahrenheit) t * 9.0 / 5.0 + 32.0 else t
     val unit = if (fahrenheit) "°F" else "°"
     return if (v % 1.0 == 0.0) "${v.toInt()}$unit" else "%.1f$unit".format(v)
+}
+
+/**
+ * EN: Format a calibration correction as a signed delta ("+1°", "−1.5°"). This is a temperature
+ *     *difference*, not a temperature: converting it to °F scales by 9/5 with no +32 offset.
+ * DE: Eine Kalibrier-Korrektur als vorzeichenbehaftetes Delta formatieren („+1°", „−1,5°"). Das ist eine
+ *     Temperatur-*Differenz*, keine Temperatur: die Umrechnung in °F skaliert mit 9/5 ohne +32-Versatz.
+ */
+internal fun formatOffset(delta: Double, fahrenheit: Boolean = false): String {
+    val v = if (fahrenheit) delta * 9.0 / 5.0 else delta
+    val a = abs(v)
+    val num = if (a % 1.0 == 0.0) "${a.toInt()}" else "%.1f".format(a)
+    return "${if (v < 0) "−" else "+"}$num°"
 }

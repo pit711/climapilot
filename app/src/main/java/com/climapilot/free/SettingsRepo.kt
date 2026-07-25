@@ -23,6 +23,13 @@ object SettingsRepo {
     private const val K_DIAG_GROUP2 = "diag_group2"
     private const val K_DIAG_GROUP7 = "diag_group7"
     private const val K_POLL_INTERVAL = "poll_interval_sec"
+    private const val K_INDOOR_OFFSET = "indoor_offset_"
+
+    /** EN: Largest indoor-temperature correction we allow, in kelvin. DE: Größte erlaubte Innentemperatur-Korrektur in Kelvin. */
+    const val INDOOR_OFFSET_MAX = 5.0
+
+    /** EN: Step size of the calibration stepper, matching the sensor's 0.5 K resolution. DE: Schrittweite des Kalibrier-Reglers, passend zur 0,5-K-Auflösung des Fühlers. */
+    const val INDOOR_OFFSET_STEP = 0.5
 
     /** EN: true = show temperatures in °F. DE: true = Temperaturen in °F anzeigen. */
     fun useFahrenheit(ctx: Context): Boolean = prefs(ctx).getBoolean(K_FAHRENHEIT, false)
@@ -114,6 +121,27 @@ object SettingsRepo {
 
     fun setPollIntervalSec(ctx: Context, value: Int) =
         prefs(ctx).edit().putInt(K_POLL_INTERVAL, value.coerceIn(2, 60)).apply()
+
+    /**
+     * EN: Manual indoor-temperature calibration for one device, in kelvin (−5…+5, 0 = off). Many units
+     *     read a degree or two off the real room temperature; this correction is added to the sensor
+     *     value wherever the indoor temperature is shown or recorded, so the reading — and with it the
+     *     "how far am I from the setpoint?" judgement — matches a room thermometer. Stored per device
+     *     because the error belongs to that unit's sensor, not to the app.
+     * DE: Manuelle Innentemperatur-Kalibrierung für ein Gerät, in Kelvin (−5…+5, 0 = aus). Viele Geräte
+     *     messen ein bis zwei Grad neben der echten Raumtemperatur; diese Korrektur wird überall dort auf
+     *     den Fühlerwert addiert, wo die Innentemperatur angezeigt oder aufgezeichnet wird — damit der
+     *     Wert und die Einschätzung „wie weit bin ich vom Soll?" zum Raumthermometer passen. Pro Gerät
+     *     gespeichert, weil der Fehler zum Fühler dieses Geräts gehört, nicht zur App.
+     */
+    fun indoorOffset(ctx: Context, deviceId: Long): Double =
+        prefs(ctx).getFloat(K_INDOOR_OFFSET + deviceId, 0f).toDouble()
+            .coerceIn(-INDOOR_OFFSET_MAX, INDOOR_OFFSET_MAX)
+
+    fun setIndoorOffset(ctx: Context, deviceId: Long, value: Double) =
+        prefs(ctx).edit()
+            .putFloat(K_INDOOR_OFFSET + deviceId, value.coerceIn(-INDOOR_OFFSET_MAX, INDOOR_OFFSET_MAX).toFloat())
+            .apply()
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 }

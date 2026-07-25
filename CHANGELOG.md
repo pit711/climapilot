@@ -2,6 +2,26 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.6] — 2026-07-25
+
+### 🇬🇧 English
+**New**
+- **Indoor temperature calibration** (Options tab) — many units read a degree or two off the real room temperature. Compare against a room thermometer and dial in a correction of ±5 K in 0.5 K steps. The corrected value is shown and recorded everywhere (hero readout, widget, history), marked with a small amber delta, and a "measured → shown" line makes the effect concrete while dialling. Saved per device. Suggested on [r/MideaPortaSplit](https://www.reddit.com/r/MideaPortaSplit/).
+- The correction also **shifts the setpoint sent to the unit** by the same whole degrees. The AC regulates against its own sensor, so a sensor reading 1 K low makes it stop 1 K short of the target; sending a setpoint lowered by 1 K cancels that out and the room actually reaches what you set. The Options card shows the shifted value ("Sent to the unit: 22° — target 23°").
+- **Translations** — German, Spanish, French, Italian, Dutch and Portuguese, alongside English. The app language can be picked separately from the phone language (System settings ▸ Apps ▸ ClimaPilot ▸ Language).
+
+**Fixed**
+- **Target temperature now steps in whole degrees.** The protocol carries a half-degree bit, but Midea units ignore it and report the setpoint back rounded — so a ".5" step looked like it had applied and then silently snapped back on the next poll. Whole degrees everywhere now: in-app stepper, scene editor, home-screen widget, Wear OS and background scene/plan runs. Scenes saved with a half degree are snapped when applied.
+
+### 🇩🇪 Deutsch
+**Neu**
+- **Innentemperatur-Kalibrierung** (Optionen-Reiter) — viele Geräte messen ein bis zwei Grad neben der echten Raumtemperatur. Mit einem Raumthermometer vergleichen und eine Korrektur von ±5 K in 0,5-K-Schritten einstellen. Der korrigierte Wert wird überall angezeigt und aufgezeichnet (Hero-Anzeige, Widget, Verlauf), gekennzeichnet mit einem kleinen bernsteinfarbenen Delta; eine Zeile „gemessen → angezeigt" macht die Wirkung beim Einstellen greifbar. Wird pro Gerät gespeichert. Angeregt auf [r/MideaPortaSplit](https://www.reddit.com/r/MideaPortaSplit/).
+- Die Korrektur **verschiebt auch den an das Gerät gesendeten Sollwert** um dieselben ganzen Grad. Die Klima regelt gegen ihren eigenen Fühler; misst dieser 1 K zu niedrig, hört sie 1 K vor dem Ziel auf. Ein um 1 K abgesenkter Sollwert hebt das auf, und der Raum erreicht wirklich das Eingestellte. Die Optionen-Karte zeigt den verschobenen Wert („An das Gerät: 22° — Ziel 23°").
+- **Übersetzungen** — Deutsch, Spanisch, Französisch, Italienisch, Niederländisch und Portugiesisch, zusätzlich zu Englisch. Die App-Sprache lässt sich getrennt von der Telefonsprache wählen (Systemeinstellungen ▸ Apps ▸ ClimaPilot ▸ Sprache).
+
+**Behoben**
+- **Die Zieltemperatur springt jetzt in ganzen Grad.** Das Protokoll führt ein Halbgrad-Bit mit, Midea-Geräte ignorieren es aber und melden den Sollwert gerundet zurück — ein „,5"-Schritt sah dadurch aus, als hätte er gegriffen, und sprang beim nächsten Poll still zurück. Jetzt überall ganze Grad: Regler in der App, Szenen-Editor, Homescreen-Widget, Wear OS und Szenen-/Plan-Ausführung im Hintergrund. Mit halbem Grad gespeicherte Szenen werden beim Anwenden eingerastet.
+
 ## [0.6.5] — 2026-07-20
 
 ### 🇬🇧 English

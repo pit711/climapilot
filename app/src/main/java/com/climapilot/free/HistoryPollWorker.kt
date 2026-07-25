@@ -47,10 +47,15 @@ class HistoryPollWorker(appContext: Context, params: WorkerParameters) :
                     val g1 = if (SettingsRepo.diagGroup1(applicationContext)) session.queryGroup1() else null
                     val g2 = if (SettingsRepo.diagGroup2(applicationContext)) session.queryGroup2() else null
                     val g7 = if (SettingsRepo.diagGroup7(applicationContext)) session.queryGroup7() else null
+                    // EN: Record the calibrated indoor temperature, matching what the app shows — otherwise
+                    //     the charts would jump between corrected (foreground) and raw (background) samples.
+                    // DE: Die kalibrierte Innentemperatur aufzeichnen, passend zur Anzeige der App — sonst
+                    //     sprängen die Charts zwischen korrigierten (Vordergrund) und rohen (Hintergrund) Werten.
+                    val offset = SettingsRepo.indoorOffset(applicationContext, dev.id)
                     UsageHistory.record(
                         applicationContext, dev.id,
                         en?.powerW, en?.totalKwh, st?.powerOn ?: false,
-                        st?.indoorTemp, st?.outdoorTemp, st?.fanSpeed ?: 0,
+                        st?.indoorTemp?.plus(offset), st?.outdoorTemp, st?.fanSpeed ?: 0,
                         compressorHz = g1?.compressorFrequency?.toDouble(),
                         compressorW = g7?.compressorPower,
                         fanRpm = g2?.indoorFanSpeed,

@@ -119,6 +119,17 @@
     <string name="price_per_kwh">Preis pro kWh</string>
     <string name="price_hint">Für die Schätzung der Gesamtkosten aus dem Verbrauch.</string>
 
+    <!-- Innentemperatur-Kalibrierung (Optionen-Reiter) -->
+    <string name="section_calibration">Innentemperatur-Kalibrierung</string>
+    <string name="calibration_hint">Viele Geräte messen ein bis zwei Grad neben der echten Raumtemperatur. Mit einem Raumthermometer vergleichen und den Wert hier korrigieren. Die App zeigt dann überall den korrigierten Wert, gekennzeichnet mit einem kleinen bernsteinfarbenen Delta, und verschiebt den an das Gerät gesendeten Sollwert um dieselben ganzen Grad — damit der Raum wirklich erreicht, was eingestellt ist. Gilt für dieses Gerät.</string>
+    <string name="calibration_none">keine Korrektur</string>
+    <string name="calibration_preview">Gemessen %1$s → angezeigt %2$s</string>
+    <string name="calibration_device_target">An das Gerät: %1$s — Ziel %2$s</string>
+    <string name="calibration_no_reading">Warten auf den ersten Messwert…</string>
+    <string name="calibration_reset">Auf 0 zurücksetzen</string>
+    <string name="calibration_less">Korrektur verringern</string>
+    <string name="calibration_more">Korrektur erhöhen</string>
+
     <!-- Einstellungen: Beta / experimentelle Diagnose -->
     <string name="settings_beta">Beta-Funktionen</string>
     <string name="settings_beta_hint">Experimentelle Zusatz-Diagnose, standardmäßig an — jede Option fügt eine Abfrage pro Aktualisierung hinzu und lässt sich hier abschalten. Nicht alle Geräte unterstützen sie. Werte erscheinen im Status-Reiter und werden im Verlauf aufgezeichnet (wenn die Verlaufsaufzeichnung an ist).</string>
@@ -233,6 +244,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_6_6_title">Version 0.6.6</string>
+    <string name="changelog_0_6_6_body">•  Neu: Innentemperatur-Kalibrierung (Optionen-Reiter) — korrigiert einen Fühler, der bis zu ±5 K danebenliegt. Der korrigierte Wert wird überall angezeigt und aufgezeichnet, gekennzeichnet mit einem kleinen bernsteinfarbenen Delta, und der an das Gerät gesendete Sollwert wird um dieselben ganzen Grad verschoben — damit der Raum wirklich erreicht, was eingestellt ist\n•  Behoben: die Zieltemperatur springt jetzt in ganzen Grad — Midea-Geräte ignorieren Halbgrad-Sollwerte und runden sie still, wodurch ein „,5\"-Tipper beim nächsten Refresh zurücksprang\n•  Neu: übersetzt auf Deutsch, Spanisch, Französisch, Italienisch, Niederländisch und Portugiesisch; die App-Sprache lässt sich getrennt von der Telefonsprache wählen</string>
     <string name="changelog_0_6_5_title">Version 0.6.5</string>
     <string name="changelog_0_6_5_body">•  Neu: konfigurierbares Aktualisierungsintervall (2/6/10/30 s) in den Einstellungen\n•  Neu: Diagnose wird im Verlauf aufgezeichnet, mit drei neuen Charts — Kompressorfrequenz, Leistung Außengerät, Innenlüfterdrehzahl\n•  Geändert: Beta-Diagnose ist jetzt standardmäßig an (weiterhin je Gruppe abschaltbar)</string>
     <string name="changelog_0_6_4_title">Version 0.6.4</string>

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Scènes</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco-nacht</string>
+    <string name="scene_comfort">Comfort</string>
+    <string name="scene_save">Opslaan</string>
+    <string name="scene_save_title">Scène opslaan</string>
+    <string name="scene_name_label">Naam van de scène</string>
+    <string name="scene_default_name">Scène</string>
+    <string name="scene_hint">Tik om toe te passen · houd ingedrukt om te bewerken</string>
+    <string name="scene_edit_title">Scène bewerken</string>
+    <string name="scene_schedule">Dagelijks uitvoeren</string>
+    <string name="scene_schedule_at">Tijd: %1$s</string>
+    <string name="scene_schedule_note">Wordt elke dag automatisch toegepast. De app moet op de achtergrond mogen draaien.</string>
+    <string name="scene_delete">Verwijderen</string>
+    <string name="scene_delete_title">Scène verwijderen?</string>
+    <string name="scene_delete_msg">‘%1$s’ wordt verwijderd.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Weekplanning</string>
+    <string name="plan_empty">Nog geen tijdvakken. Voeg er een toe om een scène automatisch uit te voeren — bijvoorbeeld maximaal koelen op maandag van 6 tot 18 uur.</string>
+    <string name="plan_need_scene">Maak eerst een scène — de planning voert jouw scènes uit.</string>
+    <string name="plan_add">Tijdvak toevoegen</string>
+    <string name="plan_hint">Tijdvakken draaien op de achtergrond, ook als de telefoon in rust is op wifi. Sta ClimaPilot toe op de achtergrond te draaien voor betrouwbare tijden (Instellingen ▸ Betrouwbare timers).</string>
+    <string name="plan_new_title">Nieuw tijdvak</string>
+    <string name="plan_edit_title">Tijdvak bewerken</string>
+    <string name="plan_scene_label">Scène</string>
+    <string name="plan_days_label">Dagen</string>
+    <string name="plan_from">Van</string>
+    <string name="plan_to">Tot</string>
+    <string name="plan_end_label">Aan het einde</string>
+    <string name="plan_end_off">Uitschakelen</string>
+    <string name="plan_end_leave">Aan laten</string>
+    <string name="plan_overnight">+1 dag</string>
+    <string name="plan_every_day">Elke dag</string>
+    <string name="plan_disabled">gepauzeerd</string>
+    <string name="plan_to_off">→ uit</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Je airco via wifi</string>
+    <string name="action_discover">Apparaten zoeken</string>
+    <string name="action_discovering">Zoeken…</string>
+    <string name="action_manual">Handmatig</string>
+    <string name="demo_preview">Voorbeeld zonder apparaat (demo)</string>
+    <string name="empty_title">Nog geen apparaten</string>
+    <string name="empty_body">Tik op ‘Apparaten zoeken’. Je telefoon moet op hetzelfde wifi-netwerk zitten als de airco.</string>
+    <string name="error_no_devices">Geen apparaten gevonden. Zelfde wifi? Anders handmatig toevoegen.</string>
+    <string name="action_connect">Verbinden</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Terug</string>
+    <string name="cd_refresh">Vernieuwen</string>
+    <string name="cd_power">Aan/uit</string>
+    <string name="cd_reorder">Sleep om te herschikken</string>
+    <string name="connected_to">Verbonden · %1$s</string>
+    <string name="disconnected">Niet verbonden</string>
+    <string name="state_on">AAN</string>
+    <string name="state_off">UIT</string>
+    <string name="target_temp">Gewenste temperatuur</string>
+    <string name="readout_indoor">Binnen</string>
+    <string name="readout_outdoor">Buiten</string>
+    <string name="readout_power">Vermogen</string>
+
+    <string name="section_mode">Modus</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Koelen</string>
+    <string name="mode_dry">Ontv.</string>
+    <string name="mode_heat">Verw.</string>
+    <string name="mode_fan">Vent.</string>
+
+    <string name="section_fan">Ventilatorsnelheid</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1 %</string>
+    <string name="fan_silent">Stil</string>
+    <string name="fan_low">Laag</string>
+    <string name="fan_medium">Gemiddeld</string>
+    <string name="fan_high">Hoog</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automatisch</string>
+    <string name="fan_level">Niveau: %1$d %%</string>
+
+    <string name="section_status">Live status</string>
+    <string name="status_indoor">Binnentemperatuur</string>
+    <string name="status_outdoor">Buitentemperatuur</string>
+    <string name="status_power">Vermogen</string>
+    <string name="status_total">Totaal verbruik</string>
+    <string name="status_error">Foutcode</string>
+    <string name="status_error_none">geen</string>
+    <string name="status_error_code">nr. %1$d</string>
+    <string name="status_cost">Totale kosten</string>
+
+    <!-- Beta diagnostics -->
+    <string name="section_diagnostics">Diagnostiek (bèta)</string>
+    <string name="diag_beta_hint">Experimentele telemetrie. Niet elk apparaat stuurt deze door — waarden kunnen leeg blijven.</string>
+    <string name="diag_group1_title">Compressor en koudemiddel</string>
+    <string name="diag_compressor_freq">Compressorfrequentie</string>
+    <string name="diag_compressor_freq_target">Gewenste frequentie</string>
+    <string name="diag_compressor_current">Opgenomen stroom</string>
+    <string name="diag_compressor_voltage">Voedingsspanning</string>
+    <string name="diag_temp_t1">Binnenbatterij (T1)</string>
+    <string name="diag_temp_t2">Verdamper (T2)</string>
+    <string name="diag_temp_t3">Condensor (T3)</string>
+    <string name="diag_temp_t4">Buiten (T4)</string>
+    <string name="diag_temp_tp">Persleiding (TP)</string>
+    <string name="diag_group2_title">Binnenventilator en pomp</string>
+    <string name="diag_fan_speed">Ventilatorsnelheid</string>
+    <string name="diag_fan_speed_target">Gewenste snelheid</string>
+    <string name="diag_water_pump">Condenspomp</string>
+    <string name="diag_pump_on">draait</string>
+    <string name="diag_pump_off">uit</string>
+    <string name="diag_group7_title">Vermogen buitenunit</string>
+    <string name="diag_compressor_power">Opgenomen vermogen</string>
+
+    <!-- Settings: display & price -->
+    <string name="settings_display">Weergave en tarief</string>
+    <string name="unit_fahrenheit">°F (Fahrenheit) tonen</string>
+    <string name="price_per_kwh">Prijs per kWh</string>
+    <string name="price_hint">Wordt gebruikt om de totale kosten uit het verbruik te schatten.</string>
+
+    <!-- Indoor-temperature calibration -->
+    <string name="section_calibration">Kalibratie binnentemperatuur</string>
+    <string name="calibration_hint">Veel apparaten meten een tot twee graden naast de werkelijke kamertemperatuur. Vergelijk met een kamerthermometer en corrigeer de waarde hier. De app toont dan overal de gecorrigeerde waarde, gemarkeerd met een klein amberkleurig delta, en verschuift de naar het apparaat gestuurde streefwaarde met evenveel hele graden — zodat de kamer echt bereikt wat je instelt. Opgeslagen voor dit apparaat.</string>
+    <string name="calibration_none">geen correctie</string>
+    <string name="calibration_preview">Gemeten %1$s → getoond %2$s</string>
+    <string name="calibration_device_target">Naar het apparaat: %1$s — doel %2$s</string>
+    <string name="calibration_no_reading">Wachten op de eerste meting…</string>
+    <string name="calibration_reset">Terug naar 0</string>
+    <string name="calibration_less">Correctie verlagen</string>
+    <string name="calibration_more">Correctie verhogen</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Vernieuwingsinterval</string>
+    <string name="settings_poll_hint">Hoe vaak status, energie en diagnostiek worden opgevraagd zolang de app verbonden is. Kortere intervallen zijn sneller, maar geven meer wifi-verkeer.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta -->
+    <string name="settings_beta">Bètafuncties</string>
+    <string name="settings_beta_hint">Experimentele extra diagnostiek, standaard aan — elke optie voegt een opvraging per vernieuwing toe en kan hier worden uitgezet. Niet alle apparaten ondersteunen dit. Waarden verschijnen op het tabblad Status en worden vastgelegd in de geschiedenis (als opname aanstaat).</string>
+    <string name="beta_group1">Compressordiagnostiek</string>
+    <string name="beta_group1_desc">Frequentie, stroom, spanning en koudemiddeltemperaturen (T1–T4, persleiding)</string>
+    <string name="beta_group2">Binnenventilator en pomp</string>
+    <string name="beta_group2_desc">Werkelijke snelheid van de binnenventilator en toestand van de condenspomp</string>
+    <string name="beta_group7">Vermogen buitenunit</string>
+    <string name="beta_group7_desc">Actueel opgenomen vermogen van de buitenunit, in watt</string>
+
+    <string name="section_options">Opties</string>
+    <string name="option_swing">Swing (lamellen)</string>
+    <string name="option_eco">Eco-modus</string>
+    <string name="option_beep">Pieptoon</string>
+    <string name="option_anion">Ionisator</string>
+    <string name="option_out_silent">Buitenunit stil</string>
+    <string name="option_self_clean">Zelfreiniging</string>
+    <string name="option_display">Display / led</string>
+
+    <string name="section_gear">Compressorbegrenzing</string>
+    <string name="gear_full">Vol</string>
+    <string name="gear_75">75 %</string>
+    <string name="gear_50">50 %</string>
+
+    <string name="section_sleep">Slaaptimer</string>
+    <string name="sleep_active">Gaat uit over %1$d min</string>
+    <string name="sleep_cancel">Timer annuleren</string>
+    <string name="sleep_custom">Aangepast…</string>
+    <string name="sleep_custom_title">Slaaptimer</string>
+    <string name="sleep_custom_label">Minuten</string>
+    <string name="action_start">Starten</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Tip: houd een kaart ingedrukt om die naar een andere plek te slepen.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Apparaat handmatig toevoegen</string>
+    <string name="manual_hint">Voor verbindingen zonder broadcast-detectie. Het apparaat-ID vind je in de Midea/SmartHome-app of via een netwerkscan.</string>
+    <string name="field_ip">IP-adres</string>
+    <string name="field_port">Poort</string>
+    <string name="field_id">Apparaat-ID (decimaal)</string>
+    <string name="field_name">Naam (optioneel)</string>
+    <string name="action_add">Toevoegen</string>
+    <string name="action_cancel">Annuleren</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Token exporteren</string>
+    <string name="export_title">Token exporteren</string>
+    <string name="export_hint">Met deze gegevens bedien je dit apparaat lokaal zonder cloud — bewaar ze als back-up of gebruik ze in andere tools. Houd ze privé.</string>
+    <string name="export_none">Nog geen token. Verbind één keer online met het apparaat en exporteer daarna.</string>
+    <string name="export_copy">Kopiëren</string>
+    <string name="export_share">Delen</string>
+    <string name="export_copied">Gekopieerd naar het klembord</string>
+    <string name="action_close">Sluiten</string>
+    <string name="import_button">Importeren</string>
+    <string name="import_title">Token importeren</string>
+    <string name="import_hint">Plak een tokenblok (uit Exporteren, msmart, …). Het apparaat werkt daarna offline.</string>
+    <string name="import_field">Tokenblok</string>
+    <string name="import_ok">Token geïmporteerd</string>
+    <string name="import_error">Dat tokenblok kon niet worden gelezen</string>
+
+    <!-- Known (cached) devices -->
+    <string name="known_devices">Opgeslagen apparaten</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Airco aan/uit</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Voorbeeld (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Verbinden mislukt: %1$s</string>
+    <string name="error_command">Opdracht mislukt: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Voordat je begint</string>
+    <string name="disclaimer_body">ClimaPilot is een onafhankelijke app en is niet verbonden aan Midea, en wordt door Midea niet onderschreven of ondersteund. De app bedient compatibele airconditioners via je lokale wifi-netwerk.\n\nZorg dat je apparaat correct is geïnstalleerd en veilig te gebruiken is voordat je opdrachten stuurt. Je gebruikt deze app op eigen risico; de makers aanvaarden geen aansprakelijkheid voor schade of verlies.\n\nGemeten waarden zoals het vermogen komen van het apparaat en kunnen onnauwkeurig zijn.\n\nLet op: bij de eerste verbinding met een apparaat haalt ClimaPilot een eenmalig toegangstoken op bij de server van Midea (geen account nodig). Daarna verloopt de bediening volledig lokaal — je kunt de app zelfs internettoegang ontzeggen.</string>
+    <string name="disclaimer_accept">Begrepen</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Snelle aircobediening</string>
+    <string name="widget_not_connected">Niet verbonden</string>
+    <string name="widget_off">Uit</string>
+    <string name="widget_on">Aan</string>
+    <string name="widget_indoor">Binnen %1$s</string>
+    <string name="widget_power">Aan/uit</string>
+    <string name="widget_cool_down">Kouder</string>
+    <string name="widget_warm_up">Warmer</string>
+    <string name="widget_mode">Modus</string>
+    <string name="widget_all_label">Airco — alle bediening</string>
+    <string name="widget_power_label">Airco — aan/uit</string>
+    <string name="widget_temp_label">Airco — temperatuur</string>
+    <string name="widget_mode_label">Airco — modus</string>
+    <string name="widget_all_desc">Naam, temperatuur, aan/uit en modus</string>
+    <string name="widget_power_desc">De airco aan- of uitzetten</string>
+    <string name="widget_temp_desc">De temperatuur hoger of lager zetten</string>
+    <string name="widget_mode_desc">De werkingsmodus wisselen</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Instellingen</string>
+    <string name="cd_settings">Instellingen</string>
+    <string name="settings_version">Versie %1$s</string>
+    <string name="changelog_title">Wat is er nieuw</string>
+    <string name="support_title">Ondersteun de ontwikkeling</string>
+    <string name="support_body">ClimaPilot is gratis en zonder advertenties. Als de app je helpt, houdt een kleine bijdrage haar in leven — bedankt!</string>
+    <string name="support_kofi">Trakteer me op een koffie (Ko-fi)</string>
+    <string name="support_paypal">Bijdrage via PayPal</string>
+    <string name="credits_title">Met dank aan</string>
+    <string name="credits_body">Het lokale Midea-protocol van ClimaPilot is een Kotlin-port van het uitstekende project midea-msmart van @mill1000. Enorm bedankt — zonder dat project bestond deze app niet.</string>
+    <string name="credits_link">midea-msmart op GitHub</string>
+    <string name="changelog_0_6_6_title">Versie 0.6.6</string>
+    <string name="changelog_0_6_6_body">•  Nieuw: kalibratie van de binnentemperatuur (tabblad Opties) — corrigeert een sensor die tot ±5 K afwijkt. De gecorrigeerde waarde wordt overal getoond en vastgelegd, gemarkeerd met een klein amberkleurig delta, en de naar het apparaat gestuurde streefwaarde wordt met evenveel hele graden verschoven, zodat de kamer echt bereikt wat je instelt\n•  Opgelost: de gewenste temperatuur gaat nu met hele graden — Midea-apparaten negeren halvegraadwaarden en rondden ze stilzwijgend af, waardoor een ‘,5’-tik bij de volgende vernieuwing terugsprong\n•  Nieuw: vertaald naar Duits, Spaans, Frans, Italiaans, Nederlands en Portugees; de taal van de app is los van de telefoontaal te kiezen</string>
+    <string name="changelog_0_6_5_title">Versie 0.6.5</string>
+    <string name="changelog_0_6_5_body">•  Nieuw: instelbaar vernieuwingsinterval (2/6/10/30 s) bij Instellingen\n•  Nieuw: diagnostiek wordt vastgelegd in de geschiedenis met drie nieuwe grafieken — compressorfrequentie, vermogen buitenunit en snelheid van de binnenventilator\n•  Gewijzigd: bètadiagnostiek staat nu standaard aan (nog steeds per groep uit te zetten)</string>
+    <string name="changelog_0_6_4_title">Versie 0.6.4</string>
+    <string name="changelog_0_6_4_body">•  Nieuw: diagnostiek (bèta) op het tabblad Status — compressorfrequentie/-stroom/-spanning, koudemiddeltemperaturen (T1–T4, persleiding), snelheid binnenventilator, condenspomp en vermogen buitenunit. Per groep in te schakelen via Instellingen → Bètafuncties\n•  Opgelost: het uitzetten van de stille buitenmodus geeft de snelheidsbegrenzing van de compressor meteen weer vrij\n•  Opgelost: de schakelaar voor de stille buitenmodus toont na opnieuw verbinden de werkelijke stand van het apparaat\n•  Opgelost: compressorbegrenzing — ‘50 %’ en ‘75 %’ waren verwisseld; ‘50 %’ is nu echt de strengste begrenzing\n•  Opgelost: uit msmart-ng geïmporteerde tokens verbinden nu offline in plaats van opnieuw uit de cloud te halen\n•  Verbeterd: het zoeken naar apparaten gebruikt ook subnet-broadcasts voor routers die de globale broadcast blokkeren</string>
+    <string name="changelog_0_6_3_title">Versie 0.6.3</string>
+    <string name="changelog_0_6_3_body">•  Opgelost: de stille buitenmodus werkt nu echt — de app stuurde een aan-waarde die het apparaat stilzwijgend weigerde; nu wordt de verwachte waarde gestuurd (zoals msmart-ng)</string>
+    <string name="changelog_0_6_2_title">Versie 0.6.2</string>
+    <string name="changelog_0_6_2_body">•  Opgelost: de pieptoon ging verloren na opnieuw verbinden — die wordt nu opgeslagen en opnieuw toegepast\n•  Opmerking toegevoegd: veel apparaten piepen alleen bij aan/uit, niet bij andere wijzigingen</string>
+    <string name="changelog_0_6_1_title">Versie 0.6.1</string>
+    <string name="changelog_0_6_1_body">•  Opgelost: de ventilator op ‘Auto’ springt niet meer naar hoog — die blijft op Auto\n•  Opgelost: de ionisator gaat niet meer uit als je de temperatuur of de modus wijzigt of een scène toepast\n•  Opgelost: swing, display/led en ionisator tonen de werkelijke stand van het apparaat (teruggelezen van de airco), inclusief wijzigingen met de fysieke afstandsbediening\n•  Eco: eco inschakelen verhoogt de streefwaarde nu naar 24 °C als die lager is, omdat het apparaat eco pas vanaf 24 °C toestaat</string>
+    <string name="changelog_0_6_title">Versie 0.6</string>
+    <string name="changelog_0_6_body">•  Nieuw: ingebouwde updater — zoekt op GitHub naar nieuwere versies en installeert ze met één tik (je bevestigt elke installatie). De automatische controle bij het opstarten kun je uitzetten in Instellingen\n•  Nieuw: schakelaar Display / led bij Opties — het paneellampje van de binnenunit aan- of uitzetten</string>
+    <string name="changelog_0_5_title">Versie 0.5</string>
+    <string name="changelog_0_5_body">•  Nieuw: weekplanning — koppel scènes aan terugkerende dag- en tijdvakken (bijv. maximaal koelen op maandag, 6–18) op een visuele weekkalender; uit of aan laten aan het einde\n•  Draait op de achtergrond, ook als de telefoon in rust is op wifi (bestand tegen Doze), en overleeft herstarts\n•  Let op: zolang een planning actief is toont Android het weksymbool; sta achtergrondgebruik toe via Instellingen ▸ Betrouwbare timers voor betrouwbare tijden</string>
+    <string name="changelog_0_4_2_title">Versie 0.4.2</string>
+    <string name="changelog_0_4_2_body">•  Opgelost: de alles-in-één widget laadde niet (‘Probleem bij laden van widget’)\n•  IR-afstandsbediening: schakelaars voor swing, stil, turbo en eco toegevoegd — de laatste stand wordt nu ook onthouden\n•  Ventilatorsnelheid: snelinstelling van 1 % toegevoegd</string>
+    <string name="changelog_0_4_1_title">Versie 0.4.1</string>
+    <string name="changelog_0_4_1_body">•  Nieuw: IR-afstandsbedieningsmodus (infrarood) — bedien de airco als een afstandsbediening op telefoons met een IR-zender, zonder wifi\n•  Opgelost: de app kon niet over een eerdere versie heen worden bijgewerkt (de ondertekeningssleutel is hersteld)</string>
+    <string name="changelog_0_4_title">Versie 0.4</string>
+    <string name="changelog_0_4_body">•  Nieuwe navigatie met tabbladen: Bediening · Opties · Scènes · Status · Geschiedenis — wordt een zijbalk op tablets en in liggende stand\n•  Energie- en filtergeschiedenis met grafieken — vermogen, binnen-/buitentemperatuur en ventilatorniveau, per uur / dag / week / maand of een gekozen dag, per airco; optionele achtergrondopname elke ~15 min (wifi)\n•  Wear OS-app — bedien de airco vanaf je horloge\n•  Betrouwbare uit-/slaaptimer — met nieuwe pogingen, overleeft een herstart, met aftelmelding (nu uit / annuleren)\n•  Automatisch uitschakelen na een maximale looptijd\n•  App-vergrendeling met vingerafdruk of pincode\n•  Modustegel voor Snelle instellingen · snelkoppelingen (uit / scène / demo)\n•  Hulp bij ‘Betrouwbare timers’ (batterijoptimalisatie en automatisch starten van de fabrikant)\n•  Vernieuwde AAN/UIT-schuifknop en compactere modus- en ventilatorbediening</string>
+    <string name="changelog_0_3_2_title">Versie 0.3.2</string>
+    <string name="changelog_0_3_2_body">•  Crash verholpen bij het starten van de slaaptimer op sommige toestellen (bijv. Xiaomi/HyperOS)</string>
+    <string name="changelog_0_3_1_title">Versie 0.3.1</string>
+    <string name="changelog_0_3_1_body">•  De slaaptimer zet de airco nu op tijd uit, ook als de app gesloten is en de telefoon in rust staat (Doze)</string>
+    <string name="changelog_0_3_title">Versie 0.3</string>
+    <string name="changelog_0_3_body">•  Opgelost: een opgeslagen apparaat kon na een zoekopdracht twee keer verschijnen\n•  Opgelost: de slaaptimer zet de airco ook uit als de app gesloten is\n•  Widgets per functie geordend: aparte widgets voor aan/uit, temperatuur en modus, plus een vernieuwde alles-in-één widget\n•  Moduswidget: kies een modus direct uit de chips (de actieve is gemarkeerd) in plaats van doorschakelen\n•  Alles-in-één widget vernieuwd: gecentreerde aan/uit-knop, verbindingslampje, temperatuur- en moduschips</string>
+    <string name="changelog_0_2_title">Versie 0.2</string>
+    <string name="changelog_0_2_body">•  Snelle scènes met volledige editor en dagelijkse planning\n•  Live status: vermogen, totaal verbruik en geschatte kosten\n•  Opties: swing, eco, pieptoon — plus ionisator, stille buitenunit en zelfreiniging waar het apparaat dat ondersteunt\n•  Compressorbegrenzing; slaaptimer met opgeslagen eigen tijdsduren\n•  Offline tokenopslag — internet alleen bij de eerste verbinding; tokens exporteren en importeren\n•  Opgeslagen apparaten voor direct offline opnieuw verbinden\n•  Herschik de bedieningskaarten met de sleepgreep\n•  Widget voor het startscherm in 1×1 / 2×2 / 4×2 (aan/uit, temperatuur, modus) en tegel voor Snelle instellingen\n•  °C/°F-schakelaar en prijs per kWh</string>
+    <string name="changelog_0_1_title">Versie 0.1</string>
+    <string name="changelog_0_1_body">•  Eerste versie\n•  Lokale bediening van Midea-airconditioners via wifi\n•  Modus, temperatuur, ventilator, swing, eco en pieptoon\n•  Live status: binnen-/buitentemperatuur, vermogen, verbruik en foutcode\n•  Snelle scènes en slaaptimer\n•  Compressorbegrenzing\n•  Demomodus zonder apparaat</string>
+
+    <!-- Background reliability -->
+    <string name="reliability_title">Betrouwbare timers</string>
+    <string name="reliability_body">Sta ClimaPilot toe op de achtergrond te draaien, zodat de slaaptimer en scèneplanningen ook afgaan als de app gesloten is.</string>
+    <string name="reliability_battery_ok">Batterijoptimalisatie: uit ✓</string>
+    <string name="reliability_battery_warn">Batterijoptimalisatie staat aan — timers kunnen te laat of niet afgaan.</string>
+    <string name="reliability_battery_action">Achtergrond toestaan (batterij)</string>
+    <string name="reliability_autostart_action">Automatisch starten toestaan (fabrikant)</string>
+
+    <!-- In-app updater -->
+    <string name="update_title">App-updates</string>
+    <string name="update_body">Nieuwe versies worden van GitHub gehaald. Je bevestigt de installatie altijd zelf.</string>
+    <string name="update_current">Geïnstalleerd: %1$s</string>
+    <string name="update_auto_label">Automatisch controleren bij starten</string>
+    <string name="update_check_button">Controleren op updates</string>
+    <string name="update_checking">Controleren…</string>
+    <string name="update_uptodate">Je hebt de nieuwste versie (%1$s).</string>
+    <string name="update_error">Controleren op updates is mislukt. Controleer je verbinding en probeer het opnieuw.</string>
+    <string name="update_available_title">Update beschikbaar</string>
+    <string name="update_available_body">Versie %1$s is beschikbaar — je hebt %2$s.</string>
+    <string name="update_install">Bijwerken</string>
+    <string name="update_downloading">Downloaden… %1$d %%</string>
+    <string name="update_later">Later</string>
+    <string name="update_failed">Downloaden mislukt. Probeer het later opnieuw.</string>
+    <string name="update_verify_failed">De download is niet door de beveiligingscontrole gekomen en is niet geïnstalleerd.</string>
+    <string name="update_need_permission">Sta ClimaPilot toe apps te installeren en tik daarna opnieuw op Bijwerken.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Uitschakelen</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Toepassen: %1$s</string>
+
+    <!-- Auto power-off -->
+    <string name="autooff_title">Automatisch uitschakelen</string>
+    <string name="autooff_body">Een veiligheidsuitschakeling: draait de airco langer dan dit, dan gaat hij vanzelf uit — het lokale alternatief voor een afwezigheidstimer (je telefoon bereikt de airco niet meer zodra je van de wifi af bent). 0 = uit.</string>
+    <string name="autooff_hours_label">Uitschakelen na (uren)</string>
+
+    <!-- Sleep-timer notification -->
+    <string name="notif_channel_timer">Slaaptimer</string>
+    <string name="notif_timer_title">Slaaptimer loopt</string>
+    <string name="notif_timer_text">De airco gaat uit als het aftellen klaar is.</string>
+    <string name="notif_timer_off_now">Nu uit</string>
+    <string name="notif_timer_cancel">Annuleren</string>
+
+    <!-- App lock -->
+    <string name="lock_card_title">App-vergrendeling</string>
+    <string name="lock_card_body">Vraag om je vingerafdruk, gezicht of schermpincode om ClimaPilot te openen — zodat niemand anders je airco kan bedienen.</string>
+    <string name="lock_card_switch">Ontgrendelen vereisen bij openen</string>
+    <string name="lock_title">ClimaPilot ontgrendelen</string>
+    <string name="lock_subtitle">Verifieer jezelf om de airco te bedienen</string>
+    <string name="lock_unlock">Ontgrendelen</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Aircomodus</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Geschiedenis</string>
+    <string name="history_card_title">Energie en filter</string>
+    <string name="history_card_body">Bekijk het recente en totale verbruik en houd bij wanneer het filter schoongemaakt moet worden.</string>
+    <string name="history_card_open">Geschiedenis openen</string>
+    <string name="history_power_title">Vermogen (24 u)</string>
+    <string name="history_empty">Nog te weinig gegevens — gebruik de airco een tijdje en kijk later terug.</string>
+    <string name="history_peak">Piek: %1$d W</string>
+    <string name="history_totals_title">Verbruik</string>
+    <string name="history_total_kwh">Totaal: %1$.1f kWh</string>
+    <string name="history_total_cost">Geschatte kosten: %1$.2f €</string>
+    <string name="history_filter_title">Filter</string>
+    <string name="history_filter_runtime">Looptijd sinds laatste reiniging: %1$d u van %2$d u</string>
+    <string name="history_filter_due">Tijd om het filter schoon te maken.</string>
+    <string name="history_filter_reset">Filter gereinigd (resetten)</string>
+    <string name="history_filter_hint">Dit is een onderhoudsherinnering binnen de app, op basis van de looptijd. De filterindicator van het apparaat zelf wordt niet uitgelezen of gereset — doe dat op de airco.</string>
+    <string name="option_beep_hint">Bevestigingstoon. Veel apparaten piepen alleen bij aan/uit, niet bij andere wijzigingen.</string>
+    <string name="history_record_title">Geschiedenis opnemen</string>
+    <string name="history_record_body">Als dit aanstaat, legt ClimaPilot vermogen, temperaturen en ventilator vast en bevraagt de airco ongeveer elke 15 min op de achtergrond (alleen wifi). Standaard uit.</string>
+    <string name="history_record_switch">Aircogegevens opnemen</string>
+    <string name="history_indoor_title">Binnentemperatuur (24 u)</string>
+    <string name="history_outdoor_title">Buitentemperatuur (24 u)</string>
+    <string name="history_fan_title">Ventilatorniveau (24 u)</string>
+    <string name="history_comp_hz_title">Compressorfrequentie (bèta)</string>
+    <string name="history_comp_w_title">Vermogen buitenunit (bèta)</string>
+    <string name="history_fan_rpm_title">Snelheid binnenventilator (bèta)</string>
+    <string name="history_metric_summary">Nu %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Uur</string>
+    <string name="range_day">Dag</string>
+    <string name="range_week">Week</string>
+    <string name="range_month">Maand</string>
+    <string name="history_pick_day">Kies een dag</string>
+    <string name="history_day">Dag: %1$s</string>
+    <string name="history_range_kwh">In deze periode: %1$.1f kWh</string>
+    <string name="history_range_cost">Geschatte kosten: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Bevalt ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot is gratis en zonder advertenties. Als de app een plek op je telefoon heeft verdiend, houdt een kleine bijdrage haar in leven — bedankt!</string>
+    <string name="donate_later">Misschien later</string>
+    <string name="donate_already">Al gesteund</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR-afstandsbediening</string>
+    <string name="ir_remote_entry">IR-afstandsbediening (infrarood)</string>
+    <string name="ir_remote_subtitle">Infrarood · alleen zenden</string>
+    <string name="ir_no_emitter">Deze telefoon heeft geen infraroodzender</string>
+    <string name="option_quiet">Stil</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Infrarood werkt maar één kant op — deze schakelaars tonen wat het laatst is gestuurd, niet de werkelijke stand van het apparaat.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Bediening</string>
+    <string name="nav_status">Status</string>
+    <string name="nav_options">Opties</string>
+    <string name="nav_scenes">Scènes</string>
+    <string name="nav_history">Geschiedenis</string>
+</resources>

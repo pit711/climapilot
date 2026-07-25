@@ -8,6 +8,7 @@ import android.content.Intent
 import android.widget.RemoteViews
 import com.climapilot.free.MainActivity
 import com.climapilot.free.R
+import com.climapilot.free.SettingsRepo
 import com.climapilot.free.TokenRepo
 import com.climapilot.free.midea.MideaAcSession
 import kotlinx.coroutines.CoroutineScope
@@ -17,11 +18,11 @@ import kotlin.math.roundToInt
 
 /**
  * EN: Home-screen widget: shows the AC's target/indoor temperature and power state, with quick
- *     actions for power and ±0.5 °C. Commands reuse the same local LAN protocol as the app and use the
+ *     actions for power and ±1 °C. Commands reuse the same local LAN protocol as the app and use the
  *     cached token, so the widget controls the AC fully OFFLINE (no internet needed). All text is
  *     resolved from string resources, so the widget follows the device language.
  * DE: Homescreen-Widget: zeigt Soll-/Innentemperatur und Ein-Aus-Zustand der Klima, mit Schnellaktionen
- *     für Ein/Aus und ±0,5 °C. Die Befehle nutzen dasselbe lokale LAN-Protokoll wie die App und das
+ *     für Ein/Aus und ±1 °C. Die Befehle nutzen dasselbe lokale LAN-Protokoll wie die App und das
  *     gecachte Token, sodass das Widget die Klima vollständig OFFLINE steuert (kein Internet nötig).
  *     Alle Texte stammen aus String-Ressourcen, das Widget folgt also der Gerätesprache.
  */
@@ -87,10 +88,16 @@ class AcWidgetProvider : AppWidgetProvider() {
         }
         // EN: Optimistically update the widget first for snappy feedback. DE: Das Widget zuerst optimistisch aktualisieren für flotte Rückmeldung.
         val newPower = if (action == Action.POWER) !snap.powerOn else snap.powerOn
+        // EN: Whole-degree steps — Midea units ignore the protocol's half-degree bit and round the
+        //     setpoint anyway. Rounding the stored value too repairs any half degree saved by an older
+        //     build. DE: Ganzgrad-Schritte — Midea-Geräte ignorieren das Halbgrad-Bit des Protokolls und
+        //     runden den Sollwert ohnehin. Das Runden des gespeicherten Werts repariert zugleich ein von
+        //     einem älteren Build gespeichertes halbes Grad.
+        val base = snap.targetTemp.roundToInt().toDouble()
         val newTarget = when (action) {
-            Action.UP -> (snap.targetTemp + 0.5).coerceIn(16.0, 30.0)
-            Action.DOWN -> (snap.targetTemp - 0.5).coerceIn(16.0, 30.0)
-            else -> snap.targetTemp
+            Action.UP -> (base + 1.0).coerceIn(16.0, 30.0)
+            Action.DOWN -> (base - 1.0).coerceIn(16.0, 30.0)
+            else -> base
         }
         // EN: Cycle Auto→Cool→Dry→Heat→Fan→Auto. DE: Auto→Kühlen→Trocknen→Heizen→Lüften→Auto durchschalten.
         val newMode = if (action == Action.MODE) (if (snap.mode in 1..4) snap.mode + 1 else 1) else snap.mode
@@ -107,7 +114,15 @@ class AcWidgetProvider : AppWidgetProvider() {
                 session.connect()
                 when (action) {
                     Action.POWER -> session.setPower(newPower)
-                    Action.UP, Action.DOWN -> { session.tempC = newTarget; session.apply() }
+                    // EN: The widget shows the room temperature the user wants; the unit gets it shifted by
+                    //     the indoor calibration, exactly like the in-app stepper does.
+                    // DE: Das Widget zeigt die vom Nutzer gewünschte Raumtemperatur; das Gerät bekommt sie um
+                    //     die Innenraum-Kalibrierung verschoben, genau wie beim Regler in der App.
+                    Action.UP, Action.DOWN -> {
+                        val shift = SettingsRepo.indoorOffset(ctx, device.id).roundToInt()
+                        session.tempC = (newTarget - shift).coerceIn(16.0, 30.0)
+                        session.apply()
+                    }
                     Action.MODE -> session.setMode(newMode)
                 }
                 session.close()

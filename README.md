@@ -38,6 +38,7 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 - 💨 Fan speed presets + fine slider, swing, eco mode, beep
 - 🌬️ Device-specific modes where supported: ionizer, outdoor-silent, self-clean
 - 📊 Live status: indoor / outdoor temperature, power draw, consumption, **estimated cost** (price per kWh)
+- 🎚️ **Indoor temperature calibration** — correct a sensor that reads off by up to ±5 K (0.5 K steps). The corrected reading is shown everywhere with a small amber delta, **and the setpoint sent to the unit is shifted by the same whole degrees**, so the room actually reaches what you set. Saved per device.
 - 🔬 **Diagnostics (beta)** — compressor frequency, current & voltage, refrigerant-circuit temperatures (T1–T4, discharge pipe), indoor fan rpm, condensate pump and outdoor-unit watts; opt-in per group under Settings → Beta features
 - ⚡ Quick scenes with a full editor & **daily schedule**
 - 📅 **Weekly day-planner** — assign scenes to recurring weekday + time windows (e.g. *max cooling on Mondays, 6–18*) on a visual week calendar; each window applies its scene at the start and can switch the AC off at the end. Runs in the background even while the phone is idle on Wi-Fi.
@@ -51,6 +52,7 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 - 🏠 **Home-screen widgets** — power, temperature, mode picker, and an all-in-one — + **Quick Settings tiles** (power & mode) — control offline from the home screen
 - 🔒 Optional **app lock** (fingerprint / PIN) · launcher shortcuts (off / scene / demo)
 - 🔑 Export / import the device token (offline backup, reuse in other tools)
+- 🌍 **7 languages** — English, German, Spanish, French, Italian, Dutch, Portuguese; the app language can be picked separately from the phone language
 - 👀 Demo mode — explore the UI without a device
 
 ### Install
@@ -85,6 +87,7 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 - 💨 Lüfter-Presets + Feinregler, Swing, Eco-Modus, Signalton
 - 🌬️ Gerätespezifische Modi, wo unterstützt: Ionisierer, Außen-Leise, Selbstreinigung
 - 📊 Live-Status: Innen-/Außentemperatur, Leistung, Verbrauch, **geschätzte Kosten** (Preis pro kWh)
+- 🎚️ **Innentemperatur-Kalibrierung** — einen Fühler korrigieren, der bis zu ±5 K danebenliegt (0,5-K-Schritte). Der korrigierte Wert erscheint überall mit einem kleinen bernsteinfarbenen Delta, **und der an das Gerät gesendete Sollwert wird um dieselben ganzen Grad verschoben** — damit der Raum wirklich erreicht, was eingestellt ist. Gilt pro Gerät.
 - 🔬 **Diagnose (Beta)** — Kompressor-Frequenz, -Strom & -Spannung, Kältekreis-Temperaturen (T1–T4, Druckrohr), Innenlüfterdrehzahl, Kondensatpumpe und Watt des Außengeräts; je Gruppe unter Einstellungen → Beta-Funktionen aktivierbar
 - ⚡ Schnell-Szenen mit vollem Editor & **Tagesplan**
 - 📅 **Wochen-Tagesplaner** — Szenen wiederkehrenden Wochentag-+Zeit-Fenstern zuweisen (z. B. *maximal kühlen montags 6–18*) auf einem visuellen Wochenkalender; jedes Fenster wendet beim Start seine Szene an und kann die Klima am Ende ausschalten. Läuft im Hintergrund, auch wenn das Handy im WLAN ruht.
@@ -98,6 +101,7 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 - 🏠 **Homescreen-Widgets** — Ein/Aus, Temperatur, Modus-Auswahl und ein Alles-Widget — + **Schnelleinstellungen-Kacheln** (Ein/Aus & Modus) — offline vom Startbildschirm steuern
 - 🔒 Optionale **App-Sperre** (Fingerabdruck / PIN) · Launcher-Shortcuts (Aus / Szene / Demo)
 - 🔑 Geräte-Token exportieren / importieren (Offline-Backup, Nutzung in anderen Tools)
+- 🌍 **7 Sprachen** — Englisch, Deutsch, Spanisch, Französisch, Italienisch, Niederländisch, Portugiesisch; die App-Sprache lässt sich getrennt von der Telefonsprache wählen
 - 👀 Demo-Modus — UI ohne Gerät ausprobieren
 
 ### Installation

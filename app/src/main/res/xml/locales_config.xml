@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  EN: Languages the app ships translated strings for. Declaring them lets Android offer a per-app
+      language picker (System settings ▸ Apps ▸ ClimaPilot ▸ Language), so the app can be used in a
+      different language than the phone. The first entry is the default that untranslated locales fall
+      back to.
+  DE: Sprachen, für die die App übersetzte Texte mitbringt. Die Deklaration lässt Android eine
+      App-Sprachauswahl anbieten (Systemeinstellungen ▸ Apps ▸ ClimaPilot ▸ Sprache), sodass die App in
+      einer anderen Sprache als das Telefon laufen kann. Der erste Eintrag ist die Vorgabe, auf die
+      nicht übersetzte Sprachen zurückfallen.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android"
+    android:defaultLocale="en">
+    <locale android:name="en" />
+    <locale android:name="de" />
+    <locale android:name="es" />
+    <locale android:name="fr" />
+    <locale android:name="it" />
+    <locale android:name="nl" />
+    <locale android:name="pt" />
+</locale-config>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  EN: Temperature-only widget. − / target temperature / + ; the buttons nudge the setpoint by 0.5 °C.
-  DE: Reines Temperatur-Widget. − / Zieltemperatur / + ; die Knöpfe ändern den Sollwert um 0,5 °C.
+  EN: Temperature-only widget. − / target temperature / + ; the buttons nudge the setpoint by 1 °C.
+  DE: Reines Temperatur-Widget. − / Zieltemperatur / + ; die Knöpfe ändern den Sollwert um 1 °C.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"

@@ -138,6 +138,17 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     // EN: Display preferences. DE: Anzeige-Einstellungen.
     var useFahrenheit by mutableStateOf(false); private set
     var pricePerKwh by mutableStateOf(0.0); private set
+
+    // EN: ---- indoor-temperature calibration ---- a manual correction (kelvin, −5…+5) for units whose
+    //     built-in sensor reads off the real room temperature. Loaded per device on connect; applied to
+    //     every reading the app shows or records (see [calibrated]).
+    // DE: ---- Innentemperatur-Kalibrierung ---- eine manuelle Korrektur (Kelvin, −5…+5) für Geräte, deren
+    //     eingebauter Fühler neben der echten Raumtemperatur liegt. Beim Verbinden je Gerät geladen; auf
+    //     jeden Wert angewandt, den die App anzeigt oder aufzeichnet (siehe [calibrated]).
+    var indoorOffset by mutableStateOf(0.0); private set
+    // EN: The raw, uncorrected sensor reading — kept so the calibration UI can show "measured → shown".
+    // DE: Der rohe, unkorrigierte Fühlerwert — damit die Kalibrier-UI „gemessen → angezeigt" zeigen kann.
+    var indoorTempRaw by mutableStateOf<Double?>(null); private set
     // EN: Auto power-off after the AC runs this many hours (0 = off). DE: Auto-Aus, nachdem die Klima so viele Stunden läuft (0 = aus).
     var maxRuntimeHours by mutableStateOf(0); private set
     // EN: Record the AC history + run the background poll (off by default). DE: Klima-Verlauf aufzeichnen + Hintergrund-Poll (standardmäßig aus).
@@ -181,6 +192,13 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     private var sleepJob: Job? = null
 
     private var session: MideaAcSession? = null
+    // EN: The setpoint we last handed to the unit. A read-back that merely echoes it must not overwrite
+    //     the user's target — that matters when the calibration compensation had to be clamped at the
+    //     16–30 °C limit and the two therefore no longer differ by exactly the compensation.
+    // DE: Der zuletzt an das Gerät übergebene Sollwert. Ein Rücklesen, das ihn nur widerspiegelt, darf das
+    //     Ziel des Nutzers nicht überschreiben — wichtig, wenn die Kalibrier-Kompensation an der Grenze
+    //     16–30 °C begrenzt werden musste und beide sich daher nicht mehr exakt um sie unterscheiden.
+    private var lastSentDeviceTemp: Double? = null
     private var refreshJob: Job? = null
     private val lock = Mutex()   // EN: serialise socket access / DE: Socket-Zugriff serialisieren
 
@@ -229,6 +247,43 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     fun updatePricePerKwh(value: Double) {
         pricePerKwh = value
         SettingsRepo.setPricePerKwh(getApplication(), value)
+    }
+
+    /**
+     * EN: Apply the indoor-temperature calibration to a device reading. This is the one place the
+     *     correction is added, so every consumer downstream — hero readout, widget, history — sees the
+     *     same corrected value. The untouched sensor value is kept in [indoorTempRaw] for the
+     *     calibration UI.
+     * DE: Die Innentemperatur-Kalibrierung auf einen Gerätewert anwenden. Das ist die einzige Stelle, an
+     *     der die Korrektur addiert wird — alle Abnehmer (Hero-Anzeige, Widget, Verlauf) sehen damit
+     *     denselben korrigierten Wert. Der unveränderte Fühlerwert bleibt für die Kalibrier-UI in
+     *     [indoorTempRaw].
+     */
+    private fun calibrated(s: AcState): AcState {
+        indoorTempRaw = s.indoorTemp
+        val raw = s.indoorTemp ?: return s
+        return if (indoorOffset == 0.0) s else s.copy(indoorTemp = raw + indoorOffset)
+    }
+
+    /**
+     * EN: Set the indoor-temperature correction for the connected device and persist it. The reading
+     *     already on screen is re-corrected right away, so ± taps move the number live instead of only
+     *     after the next poll. When the correction changes the whole-degree setpoint shift, the target is
+     *     re-sent immediately — otherwise the unit would keep regulating to the old setpoint until the
+     *     next temperature tap. Without a device there is nothing to calibrate, so the call is a no-op.
+     * DE: Die Innentemperatur-Korrektur für das verbundene Gerät setzen und speichern. Der bereits
+     *     angezeigte Wert wird sofort neu korrigiert, sodass ±-Tipper die Zahl live bewegen statt erst
+     *     beim nächsten Poll. Ändert die Korrektur die Sollwert-Verschiebung in ganzen Grad, wird das Ziel
+     *     sofort neu gesendet — sonst würde das Gerät bis zum nächsten Temperatur-Tipper weiter auf den
+     *     alten Sollwert regeln. Ohne Gerät gibt es nichts zu kalibrieren — der Aufruf tut dann nichts.
+     */
+    fun updateIndoorOffset(value: Double) {
+        val dev = connectedDevice ?: return
+        val shiftBefore = tempCompensation
+        indoorOffset = value.coerceIn(-SettingsRepo.INDOOR_OFFSET_MAX, SettingsRepo.INDOOR_OFFSET_MAX)
+        SettingsRepo.setIndoorOffset(getApplication(), dev.id, indoorOffset)
+        indoorTempRaw?.let { raw -> live = live?.copy(indoorTemp = raw + indoorOffset) }
+        if (tempCompensation != shiftBefore) sendTemp(tempC) else publishWidget()
     }
 
     /** EN: Set the "auto power-off after N hours" safety duration and persist (0 = off). DE: Die „Auto-Aus nach N Stunden"-Sicherheitsdauer setzen und speichern (0 = aus). */
@@ -495,6 +550,10 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
                 session = s
                 connectedDevice = device
                 status = Status.Connected
+                // EN: Load this unit's temperature calibration before the first read, so the very first
+                //     reading shown is already corrected. DE: Die Temperatur-Kalibrierung dieses Geräts vor
+                //     dem ersten Lesen laden, damit schon der erste angezeigte Wert korrigiert ist.
+                indoorOffset = SettingsRepo.indoorOffset(ctx, device.id)
                 // EN: pull current state + capabilities right away / DE: aktuellen Zustand + Fähigkeiten sofort abrufen
                 val caps = s.queryCapabilities()
                 rateLevels = caps?.rateLevels ?: 0
@@ -537,9 +596,14 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         // EN: Show all optional toggles in demo so the UI can be explored. DE: In der Demo alle optionalen Schalter zeigen, damit die UI erkundbar ist.
         capAnion = true; capSelfClean = true; capOutSilent = true
         anion = false; selfClean = false; outSilent = false; display = true
-        live = AcState(
-            powerOn = true, mode = MideaAc.MODE_COOL, targetTemp = 24.0, fanSpeed = 60,
-            indoorTemp = 23.5, outdoorTemp = 29.0, errorCode = 0,
+        // EN: The demo unit gets its own calibration slot, so the feature can be tried without hardware.
+        // DE: Das Demo-Gerät bekommt einen eigenen Kalibrier-Platz, damit das Feature ohne Hardware ausprobierbar ist.
+        indoorOffset = SettingsRepo.indoorOffset(getApplication(), 0L)
+        live = calibrated(
+            AcState(
+                powerOn = true, mode = MideaAc.MODE_COOL, targetTemp = 24.0, fanSpeed = 60,
+                indoorTemp = 23.5, outdoorTemp = 29.0, errorCode = 0,
+            )
         )
         energy = EnergyUsage(powerW = 420.0, totalKwh = 137.4, currentKwh = 1.2)
         // EN: Plausible beta-diagnostics sample so the Status card can be explored once a group is enabled.
@@ -563,7 +627,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         session = null
         irMode = false
         connectedDevice = null
-        live = null; energy = null
+        live = null; energy = null; indoorTempRaw = null; indoorOffset = 0.0
         group1 = null; group2 = null; group7 = null
         status = Status.Idle
         publishWidget()
@@ -591,7 +655,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         status = Status.Connected
         rateLevels = 0
         capAnion = false; capSelfClean = false; capOutSilent = false
-        live = null; energy = null
+        live = null; energy = null; indoorTempRaw = null; indoorOffset = 0.0
         // EN: Restore the last assumed IR state so the remote "remembers" what it last sent. We only
         //     restore the on-screen state — nothing is transmitted on entry, so opening IR mode never
         //     changes the unit by surprise. DE: Den zuletzt angenommenen IR-Zustand wiederherstellen,
@@ -658,10 +722,20 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     private fun syncFromState(s: AcState) {
         powerOn = s.powerOn
         mode = s.mode.takeIf { it in 1..5 } ?: mode
-        tempC = s.targetTemp
+        // EN: The unit reports its own setpoint; add the calibration compensation back to get the room
+        //     temperature the user asked for. When it is only echoing what we just sent, the user's value
+        //     stands — otherwise a clamped compensation would drag the displayed target along.
+        // DE: Das Gerät meldet seinen eigenen Sollwert; die Kalibrier-Kompensation wieder addieren ergibt
+        //     die vom Nutzer gewünschte Raumtemperatur. Spiegelt es nur das eben Gesendete, bleibt der
+        //     Nutzerwert stehen — sonst würde eine begrenzte Kompensation das angezeigte Ziel mitziehen.
+        if (s.targetTemp != lastSentDeviceTemp) {
+            tempC = (s.targetTemp + tempCompensation).coerceIn(16.0, 30.0)
+        }
         fan = s.fanSpeed.takeIf { it in 1..102 } ?: fan
         syncOptionsFromState(s)
-        session?.let { it.powerOn = powerOn; it.mode = mode; it.tempC = tempC; it.fan = fan }
+        // EN: The session mirrors the *device* setpoint — it is what goes back out in the next frame.
+        // DE: Die Sitzung spiegelt den *Geräte*-Sollwert — er geht im nächsten Frame wieder hinaus.
+        session?.let { it.powerOn = powerOn; it.mode = mode; it.tempC = s.targetTemp; it.fan = fan }
     }
 
     /**
@@ -713,14 +787,59 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
 
     fun togglePower() { val v = !powerOn; command({ powerOn = v }) { setPower(v) }; if (v) maybeArmMaxRuntime() }
     fun applyMode(m: Int) = command({ mode = m }) { setMode(m) }
-    fun nudgeTemp(delta: Double) {
-        // EN: IR is integer-only (17–30 °C), so step by whole degrees in IR mode. DE: IR ist ganzzahlig (17–30 °C), daher im IR-Modus in ganzen Grad schritten.
-        val d = if (irMode) (if (delta > 0) 1.0 else -1.0) else delta
-        val range = if (irMode) 17.0..30.0 else 16.0..30.0
-        val v = (tempC + d).coerceIn(range.start, range.endInclusive)
-        command({ tempC = v }) { setTemp(v) }
+
+    /**
+     * EN: Snap a setpoint to whole degrees within the supported range. Midea units only accept integer
+     *     setpoints: the protocol does carry a half-degree bit, but the AC ignores it and reports the
+     *     value back rounded — so a ".5" step looked like it had applied and then silently snapped back
+     *     on the next poll. The app therefore steps in whole degrees everywhere. IR is integer-only too
+     *     and additionally can't address anything below 17 °C.
+     * DE: Ein Soll auf ganze Grad im unterstützten Bereich einrasten. Midea-Geräte nehmen nur ganzzahlige
+     *     Sollwerte an: Das Protokoll führt zwar ein Halbgrad-Bit mit, die Klima ignoriert es aber und
+     *     meldet den Wert gerundet zurück — ein „,5"-Schritt sah dadurch aus, als hätte er gegriffen, und
+     *     sprang beim nächsten Poll still zurück. Die App arbeitet daher überall in ganzen Grad. IR ist
+     *     ebenfalls ganzzahlig und kommt zusätzlich nicht unter 17 °C.
+     */
+    private fun snapTemp(t: Double, min: Double = 16.0): Double =
+        t.roundToInt().toDouble().coerceIn(min, 30.0)
+
+    /**
+     * EN: The calibration expressed as a whole-degree setpoint shift. The unit regulates against its own
+     *     sensor, so a sensor that reads [indoorOffset] too low makes it stop [indoorOffset] short of the
+     *     room temperature the user asked for. Handing it a setpoint lowered by the same amount cancels
+     *     that out. Rounded to whole degrees because that is all the unit accepts — a 0.5 K calibration
+     *     still refines the *reading*, it just can't be dialled into the setpoint.
+     * DE: Die Kalibrierung als Sollwert-Verschiebung in ganzen Grad. Das Gerät regelt gegen seinen eigenen
+     *     Fühler; misst dieser um [indoorOffset] zu niedrig, hört es also um [indoorOffset] vor der vom
+     *     Nutzer gewünschten Raumtemperatur auf. Ein um denselben Betrag abgesenkter Sollwert hebt das
+     *     auf. Auf ganze Grad gerundet, weil das Gerät nur die annimmt — eine 0,5-K-Kalibrierung
+     *     verfeinert weiterhin die *Anzeige*, lässt sich nur nicht in den Sollwert einrechnen.
+     */
+    private val tempCompensation: Int get() = indoorOffset.roundToInt()
+
+    /** EN: Turn a desired room temperature into the setpoint the unit must be given. DE: Eine gewünschte Raumtemperatur in den Sollwert übersetzen, den das Gerät bekommen muss. */
+    private fun deviceTemp(userTemp: Double): Double =
+        (userTemp - tempCompensation).roundToInt().toDouble().coerceIn(16.0, 30.0)
+
+    /** EN: What the unit is actually being asked to hold — shown in the calibration card. DE: Worauf das Gerät tatsächlich geregelt wird — in der Kalibrier-Karte angezeigt. */
+    val deviceTargetTemp: Double get() = deviceTemp(tempC)
+
+    /**
+     * EN: Send a desired room temperature: the UI keeps the user's value, the unit gets the compensated
+     *     one. Both go through here so no path can forget the calibration.
+     * DE: Eine gewünschte Raumtemperatur senden: Die UI behält den Nutzerwert, das Gerät bekommt den
+     *     kompensierten. Beide Wege laufen hierüber, damit keiner die Kalibrierung vergessen kann.
+     */
+    private fun sendTemp(userTemp: Double) {
+        val dev = deviceTemp(userTemp)
+        lastSentDeviceTemp = dev
+        command({ tempC = userTemp }) { setTemp(dev) }
     }
-    fun applyTemp(t: Double) { val v = t.coerceIn(16.0, 30.0); command({ tempC = v }) { setTemp(v) } }
+
+    fun nudgeTemp(delta: Double) =
+        sendTemp(snapTemp(tempC + (if (delta > 0) 1.0 else -1.0), min = if (irMode) 17.0 else 16.0))
+
+    fun applyTemp(t: Double) = sendTemp(snapTemp(t))
     fun applyFan(value: Int) = command({ fan = value }) { setFan(value) }
     fun toggleSwing() { val v = !swing; command({ swing = v }) { setSwing(v) } }
     /**
@@ -736,9 +855,12 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     fun toggleEco() {
         val v = !eco
         val bumpTemp = v && tempC < 24.0
+        // EN: 24 °C is the user's target, so the unit gets it calibration-compensated like any other setpoint.
+        // DE: 24 °C ist das Ziel des Nutzers, das Gerät bekommt es also kalibriert wie jeden anderen Sollwert.
+        val dev = if (bumpTemp) deviceTemp(24.0).also { lastSentDeviceTemp = it } else null
         command({ eco = v; if (bumpTemp) tempC = 24.0 }) {
             eco = v
-            if (bumpTemp) tempC = 24.0
+            if (dev != null) tempC = dev
             apply()
         }
     }
@@ -766,11 +888,19 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
      *     zusammenhängender SetState-Frame.
      */
     fun applyScene(scene: Scene) {
+        // EN: A scene stores the room temperature the user wants, so it is compensated like a manual
+        //     setpoint. Scenes saved before the whole-degree fix may still hold a ".5" — snap it first.
+        // DE: Eine Szene speichert die vom Nutzer gewünschte Raumtemperatur und wird daher wie ein
+        //     manueller Sollwert kompensiert. Vor dem Ganzgrad-Fix gespeicherte Szenen können noch ein
+        //     „,5" enthalten — daher zuerst einrasten.
+        val t = snapTemp(scene.tempC)
+        val dev = deviceTemp(t)
+        lastSentDeviceTemp = dev
         command({
-            powerOn = scene.powerOn; mode = scene.mode; tempC = scene.tempC
+            powerOn = scene.powerOn; mode = scene.mode; tempC = t
             fan = scene.fan; eco = scene.eco; swing = scene.swing
         }) {
-            powerOn = scene.powerOn; mode = scene.mode; tempC = scene.tempC
+            powerOn = scene.powerOn; mode = scene.mode; tempC = dev
             fan = scene.fan; eco = scene.eco; swing = if (scene.swing) 0x3F else 0
             apply()
         }
@@ -782,7 +912,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         val s = session ?: return
         lock.withLock {
             // EN: Reflect device-reported option states too (also catches physical-remote changes). DE: Auch die vom Gerät gemeldeten Optionszustände spiegeln (erfasst auch Fernbedienungs-Änderungen).
-            s.queryState()?.let { live = it; syncOptionsFromState(it) }
+            s.queryState()?.let { live = calibrated(it); syncOptionsFromState(it) }
             s.queryEnergy()?.let { energy = it }
             // EN: Beta diagnostics (PR #278) — only poll a group when the user enabled it (extra round-trips).
             // DE: Beta-Diagnose (PR #278) — eine Gruppe nur abfragen, wenn der Nutzer sie aktiviert hat (Extra-Round-Trips).

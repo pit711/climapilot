@@ -8,10 +8,10 @@ import com.climapilot.free.R
 
 /**
  * EN: Temperature-only home-screen widget. Shows the target temperature with − / + buttons that nudge
- *     the setpoint by 0.5 °C offline via [AcWidgetProvider]'s central control path. Tapping the number
+ *     the setpoint by 1 °C offline via [AcWidgetProvider]'s central control path. Tapping the number
  *     opens the app.
  * DE: Reines Temperatur-Homescreen-Widget. Zeigt die Zieltemperatur mit −/+-Knöpfen, die den Sollwert
- *     offline um 0,5 °C ändern (zentraler Steuer-Pfad von [AcWidgetProvider]). Ein Tippen auf die Zahl
+ *     offline um 1 °C ändern (zentraler Steuer-Pfad von [AcWidgetProvider]). Ein Tippen auf die Zahl
  *     öffnet die App.
  */
 class AcWidgetTempProvider : AppWidgetProvider() {
