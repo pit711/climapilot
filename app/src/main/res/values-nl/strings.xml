@@ -122,7 +122,7 @@
 
     <!-- Indoor-temperature calibration -->
     <string name="section_calibration">Kalibratie binnentemperatuur</string>
-    <string name="calibration_hint">Veel apparaten meten een tot twee graden naast de werkelijke kamertemperatuur. Vergelijk met een kamerthermometer en corrigeer de waarde hier. De app toont dan overal de gecorrigeerde waarde, gemarkeerd met een klein amberkleurig delta, en verschuift de naar het apparaat gestuurde streefwaarde met evenveel hele graden — zodat de kamer echt bereikt wat je instelt. Opgeslagen voor dit apparaat.</string>
+    <string name="calibration_hint">Veel apparaten meten een tot twee graden naast de werkelijke kamertemperatuur. Vergelijk met een kamerthermometer en corrigeer de waarde hier. De app toont dan overal de gecorrigeerde waarde, gemarkeerd met een kleine amberkleurige delta, en verschuift de naar het apparaat gestuurde streefwaarde met evenveel hele graden — zodat de kamer echt bereikt wat je instelt. Opgeslagen voor dit apparaat.</string>
     <string name="calibration_none">geen correctie</string>
     <string name="calibration_preview">Gemeten %1$s → getoond %2$s</string>
     <string name="calibration_device_target">Naar het apparaat: %1$s — doel %2$s</string>
@@ -180,6 +180,24 @@
     <string name="field_name">Naam (optioneel)</string>
     <string name="action_add">Toevoegen</string>
     <string name="action_cancel">Annuleren</string>
+    <string name="action_save">Opslaan</string>
+    <string name="rename_title">Apparaat hernoemen</string>
+    <string name="rename_hint">De naam wordt alleen in deze app opgeslagen — handig om twee apparaten uit elkaar te houden.</string>
+    <string name="cd_rename">Hernoemen</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Apparaat</string>
+    <string name="device_edit_name">Naam</string>
+    <string name="device_edit_save">Opslaan</string>
+    <string name="device_forget">Verwijderen</string>
+    <string name="device_forget_really">Definitief verwijderen</string>
+    <string name="device_forget_confirm">Hiermee worden de opgeslagen inloggegevens gewist. Je kunt het apparaat altijd opnieuw toevoegen.</string>
+    <string name="pane_pick_device">Kies een apparaat</string>
+    <string name="pane_pick_device_hint">Kies er een uit de lijst links om het te bedienen.</string>
+    <string name="option_turbo_fan_hint">Turbo regelt de ventilator — zet turbo uit om de snelheid te wijzigen.</string>
+    <string name="option_self_clean_hint">Start de zelfreinigingscyclus van de verdamper. Duurt afhankelijk van het apparaat ongeveer 20 tot 30 minuten; de normale koeling wordt ondertussen gepauzeerd.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
 
     <!-- Token export -->
     <string name="cd_export">Token exporteren</string>
@@ -220,6 +238,16 @@
     <string name="widget_off">Uit</string>
     <string name="widget_on">Aan</string>
     <string name="widget_indoor">Binnen %1$s</string>
+    <string name="widget_outdoor">Buiten %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 u</string>
+    <string name="widget_sleep_120">2 u</string>
+    <string name="widget_sleep_240">4 u</string>
+    <string name="widget_sleep_title">Slaaptimer</string>
+    <string name="widget_sleep_off_in">dan gaat de airco uit</string>
+    <string name="widget_sleep_idle">Geen timer actief</string>
+    <string name="widget_sleep_off_now">Nu uit</string>
+    <string name="widget_sleep_cancel">Annuleren</string>
     <string name="widget_power">Aan/uit</string>
     <string name="widget_cool_down">Kouder</string>
     <string name="widget_warm_up">Warmer</string>
@@ -228,7 +256,18 @@
     <string name="widget_power_label">Airco — aan/uit</string>
     <string name="widget_temp_label">Airco — temperatuur</string>
     <string name="widget_mode_label">Airco — modus</string>
-    <string name="widget_all_desc">Naam, temperatuur, aan/uit en modus</string>
+    <string name="widget_all_desc">Aan/uit, temperatuur, modus, ventilator, turbo en slaaptimer</string>
+    <string name="widget_sleep_label">Airco — slaaptimer</string>
+    <string name="widget_sleep_desc">Live aftellen met snelkeuzes</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">uur</string>
+    <string name="widget_sleep_quick_desc">Eén tik zet de slaaptimer</string>
+    <string name="widget_sleep_30_label">Slaaptimer 30 min</string>
+    <string name="widget_sleep_60_label">Slaaptimer 1 u</string>
+    <string name="widget_sleep_120_label">Slaaptimer 2 u</string>
+    <string name="widget_sleep_240_label">Slaaptimer 4 u</string>
+    <string name="widget_sleep_480_label">Slaaptimer 8 u</string>
+    <string name="widget_sleep_720_label">Slaaptimer 12 u</string>
     <string name="widget_power_desc">De airco aan- of uitzetten</string>
     <string name="widget_temp_desc">De temperatuur hoger of lager zetten</string>
     <string name="widget_mode_desc">De werkingsmodus wisselen</string>
@@ -239,16 +278,18 @@
     <string name="settings_version">Versie %1$s</string>
     <string name="changelog_title">Wat is er nieuw</string>
     <string name="support_title">Ondersteun de ontwikkeling</string>
-    <string name="support_body">ClimaPilot is gratis en zonder advertenties. Als de app je helpt, houdt een kleine bijdrage haar in leven — bedankt!</string>
+    <string name="support_body">ClimaPilot is gratis en zonder advertenties. Als de app je helpt, houdt een kleine bijdrage hem in leven — bedankt!</string>
     <string name="support_kofi">Trakteer me op een koffie (Ko-fi)</string>
     <string name="support_paypal">Bijdrage via PayPal</string>
     <string name="credits_title">Met dank aan</string>
     <string name="credits_body">Het lokale Midea-protocol van ClimaPilot is een Kotlin-port van het uitstekende project midea-msmart van @mill1000. Enorm bedankt — zonder dat project bestond deze app niet.</string>
     <string name="credits_link">midea-msmart op GitHub</string>
+    <string name="changelog_0_6_9_title">Versie 0.6.9</string>
+    <string name="changelog_0_6_9_body">•  Nieuw: één bedieningsvlak voor elk schermformaat — tablets tonen de apparatenlijst in twee kolommen naast de bediening, de tabbladen zitten op elk apparaat onderaan, de app draait schermvullend en de ventilatorsnelheid kreeg een schuifregelaar over het volledige bereik van 1 tot 100 %\n•  Nieuw: een turbo/boost-schakelaar bij Opties. De stand wordt teruggelezen van het apparaat, dus de schakelaar toont ook boost die met de afstandsbediening of de officiële app is ingeschakeld\n•  Nieuw: opgeslagen apparaten hernoemen of verwijderen door er lang op te drukken — handig om twee apparaten uit elkaar te houden\n•  Nieuw: de app spreekt nu 22 talen en dekt daarmee de Europese talen die iPhones standaard meeleveren\n•  Opgelost: kortstondige leesfouten tekenen geen nulpieken meer in de geschiedenisgrafieken; echte uit-periodes blijven gewoon zichtbaar</string>
     <string name="changelog_0_6_7_title">Versie 0.6.7</string>
     <string name="changelog_0_6_7_body">•  Opgelost: de airco bedienen via een widget op het startscherm of via het horloge zet je overige instellingen niet meer terug. Een tik op de modus dwong ook 24 °C en ventilator 60 af en zette swing, eco en de ionisator uit, omdat elke opdracht de volledige toestand verstuurt en de niet-gelezen velden terugvielen op standaardwaarden\n•  Opgelost: de updatemelding toonde ruwe Markdown uit de release notes (‘###’, ‘**vet**’, linksyntaxis) — er staat nu nette tekst</string>
     <string name="changelog_0_6_6_title">Versie 0.6.6</string>
-    <string name="changelog_0_6_6_body">•  Nieuw: kalibratie van de binnentemperatuur (tabblad Opties) — corrigeert een sensor die tot ±5 K afwijkt. De gecorrigeerde waarde wordt overal getoond en vastgelegd, gemarkeerd met een klein amberkleurig delta, en de naar het apparaat gestuurde streefwaarde wordt met evenveel hele graden verschoven, zodat de kamer echt bereikt wat je instelt\n•  Opgelost: de gewenste temperatuur gaat nu met hele graden — Midea-apparaten negeren halvegraadwaarden en rondden ze stilzwijgend af, waardoor een ‘,5’-tik bij de volgende vernieuwing terugsprong\n•  Nieuw: vertaald naar Duits, Spaans, Frans, Italiaans, Nederlands en Portugees; de taal van de app is los van de telefoontaal te kiezen</string>
+    <string name="changelog_0_6_6_body">•  Nieuw: kalibratie van de binnentemperatuur (tabblad Opties) — corrigeert een sensor die tot ±5 K afwijkt. De gecorrigeerde waarde wordt overal getoond en vastgelegd, gemarkeerd met een kleine amberkleurige delta, en de naar het apparaat gestuurde streefwaarde wordt met evenveel hele graden verschoven, zodat de kamer echt bereikt wat je instelt\n•  Opgelost: de gewenste temperatuur gaat nu met hele graden — Midea-apparaten negeren halvegraadwaarden en ronden ze stilzwijgend af, waardoor een ‘,5’-tik bij de volgende vernieuwing terugsprong\n•  Nieuw: vertaald naar Duits, Spaans, Frans, Italiaans, Nederlands en Portugees; de taal van de app is los van de telefoontaal te kiezen</string>
     <string name="changelog_0_6_5_title">Versie 0.6.5</string>
     <string name="changelog_0_6_5_body">•  Nieuw: instelbaar vernieuwingsinterval (2/6/10/30 s) bij Instellingen\n•  Nieuw: diagnostiek wordt vastgelegd in de geschiedenis met drie nieuwe grafieken — compressorfrequentie, vermogen buitenunit en snelheid van de binnenventilator\n•  Gewijzigd: bètadiagnostiek staat nu standaard aan (nog steeds per groep uit te zetten)</string>
     <string name="changelog_0_6_4_title">Versie 0.6.4</string>
@@ -372,7 +413,7 @@
 
     <!-- Donation prompt -->
     <string name="donate_prompt_title">Bevalt ClimaPilot?</string>
-    <string name="donate_prompt_body">ClimaPilot is gratis en zonder advertenties. Als de app een plek op je telefoon heeft verdiend, houdt een kleine bijdrage haar in leven — bedankt!</string>
+    <string name="donate_prompt_body">ClimaPilot is gratis en zonder advertenties. Als de app een plek op je telefoon heeft verdiend, houdt een kleine bijdrage hem in leven — bedankt!</string>
     <string name="donate_later">Misschien later</string>
     <string name="donate_already">Al gesteund</string>
 

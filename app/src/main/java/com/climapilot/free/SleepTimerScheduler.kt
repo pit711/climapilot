@@ -62,6 +62,8 @@ object SleepTimerScheduler {
         }
         // EN: Show the live countdown notification with off-now/cancel controls. DE: Die Live-Countdown-Benachrichtigung mit Jetzt-aus/Abbrechen-Steuerung zeigen.
         TimerNotification.show(ctx, triggerAt)
+        // EN: Refresh any placed sleep-timer widget so its countdown starts at once. DE: Etwaige platzierte Sleep-Timer-Widgets aktualisieren, damit ihr Countdown sofort losläuft.
+        com.climapilot.free.widget.WidgetRepo.refreshSleepWidgets(ctx)
     }
 
     /** EN: Cancel the pending power-off (if any) and forget it. DE: Das ausstehende Ausschalten (falls vorhanden) abbrechen und vergessen. */
@@ -78,6 +80,8 @@ object SleepTimerScheduler {
         prefs(ctx).edit().remove(K_DEVICE).remove(K_TRIGGER).apply()
         // EN: The timer is gone (fired or cancelled) — drop its notification. DE: Der Timer ist weg (ausgelöst oder abgebrochen) — seine Benachrichtigung entfernen.
         TimerNotification.cancel(ctx)
+        // EN: Reset any placed sleep-timer widget back to its idle state. DE: Etwaige platzierte Sleep-Timer-Widgets in den Ruhezustand zurücksetzen.
+        com.climapilot.free.widget.WidgetRepo.refreshSleepWidgets(ctx)
     }
 
     /** EN: Absolute trigger time of the pending power-off, or null if none is armed. DE: Absolute Auslösezeit des ausstehenden Ausschaltens, oder null, falls keiner aktiv ist. */

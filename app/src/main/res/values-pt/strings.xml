@@ -122,7 +122,7 @@
 
     <!-- Indoor-temperature calibration -->
     <string name="section_calibration">Calibração da temperatura interior</string>
-    <string name="calibration_hint">Muitos aparelhos medem um ou dois graus ao lado da temperatura real da divisão. Compare com um termómetro de ambiente e corrija aqui o valor. A aplicação passa a mostrar em todo o lado o valor corrigido, assinalado com um pequeno delta âmbar, e desloca nos mesmos graus inteiros o valor enviado ao aparelho — para que a divisão atinja realmente o que definiu. Guardado para este dispositivo.</string>
+    <string name="calibration_hint">Muitos aparelhos desviam-se um ou dois graus da temperatura real da divisão. Compare com um termómetro de ambiente e corrija aqui o valor. A aplicação passa a mostrar em todo o lado o valor corrigido, assinalado com um pequeno delta âmbar, e desloca nos mesmos graus inteiros o valor enviado ao aparelho — para que a divisão atinja realmente o que definiu. Guardado para este dispositivo.</string>
     <string name="calibration_none">sem correção</string>
     <string name="calibration_preview">Medido %1$s → mostrado %2$s</string>
     <string name="calibration_device_target">Enviado ao aparelho: %1$s — objetivo %2$s</string>
@@ -180,6 +180,24 @@
     <string name="field_name">Nome (opcional)</string>
     <string name="action_add">Adicionar</string>
     <string name="action_cancel">Cancelar</string>
+    <string name="action_save">Guardar</string>
+    <string name="rename_title">Mudar o nome do dispositivo</string>
+    <string name="rename_hint">O nome é guardado apenas nesta aplicação — útil para distinguir dois aparelhos.</string>
+    <string name="cd_rename">Mudar o nome</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Dispositivo</string>
+    <string name="device_edit_name">Nome</string>
+    <string name="device_edit_save">Guardar</string>
+    <string name="device_forget">Remover</string>
+    <string name="device_forget_really">Remover definitivamente</string>
+    <string name="device_forget_confirm">Isto apaga as credenciais guardadas. Pode voltar a adicionar o dispositivo em qualquer altura.</string>
+    <string name="pane_pick_device">Escolha um dispositivo</string>
+    <string name="pane_pick_device_hint">Escolha um na lista à esquerda para o controlar.</string>
+    <string name="option_turbo_fan_hint">O turbo controla a ventoinha — desligue o turbo para alterar a velocidade.</string>
+    <string name="option_self_clean_hint">Executa o ciclo de autolimpeza do evaporador. Demora cerca de 20 a 30 minutos, consoante o dispositivo; entretanto, o arrefecimento normal fica em pausa.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
 
     <!-- Token export -->
     <string name="cd_export">Exportar token</string>
@@ -220,6 +238,16 @@
     <string name="widget_off">Desligado</string>
     <string name="widget_on">Ligado</string>
     <string name="widget_indoor">Interior %1$s</string>
+    <string name="widget_outdoor">Exterior %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Temporizador de desligar</string>
+    <string name="widget_sleep_off_in">depois o AC desliga-se</string>
+    <string name="widget_sleep_idle">Sem temporizador ativo</string>
+    <string name="widget_sleep_off_now">Desligar já</string>
+    <string name="widget_sleep_cancel">Cancelar</string>
     <string name="widget_power">Ligar/desligar</string>
     <string name="widget_cool_down">Mais frio</string>
     <string name="widget_warm_up">Mais quente</string>
@@ -228,7 +256,18 @@
     <string name="widget_power_label">AC — ligar/desligar</string>
     <string name="widget_temp_label">AC — temperatura</string>
     <string name="widget_mode_label">AC — modo</string>
-    <string name="widget_all_desc">Nome, temperatura, ligar/desligar e modo</string>
+    <string name="widget_all_desc">Ligar/desligar, temperatura, modo, ventoinha, turbo e temporizador de desligar</string>
+    <string name="widget_sleep_label">AC — temporizador de desligar</string>
+    <string name="widget_sleep_desc">Contagem decrescente ao vivo com predefinições</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">horas</string>
+    <string name="widget_sleep_quick_desc">Um toque arma o temporizador de desligar</string>
+    <string name="widget_sleep_30_label">Desligar em 30 min</string>
+    <string name="widget_sleep_60_label">Desligar em 1 h</string>
+    <string name="widget_sleep_120_label">Desligar em 2 h</string>
+    <string name="widget_sleep_240_label">Desligar em 4 h</string>
+    <string name="widget_sleep_480_label">Desligar em 8 h</string>
+    <string name="widget_sleep_720_label">Desligar em 12 h</string>
     <string name="widget_power_desc">Ligar/desligar o ar condicionado</string>
     <string name="widget_temp_desc">Aumentar ou baixar a temperatura</string>
     <string name="widget_mode_desc">Mudar o modo de funcionamento</string>
@@ -245,6 +284,8 @@
     <string name="credits_title">Agradecimentos</string>
     <string name="credits_body">O protocolo Midea local do ClimaPilot é uma adaptação em Kotlin do excelente projeto midea-msmart de @mill1000. Muito obrigado — sem ele esta aplicação não existiria.</string>
     <string name="credits_link">midea-msmart no GitHub</string>
+    <string name="changelog_0_6_9_title">Versão 0.6.9</string>
+    <string name="changelog_0_6_9_body">•  Novo: uma única superfície de controlo para todos os tamanhos de ecrã — os tablets mostram a lista de dispositivos em duas colunas ao lado dos controlos, os separadores ficam em baixo em todos os dispositivos, a aplicação corre em ecrã inteiro e a velocidade da ventoinha ganhou um cursor em toda a gama de 1 a 100 %\n•  Novo: um interruptor turbo/boost no separador Opções. O estado é relido do aparelho, pelo que o interruptor mostra também o boost ativado a partir do comando ou da aplicação oficial\n•  Novo: mude o nome ou remova os dispositivos guardados com um toque longo sobre o dispositivo — útil para distinguir dois aparelhos\n•  Novo: a aplicação fala agora 22 idiomas, abrangendo os idiomas europeus que os iPhones trazem de fábrica\n•  Corrigido: falhas de leitura momentâneas já não desenham picos a zero nos gráficos do histórico; os períodos realmente desligados continuam a aparecer</string>
     <string name="changelog_0_6_7_title">Versão 0.6.7</string>
     <string name="changelog_0_6_7_body">•  Corrigido: controlar o ar condicionado a partir de um widget do ecrã principal ou do relógio já não repõe as restantes definições. Um toque no modo impunha também 24 °C e ventoinha 60 e desligava a oscilação, o eco e o ionizador, porque cada comando envia o estado completo e os campos não lidos voltavam aos valores predefinidos\n•  Corrigido: o aviso de atualização mostrava o Markdown em bruto das notas de versão («###», «**negrito**», sintaxe de ligações) — agora o texto aparece limpo</string>
     <string name="changelog_0_6_6_title">Versão 0.6.6</string>
@@ -352,7 +393,7 @@
     <string name="history_filter_hint">Este é um lembrete de manutenção interno da aplicação, baseado no tempo de funcionamento. Não lê nem repõe o indicador de filtro do próprio aparelho — reponha-o no ar condicionado.</string>
     <string name="option_beep_hint">Tom de confirmação. Muitos aparelhos só emitem o sinal ao ligar/desligar, não noutras alterações.</string>
     <string name="history_record_title">Registar histórico</string>
-    <string name="history_record_body">Quando ativo, o ClimaPilot regista potência, temperaturas e ventoinha e consulta o ar condicionado cerca de cada 15 min em segundo plano (só Wi-Fi). Desativado por predefinição.</string>
+    <string name="history_record_body">Quando ativo, o ClimaPilot regista potência, temperaturas e ventoinha e consulta o ar condicionado aproximadamente a cada 15 min em segundo plano (só Wi-Fi). Desativado por predefinição.</string>
     <string name="history_record_switch">Registar dados do AC</string>
     <string name="history_indoor_title">Temperatura interior (24 h)</string>
     <string name="history_outdoor_title">Temperatura exterior (24 h)</string>

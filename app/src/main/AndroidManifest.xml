@@ -104,10 +104,28 @@
                 <action android:name="com.climapilot.free.widget.TEMP_DOWN" />
                 <action android:name="com.climapilot.free.widget.MODE" />
                 <action android:name="com.climapilot.free.widget.SET_MODE" />
+                <action android:name="com.climapilot.free.widget.SET_FAN" />
+                <action android:name="com.climapilot.free.widget.TURBO" />
+                <action android:name="com.climapilot.free.widget.ECO" />
+                <action android:name="com.climapilot.free.widget.SWING" />
+                <action android:name="com.climapilot.free.widget.SLEEP" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_ac_info" />
+        </receiver>
+
+        <!-- Dedicated sleep-timer widget / Eigenes Sleep-Timer-Widget -->
+        <receiver
+            android:name=".widget.AcWidgetSleepProvider"
+            android:exported="false"
+            android:label="@string/widget_sleep_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sleep_info" />
         </receiver>
 
         <!-- Power-only widget / Reines Ein/Aus-Widget -->
@@ -147,6 +165,85 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_mode_info" />
+        </receiver>
+
+
+        <!-- 1x1 sleep tile: 30 min / 1x1-Sleep-Kachel: 30 Min -->
+        <receiver
+            android:name=".widget.AcWidgetSleep30Provider"
+            android:exported="false"
+            android:label="@string/widget_sleep_30_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sleep_30_info" />
+        </receiver>
+
+        <!-- 1x1 sleep tile: 60 min / 1x1-Sleep-Kachel: 60 Min -->
+        <receiver
+            android:name=".widget.AcWidgetSleep60Provider"
+            android:exported="false"
+            android:label="@string/widget_sleep_60_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sleep_60_info" />
+        </receiver>
+
+        <!-- 1x1 sleep tile: 120 min / 1x1-Sleep-Kachel: 120 Min -->
+        <receiver
+            android:name=".widget.AcWidgetSleep120Provider"
+            android:exported="false"
+            android:label="@string/widget_sleep_120_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sleep_120_info" />
+        </receiver>
+
+        <!-- 1x1 sleep tile: 240 min / 1x1-Sleep-Kachel: 240 Min -->
+        <receiver
+            android:name=".widget.AcWidgetSleep240Provider"
+            android:exported="false"
+            android:label="@string/widget_sleep_240_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sleep_240_info" />
+        </receiver>
+
+        <!-- 1x1 sleep tile: 480 min / 1x1-Sleep-Kachel: 480 Min -->
+        <receiver
+            android:name=".widget.AcWidgetSleep480Provider"
+            android:exported="false"
+            android:label="@string/widget_sleep_480_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sleep_480_info" />
+        </receiver>
+
+        <!-- 1x1 sleep tile: 720 min / 1x1-Sleep-Kachel: 720 Min -->
+        <receiver
+            android:name=".widget.AcWidgetSleep720Provider"
+            android:exported="false"
+            android:label="@string/widget_sleep_720_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_sleep_720_info" />
         </receiver>
 
         <!-- Receives control commands from the Wear OS watch app over the Data Layer / Empfängt Steuerbefehle der Wear-OS-Watch-App über den Data-Layer -->

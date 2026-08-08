@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Tilanteet</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco-yö</string>
+    <string name="scene_comfort">Mukavuus</string>
+    <string name="scene_save">Tallenna</string>
+    <string name="scene_save_title">Tallenna tilanne</string>
+    <string name="scene_name_label">Tilanteen nimi</string>
+    <string name="scene_default_name">Tilanne</string>
+    <string name="scene_hint">Käytä napauttamalla · muokkaa pitkällä painalluksella</string>
+    <string name="scene_edit_title">Muokkaa tilannetta</string>
+    <string name="scene_schedule">Suorita päivittäin</string>
+    <string name="scene_schedule_at">Aika: %1$s</string>
+    <string name="scene_schedule_note">Otetaan käyttöön automaattisesti joka päivä. Vaatii, että sovellus saa toimia taustalla.</string>
+    <string name="scene_delete">Poista</string>
+    <string name="scene_delete_title">Poistetaanko tilanne?</string>
+    <string name="scene_delete_msg">”%1$s” poistetaan.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Viikko-ohjelma</string>
+    <string name="plan_empty">Ei vielä aikaikkunoita. Lisää yksi, niin tilanne suoritetaan automaattisesti – esim. täysi jäähdytys maanantaisin klo 6–18.</string>
+    <string name="plan_need_scene">Luo ensin tilanne – ohjelma suorittaa tilanteitasi.</string>
+    <string name="plan_add">Lisää aikaikkuna</string>
+    <string name="plan_hint">Aikaikkunat toimivat taustalla, vaikka puhelin olisi lepotilassa Wi-Fi-verkossa. Luotettavaa ajastusta varten salli ClimaPilotin toiminta taustalla (Asetukset ▸ Luotettavat ajastimet).</string>
+    <string name="plan_new_title">Uusi aikaikkuna</string>
+    <string name="plan_edit_title">Muokkaa aikaikkunaa</string>
+    <string name="plan_scene_label">Tilanne</string>
+    <string name="plan_days_label">Päivät</string>
+    <string name="plan_from">Alkaa</string>
+    <string name="plan_to">Päättyy</string>
+    <string name="plan_end_label">Kun aikaikkuna päättyy</string>
+    <string name="plan_end_off">Sammuta</string>
+    <string name="plan_end_leave">Jätä päälle</string>
+    <string name="plan_overnight">+1 päivä</string>
+    <string name="plan_every_day">Joka päivä</string>
+    <string name="plan_disabled">tauolla</string>
+    <string name="plan_to_off">→ pois</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Ilmastointilaitteesi Wi-Fi-verkossa</string>
+    <string name="action_discover">Etsi laitteita</string>
+    <string name="action_discovering">Etsitään…</string>
+    <string name="action_manual">Manuaalisesti</string>
+    <string name="demo_preview">Esikatselu ilman laitetta (demo)</string>
+    <string name="empty_title">Ei vielä laitteita</string>
+    <string name="empty_body">Napauta ”Etsi laitteita”. Puhelimen pitää olla samassa Wi-Fi-verkossa kuin ilmastointilaite.</string>
+    <string name="error_no_devices">Laitteita ei löytynyt. Oletko samassa Wi-Fi-verkossa? Muussa tapauksessa lisää laite manuaalisesti.</string>
+    <string name="action_connect">Yhdistä</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Takaisin</string>
+    <string name="cd_refresh">Päivitä</string>
+    <string name="cd_power">Virta</string>
+    <string name="cd_reorder">Järjestä vetämällä</string>
+    <string name="connected_to">Yhdistetty · %1$s</string>
+    <string name="disconnected">Yhteys katkennut</string>
+    <string name="state_on">PÄÄLLÄ</string>
+    <string name="state_off">POIS</string>
+    <string name="target_temp">Tavoitelämpötila</string>
+    <string name="readout_indoor">Sisällä</string>
+    <string name="readout_outdoor">Ulkona</string>
+    <string name="readout_power">Teho</string>
+
+    <string name="section_mode">Toimintatila</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Jäähdytys</string>
+    <string name="mode_dry">Kuivaus</string>
+    <string name="mode_heat">Lämmitys</string>
+    <string name="mode_fan">Tuuletus</string>
+
+    <string name="section_fan">Puhallinnopeus</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1 %</string>
+    <string name="fan_silent">Hiljainen</string>
+    <string name="fan_low">Hidas</string>
+    <string name="fan_medium">Keskitaso</string>
+    <string name="fan_high">Nopea</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automaatti</string>
+    <string name="fan_level">Taso: %1$d %%</string>
+
+    <string name="section_status">Reaaliaikainen tila</string>
+    <string name="status_indoor">Sisälämpötila</string>
+    <string name="status_outdoor">Ulkolämpötila</string>
+    <string name="status_power">Teho</string>
+    <string name="status_total">Kokonaiskulutus</string>
+    <string name="status_error">Virhekoodi</string>
+    <string name="status_error_none">ei virheitä</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Kokonaiskustannukset</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Diagnostiikka (beta)</string>
+    <string name="diag_beta_hint">Kokeellista telemetriaa. Kaikki laitteet eivät raportoi näitä arvoja – ne voivat jäädä tyhjiksi.</string>
+    <string name="diag_group1_title">Kompressori &amp; kylmäaine</string>
+    <string name="diag_compressor_freq">Kompressorin taajuus</string>
+    <string name="diag_compressor_freq_target">Tavoitetaajuus</string>
+    <string name="diag_compressor_current">Ottovirta</string>
+    <string name="diag_compressor_voltage">Syöttöjännite</string>
+    <string name="diag_temp_t1">Sisäkenno (T1)</string>
+    <string name="diag_temp_t2">Höyrystin (T2)</string>
+    <string name="diag_temp_t3">Lauhdutin (T3)</string>
+    <string name="diag_temp_t4">Ulkoilma (T4)</string>
+    <string name="diag_temp_tp">Paineputki (TP)</string>
+    <string name="diag_group2_title">Sisäpuhallin &amp; pumppu</string>
+    <string name="diag_fan_speed">Puhallinnopeus</string>
+    <string name="diag_fan_speed_target">Puhaltimen tavoitenopeus</string>
+    <string name="diag_water_pump">Kondenssivesipumppu</string>
+    <string name="diag_pump_on">käynnissä</string>
+    <string name="diag_pump_off">pois</string>
+    <string name="diag_group7_title">Ulkoyksikön teho</string>
+    <string name="diag_compressor_power">Ottoteho</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Näyttö &amp; hinta</string>
+    <string name="unit_fahrenheit">Näytä °F (Fahrenheit)</string>
+    <string name="price_per_kwh">kWh-hinta</string>
+    <string name="price_hint">Käytetään kokonaiskustannusten arviointiin kulutuksen perusteella.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Sisälämpötilan kalibrointi</string>
+    <string name="calibration_hint">Monet laitteet näyttävät todellisesta huonelämpötilasta asteen tai pari poikkeavan lukeman. Vertaa lukemaa huonelämpömittariin ja korjaa se tässä. Sen jälkeen sovellus näyttää korjatun arvon kaikkialla pienellä keltaisella deltalla merkittynä ja siirtää laitteelle lähetettävää tavoitelämpötilaa samat täydet asteet – niin huone todella saavuttaa asettamasi lämpötilan. Tallennetaan tälle laitteelle.</string>
+    <string name="calibration_none">ei korjausta</string>
+    <string name="calibration_preview">Mitattu %1$s → näytetään %2$s</string>
+    <string name="calibration_device_target">Laitteelle lähetetty: %1$s – tavoite %2$s</string>
+    <string name="calibration_no_reading">Odotetaan ensimmäistä lukemaa…</string>
+    <string name="calibration_reset">Nollaa</string>
+    <string name="calibration_less">Pienennä korjausta</string>
+    <string name="calibration_more">Suurenna korjausta</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Päivitysväli</string>
+    <string name="settings_poll_hint">Kuinka usein tila, energia ja diagnostiikka haetaan, kun sovellus on yhdistettynä. Lyhyempi väli päivittää nopeammin mutta lisää Wi-Fi-liikennettä.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Beta-ominaisuudet</string>
+    <string name="settings_beta_hint">Kokeellista lisädiagnostiikkaa, oletuksena käytössä – jokainen valinta lisää yhden kyselyn päivitystä kohden, ja sen voi poistaa käytöstä tässä. Kaikki laitteet eivät tue niitä. Arvot näkyvät Tila-välilehdellä ja tallentuvat historiaan (kun historian tallennus on käytössä).</string>
+    <string name="beta_group1">Kompressoridiagnostiikka</string>
+    <string name="beta_group1_desc">Taajuus, virta, jännite &amp; kylmäaineen lämpötilat (T1–T4, paineputki)</string>
+    <string name="beta_group2">Sisäpuhallin &amp; pumppu</string>
+    <string name="beta_group2_desc">Sisäpuhaltimen todellinen nopeus ja kondenssivesipumpun tila</string>
+    <string name="beta_group7">Ulkoyksikön teho</string>
+    <string name="beta_group7_desc">Ulkoyksikön reaaliaikainen tehonkulutus watteina</string>
+
+    <string name="section_options">Valinnat</string>
+    <string name="option_swing">Swing (säleiköt)</string>
+    <string name="option_eco">Eco-tila</string>
+    <string name="option_beep">Merkkiääni</string>
+    <string name="option_anion">Ionisaattori</string>
+    <string name="option_out_silent">Hiljainen ulkoyksikkö</string>
+    <string name="option_self_clean">Itsepuhdistus</string>
+    <string name="option_display">Näyttö / LED</string>
+
+    <string name="section_gear">Kompressorin rajoitus</string>
+    <string name="gear_full">Täysi</string>
+    <string name="gear_75">75 %</string>
+    <string name="gear_50">50 %</string>
+
+    <string name="section_sleep">Uniajastin</string>
+    <string name="sleep_active">Virta katkeaa %1$d min kuluttua</string>
+    <string name="sleep_cancel">Peruuta ajastin</string>
+    <string name="sleep_custom">Mukautettu…</string>
+    <string name="sleep_custom_title">Uniajastin</string>
+    <string name="sleep_custom_label">Minuutit</string>
+    <string name="action_start">Käynnistä</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Vinkki: paina korttia pitkään ja vedä se toiseen järjestykseen.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Lisää laite manuaalisesti</string>
+    <string name="manual_hint">Yhteyksiä varten, joissa broadcast-haku ei toimi. Löydät laite-ID:n Midea/SmartHome-sovelluksesta tai verkkoskannauksella.</string>
+    <string name="field_ip">IP-osoite</string>
+    <string name="field_port">Portti</string>
+    <string name="field_id">Laite-ID (desimaalilukuna)</string>
+    <string name="field_name">Nimi (valinnainen)</string>
+    <string name="action_add">Lisää</string>
+    <string name="action_cancel">Peruuta</string>
+    <string name="action_save">Tallenna</string>
+    <string name="rename_title">Nimeä laite uudelleen</string>
+    <string name="rename_hint">Nimi tallennetaan vain tähän sovellukseen – kätevä, kun pitää erottaa kaksi laitetta toisistaan.</string>
+    <string name="cd_rename">Nimeä uudelleen</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Laite</string>
+    <string name="device_edit_name">Nimi</string>
+    <string name="device_edit_save">Tallenna</string>
+    <string name="device_forget">Poista</string>
+    <string name="device_forget_really">Poista pysyvästi</string>
+    <string name="device_forget_confirm">Tämä poistaa tallennetut tunnistetiedot. Voit lisätä laitteen uudelleen milloin tahansa.</string>
+    <string name="pane_pick_device">Valitse laite</string>
+    <string name="pane_pick_device_hint">Valitse laite vasemmalla olevasta luettelosta, niin voit ohjata sitä.</string>
+    <string name="option_turbo_fan_hint">Turbo ohjaa puhallinta – kytke turbo pois päältä, jos haluat muuttaa nopeutta.</string>
+    <string name="option_self_clean_hint">Käynnistää höyrystimen itsepuhdistusjakson. Kestää laitteesta riippuen noin 20–30 minuuttia; normaali jäähdytys on sillä välin tauolla.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Vie token</string>
+    <string name="export_title">Vie token</string>
+    <string name="export_hint">Näillä tunnistetiedoilla voit ohjata tätä laitetta paikallisesti ilman pilveä – ota niistä varmuuskopio tai käytä niitä muissa työkaluissa. Pidä ne omana tietonasi.</string>
+    <string name="export_none">Ei vielä tokenia. Yhdistä laitteeseen kerran verkkoyhteydellä ja vie sitten.</string>
+    <string name="export_copy">Kopioi</string>
+    <string name="export_share">Jaa</string>
+    <string name="export_copied">Kopioitu leikepöydälle</string>
+    <string name="action_close">Sulje</string>
+    <string name="import_button">Tuo</string>
+    <string name="import_title">Tuo token</string>
+    <string name="import_hint">Liitä token-lohko (Vie-toiminnosta, msmartista, …). Sen jälkeen laite toimii ilman verkkoyhteyttä.</string>
+    <string name="import_field">Token-lohko</string>
+    <string name="import_ok">Token tuotu</string>
+    <string name="import_error">Token-lohkoa ei voitu lukea</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Tallennetut laitteet</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Ilmastoinnin virta</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Esikatselu (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Yhteys epäonnistui: %1$s</string>
+    <string name="error_command">Komento epäonnistui: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Ennen kuin aloitat</string>
+    <string name="disclaimer_body">ClimaPilot on riippumaton sovellus, eikä se ole Midean kehittämä, tukema tai hyväksymä. Se ohjaa yhteensopivia ilmastointilaitteita paikallisen Wi-Fi-verkkosi kautta.\n\nVarmista ennen komentojen lähettämistä, että laitteesi on asennettu oikein ja turvallinen käyttää. Käytät sovellusta omalla vastuullasi; tekijät eivät vastaa mistään vahingoista tai menetyksistä.\n\nMitatut arvot, kuten teho, tulevat laitteelta ja voivat olla epätarkkoja.\n\nHuomaa: kun yhdistät laitteeseen ensimmäisen kerran, ClimaPilot hakee kertaluonteisen pääsytokenin Midean palvelimelta (tiliä ei tarvita). Sen jälkeen ohjaus toimii täysin paikallisesti – voit halutessasi jopa estää sovellukselta internet-yhteyden.</string>
+    <string name="disclaimer_accept">Ymmärrän</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Ilmastoinnin pikaohjaus</string>
+    <string name="widget_not_connected">Ei yhteyttä</string>
+    <string name="widget_off">Pois</string>
+    <string name="widget_on">Päällä</string>
+    <string name="widget_indoor">Sisällä %1$s</string>
+    <string name="widget_outdoor">Ulkona %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Uniajastin</string>
+    <string name="widget_sleep_off_in">sitten ilmastointi sammuu</string>
+    <string name="widget_sleep_idle">Ei ajastinta käynnissä</string>
+    <string name="widget_sleep_off_now">Sammuta heti</string>
+    <string name="widget_sleep_cancel">Peruuta</string>
+    <string name="widget_power">Virta</string>
+    <string name="widget_cool_down">Viileämpi</string>
+    <string name="widget_warm_up">Lämpimämpi</string>
+    <string name="widget_mode">Tila</string>
+    <string name="widget_all_label">Ilmastointi – kaikki säätimet</string>
+    <string name="widget_power_label">Ilmastointi – virta</string>
+    <string name="widget_temp_label">Ilmastointi – lämpötila</string>
+    <string name="widget_mode_label">Ilmastointi – tila</string>
+    <string name="widget_all_desc">Virta, lämpötila, tila, puhallin, turbo ja uniajastin</string>
+    <string name="widget_sleep_label">Ilmastointi – uniajastin</string>
+    <string name="widget_sleep_desc">Reaaliaikainen lähtölaskenta pikavalinnoilla</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">tuntia</string>
+    <string name="widget_sleep_quick_desc">Yksi napautus asettaa uniajastimen</string>
+    <string name="widget_sleep_30_label">Uniajastin 30 min</string>
+    <string name="widget_sleep_60_label">Uniajastin 1 h</string>
+    <string name="widget_sleep_120_label">Uniajastin 2 h</string>
+    <string name="widget_sleep_240_label">Uniajastin 4 h</string>
+    <string name="widget_sleep_480_label">Uniajastin 8 h</string>
+    <string name="widget_sleep_720_label">Uniajastin 12 h</string>
+    <string name="widget_power_desc">Kytke ilmastointi päälle tai pois</string>
+    <string name="widget_temp_desc">Nosta tai laske lämpötilaa</string>
+    <string name="widget_mode_desc">Vaihda toimintatilaa</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Asetukset</string>
+    <string name="cd_settings">Asetukset</string>
+    <string name="settings_version">Versio %1$s</string>
+    <string name="support_title">Tue kehitystä</string>
+    <string name="support_body">ClimaPilot on ilmainen ja mainokseton. Jos siitä on sinulle apua, pieni lahjoitus pitää kehityksen käynnissä – kiitos!</string>
+    <string name="support_kofi">Tarjoa minulle kahvi (Ko-fi)</string>
+    <string name="support_paypal">Lahjoita PayPalilla</string>
+    <string name="credits_title">Kiitokset</string>
+    <string name="credits_body">ClimaPilotin paikallinen Midea-protokolla on Kotlin-portti @mill1000:n erinomaisesta midea-msmart-projektista. Suuret kiitokset – ilman sitä tätä sovellusta ei olisi olemassa.</string>
+    <string name="credits_link">midea-msmart GitHubissa</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Luotettavat ajastimet</string>
+    <string name="reliability_body">Jotta uniajastin ja tilanteiden ajastukset toimivat myös sovelluksen ollessa suljettuna, salli ClimaPilotin toiminta taustalla.</string>
+    <string name="reliability_battery_ok">Akun optimointi: pois ✓</string>
+    <string name="reliability_battery_warn">Akun optimointi on käytössä – ajastimet voivat viivästyä tai jäädä väliin.</string>
+    <string name="reliability_battery_action">Salli taustatoiminta (akku)</string>
+    <string name="reliability_autostart_action">Salli automaattikäynnistys (valmistaja)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Sovelluspäivitykset</string>
+    <string name="update_body">Uudet versiot haetaan GitHubista. Vahvistat asennuksen aina itse.</string>
+    <string name="update_current">Asennettu: %1$s</string>
+    <string name="update_auto_label">Tarkista automaattisesti käynnistyksessä</string>
+    <string name="update_check_button">Tarkista päivitykset</string>
+    <string name="update_checking">Tarkistetaan…</string>
+    <string name="update_uptodate">Käytössäsi on uusin versio (%1$s).</string>
+    <string name="update_error">Päivitysten tarkistus epäonnistui. Tarkista yhteytesi ja yritä uudelleen.</string>
+    <string name="update_available_title">Päivitys saatavilla</string>
+    <string name="update_available_body">Versio %1$s on saatavilla – käytössäsi on %2$s.</string>
+    <string name="update_install">Päivitä</string>
+    <string name="update_downloading">Ladataan… %1$d %%</string>
+    <string name="update_later">Myöhemmin</string>
+    <string name="update_failed">Lataus epäonnistui. Yritä myöhemmin uudelleen.</string>
+    <string name="update_verify_failed">Lataus ei läpäissyt turvatarkistusta, eikä sitä asennettu.</string>
+    <string name="update_need_permission">Salli ClimaPilotin asentaa sovelluksia ja napauta sitten Päivitä uudelleen.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Sammuta</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Ota käyttöön: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Automaattinen sammutus</string>
+    <string name="autooff_body">Turvakatkaisu: jos ilmastointi käy tätä pidempään, se sammuu automaattisesti – paikallinen vastine poissaoloajastimelle (puhelimesi ei tavoita laitetta, kun poistut Wi-Fi-verkosta). 0 = pois käytöstä.</string>
+    <string name="autooff_hours_label">Sammuta tämän ajan jälkeen (tuntia)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Uniajastin</string>
+    <string name="notif_timer_title">Uniajastin käynnissä</string>
+    <string name="notif_timer_text">Ilmastointi sammuu, kun lähtölaskenta päättyy.</string>
+    <string name="notif_timer_off_now">Sammuta heti</string>
+    <string name="notif_timer_cancel">Peruuta</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Sovelluslukitus</string>
+    <string name="lock_card_body">Vaadi sormenjälki, kasvot tai näytön PIN-koodi ClimaPilotin avaamiseen – niin kukaan muu ei voi ohjata ilmastointiasi.</string>
+    <string name="lock_card_switch">Vaadi lukituksen avaus</string>
+    <string name="lock_title">Avaa ClimaPilotin lukitus</string>
+    <string name="lock_subtitle">Todenna henkilöllisyytesi, jotta voit ohjata ilmastointia</string>
+    <string name="lock_unlock">Avaa lukitus</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Ilmastoinnin tila</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Historia</string>
+    <string name="history_card_title">Energia &amp; suodatin</string>
+    <string name="history_card_body">Näet viimeaikaisen tehonkäytön ja kokonaiskulutuksen sekä milloin suodatin pitää puhdistaa.</string>
+    <string name="history_card_open">Avaa historia</string>
+    <string name="history_power_title">Teho (24 h)</string>
+    <string name="history_empty">Ei vielä riittävästi tietoja – käytä ilmastointia hetki ja palaa myöhemmin.</string>
+    <string name="history_peak">Huippu: %1$d W</string>
+    <string name="history_totals_title">Kulutus</string>
+    <string name="history_total_kwh">Yhteensä: %1$.1f kWh</string>
+    <string name="history_total_cost">Arvioitu kustannus: %1$.2f €</string>
+    <string name="history_filter_title">Suodatin</string>
+    <string name="history_filter_runtime">Käyttöaika viime puhdistuksesta: %1$d h / %2$d h</string>
+    <string name="history_filter_due">On aika puhdistaa suodatin.</string>
+    <string name="history_filter_reset">Suodatin puhdistettu (nollaa)</string>
+    <string name="history_filter_hint">Tämä on sovelluksen sisäinen, käyttöaikaan perustuva huoltomuistutus. Se ei lue eikä nollaa laitteen omaa suodatinilmaisinta – nollaa se itse ilmastointilaitteesta.</string>
+    <string name="option_beep_hint">Vahvistusääni. Monet laitteet piippaavat vain päälle/pois kytkettäessä, eivät muista muutoksista.</string>
+    <string name="history_record_title">Tallenna historiaa</string>
+    <string name="history_record_body">Kun tämä on käytössä, ClimaPilot kirjaa tehon, lämpötilat ja puhallintason ja kysyy laitteen tilan taustalla noin 15 minuutin välein (vain Wi-Fi). Oletuksena pois käytöstä.</string>
+    <string name="history_record_switch">Tallenna ilmastoinnin tiedot</string>
+    <string name="history_indoor_title">Sisälämpötila (24 h)</string>
+    <string name="history_outdoor_title">Ulkolämpötila (24 h)</string>
+    <string name="history_fan_title">Puhallintaso (24 h)</string>
+    <string name="history_comp_hz_title">Kompressorin taajuus (beta)</string>
+    <string name="history_comp_w_title">Ulkoyksikön teho (beta)</string>
+    <string name="history_fan_rpm_title">Sisäpuhaltimen nopeus (beta)</string>
+    <string name="history_metric_summary">Nyt %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Tunti</string>
+    <string name="range_day">Päivä</string>
+    <string name="range_week">Viikko</string>
+    <string name="range_month">Kuukausi</string>
+    <string name="history_pick_day">Valitse päivä</string>
+    <string name="history_day">Päivä: %1$s</string>
+    <string name="history_range_kwh">Tällä jaksolla: %1$.1f kWh</string>
+    <string name="history_range_cost">Arvioitu kustannus: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Pidätkö ClimaPilotista?</string>
+    <string name="donate_prompt_body">ClimaPilot on ilmainen ja mainokseton. Jos se on ansainnut paikkansa puhelimessasi, pieni lahjoitus pitää kehityksen käynnissä – kiitos!</string>
+    <string name="donate_later">Ehkä myöhemmin</string>
+    <string name="donate_already">Olen jo tukenut</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR-kaukosäädin</string>
+    <string name="ir_remote_entry">IR-kaukosäädin (infrapuna)</string>
+    <string name="ir_remote_subtitle">Infrapuna · vain lähetys</string>
+    <string name="ir_no_emitter">Tässä puhelimessa ei ole infrapunalähetintä</string>
+    <string name="option_quiet">Hiljainen</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Infrapuna on yksisuuntainen – kytkimet näyttävät viimeksi lähetetyn asetuksen, eivät laitteen todellista tilaa.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Ohjaus</string>
+    <string name="nav_status">Tila</string>
+    <string name="nav_options">Valinnat</string>
+    <string name="nav_scenes">Tilanteet</string>
+    <string name="nav_history">Historia</string>
+</resources>

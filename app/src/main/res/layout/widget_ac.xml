@@ -1,189 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  EN: All-in-one widget. Power button centered on top (the hero) with a small connection dot in the
-      corner; temperature with − / + below; all five modes as chips at the bottom (active highlighted,
-      each selects its mode directly); a slim status line (indoor · power / off).
-  DE: Alles-Widget. Power-Knopf mittig oben (der Hero) mit kleinem Verbindungspunkt in der Ecke;
-      Temperatur mit − / + darunter; alle fünf Modi als Chips unten (aktiver hervorgehoben, jeder wählt
-      seinen Modus direkt); eine schlanke Statuszeile (Innen · Leistung / aus).
--->
+<!-- EN: All-in-one AC widget (Maxi): power, temperature, mode, fan speed, turbo/eco/swing and
+     sleep-timer quick actions. RemoteViews-safe: only ImageView/TextView/LinearLayout, no bare <View>.
+     DE: Alles-in-einem-Klima-Widget (Maxi): Ein/Aus, Temperatur, Modus, Lüfterstufe, Turbo/Eco/Swing
+     und Sleep-Timer-Schnellaktionen. RemoteViews-sicher: nur ImageView/TextView/LinearLayout, kein
+     nacktes <View>. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/widget_bg"
-    android:padding="16dp"
-    android:theme="@android:style/Theme.DeviceDefault">
+    android:background="@drawable/wdg_card"
+    android:padding="12dp">
 
-    <!-- Header: power centered, connection dot in the top-right corner -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- EN: Must be an ImageView, not a bare <View>: RemoteViews can only inflate @RemoteView-annotated
-             classes, so a plain View throws "Problem loading widget" in the launcher process.
-             DE: Muss eine ImageView sein, kein nacktes <View>: RemoteViews kann nur @RemoteView-annotierte
-             Klassen inflaten, ein einfaches View wirft „Problem beim Laden des Widgets" im Launcher-Prozess. -->
-        <ImageView
-            android:id="@+id/widget_dot"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="top|end"
-            android:layout_marginTop="2dp"
-            android:contentDescription="@null"
-            android:background="@drawable/widget_dot_off" />
-
-        <ImageButton
-            android:id="@+id/btn_power"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/widget_btn_bg"
-            android:src="@drawable/ic_w_power"
-            android:contentDescription="@string/widget_power"
-            android:scaleType="centerInside" />
-    </FrameLayout>
-
-    <!-- Temperature: − 24° + -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="12dp">
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/widget_dot"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/widget_dot_on" />
+        <TextView
+            android:id="@+id/widget_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Klima"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:maxLines="1" />
+        <TextView
+            android:id="@+id/btn_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/wdg_pill_off"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/state_off"
+            android:textColor="#AFC2C7"
+            android:textSize="11sp" />
+        <TextView
+            android:id="@+id/btn_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/wdg_pill_on"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="@string/state_on"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-        <ImageButton
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
             android:id="@+id/btn_minus"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/widget_btn_bg"
-            android:src="@drawable/ic_w_minus"
-            android:contentDescription="@string/widget_cool_down"
-            android:scaleType="centerInside" />
-
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/wdg_btn"
+            android:padding="10dp"
+            android:src="@drawable/ic_w_minus" />
         <TextView
             android:id="@+id/widget_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="22dp"
-            android:minWidth="96dp"
-            android:gravity="center"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:fontFamily="sans-serif-light"
+            android:text="16°"
             android:textColor="#FFFFFF"
-            android:textSize="44sp"
-            android:textStyle="bold"
-            android:text="24°" />
-
-        <ImageButton
+            android:textSize="40sp" />
+        <ImageView
             android:id="@+id/btn_plus"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/widget_btn_bg"
-            android:src="@drawable/ic_w_plus"
-            android:contentDescription="@string/widget_warm_up"
-            android:scaleType="centerInside" />
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/wdg_btn"
+            android:padding="10dp"
+            android:src="@drawable/ic_w_plus" />
     </LinearLayout>
 
-    <!-- Mode chips -->
+    <TextView style="@style/WdgSection" android:text="@string/section_mode" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="14dp">
-
-        <TextView
-            android:id="@+id/mode_auto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:paddingTop="9dp"
-            android:paddingBottom="9dp"
-            android:gravity="center"
-            android:background="@drawable/widget_chip_bg"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/mode_auto" />
-
-        <TextView
-            android:id="@+id/mode_cool"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:paddingTop="9dp"
-            android:paddingBottom="9dp"
-            android:gravity="center"
-            android:background="@drawable/widget_chip_bg"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/mode_cool" />
-
-        <TextView
-            android:id="@+id/mode_dry"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:paddingTop="9dp"
-            android:paddingBottom="9dp"
-            android:gravity="center"
-            android:background="@drawable/widget_chip_bg"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/mode_dry" />
-
-        <TextView
-            android:id="@+id/mode_heat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="4dp"
-            android:paddingTop="9dp"
-            android:paddingBottom="9dp"
-            android:gravity="center"
-            android:background="@drawable/widget_chip_bg"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/mode_heat" />
-
-        <TextView
-            android:id="@+id/mode_fan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingTop="9dp"
-            android:paddingBottom="9dp"
-            android:gravity="center"
-            android:background="@drawable/widget_chip_bg"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/mode_fan" />
+        android:orientation="horizontal">
+        <TextView android:id="@+id/mode_auto" style="@style/WdgChip" android:text="@string/mode_auto" />
+        <TextView android:id="@+id/mode_cool" style="@style/WdgChip" android:text="@string/mode_cool" />
+        <TextView android:id="@+id/mode_dry" style="@style/WdgChip" android:text="@string/mode_dry" />
+        <TextView android:id="@+id/mode_heat" style="@style/WdgChip" android:text="@string/mode_heat" />
+        <TextView android:id="@+id/mode_fan" style="@style/WdgChip" android:text="@string/mode_fan" />
     </LinearLayout>
 
-    <!-- Status -->
+    <TextView style="@style/WdgSection" android:text="@string/section_fan" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/fan_auto" style="@style/WdgChip" android:text="@string/fan_auto" />
+        <TextView android:id="@+id/fan_min" style="@style/WdgChip" android:text="@string/fan_min" />
+        <TextView android:id="@+id/fan_silent" style="@style/WdgChip" android:text="@string/fan_silent" />
+        <TextView android:id="@+id/fan_low" style="@style/WdgChip" android:text="@string/fan_low" />
+        <TextView android:id="@+id/fan_medium" style="@style/WdgChip" android:text="@string/fan_medium" />
+        <TextView android:id="@+id/fan_high" style="@style/WdgChip" android:text="@string/fan_high" />
+        <TextView android:id="@+id/fan_turbo" style="@style/WdgChip" android:text="@string/fan_turbo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:orientation="horizontal">
+        <TextView android:id="@+id/opt_turbo" style="@style/WdgChip" android:text="@string/option_turbo" />
+        <TextView android:id="@+id/opt_eco" style="@style/WdgChip" android:text="@string/option_eco" />
+        <TextView android:id="@+id/opt_swing" style="@style/WdgChip" android:text="@string/option_swing" />
+        <TextView android:id="@+id/sleep_30" style="@style/WdgChip" android:text="@string/widget_sleep_30" />
+        <TextView android:id="@+id/sleep_60" style="@style/WdgChip" android:text="@string/widget_sleep_60" />
+        <TextView android:id="@+id/sleep_120" style="@style/WdgChip" android:text="@string/widget_sleep_120" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/widget_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textColor="#A8FFFFFF"
-        android:textSize="12sp"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:text="" />
-
+        android:layout_marginTop="9dp"
+        android:text="Innen 17,5° · 695 W"
+        android:textColor="#8FA6AC"
+        android:textSize="10.5sp"
+        android:maxLines="1" />
 </LinearLayout>

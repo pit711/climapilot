@@ -28,8 +28,17 @@ object SettingsRepo {
     /** EN: Largest indoor-temperature correction we allow, in kelvin. DE: Größte erlaubte Innentemperatur-Korrektur in Kelvin. */
     const val INDOOR_OFFSET_MAX = 5.0
 
-    /** EN: Step size of the calibration stepper, matching the sensor's 0.5 K resolution. DE: Schrittweite des Kalibrier-Reglers, passend zur 0,5-K-Auflösung des Fühlers. */
-    const val INDOOR_OFFSET_STEP = 0.5
+    /**
+     * EN: Step size of the calibration stepper. Whole degrees, even though the sensor resolves 0.5 K:
+     *     the compensation is rounded to whole degrees before it reaches the unit (see
+     *     AcViewModel.tempCompensation), so a half-degree calibration moved the displayed reading but
+     *     not the regulation — the two drifted apart by design.
+     * DE: Schrittweite des Kalibrier-Reglers. Ganze Grad, obwohl der Fühler 0,5 K auflöst: Die
+     *     Kompensation wird vor dem Senden auf ganze Grad gerundet (siehe AcViewModel.tempCompensation),
+     *     ein halbes Grad verschob also die Anzeige, nicht aber die Regelung — beide liefen dadurch
+     *     zwangsläufig auseinander.
+     */
+    const val INDOOR_OFFSET_STEP = 1.0
 
     /** EN: true = show temperatures in °F. DE: true = Temperaturen in °F anzeigen. */
     fun useFahrenheit(ctx: Context): Boolean = prefs(ctx).getBoolean(K_FAHRENHEIT, false)

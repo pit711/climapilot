@@ -103,6 +103,7 @@ object MideaAc {
         beep: Boolean = false,
         eco: Boolean = false,
         anion: Boolean = false,
+        turbo: Boolean = false,
     ): ByteArray {
         val beepBit = if (beep) 0x40 else 0
         val powerBit = if (powerOn) 0x1 else 0
@@ -130,6 +131,15 @@ object MideaAc {
         //     Wir MÜSSEN den aktuellen Zustand in jedem SetState mitschicken, sonst löscht ihn jeder Befehl
         //     (Temp/Modus/Szene) und schaltet den Ionisierer still aus.
         val purifierBit = if (anion) 0x20 else 0
+        // EN: Turbo/boost occupies TWO spots (msmart SetStateCommand): byte 8 bit 5 (alt) AND byte 10
+        //     bit 1 — both must be set together or some units ignore the request. Like the ionizer it is
+        //     carried in every SetState so other commands don't silently clear it (issue #13).
+        // DE: Turbo/Boost belegt ZWEI Stellen (msmart SetStateCommand): Byte 8 Bit 5 (alt) UND Byte 10
+        //     Bit 1 — beide müssen zusammen gesetzt werden, sonst ignorieren manche Geräte den Wunsch.
+        //     Wie der Ionisierer wird er in jedem SetState mitgeführt, damit andere Befehle ihn nicht
+        //     still löschen (Issue #13).
+        val turboAltBit = if (turbo) 0x20 else 0
+        val turboBit = if (turbo) 0x02 else 0
         val humidity = 40 and 0x7F
 
         // EN: Fixed 25-byte SetState payload. Each byte's meaning is noted EN/DE on the right.
@@ -141,9 +151,9 @@ object MideaAc {
             (fan and 0xFF).toByte(),                          // EN: fan speed / DE: Lüfterstufe
             0x7F, 0x7F, 0x00,                                 // EN: on/off timer (disabled) / DE: Ein-/Aus-Timer (deaktiviert)
             swingMode.toByte(),                               // EN: swing / DE: Swing (Lamellen)
-            0x00,                                             // EN: follow-me / alt turbo / DE: Follow-me / alt. Turbo
+            turboAltBit.toByte(),                             // EN: follow-me / alt turbo (0x20) / DE: Follow-me / alt. Turbo (0x20)
             (ecoBit or purifierBit).toByte(),                 // EN: eco (0x80) + purifier/ionizer (0x20) / DE: Eco (0x80) + Purifier/Ionisierer (0x20)
-            0x00,                                             // EN: sleep/turbo/Fahrenheit (we use Celsius) / DE: Sleep/Turbo/Fahrenheit (wir nutzen Celsius)
+            turboBit.toByte(),                                // EN: sleep/turbo (0x02)/Fahrenheit (we use Celsius) / DE: Sleep/Turbo (0x02)/Fahrenheit (wir nutzen Celsius)
             0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00,
             temperatureAlt.toByte(),                          // EN: alt temperature (extended range) / DE: alt. Temperatur (erweiterter Bereich)
@@ -290,7 +300,12 @@ object MideaAc {
         val anionOn = (b(9) and 0x20) != 0
         val displayOn = b(14) != 0x70
         val filterAlert = (b(13) and 0x20) != 0
-        return AcState(powerOn, mode, targetTemp, fan, indoor, outdoor, b(16), swingOn, ecoOn, anionOn, displayOn, filterAlert)
+        // EN: Turbo is reported in two spots (msmart StateResponse: byte 8 bit 5 OR byte 10 bit 1) —
+        //     different firmwares use different ones, so OR them. DE: Turbo wird an zwei Stellen gemeldet
+        //     (msmart StateResponse: Byte 8 Bit 5 ODER Byte 10 Bit 1) — je nach Firmware unterschiedlich,
+        //     daher per ODER zusammenführen.
+        val turboOn = (b(8) and 0x20) != 0 || (b(10) and 0x2) != 0
+        return AcState(powerOn, mode, targetTemp, fan, indoor, outdoor, b(16), swingOn, ecoOn, anionOn, displayOn, filterAlert, turboOn)
     }
 
     /**
@@ -521,6 +536,7 @@ data class AcState(
     val anion: Boolean = false,
     val displayOn: Boolean = true,
     val filterAlert: Boolean = false,
+    val turbo: Boolean = false,
 )
 
 /**
@@ -571,6 +587,7 @@ class MideaAcSession(
     var swing = 0
     var eco = false
     var anion = false   // EN: ionizer/purifier — carried in every SetState so it isn't cleared / DE: Ionisierer/Purifier — in jedem SetState mitgeführt, damit er nicht gelöscht wird
+    var turbo = false   // EN: turbo/boost — carried in every SetState like the ionizer (issue #13) / DE: Turbo/Boost — wie der Ionisierer in jedem SetState mitgeführt (Issue #13)
     var beep = false   // EN: when true, the unit chirps on every command / DE: wenn true, piept das Gerät bei jedem Befehl
 
     val authenticated: Boolean get() = lan.authenticated
@@ -649,7 +666,7 @@ class MideaAcSession(
      * DE: Den kompletten aktuellen Zustand in einem SetState-Frame an das Gerät senden.
      */
     suspend fun apply() {
-        send(MideaAc.buildSetState(powerOn, mode, tempC, fan, swing, beep = beep, eco = eco, anion = anion))
+        send(MideaAc.buildSetState(powerOn, mode, tempC, fan, swing, beep = beep, eco = eco, anion = anion, turbo = turbo))
     }
 
     // EN: Convenience setters — update one field, then re-send the whole state.
@@ -663,6 +680,15 @@ class MideaAcSession(
     suspend fun setFan(level: Int) { fan = level.coerceIn(1, 102); apply() }
     suspend fun setSwing(on: Boolean) { swing = if (on) 0x3F else 0; apply() }
     suspend fun setEco(on: Boolean) { eco = on; apply() }
+    /**
+     * EN: Turbo/boost on/off — full-power cooling/heating until switched off (issue #13). Sent via the
+     *     two SetState turbo bits like msmart; the device confirms it in the state frame, so the toggle
+     *     reflects reality after the next poll.
+     * DE: Turbo/Boost ein/aus — Volllast-Kühlen/-Heizen bis zum Ausschalten (Issue #13). Über die beiden
+     *     SetState-Turbo-Bits gesendet wie msmart; das Gerät bestätigt ihn im State-Frame, der Schalter
+     *     zeigt nach dem nächsten Poll also die Realität.
+     */
+    suspend fun setTurbo(on: Boolean) { turbo = on; apply() }
 
     /**
      * EN: Compressor throttle: 100 = off/full, 75, 50. Buzzer is kept off in the same command.

@@ -165,31 +165,31 @@ fun HistoryScreen(vm: AcViewModel) {
             }
         } else {
             MetricChartCard(Icons.Default.Bolt, stringResource(R.string.history_power_title), "W", cs.primary,
-                samples.map { it.ts to it.powerW }, timeFmt)
+                smoothDropouts(samples.map { it.ts to it.powerW }), timeFmt)
             Spacer(Modifier.height(14.dp))
             MetricChartCard(Icons.Default.Thermostat, stringResource(R.string.history_indoor_title), "°", Color(0xFF34A0FF),
-                samples.mapNotNull { s -> s.indoorTemp?.let { s.ts to it } }, timeFmt)
+                smoothDropouts(samples.mapNotNull { s -> s.indoorTemp?.let { s.ts to it } }), timeFmt)
             Spacer(Modifier.height(14.dp))
             MetricChartCard(Icons.Default.Thermostat, stringResource(R.string.history_outdoor_title), "°", Color(0xFFFF8A3D),
-                samples.mapNotNull { s -> s.outdoorTemp?.let { s.ts to it } }, timeFmt)
+                smoothDropouts(samples.mapNotNull { s -> s.outdoorTemp?.let { s.ts to it } }), timeFmt)
             Spacer(Modifier.height(14.dp))
             MetricChartCard(Icons.Default.Air, stringResource(R.string.history_fan_title), "", Color(0xFF59C36A),
-                samples.map { it.ts to it.fanSpeed.toDouble() }, timeFmt)
+                smoothDropouts(samples.map { it.ts to it.fanSpeed.toDouble() }), timeFmt)
             // EN: Beta-diagnostics charts — only when samples with that data exist (group enabled + device answered).
             // DE: Beta-Diagnose-Charts — nur wenn Messwerte mit diesen Daten existieren (Gruppe aktiv + Gerät antwortete).
-            val hzData = samples.mapNotNull { s -> s.compressorHz?.let { s.ts to it } }
+            val hzData = smoothDropouts(samples.mapNotNull { s -> s.compressorHz?.let { s.ts to it } })
             if (hzData.isNotEmpty()) {
                 Spacer(Modifier.height(14.dp))
                 MetricChartCard(Icons.Default.ShowChart, stringResource(R.string.history_comp_hz_title), "Hz", Color(0xFFB388FF),
                     hzData, timeFmt)
             }
-            val compWData = samples.mapNotNull { s -> s.compressorW?.let { s.ts to it } }
+            val compWData = smoothDropouts(samples.mapNotNull { s -> s.compressorW?.let { s.ts to it } })
             if (compWData.isNotEmpty()) {
                 Spacer(Modifier.height(14.dp))
                 MetricChartCard(Icons.Default.Bolt, stringResource(R.string.history_comp_w_title), "W", Color(0xFFFFD54F),
                     compWData, timeFmt)
             }
-            val rpmData = samples.mapNotNull { s -> s.fanRpm?.let { s.ts to it.toDouble() } }
+            val rpmData = smoothDropouts(samples.mapNotNull { s -> s.fanRpm?.let { s.ts to it.toDouble() } })
             if (rpmData.isNotEmpty()) {
                 Spacer(Modifier.height(14.dp))
                 MetricChartCard(Icons.Default.Air, stringResource(R.string.history_fan_rpm_title), "rpm", Color(0xFF4DD0E1),
@@ -217,6 +217,34 @@ fun HistoryScreen(vm: AcViewModel) {
             dismissButton = { TextButton(onClick = { showPicker = false }) { Text(stringResource(R.string.action_cancel)) } },
         ) { DatePicker(state = dpState) }
     }
+}
+
+/**
+ * EN: Drop momentary invalid readings from a chart series (issue #12). A failed poll records a 0 (e.g.
+ *     the energy query timing out mid-run), which paints a full-height spike down to the axis. A real
+ *     "off" period, by contrast, stays at 0 for many consecutive samples. So: remove runs of AT MOST
+ *     two zero samples that sit between non-zero neighbours; longer runs and zeros at the series edges
+ *     are kept — those are genuine data. Chart-only; the recorded samples are untouched.
+ * DE: Momentane ungültige Messwerte aus einer Chart-Reihe entfernen (Issue #12). Ein fehlgeschlagener
+ *     Poll zeichnet eine 0 auf (z. B. wenn die Energie-Abfrage mitten im Betrieb ausläuft) und malt
+ *     damit eine Spitze bis zur Achse. Eine echte „Aus"-Phase bleibt dagegen über viele aufeinander-
+ *     folgende Messwerte auf 0. Daher: Läufe von HÖCHSTENS zwei Null-Werten zwischen Nicht-Null-
+ *     Nachbarn entfernen; längere Läufe und Nullen am Reihenrand bleiben — das sind echte Daten.
+ *     Wirkt nur im Chart; die aufgezeichneten Messwerte bleiben unverändert.
+ */
+private fun smoothDropouts(values: List<Pair<Long, Double>>): List<Pair<Long, Double>> {
+    if (values.size < 3) return values
+    val out = ArrayList<Pair<Long, Double>>(values.size)
+    var i = 0
+    while (i < values.size) {
+        if (values[i].second != 0.0) { out.add(values[i]); i++; continue }
+        var j = i
+        while (j < values.size && values[j].second == 0.0) j++
+        val isGlitch = j - i <= 2 && i > 0 && j < values.size
+        if (!isGlitch) for (k in i until j) out.add(values[k])
+        i = j
+    }
+    return out
 }
 
 private fun localDayStart(utcMidnightMs: Long): Long {

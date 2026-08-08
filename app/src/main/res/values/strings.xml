@@ -182,6 +182,24 @@
     <string name="field_name">Name (optional)</string>
     <string name="action_add">Add</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="rename_title">Rename device</string>
+    <string name="rename_hint">The name is only stored in this app — handy for telling two units apart.</string>
+    <string name="cd_rename">Rename</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Device</string>
+    <string name="device_edit_name">Name</string>
+    <string name="device_edit_save">Save</string>
+    <string name="device_forget">Remove</string>
+    <string name="device_forget_really">Remove for good</string>
+    <string name="device_forget_confirm">This deletes the saved credentials. You can add the device again at any time.</string>
+    <string name="pane_pick_device">Pick a device</string>
+    <string name="pane_pick_device_hint">Choose one from the list on the left to control it.</string>
+    <string name="option_turbo_fan_hint">Turbo controls the fan — switch turbo off to change the speed.</string>
+    <string name="option_self_clean_hint">Runs the evaporator self-clean cycle. Takes roughly 20 to 30 minutes depending on the unit; normal cooling pauses while it runs.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
 
     <!-- Token export -->
     <string name="cd_export">Export token</string>
@@ -222,6 +240,16 @@
     <string name="widget_off">Off</string>
     <string name="widget_on">On</string>
     <string name="widget_indoor">Indoor %1$s</string>
+    <string name="widget_outdoor">Outdoor %1$s</string>
+    <string name="widget_sleep_30">30 m</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Sleep timer</string>
+    <string name="widget_sleep_off_in">then the AC switches off</string>
+    <string name="widget_sleep_idle">No timer running</string>
+    <string name="widget_sleep_off_now">Off now</string>
+    <string name="widget_sleep_cancel">Cancel</string>
     <string name="widget_power">Power</string>
     <string name="widget_cool_down">Cooler</string>
     <string name="widget_warm_up">Warmer</string>
@@ -230,7 +258,18 @@
     <string name="widget_power_label">AC — power</string>
     <string name="widget_temp_label">AC — temperature</string>
     <string name="widget_mode_label">AC — mode</string>
-    <string name="widget_all_desc">Name, temperature, power &amp; mode</string>
+    <string name="widget_all_desc">Power, temperature, mode, fan, turbo and sleep timer</string>
+    <string name="widget_sleep_label">AC — sleep timer</string>
+    <string name="widget_sleep_desc">Live count-down with quick presets</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">hours</string>
+    <string name="widget_sleep_quick_desc">One tap arms the sleep timer</string>
+    <string name="widget_sleep_30_label">Sleep 30 min</string>
+    <string name="widget_sleep_60_label">Sleep 1 h</string>
+    <string name="widget_sleep_120_label">Sleep 2 h</string>
+    <string name="widget_sleep_240_label">Sleep 4 h</string>
+    <string name="widget_sleep_480_label">Sleep 8 h</string>
+    <string name="widget_sleep_720_label">Sleep 12 h</string>
     <string name="widget_power_desc">Toggle the AC on/off</string>
     <string name="widget_temp_desc">Raise or lower the temperature</string>
     <string name="widget_mode_desc">Switch the operating mode</string>
@@ -247,10 +286,12 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_6_9_title">Version 0.6.9</string>
+    <string name="changelog_0_6_9_body">•  New: one control surface for every screen size — tablets show the device list beside the controls in two columns, the tabs sit at the bottom on every device, the app runs fullscreen and the fan speed gained a slider across the full 1 to 100 % range\n•  New: a turbo/boost switch under Options. The state is read back from the unit, so the switch also shows boost engaged from the remote or the official app\n•  New: rename or remove saved devices by long-pressing them — handy for telling two units apart\n•  New: the app now speaks 22 languages, covering the European languages iPhones ship with\n•  Fixed: momentary read failures no longer paint zero spikes into the history charts; real off periods still show</string>
     <string name="changelog_0_6_7_title">Version 0.6.7</string>
     <string name="changelog_0_6_7_body">•  Fixed: controlling the AC from a home-screen widget or the watch no longer resets everything else. A mode tap used to also force 24 °C and fan 60 and switch swing, eco and the ionizer off, because every command sends the full state and the unread fields fell back to defaults\n•  Fixed: the update prompt showed raw Markdown from the release notes (\"###\", \"**bold**\", link syntax) — it now shows clean text</string>
     <string name="changelog_0_6_6_title">Version 0.6.6</string>
-    <string name="changelog_0_6_6_body">•  New: indoor temperature calibration (Options tab) — correct a sensor that reads up to ±5 K off. The corrected value is shown and recorded everywhere, marked with a small amber delta, and the setpoint sent to the unit is shifted by the same whole degrees, so the room really reaches what you set\n•  Fixed: the target temperature now steps in whole degrees — Midea units ignore half-degree setpoints and silently rounded them, which made a ".5" tap snap back on the next refresh\n•  New: translated into German, Spanish, French, Italian, Dutch and Portuguese; the app language can be chosen separately from the phone language</string>
+    <string name="changelog_0_6_6_body">•  New: indoor temperature calibration (Options tab) — correct a sensor that reads up to ±5 K off. The corrected value is shown and recorded everywhere, marked with a small amber delta, and the setpoint sent to the unit is shifted by the same whole degrees, so the room really reaches what you set\n•  Fixed: the target temperature now steps in whole degrees — Midea units ignore half-degree setpoints and silently round them, which made a \".5\" tap snap back on the next refresh\n•  New: translated into German, Spanish, French, Italian, Dutch and Portuguese; the app language can be chosen separately from the phone language</string>
     <string name="changelog_0_6_5_title">Version 0.6.5</string>
     <string name="changelog_0_6_5_body">•  New: configurable update interval (2/6/10/30 s) under Settings\n•  New: diagnostics are recorded in the History with three new charts — compressor frequency, outdoor-unit power, indoor fan speed\n•  Changed: beta diagnostics are now on by default (still switchable per group)</string>
     <string name="changelog_0_6_4_title">Version 0.6.4</string>

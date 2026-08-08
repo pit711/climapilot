@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Senaryolar</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eko gece</string>
+    <string name="scene_comfort">Konfor</string>
+    <string name="scene_save">Kaydet</string>
+    <string name="scene_save_title">Senaryoyu kaydet</string>
+    <string name="scene_name_label">Senaryo adı</string>
+    <string name="scene_default_name">Senaryo</string>
+    <string name="scene_hint">Uygulamak için dokun · düzenlemek için basılı tut</string>
+    <string name="scene_edit_title">Senaryoyu düzenle</string>
+    <string name="scene_schedule">Her gün çalıştır</string>
+    <string name="scene_schedule_at">Saat: %1$s</string>
+    <string name="scene_schedule_note">Her gün otomatik olarak uygulanır. Uygulamanın arka planda çalışmasına izin verilmesi gerekir.</string>
+    <string name="scene_delete">Sil</string>
+    <string name="scene_delete_title">Senaryo silinsin mi?</string>
+    <string name="scene_delete_msg">“%1$s” kaldırılacak.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Haftalık plan</string>
+    <string name="plan_empty">Henüz zaman aralığı yok. Bir senaryoyu otomatik çalıştırmak için bir tane ekle — ör. pazartesileri 6–18 arası maksimum soğutma.</string>
+    <string name="plan_need_scene">Önce bir senaryo oluştur — plan, senaryolarını çalıştırır.</string>
+    <string name="plan_add">Aralık ekle</string>
+    <string name="plan_hint">Zaman aralıkları, telefon Wi-Fi’da boşta beklerken bile arka planda çalışır. Zamanlamanın güvenilir olması için ClimaPilot’un arka planda çalışmasına izin ver (Ayarlar ▸ Güvenilir zamanlayıcılar).</string>
+    <string name="plan_new_title">Yeni zaman aralığı</string>
+    <string name="plan_edit_title">Zaman aralığını düzenle</string>
+    <string name="plan_scene_label">Senaryo</string>
+    <string name="plan_days_label">Günler</string>
+    <string name="plan_from">Başlangıç</string>
+    <string name="plan_to">Bitiş</string>
+    <string name="plan_end_label">Bitince</string>
+    <string name="plan_end_off">Kapat</string>
+    <string name="plan_end_leave">Çalışmaya devam et</string>
+    <string name="plan_overnight">+1 gün</string>
+    <string name="plan_every_day">Her gün</string>
+    <string name="plan_disabled">duraklatıldı</string>
+    <string name="plan_to_off">→ kapalı</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Kliman, Wi-Fi üzerinden</string>
+    <string name="action_discover">Cihaz ara</string>
+    <string name="action_discovering">Aranıyor…</string>
+    <string name="action_manual">Manuel</string>
+    <string name="demo_preview">Cihazsız önizleme (demo)</string>
+    <string name="empty_title">Henüz cihaz yok</string>
+    <string name="empty_body">“Cihaz ara”ya dokun. Telefonun, klimayla aynı Wi-Fi ağında olmalı.</string>
+    <string name="error_no_devices">Cihaz bulunamadı. Aynı Wi-Fi ağında mısın? Değilse manuel olarak ekle.</string>
+    <string name="action_connect">Bağlan</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Geri</string>
+    <string name="cd_refresh">Yenile</string>
+    <string name="cd_power">Güç</string>
+    <string name="cd_reorder">Sıralamak için sürükle</string>
+    <string name="connected_to">Bağlı · %1$s</string>
+    <string name="disconnected">Bağlantı kesildi</string>
+    <string name="state_on">AÇIK</string>
+    <string name="state_off">KAPALI</string>
+    <string name="target_temp">Hedef sıcaklık</string>
+    <string name="readout_indoor">İç ortam</string>
+    <string name="readout_outdoor">Dış ortam</string>
+    <string name="readout_power">Güç</string>
+
+    <string name="section_mode">Mod</string>
+    <string name="mode_auto">Otomatik</string>
+    <string name="mode_cool">Soğutma</string>
+    <string name="mode_dry">Nem alma</string>
+    <string name="mode_heat">Isıtma</string>
+    <string name="mode_fan">Fan</string>
+
+    <string name="section_fan">Fan hızı</string>
+    <string name="fan_auto">Otomatik</string>
+    <string name="fan_min">%1</string>
+    <string name="fan_silent">Sessiz</string>
+    <string name="fan_low">Düşük</string>
+    <string name="fan_medium">Orta</string>
+    <string name="fan_high">Yüksek</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Otomatik</string>
+    <string name="fan_level">Seviye: %%%1$d</string>
+
+    <string name="section_status">Canlı durum</string>
+    <string name="status_indoor">İç ortam sıcaklığı</string>
+    <string name="status_outdoor">Dış ortam sıcaklığı</string>
+    <string name="status_power">Güç</string>
+    <string name="status_total">Toplam tüketim</string>
+    <string name="status_error">Hata kodu</string>
+    <string name="status_error_none">yok</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Toplam maliyet</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Tanılama (beta)</string>
+    <string name="diag_beta_hint">Deneysel telemetri. Her cihaz bu verileri bildirmez — değerler boş kalabilir.</string>
+    <string name="diag_group1_title">Kompresör ve soğutucu akışkan</string>
+    <string name="diag_compressor_freq">Kompresör frekansı</string>
+    <string name="diag_compressor_freq_target">Hedef frekans</string>
+    <string name="diag_compressor_current">Çekilen akım</string>
+    <string name="diag_compressor_voltage">Besleme gerilimi</string>
+    <string name="diag_temp_t1">İç serpantin (T1)</string>
+    <string name="diag_temp_t2">Evaporatör (T2)</string>
+    <string name="diag_temp_t3">Kondenser (T3)</string>
+    <string name="diag_temp_t4">Dış ortam (T4)</string>
+    <string name="diag_temp_tp">Basma borusu (TP)</string>
+    <string name="diag_group2_title">İç fan ve pompa</string>
+    <string name="diag_fan_speed">Fan hızı</string>
+    <string name="diag_fan_speed_target">Hedef fan hızı</string>
+    <string name="diag_water_pump">Yoğuşma pompası</string>
+    <string name="diag_pump_on">çalışıyor</string>
+    <string name="diag_pump_off">kapalı</string>
+    <string name="diag_group7_title">Dış ünite gücü</string>
+    <string name="diag_compressor_power">Çekilen güç</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Gösterim ve fiyat</string>
+    <string name="unit_fahrenheit">°F göster (Fahrenheit)</string>
+    <string name="price_per_kwh">kWh başına fiyat</string>
+    <string name="price_hint">Tüketimden toplam maliyeti tahmin etmek için kullanılır.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">İç ortam sıcaklığı kalibrasyonu</string>
+    <string name="calibration_hint">Birçok cihaz, gerçek oda sıcaklığını bir iki derece farklı ölçer. Bir oda termometresiyle karşılaştırıp ölçümü burada düzelt. Uygulama düzeltilmiş değeri her yerde küçük, kehribar rengi bir delta işaretiyle gösterir ve cihaza gönderdiği hedef sıcaklığı aynı tam derece kadar kaydırır — böylece oda gerçekten ayarladığın sıcaklığa ulaşır. Bu cihaz için kaydedilir.</string>
+    <string name="calibration_none">düzeltme yok</string>
+    <string name="calibration_preview">Ölçülen %1$s → gösterilen %2$s</string>
+    <string name="calibration_device_target">Cihaza gönderilen: %1$s — hedef %2$s</string>
+    <string name="calibration_no_reading">İlk ölçüm bekleniyor…</string>
+    <string name="calibration_reset">0’a sıfırla</string>
+    <string name="calibration_less">Düzeltmeyi azalt</string>
+    <string name="calibration_more">Düzeltmeyi artır</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Güncelleme aralığı</string>
+    <string name="settings_poll_hint">Uygulama bağlıyken durum, enerji ve tanılama verilerinin ne sıklıkta sorgulanacağı. Daha kısa aralıklar daha hızlı güncellenir ama daha fazla Wi-Fi trafiğine yol açar.</string>
+    <string name="poll_seconds">%1$d sn</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Beta özellikler</string>
+    <string name="settings_beta_hint">Deneysel ek tanılama verileri, varsayılan olarak açık — her seçenek yenileme başına bir sorgu ekler ve buradan kapatılabilir. Her cihaz bunları desteklemez. Değerler Durum sekmesinde gösterilir ve (geçmiş kaydı açıkken) Geçmiş’e kaydedilir.</string>
+    <string name="beta_group1">Kompresör tanılama</string>
+    <string name="beta_group1_desc">Frekans, akım, gerilim ve soğutucu akışkan sıcaklıkları (T1–T4, basma borusu)</string>
+    <string name="beta_group2">İç fan ve pompa</string>
+    <string name="beta_group2_desc">Gerçek iç fan hızı ve yoğuşma pompası durumu</string>
+    <string name="beta_group7">Dış ünite gücü</string>
+    <string name="beta_group7_desc">Dış ünitenin watt cinsinden gerçek zamanlı güç tüketimi</string>
+
+    <string name="section_options">Seçenekler</string>
+    <string name="option_swing">Salınım (kanatlar)</string>
+    <string name="option_eco">Eko modu</string>
+    <string name="option_beep">Bip sesi</string>
+    <string name="option_anion">İyonizer</string>
+    <string name="option_out_silent">Sessiz dış ünite</string>
+    <string name="option_self_clean">Kendini temizleme</string>
+    <string name="option_display">Ekran / LED</string>
+
+    <string name="section_gear">Kompresör sınırlama</string>
+    <string name="gear_full">Tam</string>
+    <string name="gear_75">%75</string>
+    <string name="gear_50">%50</string>
+
+    <string name="section_sleep">Uyku zamanlayıcısı</string>
+    <string name="sleep_active">%1$d dk içinde kapanır</string>
+    <string name="sleep_cancel">Zamanlayıcıyı iptal et</string>
+    <string name="sleep_custom">Özel…</string>
+    <string name="sleep_custom_title">Uyku zamanlayıcısı</string>
+    <string name="sleep_custom_label">Dakika</string>
+    <string name="action_start">Başlat</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">İpucu: bir kartı farklı bir sıraya sürüklemek için basılı tut.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Cihazı manuel ekle</string>
+    <string name="manual_hint">Yayın (broadcast) keşfi olmadan kurulan bağlantılar için. Cihaz kimliğini Midea/SmartHome uygulamasında veya bir ağ taramasıyla bulabilirsin.</string>
+    <string name="field_ip">IP adresi</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">Cihaz kimliği (ondalık)</string>
+    <string name="field_name">Ad (isteğe bağlı)</string>
+    <string name="action_add">Ekle</string>
+    <string name="action_cancel">İptal</string>
+    <string name="action_save">Kaydet</string>
+    <string name="rename_title">Cihazı yeniden adlandır</string>
+    <string name="rename_hint">Ad yalnızca bu uygulamada saklanır — iki cihazı ayırt etmek için kullanışlıdır.</string>
+    <string name="cd_rename">Yeniden adlandır</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Cihaz</string>
+    <string name="device_edit_name">Ad</string>
+    <string name="device_edit_save">Kaydet</string>
+    <string name="device_forget">Kaldır</string>
+    <string name="device_forget_really">Kalıcı olarak kaldır</string>
+    <string name="device_forget_confirm">Bu, kayıtlı kimlik bilgilerini siler. Cihazı istediğin zaman yeniden ekleyebilirsin.</string>
+    <string name="pane_pick_device">Bir cihaz seç</string>
+    <string name="pane_pick_device_hint">Kontrol etmek için soldaki listeden birini seç.</string>
+    <string name="option_turbo_fan_hint">Turbo fanı kontrol eder — hızı değiştirmek için turboyu kapat.</string>
+    <string name="option_self_clean_hint">Evaporatörün kendini temizleme döngüsünü çalıştırır. Cihaza bağlı olarak yaklaşık 20 ila 30 dakika sürer; bu sırada normal soğutma duraklar.</string>
+    <string name="sleep_preset_min">%1$d dk</string>
+    <string name="fan_percent">%%%1$d</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Tokeni dışa aktar</string>
+    <string name="export_title">Tokeni dışa aktar</string>
+    <string name="export_hint">Bu kimlik bilgileri, cihazı bulut olmadan yerel olarak kontrol etmeni sağlar — yedekle veya başka araçlarda kullan. Gizli tut.</string>
+    <string name="export_none">Henüz token yok. İnternete bağlıyken cihaza bir kez bağlan, sonra dışa aktar.</string>
+    <string name="export_copy">Kopyala</string>
+    <string name="export_share">Paylaş</string>
+    <string name="export_copied">Panoya kopyalandı</string>
+    <string name="action_close">Kapat</string>
+    <string name="import_button">İçe aktar</string>
+    <string name="import_title">Tokeni içe aktar</string>
+    <string name="import_hint">Bir token bloğu yapıştır (Dışa aktar, msmart, … kaynağından). Cihaz ardından çevrimdışı çalışır.</string>
+    <string name="import_field">Token bloğu</string>
+    <string name="import_ok">Token içe aktarıldı</string>
+    <string name="import_error">Bu token bloğu okunamadı</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Kayıtlı cihazlar</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Klima gücü</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Önizleme (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Bağlantı başarısız: %1$s</string>
+    <string name="error_command">Komut başarısız: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Başlamadan önce</string>
+    <string name="disclaimer_body">ClimaPilot bağımsız bir uygulamadır; Midea ile bağlantılı değildir, Midea tarafından onaylanmamış veya desteklenmemiştir. Uyumlu klimaları yerel Wi-Fi ağın üzerinden kontrol eder.\n\nKomut göndermeden önce cihazının doğru kurulduğundan ve güvenle çalıştırılabileceğinden emin ol. Bu uygulamayı kendi sorumluluğunda kullanırsın; geliştiriciler herhangi bir hasar veya kayıp için sorumluluk kabul etmez.\n\nGüç gibi ölçülen değerler cihaz tarafından sağlanır ve hatalı olabilir.\n\nNot: Bir cihaza ilk kez bağlandığında ClimaPilot, Midea’nın sunucusundan tek seferlik bir erişim tokeni alır (hesap gerekmez). Sonrasında kontrol tamamen yerel olarak çalışır — istersen uygulamanın internet erişimini tamamen engelleyebilirsin.</string>
+    <string name="disclaimer_accept">Anladım</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Hızlı klima kontrolü</string>
+    <string name="widget_not_connected">Bağlı değil</string>
+    <string name="widget_off">Kapalı</string>
+    <string name="widget_on">Açık</string>
+    <string name="widget_indoor">İç ortam %1$s</string>
+    <string name="widget_outdoor">Dış ortam %1$s</string>
+    <string name="widget_sleep_30">30 dk</string>
+    <string name="widget_sleep_60">1 sa</string>
+    <string name="widget_sleep_120">2 sa</string>
+    <string name="widget_sleep_240">4 sa</string>
+    <string name="widget_sleep_title">Uyku zamanlayıcısı</string>
+    <string name="widget_sleep_off_in">sonra klima kapanır</string>
+    <string name="widget_sleep_idle">Zamanlayıcı çalışmıyor</string>
+    <string name="widget_sleep_off_now">Şimdi kapat</string>
+    <string name="widget_sleep_cancel">İptal</string>
+    <string name="widget_power">Güç</string>
+    <string name="widget_cool_down">Daha serin</string>
+    <string name="widget_warm_up">Daha sıcak</string>
+    <string name="widget_mode">Mod</string>
+    <string name="widget_all_label">Klima — tüm kontroller</string>
+    <string name="widget_power_label">Klima — güç</string>
+    <string name="widget_temp_label">Klima — sıcaklık</string>
+    <string name="widget_mode_label">Klima — mod</string>
+    <string name="widget_all_desc">Güç, sıcaklık, mod, fan, turbo ve uyku zamanlayıcısı</string>
+    <string name="widget_sleep_label">Klima — uyku zamanlayıcısı</string>
+    <string name="widget_sleep_desc">Hızlı seçeneklerle canlı geri sayım</string>
+    <string name="widget_sleep_unit_min">dk</string>
+    <string name="widget_sleep_unit_hour">saat</string>
+    <string name="widget_sleep_quick_desc">Tek dokunuşla uyku zamanlayıcısı kurulur</string>
+    <string name="widget_sleep_30_label">Uyku 30 dk</string>
+    <string name="widget_sleep_60_label">Uyku 1 sa</string>
+    <string name="widget_sleep_120_label">Uyku 2 sa</string>
+    <string name="widget_sleep_240_label">Uyku 4 sa</string>
+    <string name="widget_sleep_480_label">Uyku 8 sa</string>
+    <string name="widget_sleep_720_label">Uyku 12 sa</string>
+    <string name="widget_power_desc">Klimayı aç/kapat</string>
+    <string name="widget_temp_desc">Sıcaklığı artır veya azalt</string>
+    <string name="widget_mode_desc">Çalışma modunu değiştir</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Ayarlar</string>
+    <string name="cd_settings">Ayarlar</string>
+    <string name="settings_version">Sürüm %1$s</string>
+    <string name="support_title">Geliştirmeyi destekle</string>
+    <string name="support_body">ClimaPilot ücretsizdir ve reklamsızdır. İşine yarıyorsa küçük bir bağış gelişimini sürdürmesini sağlar — teşekkürler!</string>
+    <string name="support_kofi">Bana bir kahve ısmarla (Ko-fi)</string>
+    <string name="support_paypal">PayPal ile bağış yap</string>
+    <string name="credits_title">Katkılar</string>
+    <string name="credits_body">ClimaPilot’un yerel Midea protokolü, @mill1000 tarafından geliştirilen mükemmel midea-msmart projesinin Kotlin’e uyarlanmış hâlidir. Çok teşekkürler — o olmasaydı bu uygulama var olmazdı.</string>
+    <string name="credits_link">GitHub’da midea-msmart</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Güvenilir zamanlayıcılar</string>
+    <string name="reliability_body">Uyku zamanlayıcısının ve senaryo zamanlamalarının uygulama kapalıyken bile tetiklenmesi için ClimaPilot’un arka planda çalışmasına izin ver.</string>
+    <string name="reliability_battery_ok">Pil optimizasyonu: kapalı ✓</string>
+    <string name="reliability_battery_warn">Pil optimizasyonu açık — zamanlayıcılar gecikebilir veya atlanabilir.</string>
+    <string name="reliability_battery_action">Arka plana izin ver (pil)</string>
+    <string name="reliability_autostart_action">Otomatik başlatmaya izin ver (üretici)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Uygulama güncellemeleri</string>
+    <string name="update_body">Yeni sürümler GitHub’dan alınır. Kurulumu her zaman sen onaylarsın.</string>
+    <string name="update_current">Yüklü: %1$s</string>
+    <string name="update_auto_label">Açılışta otomatik denetle</string>
+    <string name="update_check_button">Güncellemeleri denetle</string>
+    <string name="update_checking">Denetleniyor…</string>
+    <string name="update_uptodate">En yeni sürümü kullanıyorsun (%1$s).</string>
+    <string name="update_error">Güncellemeler denetlenemedi. Bağlantını kontrol edip tekrar dene.</string>
+    <string name="update_available_title">Güncelleme mevcut</string>
+    <string name="update_available_body">Sürüm %1$s mevcut — sen %2$s sürümündesin.</string>
+    <string name="update_install">Güncelle</string>
+    <string name="update_downloading">İndiriliyor… %%%1$d</string>
+    <string name="update_later">Daha sonra</string>
+    <string name="update_failed">İndirme başarısız. Lütfen daha sonra tekrar dene.</string>
+    <string name="update_verify_failed">İndirilen dosya güvenlik denetiminden geçemedi ve yüklenmedi.</string>
+    <string name="update_need_permission">ClimaPilot’a uygulama yükleme izni ver, sonra tekrar Güncelle’ye dokun.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Kapat</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Uygula: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Otomatik kapanma</string>
+    <string name="autooff_body">Bir güvenlik kesicisi: Klima bundan daha uzun çalışırsa otomatik olarak kapanır — dışarıdayken-zamanlayıcısının yerel karşılığı (Wi-Fi’dan ayrıldığında telefonun klimaya erişemez). 0 = kapalı.</string>
+    <string name="autooff_hours_label">Şu süreden sonra kapat (saat)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Uyku zamanlayıcısı</string>
+    <string name="notif_timer_title">Uyku zamanlayıcısı çalışıyor</string>
+    <string name="notif_timer_text">Geri sayım bitince klima kapanır.</string>
+    <string name="notif_timer_off_now">Şimdi kapat</string>
+    <string name="notif_timer_cancel">İptal</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Uygulama kilidi</string>
+    <string name="lock_card_body">ClimaPilot’u açmak için parmak izi, yüz veya ekran PIN’i gerektir — böylece klimanı başka kimse kontrol edemez.</string>
+    <string name="lock_card_switch">Açmak için kilit açma gerektir</string>
+    <string name="lock_title">ClimaPilot kilidini aç</string>
+    <string name="lock_subtitle">Klimanı kontrol etmek için kimliğini doğrula</string>
+    <string name="lock_unlock">Kilidi aç</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Klima modu</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Geçmiş</string>
+    <string name="history_card_title">Enerji ve filtre</string>
+    <string name="history_card_body">Son güç kullanımını ve toplam tüketimi gör, filtrenin ne zaman temizlenmesi gerektiğini takip et.</string>
+    <string name="history_card_open">Geçmişi aç</string>
+    <string name="history_power_title">Güç (24 sa)</string>
+    <string name="history_empty">Henüz yeterli veri yok — klimayı bir süre kullanıp tekrar bak.</string>
+    <string name="history_peak">Zirve: %1$d W</string>
+    <string name="history_totals_title">Tüketim</string>
+    <string name="history_total_kwh">Toplam: %1$.1f kWh</string>
+    <string name="history_total_cost">Tahmini maliyet: %1$.2f €</string>
+    <string name="history_filter_title">Filtre</string>
+    <string name="history_filter_runtime">Son temizlikten beri çalışma: %1$d sa / %2$d sa</string>
+    <string name="history_filter_due">Filtreyi temizleme zamanı geldi.</string>
+    <string name="history_filter_reset">Filtre temizlendi (sıfırla)</string>
+    <string name="history_filter_hint">Bu, çalışma süresine dayalı uygulama içi bir bakım hatırlatıcısıdır. Cihazın kendi filtre göstergesini okumaz veya sıfırlamaz — onu klimanın üzerinden sıfırla.</string>
+    <string name="option_beep_hint">Onay sesi. Birçok cihaz yalnızca açma/kapamada bip sesi çıkarır, diğer değişikliklerde çıkarmaz.</string>
+    <string name="history_record_title">Geçmişi kaydet</string>
+    <string name="history_record_body">Açıkken ClimaPilot güç, sıcaklık ve fan verilerini kaydeder ve klimayı arka planda yaklaşık her 15 dakikada bir sorgular (yalnızca Wi-Fi). Varsayılan olarak kapalıdır.</string>
+    <string name="history_record_switch">Klima verilerini kaydet</string>
+    <string name="history_indoor_title">İç ortam sıcaklığı (24 sa)</string>
+    <string name="history_outdoor_title">Dış ortam sıcaklığı (24 sa)</string>
+    <string name="history_fan_title">Fan seviyesi (24 sa)</string>
+    <string name="history_comp_hz_title">Kompresör frekansı (beta)</string>
+    <string name="history_comp_w_title">Dış ünite gücü (beta)</string>
+    <string name="history_fan_rpm_title">İç fan hızı (beta)</string>
+    <string name="history_metric_summary">Şimdi %1$s%2$s · min %3$s · maks %4$s%5$s</string>
+    <string name="range_hour">Saat</string>
+    <string name="range_day">Gün</string>
+    <string name="range_week">Hafta</string>
+    <string name="range_month">Ay</string>
+    <string name="history_pick_day">Bir gün seç</string>
+    <string name="history_day">Gün: %1$s</string>
+    <string name="history_range_kwh">Bu dönemde: %1$.1f kWh</string>
+    <string name="history_range_cost">Tahmini maliyet: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">ClimaPilot’tan memnun musun?</string>
+    <string name="donate_prompt_body">ClimaPilot ücretsizdir ve reklamsızdır. Telefonundaki yerini hak ettiyse, küçük bir bağış gelişimini sürdürmesini sağlar — teşekkürler!</string>
+    <string name="donate_later">Belki sonra</string>
+    <string name="donate_already">Zaten destekledim</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR kumanda</string>
+    <string name="ir_remote_entry">IR kumanda (kızılötesi)</string>
+    <string name="ir_remote_subtitle">Kızılötesi · yalnızca gönderim</string>
+    <string name="ir_no_emitter">Bu telefonda kızılötesi verici yok</string>
+    <string name="option_quiet">Sessiz</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Kızılötesi tek yönlüdür — bu anahtarlar cihazın gerçek durumunu değil, en son gönderileni gösterir.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Kontrol</string>
+    <string name="nav_status">Durum</string>
+    <string name="nav_options">Seçenekler</string>
+    <string name="nav_scenes">Senaryolar</string>
+    <string name="nav_history">Geçmiş</string>
+</resources>

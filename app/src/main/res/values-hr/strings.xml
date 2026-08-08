@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Scene</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco noć</string>
+    <string name="scene_comfort">Komfor</string>
+    <string name="scene_save">Spremi</string>
+    <string name="scene_save_title">Spremi scenu</string>
+    <string name="scene_name_label">Naziv scene</string>
+    <string name="scene_default_name">Scena</string>
+    <string name="scene_hint">Dodirni za primjenu · dugo pritisni za uređivanje</string>
+    <string name="scene_edit_title">Uredi scenu</string>
+    <string name="scene_schedule">Pokreni svaki dan</string>
+    <string name="scene_schedule_at">Vrijeme: %1$s</string>
+    <string name="scene_schedule_note">Primjenjuje se automatski svaki dan. Aplikacija mora imati dopušten rad u pozadini.</string>
+    <string name="scene_delete">Izbriši</string>
+    <string name="scene_delete_title">Izbrisati scenu?</string>
+    <string name="scene_delete_msg">„%1$s” će biti uklonjena.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Tjedni plan</string>
+    <string name="plan_empty">Još nema termina. Dodaj jedan da se scena pokreće automatski — npr. maksimalno hlađenje ponedjeljkom od 6 do 18.</string>
+    <string name="plan_need_scene">Najprije stvori scenu — plan pokreće tvoje scene.</string>
+    <string name="plan_add">Dodaj termin</string>
+    <string name="plan_hint">Termini se izvršavaju u pozadini, čak i dok telefon miruje na Wi-Fi mreži. Za pouzdano tempiranje dopusti ClimaPilotu rad u pozadini (Postavke ▸ Pouzdani tajmeri).</string>
+    <string name="plan_new_title">Novi termin</string>
+    <string name="plan_edit_title">Uredi termin</string>
+    <string name="plan_scene_label">Scena</string>
+    <string name="plan_days_label">Dani</string>
+    <string name="plan_from">Od</string>
+    <string name="plan_to">Do</string>
+    <string name="plan_end_label">Na kraju</string>
+    <string name="plan_end_off">Isključi</string>
+    <string name="plan_end_leave">Nastavi raditi</string>
+    <string name="plan_overnight">+1 dan</string>
+    <string name="plan_every_day">Svaki dan</string>
+    <string name="plan_disabled">pauzirano</string>
+    <string name="plan_to_off">→ isklj.</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Tvoj klima-uređaj na Wi-Fi mreži</string>
+    <string name="action_discover">Traži uređaje</string>
+    <string name="action_discovering">Traženje…</string>
+    <string name="action_manual">Ručno</string>
+    <string name="demo_preview">Pregled bez uređaja (demo)</string>
+    <string name="empty_title">Još nema uređaja</string>
+    <string name="empty_body">Dodirni „Traži uređaje”. Telefon mora biti na istoj Wi-Fi mreži kao i klima.</string>
+    <string name="error_no_devices">Nijedan uređaj nije pronađen. Ista Wi-Fi mreža? Inače dodaj ručno.</string>
+    <string name="action_connect">Poveži</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Natrag</string>
+    <string name="cd_refresh">Osvježi</string>
+    <string name="cd_power">Napajanje</string>
+    <string name="cd_reorder">Povuci za promjenu redoslijeda</string>
+    <string name="connected_to">Povezano · %1$s</string>
+    <string name="disconnected">Nije povezano</string>
+    <string name="state_on">UKLJ</string>
+    <string name="state_off">ISKLJ</string>
+    <string name="target_temp">Ciljna temperatura</string>
+    <string name="readout_indoor">Unutra</string>
+    <string name="readout_outdoor">Vani</string>
+    <string name="readout_power">Snaga</string>
+
+    <string name="section_mode">Način rada</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Hlađenje</string>
+    <string name="mode_dry">Sušenje</string>
+    <string name="mode_heat">Grijanje</string>
+    <string name="mode_fan">Ventilator</string>
+
+    <string name="section_fan">Brzina ventilatora</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Tiho</string>
+    <string name="fan_low">Niska</string>
+    <string name="fan_medium">Srednja</string>
+    <string name="fan_high">Visoka</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automatski</string>
+    <string name="fan_level">Razina: %1$d%%</string>
+
+    <string name="section_status">Status uživo</string>
+    <string name="status_indoor">Unutarnja temperatura</string>
+    <string name="status_outdoor">Vanjska temperatura</string>
+    <string name="status_power">Snaga</string>
+    <string name="status_total">Ukupna potrošnja</string>
+    <string name="status_error">Kod pogreške</string>
+    <string name="status_error_none">nema</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Ukupni trošak</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Dijagnostika (beta)</string>
+    <string name="diag_beta_hint">Eksperimentalna telemetrija. Ne prijavljuje svaki uređaj ove vrijednosti — mogu ostati prazne.</string>
+    <string name="diag_group1_title">Kompresor &amp; rashladno sredstvo</string>
+    <string name="diag_compressor_freq">Frekvencija kompresora</string>
+    <string name="diag_compressor_freq_target">Ciljna frekvencija</string>
+    <string name="diag_compressor_current">Struja</string>
+    <string name="diag_compressor_voltage">Napon napajanja</string>
+    <string name="diag_temp_t1">Unutarnji izmjenjivač (T1)</string>
+    <string name="diag_temp_t2">Isparivač (T2)</string>
+    <string name="diag_temp_t3">Kondenzator (T3)</string>
+    <string name="diag_temp_t4">Vanjska (T4)</string>
+    <string name="diag_temp_tp">Tlačni vod (TP)</string>
+    <string name="diag_group2_title">Unutarnji ventilator &amp; pumpa</string>
+    <string name="diag_fan_speed">Brzina ventilatora</string>
+    <string name="diag_fan_speed_target">Ciljna brzina ventilatora</string>
+    <string name="diag_water_pump">Pumpa kondenzata</string>
+    <string name="diag_pump_on">radi</string>
+    <string name="diag_pump_off">isključena</string>
+    <string name="diag_group7_title">Snaga vanjske jedinice</string>
+    <string name="diag_compressor_power">Potrošnja snage</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Prikaz &amp; cijena</string>
+    <string name="unit_fahrenheit">Prikaži °F (Fahrenheit)</string>
+    <string name="price_per_kwh">Cijena po kWh</string>
+    <string name="price_hint">Koristi se za procjenu ukupnog troška iz potrošnje.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Kalibracija unutarnje temperature</string>
+    <string name="calibration_hint">Mnogi uređaji mjere stupanj-dva pored stvarne sobne temperature. Usporedi sa sobnim termometrom i ovdje ispravi očitanje. Aplikacija zatim posvuda prikazuje ispravljenu vrijednost, označenu malom žutom deltom, i pomiče zadanu temperaturu koju šalje uređaju za iste cijele stupnjeve — tako soba stvarno postigne ono što postaviš. Sprema se za ovaj uređaj.</string>
+    <string name="calibration_none">bez korekcije</string>
+    <string name="calibration_preview">Izmjereno %1$s → prikazano %2$s</string>
+    <string name="calibration_device_target">Poslano uređaju: %1$s — cilj %2$s</string>
+    <string name="calibration_no_reading">Čekanje prvog očitanja…</string>
+    <string name="calibration_reset">Vrati na 0</string>
+    <string name="calibration_less">Smanji korekciju</string>
+    <string name="calibration_more">Povećaj korekciju</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Interval osvježavanja</string>
+    <string name="settings_poll_hint">Koliko se često dohvaćaju stanje, energija i dijagnostika dok je aplikacija povezana. Kraći intervali brže osvježavaju, ali stvaraju više Wi-Fi prometa.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Beta funkcije</string>
+    <string name="settings_beta_hint">Eksperimentalna dodatna dijagnostika, uključena prema zadanim postavkama — svaka opcija dodaje jedan upit po osvježavanju i ovdje se može isključiti. Ne podržavaju je svi uređaji. Vrijednosti se prikazuju na kartici Status i bilježe u Povijesti (kad je bilježenje povijesti uključeno).</string>
+    <string name="beta_group1">Dijagnostika kompresora</string>
+    <string name="beta_group1_desc">Frekvencija, struja, napon &amp; temperature rashladnog sredstva (T1–T4, tlačni vod)</string>
+    <string name="beta_group2">Unutarnji ventilator &amp; pumpa</string>
+    <string name="beta_group2_desc">Stvarna brzina unutarnjeg ventilatora i stanje pumpe kondenzata</string>
+    <string name="beta_group7">Snaga vanjske jedinice</string>
+    <string name="beta_group7_desc">Trenutna potrošnja snage vanjske jedinice u vatima</string>
+
+    <string name="section_options">Opcije</string>
+    <string name="option_swing">Njihanje (lamele)</string>
+    <string name="option_eco">Eco način</string>
+    <string name="option_beep">Zvučni signal</string>
+    <string name="option_anion">Ionizator</string>
+    <string name="option_out_silent">Tiha vanjska jedinica</string>
+    <string name="option_self_clean">Samočišćenje</string>
+    <string name="option_display">Zaslon / LED</string>
+
+    <string name="section_gear">Ograničenje kompresora</string>
+    <string name="gear_full">Puno</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Tajmer za spavanje</string>
+    <string name="sleep_active">Isključuje se za %1$d min</string>
+    <string name="sleep_cancel">Otkaži tajmer</string>
+    <string name="sleep_custom">Prilagođeno…</string>
+    <string name="sleep_custom_title">Tajmer za spavanje</string>
+    <string name="sleep_custom_label">Minute</string>
+    <string name="action_start">Pokreni</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Savjet: dugo pritisni karticu da je povučeš na drugo mjesto.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Dodaj uređaj ručno</string>
+    <string name="manual_hint">Za veze bez broadcast otkrivanja. ID uređaja pronađi u aplikaciji Midea/SmartHome ili skeniranjem mreže.</string>
+    <string name="field_ip">IP adresa</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">ID uređaja (decimalno)</string>
+    <string name="field_name">Naziv (neobavezno)</string>
+    <string name="action_add">Dodaj</string>
+    <string name="action_cancel">Odustani</string>
+    <string name="action_save">Spremi</string>
+    <string name="rename_title">Preimenuj uređaj</string>
+    <string name="rename_hint">Naziv se sprema samo u ovoj aplikaciji — praktično za razlikovanje dvaju uređaja.</string>
+    <string name="cd_rename">Preimenuj</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Uređaj</string>
+    <string name="device_edit_name">Naziv</string>
+    <string name="device_edit_save">Spremi</string>
+    <string name="device_forget">Ukloni</string>
+    <string name="device_forget_really">Stvarno ukloni</string>
+    <string name="device_forget_confirm">Time se brišu spremljeni pristupni podaci. Uređaj možeš bilo kada ponovno dodati.</string>
+    <string name="pane_pick_device">Odaberi uređaj</string>
+    <string name="pane_pick_device_hint">Odaberi jedan s popisa lijevo da njime upravljaš.</string>
+    <string name="option_turbo_fan_hint">Turbo upravlja ventilatorom — isključi turbo da promijeniš brzinu.</string>
+    <string name="option_self_clean_hint">Pokreće ciklus samočišćenja isparivača. Ovisno o uređaju traje otprilike 20 do 30 minuta; normalno hlađenje je u međuvremenu pauzirano.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Izvezi token</string>
+    <string name="export_title">Izvoz tokena</string>
+    <string name="export_hint">Ovi ti podaci omogućuju lokalno upravljanje uređajem bez oblaka — napravi sigurnosnu kopiju ili ih koristi u drugim alatima. Čuvaj ih za sebe.</string>
+    <string name="export_none">Još nema tokena. Poveži se s uređajem jednom dok si na internetu, zatim izvezi.</string>
+    <string name="export_copy">Kopiraj</string>
+    <string name="export_share">Podijeli</string>
+    <string name="export_copied">Kopirano u međuspremnik</string>
+    <string name="action_close">Zatvori</string>
+    <string name="import_button">Uvezi</string>
+    <string name="import_title">Uvoz tokena</string>
+    <string name="import_hint">Zalijepi blok tokena (iz Izvoza, alata msmart, …). Uređaj zatim radi izvanmrežno.</string>
+    <string name="import_field">Blok tokena</string>
+    <string name="import_ok">Token je uvezen</string>
+    <string name="import_error">Taj blok tokena nije moguće pročitati</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Spremljeni uređaji</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Napajanje klime</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Pregled (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Povezivanje nije uspjelo: %1$s</string>
+    <string name="error_command">Naredba nije uspjela: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Prije početka</string>
+    <string name="disclaimer_body">ClimaPilot je neovisna aplikacija i nije povezana s tvrtkom Midea niti je ona podupire ili odobrava. Upravlja kompatibilnim klima-uređajima putem tvoje lokalne Wi-Fi mreže.\n\nPrije slanja naredbi provjeri je li uređaj ispravno montiran i siguran za rad. Aplikaciju koristiš na vlastitu odgovornost; autori ne preuzimaju nikakvu odgovornost za štetu ili gubitak.\n\nIzmjerene vrijednosti poput snage dolaze s uređaja i mogu biti netočne.\n\nNapomena: pri prvom povezivanju s uređajem ClimaPilot dohvaća jednokratni pristupni token s Midea poslužitelja (račun nije potreban). Nakon toga upravljanje radi potpuno lokalno — aplikaciji čak možeš uskratiti pristup internetu.</string>
+    <string name="disclaimer_accept">Razumijem</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Brzo upravljanje klimom</string>
+    <string name="widget_not_connected">Nije povezano</string>
+    <string name="widget_off">Isklj.</string>
+    <string name="widget_on">Uklj.</string>
+    <string name="widget_indoor">Unutra %1$s</string>
+    <string name="widget_outdoor">Vani %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Tajmer za spavanje</string>
+    <string name="widget_sleep_off_in">zatim se klima isključuje</string>
+    <string name="widget_sleep_idle">Nema aktivnog tajmera</string>
+    <string name="widget_sleep_off_now">Isključi sad</string>
+    <string name="widget_sleep_cancel">Otkaži</string>
+    <string name="widget_power">Napajanje</string>
+    <string name="widget_cool_down">Hladnije</string>
+    <string name="widget_warm_up">Toplije</string>
+    <string name="widget_mode">Način</string>
+    <string name="widget_all_label">Klima — sve kontrole</string>
+    <string name="widget_power_label">Klima — napajanje</string>
+    <string name="widget_temp_label">Klima — temperatura</string>
+    <string name="widget_mode_label">Klima — način rada</string>
+    <string name="widget_all_desc">Napajanje, temperatura, način rada, ventilator, turbo i tajmer za spavanje</string>
+    <string name="widget_sleep_label">Klima — tajmer za spavanje</string>
+    <string name="widget_sleep_desc">Odbrojavanje uživo s brzim postavkama</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">sati</string>
+    <string name="widget_sleep_quick_desc">Jedan dodir postavlja tajmer za spavanje</string>
+    <string name="widget_sleep_30_label">Tajmer 30 min</string>
+    <string name="widget_sleep_60_label">Tajmer 1 h</string>
+    <string name="widget_sleep_120_label">Tajmer 2 h</string>
+    <string name="widget_sleep_240_label">Tajmer 4 h</string>
+    <string name="widget_sleep_480_label">Tajmer 8 h</string>
+    <string name="widget_sleep_720_label">Tajmer 12 h</string>
+    <string name="widget_power_desc">Uključi/isključi klimu</string>
+    <string name="widget_temp_desc">Povisi ili snizi temperaturu</string>
+    <string name="widget_mode_desc">Promijeni način rada</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Postavke</string>
+    <string name="cd_settings">Postavke</string>
+    <string name="settings_version">Verzija %1$s</string>
+    <string name="support_title">Podrži razvoj</string>
+    <string name="support_body">ClimaPilot je besplatan i bez oglasa. Ako ti koristi, mala donacija pomaže da tako i ostane — hvala!</string>
+    <string name="support_kofi">Časti me kavom (Ko-fi)</string>
+    <string name="support_paypal">Donacija putem PayPala</string>
+    <string name="credits_title">Zasluge</string>
+    <string name="credits_body">Lokalni Midea protokol u ClimaPilotu Kotlin je port izvrsnog projekta midea-msmart autora @mill1000. Velika hvala — bez njega ova aplikacija ne bi postojala.</string>
+    <string name="credits_link">midea-msmart na GitHubu</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Pouzdani tajmeri</string>
+    <string name="reliability_body">Da bi se tajmer za spavanje i rasporedi scena aktivirali i kad je aplikacija zatvorena, dopusti ClimaPilotu rad u pozadini.</string>
+    <string name="reliability_battery_ok">Optimizacija baterije: isključena ✓</string>
+    <string name="reliability_battery_warn">Optimizacija baterije je uključena — tajmeri mogu kasniti ili izostati.</string>
+    <string name="reliability_battery_action">Dopusti pozadinski rad (baterija)</string>
+    <string name="reliability_autostart_action">Dopusti automatsko pokretanje (proizvođač)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Ažuriranja aplikacije</string>
+    <string name="update_body">Nove verzije preuzimaju se s GitHuba. Svaku instalaciju uvijek potvrđuješ.</string>
+    <string name="update_current">Instalirano: %1$s</string>
+    <string name="update_auto_label">Provjeri automatski pri pokretanju</string>
+    <string name="update_check_button">Provjeri ažuriranja</string>
+    <string name="update_checking">Provjera…</string>
+    <string name="update_uptodate">Imaš najnoviju verziju (%1$s).</string>
+    <string name="update_error">Provjera ažuriranja nije uspjela. Provjeri vezu i pokušaj ponovno.</string>
+    <string name="update_available_title">Dostupno ažuriranje</string>
+    <string name="update_available_body">Dostupna je verzija %1$s — ti imaš %2$s.</string>
+    <string name="update_install">Ažuriraj</string>
+    <string name="update_downloading">Preuzimanje… %1$d%%</string>
+    <string name="update_later">Kasnije</string>
+    <string name="update_failed">Preuzimanje nije uspjelo. Pokušaj ponovno kasnije.</string>
+    <string name="update_verify_failed">Preuzimanje nije prošlo sigurnosnu provjeru i nije instalirano.</string>
+    <string name="update_need_permission">Dopusti ClimaPilotu instaliranje aplikacija, zatim ponovno dodirni Ažuriraj.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Isključi</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Primijeni: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Automatsko isključivanje</string>
+    <string name="autooff_body">Sigurnosni prekid: ako klima radi dulje od ovoga, automatski se isključuje — lokalna zamjena za tajmer odsutnosti (telefon ne može doći do klime kad napustiš Wi-Fi mrežu). 0 = isključeno.</string>
+    <string name="autooff_hours_label">Isključi nakon (sati)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Tajmer za spavanje</string>
+    <string name="notif_timer_title">Tajmer za spavanje radi</string>
+    <string name="notif_timer_text">Klima se isključuje kad odbrojavanje završi.</string>
+    <string name="notif_timer_off_now">Isključi odmah</string>
+    <string name="notif_timer_cancel">Otkaži</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Zaključavanje aplikacije</string>
+    <string name="lock_card_body">Zahtijevaj otisak prsta, lice ili PIN zaslona za otvaranje ClimaPilota — da nitko drugi ne može upravljati tvojom klimom.</string>
+    <string name="lock_card_switch">Zahtijevaj otključavanje pri otvaranju</string>
+    <string name="lock_title">Otključaj ClimaPilot</string>
+    <string name="lock_subtitle">Autentificiraj se za upravljanje klimom</string>
+    <string name="lock_unlock">Otključaj</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Način rada klime</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Povijest</string>
+    <string name="history_card_title">Energija &amp; filtar</string>
+    <string name="history_card_body">Pogledaj nedavnu snagu i ukupnu potrošnju te prati kada filtar treba očistiti.</string>
+    <string name="history_card_open">Otvori povijest</string>
+    <string name="history_power_title">Snaga (24 h)</string>
+    <string name="history_empty">Još nema dovoljno podataka — koristi klimu neko vrijeme pa provjeri ponovno.</string>
+    <string name="history_peak">Vršno: %1$d W</string>
+    <string name="history_totals_title">Potrošnja</string>
+    <string name="history_total_kwh">Ukupno: %1$.1f kWh</string>
+    <string name="history_total_cost">Procijenjeni trošak: %1$.2f €</string>
+    <string name="history_filter_title">Filtar</string>
+    <string name="history_filter_runtime">Rad od zadnjeg čišćenja: %1$d h od %2$d h</string>
+    <string name="history_filter_due">Vrijeme je za čišćenje filtra.</string>
+    <string name="history_filter_reset">Filtar očišćen (poništi)</string>
+    <string name="history_filter_hint">Ovo je podsjetnik za održavanje u aplikaciji, temeljen na vremenu rada. Ne čita niti poništava indikator filtra samog uređaja — njega poništi na klimi.</string>
+    <string name="option_beep_hint">Zvuk potvrde. Mnogi uređaji pište samo pri uključivanju/isključivanju, ne pri drugim promjenama.</string>
+    <string name="history_record_title">Bilježenje povijesti</string>
+    <string name="history_record_body">Kad je uključeno, ClimaPilot bilježi snagu, temperature i ventilator te u pozadini dohvaća stanje klime otprilike svakih 15 min (samo Wi-Fi). Zadano je isključeno.</string>
+    <string name="history_record_switch">Bilježi podatke klime</string>
+    <string name="history_indoor_title">Unutarnja temperatura (24 h)</string>
+    <string name="history_outdoor_title">Vanjska temperatura (24 h)</string>
+    <string name="history_fan_title">Razina ventilatora (24 h)</string>
+    <string name="history_comp_hz_title">Frekvencija kompresora (beta)</string>
+    <string name="history_comp_w_title">Snaga vanjske jedinice (beta)</string>
+    <string name="history_fan_rpm_title">Brzina unutarnjeg ventilatora (beta)</string>
+    <string name="history_metric_summary">Sada %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Sat</string>
+    <string name="range_day">Dan</string>
+    <string name="range_week">Tjedan</string>
+    <string name="range_month">Mjesec</string>
+    <string name="history_pick_day">Odaberi dan</string>
+    <string name="history_day">Dan: %1$s</string>
+    <string name="history_range_kwh">U ovom razdoblju: %1$.1f kWh</string>
+    <string name="history_range_cost">Procijenjeni trošak: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Sviđa ti se ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot je besplatan i bez oglasa. Ako je zaslužio mjesto na tvom telefonu, mala donacija pomaže da tako i ostane — hvala!</string>
+    <string name="donate_later">Možda kasnije</string>
+    <string name="donate_already">Već podržavam</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR daljinski</string>
+    <string name="ir_remote_entry">IR daljinski (infracrveni)</string>
+    <string name="ir_remote_subtitle">Infracrveno · samo slanje</string>
+    <string name="ir_no_emitter">Ovaj telefon nema IR odašiljač</string>
+    <string name="option_quiet">Tiho</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Infracrvena veza je jednosmjerna — ovi prekidači prikazuju što je zadnje poslano, a ne stvarno stanje uređaja.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Kontrola</string>
+    <string name="nav_status">Status</string>
+    <string name="nav_options">Opcije</string>
+    <string name="nav_scenes">Scene</string>
+    <string name="nav_history">Povijest</string>
+</resources>

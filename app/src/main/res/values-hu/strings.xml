@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Jelenetek</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco éjszaka</string>
+    <string name="scene_comfort">Komfort</string>
+    <string name="scene_save">Mentés</string>
+    <string name="scene_save_title">Jelenet mentése</string>
+    <string name="scene_name_label">Jelenet neve</string>
+    <string name="scene_default_name">Jelenet</string>
+    <string name="scene_hint">Koppints az alkalmazáshoz · hosszan nyomva szerkesztheted</string>
+    <string name="scene_edit_title">Jelenet szerkesztése</string>
+    <string name="scene_schedule">Napi futtatás</string>
+    <string name="scene_schedule_at">Időpont: %1$s</string>
+    <string name="scene_schedule_note">Minden nap automatikusan lefut. Ehhez engedélyezned kell az app háttérben futását.</string>
+    <string name="scene_delete">Törlés</string>
+    <string name="scene_delete_title">Törlöd a jelenetet?</string>
+    <string name="scene_delete_msg">A(z) „%1$s” jelenet törlődik.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Heti terv</string>
+    <string name="plan_empty">Még nincs idősáv. Adj hozzá egyet, hogy egy jelenet automatikusan fusson — pl. maximális hűtés hétfőnként 6-tól 18-ig.</string>
+    <string name="plan_need_scene">Először hozz létre egy jelenetet — a terv a jeleneteidet futtatja.</string>
+    <string name="plan_add">Idősáv hozzáadása</string>
+    <string name="plan_hint">Az idősávok a háttérben is futnak, akkor is, ha a telefon Wi-Fi-n tétlen. A megbízható időzítéshez engedélyezd a ClimaPilot háttérben futását (Beállítások ▸ Megbízható időzítők).</string>
+    <string name="plan_new_title">Új idősáv</string>
+    <string name="plan_edit_title">Idősáv szerkesztése</string>
+    <string name="plan_scene_label">Jelenet</string>
+    <string name="plan_days_label">Napok</string>
+    <string name="plan_from">Ettől</string>
+    <string name="plan_to">Eddig</string>
+    <string name="plan_end_label">A végén</string>
+    <string name="plan_end_off">Kikapcsolás</string>
+    <string name="plan_end_leave">Fusson tovább</string>
+    <string name="plan_overnight">+1 nap</string>
+    <string name="plan_every_day">Minden nap</string>
+    <string name="plan_disabled">szüneteltetve</string>
+    <string name="plan_to_off">→ ki</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">A klímád Wi-Fi-n</string>
+    <string name="action_discover">Eszközök keresése</string>
+    <string name="action_discovering">Keresés…</string>
+    <string name="action_manual">Kézi</string>
+    <string name="demo_preview">Előnézet eszköz nélkül (demó)</string>
+    <string name="empty_title">Még nincs eszköz</string>
+    <string name="empty_body">Koppints az „Eszközök keresése” gombra. A telefonodnak ugyanazon a Wi-Fi-n kell lennie, mint a klímának.</string>
+    <string name="error_no_devices">Nem található eszköz. Ugyanaz a Wi-Fi? Ha nem megy, add hozzá kézzel.</string>
+    <string name="action_connect">Csatlakozás</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Vissza</string>
+    <string name="cd_refresh">Frissítés</string>
+    <string name="cd_power">Főkapcsoló</string>
+    <string name="cd_reorder">Húzd az átrendezéshez</string>
+    <string name="connected_to">Csatlakozva · %1$s</string>
+    <string name="disconnected">Nincs kapcsolat</string>
+    <string name="state_on">BE</string>
+    <string name="state_off">KI</string>
+    <string name="target_temp">Célhőmérséklet</string>
+    <string name="readout_indoor">Beltéri</string>
+    <string name="readout_outdoor">Kültéri</string>
+    <string name="readout_power">Teljesítmény</string>
+
+    <string name="section_mode">Üzemmód</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Hűtés</string>
+    <string name="mode_dry">Szárítás</string>
+    <string name="mode_heat">Fűtés</string>
+    <string name="mode_fan">Ventilátor</string>
+
+    <string name="section_fan">Ventilátor-fokozat</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Csendes</string>
+    <string name="fan_low">Alacsony</string>
+    <string name="fan_medium">Közepes</string>
+    <string name="fan_high">Magas</string>
+    <string name="fan_turbo">Turbó</string>
+    <string name="fan_automatic">Automata</string>
+    <string name="fan_level">Fokozat: %1$d%%</string>
+
+    <string name="section_status">Élő állapot</string>
+    <string name="status_indoor">Beltéri hőmérséklet</string>
+    <string name="status_outdoor">Kültéri hőmérséklet</string>
+    <string name="status_power">Teljesítmény</string>
+    <string name="status_total">Összfogyasztás</string>
+    <string name="status_error">Hibakód</string>
+    <string name="status_error_none">nincs</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Összköltség</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Diagnosztika (béta)</string>
+    <string name="diag_beta_hint">Kísérleti telemetria. Nem minden készülék jelenti ezeket — az értékek üresen maradhatnak.</string>
+    <string name="diag_group1_title">Kompresszor &amp; hűtőközeg</string>
+    <string name="diag_compressor_freq">Kompresszor-frekvencia</string>
+    <string name="diag_compressor_freq_target">Célfrekvencia</string>
+    <string name="diag_compressor_current">Áramfelvétel</string>
+    <string name="diag_compressor_voltage">Tápfeszültség</string>
+    <string name="diag_temp_t1">Beltéri hőcserélő (T1)</string>
+    <string name="diag_temp_t2">Elpárologtató (T2)</string>
+    <string name="diag_temp_t3">Kondenzátor (T3)</string>
+    <string name="diag_temp_t4">Kültéri (T4)</string>
+    <string name="diag_temp_tp">Nyomócső (TP)</string>
+    <string name="diag_group2_title">Beltéri ventilátor &amp; szivattyú</string>
+    <string name="diag_fan_speed">Ventilátor-fordulatszám</string>
+    <string name="diag_fan_speed_target">Cél-fordulatszám</string>
+    <string name="diag_water_pump">Kondenzvíz-szivattyú</string>
+    <string name="diag_pump_on">működik</string>
+    <string name="diag_pump_off">kikapcsolva</string>
+    <string name="diag_group7_title">Kültéri egység teljesítménye</string>
+    <string name="diag_compressor_power">Teljesítményfelvétel</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Megjelenítés &amp; ár</string>
+    <string name="unit_fahrenheit">°F megjelenítése (Fahrenheit)</string>
+    <string name="price_per_kwh">Ár kWh-nként</string>
+    <string name="price_hint">Ebből becsüljük az összköltséget a fogyasztás alapján.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Beltéri hőmérséklet kalibrálása</string>
+    <string name="calibration_hint">Sok készülék egy-két fokkal eltér a valós szobahőmérséklettől. Hasonlítsd össze egy szobahőmérővel, és itt korrigáld a mért értéket. Az app ezután mindenhol a korrigált értéket mutatja, egy kis borostyánszínű deltával jelölve, és a készüléknek küldött célértéket is ugyanennyi egész fokkal tolja el — így a szoba tényleg eléri a beállított hőmérsékletet. Ehhez az eszközhöz mentjük.</string>
+    <string name="calibration_none">nincs korrekció</string>
+    <string name="calibration_preview">Mért: %1$s → megjelenített: %2$s</string>
+    <string name="calibration_device_target">A készüléknek küldve: %1$s — cél: %2$s</string>
+    <string name="calibration_no_reading">Várakozás az első mérésre…</string>
+    <string name="calibration_reset">Visszaállítás 0-ra</string>
+    <string name="calibration_less">Korrekció csökkentése</string>
+    <string name="calibration_more">Korrekció növelése</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Frissítési időköz</string>
+    <string name="settings_poll_hint">Milyen gyakran kérdezzük le az állapotot, a fogyasztást és a diagnosztikát, amíg az app csatlakozva van. A rövidebb időköz gyorsabb frissítést, de több Wi-Fi-forgalmat jelent.</string>
+    <string name="poll_seconds">%1$d mp</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Béta funkciók</string>
+    <string name="settings_beta_hint">Kísérleti extra diagnosztika, alapból bekapcsolva — minden opció egy plusz lekérdezést jelent frissítésenként, és itt kikapcsolható. Nem minden készülék támogatja őket. Az értékek az Állapot fülön jelennek meg, és az Előzményekben is rögzülnek (ha az előzményrögzítés be van kapcsolva).</string>
+    <string name="beta_group1">Kompresszor-diagnosztika</string>
+    <string name="beta_group1_desc">Frekvencia, áram, feszültség &amp; hűtőközeg-hőmérsékletek (T1–T4, nyomócső)</string>
+    <string name="beta_group2">Beltéri ventilátor &amp; szivattyú</string>
+    <string name="beta_group2_desc">A beltéri ventilátor tényleges fordulatszáma és a kondenzvíz-szivattyú állapota</string>
+    <string name="beta_group7">Kültéri egység teljesítménye</string>
+    <string name="beta_group7_desc">A kültéri egység valós idejű teljesítményfelvétele wattban</string>
+
+    <string name="section_options">Opciók</string>
+    <string name="option_swing">Swing (lamellák)</string>
+    <string name="option_eco">Eco mód</string>
+    <string name="option_beep">Hangjelzés</string>
+    <string name="option_anion">Ionizátor</string>
+    <string name="option_out_silent">Kültéri csendes mód</string>
+    <string name="option_self_clean">Öntisztítás</string>
+    <string name="option_display">Kijelző / LED</string>
+
+    <string name="section_gear">Kompresszor-korlátozás</string>
+    <string name="gear_full">Teljes</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Elalvásidőzítő</string>
+    <string name="sleep_active">Kikapcsol %1$d perc múlva</string>
+    <string name="sleep_cancel">Időzítő törlése</string>
+    <string name="sleep_custom">Egyéni…</string>
+    <string name="sleep_custom_title">Elalvásidőzítő</string>
+    <string name="sleep_custom_label">Perc</string>
+    <string name="action_start">Indítás</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Tipp: nyomj hosszan egy kártyára, és húzd át másik helyre.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Eszköz kézi hozzáadása</string>
+    <string name="manual_hint">Broadcast-felderítés nélküli kapcsolatokhoz. Az eszközazonosítót a Midea/SmartHome appban vagy hálózati szkenneléssel találod meg.</string>
+    <string name="field_ip">IP-cím</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">Eszközazonosító (decimális)</string>
+    <string name="field_name">Név (opcionális)</string>
+    <string name="action_add">Hozzáadás</string>
+    <string name="action_cancel">Mégse</string>
+    <string name="action_save">Mentés</string>
+    <string name="rename_title">Eszköz átnevezése</string>
+    <string name="rename_hint">A név csak ebben az appban tárolódik — hasznos, ha két készüléket kell megkülönböztetni.</string>
+    <string name="cd_rename">Átnevezés</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Eszköz</string>
+    <string name="device_edit_name">Név</string>
+    <string name="device_edit_save">Mentés</string>
+    <string name="device_forget">Eltávolítás</string>
+    <string name="device_forget_really">Végleges eltávolítás</string>
+    <string name="device_forget_confirm">Ez törli a mentett hitelesítő adatokat. Az eszközt bármikor újra hozzáadhatod.</string>
+    <string name="pane_pick_device">Válassz eszközt</string>
+    <string name="pane_pick_device_hint">Válassz egyet a bal oldali listából, és máris vezérelheted.</string>
+    <string name="option_turbo_fan_hint">A turbó vezérli a ventilátort — a fokozat módosításához kapcsold ki a turbót.</string>
+    <string name="option_self_clean_hint">Elindítja az elpárologtató öntisztítási ciklusát. Készüléktől függően nagyjából 20–30 percig tart; közben a normál hűtés szünetel.</string>
+    <string name="sleep_preset_min">%1$d perc</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Token exportálása</string>
+    <string name="export_title">Token exportálása</string>
+    <string name="export_hint">Ezekkel a hitelesítő adatokkal a felhő nélkül, helyben vezérelheted az eszközt — mentsd el őket, vagy használd más eszközökben. Tartsd őket titokban.</string>
+    <string name="export_none">Még nincs token. Csatlakozz egyszer az eszközhöz internetkapcsolattal, majd exportálj.</string>
+    <string name="export_copy">Másolás</string>
+    <string name="export_share">Megosztás</string>
+    <string name="export_copied">Vágólapra másolva</string>
+    <string name="action_close">Bezárás</string>
+    <string name="import_button">Importálás</string>
+    <string name="import_title">Token importálása</string>
+    <string name="import_hint">Illessz be egy tokenblokkot (Exportból, msmartból, …). Az eszköz ezután offline is működik.</string>
+    <string name="import_field">Tokenblokk</string>
+    <string name="import_ok">Token importálva</string>
+    <string name="import_error">Nem sikerült beolvasni a tokenblokkot</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Mentett eszközök</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Klíma be/ki</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Előnézet (demó)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Sikertelen csatlakozás: %1$s</string>
+    <string name="error_command">Sikertelen parancs: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Mielőtt elkezdenéd</string>
+    <string name="disclaimer_body">A ClimaPilot független alkalmazás, amely nem áll kapcsolatban a Mideával, és amelyet a Midea nem hagyott jóvá és nem támogat. Kompatibilis klímaberendezéseket vezérel a helyi Wi-Fi-hálózaton.\n\nMielőtt parancsokat küldenél, győződj meg róla, hogy a készülék megfelelően van telepítve és biztonságosan üzemeltethető. Az appot saját felelősségedre használod; a szerzők nem vállalnak felelősséget semmilyen kárért vagy veszteségért.\n\nA mért értékek, például a teljesítmény, a készüléktől származnak, és pontatlanok lehetnek.\n\nMegjegyzés: amikor először csatlakozol egy eszközhöz, a ClimaPilot egy egyszeri hozzáférési tokent kér le a Midea szerveréről (fiók nem szükséges). Ezután a vezérlés teljesen helyben fut — akár az internet-hozzáférést is megtagadhatod az apptól.</string>
+    <string name="disclaimer_accept">Értem</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Gyors klímavezérlés</string>
+    <string name="widget_not_connected">Nincs kapcsolat</string>
+    <string name="widget_off">Ki</string>
+    <string name="widget_on">Be</string>
+    <string name="widget_indoor">Beltéri %1$s</string>
+    <string name="widget_outdoor">Kültéri %1$s</string>
+    <string name="widget_sleep_30">30 perc</string>
+    <string name="widget_sleep_60">1 óra</string>
+    <string name="widget_sleep_120">2 óra</string>
+    <string name="widget_sleep_240">4 óra</string>
+    <string name="widget_sleep_title">Elalvásidőzítő</string>
+    <string name="widget_sleep_off_in">utána a klíma kikapcsol</string>
+    <string name="widget_sleep_idle">Nincs aktív időzítő</string>
+    <string name="widget_sleep_off_now">Kikapcsolás</string>
+    <string name="widget_sleep_cancel">Mégse</string>
+    <string name="widget_power">Be/Ki</string>
+    <string name="widget_cool_down">Hűvösebb</string>
+    <string name="widget_warm_up">Melegebb</string>
+    <string name="widget_mode">Üzemmód</string>
+    <string name="widget_all_label">Klíma — minden vezérlő</string>
+    <string name="widget_power_label">Klíma — be/ki</string>
+    <string name="widget_temp_label">Klíma — hőmérséklet</string>
+    <string name="widget_mode_label">Klíma — üzemmód</string>
+    <string name="widget_all_desc">Be/ki, hőmérséklet, üzemmód, ventilátor, turbó és elalvásidőzítő</string>
+    <string name="widget_sleep_label">Klíma — elalvásidőzítő</string>
+    <string name="widget_sleep_desc">Élő visszaszámlálás gyorsválasztással</string>
+    <string name="widget_sleep_unit_min">perc</string>
+    <string name="widget_sleep_unit_hour">óra</string>
+    <string name="widget_sleep_quick_desc">Egy koppintás beállítja az elalvásidőzítőt</string>
+    <string name="widget_sleep_30_label">Elalvás 30 perc</string>
+    <string name="widget_sleep_60_label">Elalvás 1 óra</string>
+    <string name="widget_sleep_120_label">Elalvás 2 óra</string>
+    <string name="widget_sleep_240_label">Elalvás 4 óra</string>
+    <string name="widget_sleep_480_label">Elalvás 8 óra</string>
+    <string name="widget_sleep_720_label">Elalvás 12 óra</string>
+    <string name="widget_power_desc">Klíma be- és kikapcsolása</string>
+    <string name="widget_temp_desc">Hőmérséklet emelése vagy csökkentése</string>
+    <string name="widget_mode_desc">Üzemmód váltása</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Beállítások</string>
+    <string name="cd_settings">Beállítások</string>
+    <string name="settings_version">Verzió: %1$s</string>
+    <string name="support_title">Fejlesztés támogatása</string>
+    <string name="support_body">A ClimaPilot ingyenes és reklámmentes. Ha hasznodra válik, egy kis borravaló segíti a folytatást — köszönöm!</string>
+    <string name="support_kofi">Hívj meg egy kávéra (Ko-fi)</string>
+    <string name="support_paypal">Borravaló PayPallal</string>
+    <string name="credits_title">Köszönet</string>
+    <string name="credits_body">A ClimaPilot helyi Midea-protokollja a @mill1000 kiváló midea-msmart projektjének Kotlin-portja. Hatalmas köszönet — nélküle ez az app nem létezne.</string>
+    <string name="credits_link">midea-msmart a GitHubon</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Megbízható időzítők</string>
+    <string name="reliability_body">Hogy az elalvásidőzítő és a jelenetütemezések akkor is működjenek, amikor az app be van zárva, engedélyezd a ClimaPilot háttérben futását.</string>
+    <string name="reliability_battery_ok">Akkumulátor-optimalizálás: kikapcsolva ✓</string>
+    <string name="reliability_battery_warn">Az akkumulátor-optimalizálás be van kapcsolva — az időzítők késhetnek vagy elmaradhatnak.</string>
+    <string name="reliability_battery_action">Háttér engedélyezése (akkumulátor)</string>
+    <string name="reliability_autostart_action">Automatikus indítás engedélyezése (gyártói)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Alkalmazásfrissítések</string>
+    <string name="update_body">Az új verziók a GitHubról töltődnek le. A telepítést mindig te hagyod jóvá.</string>
+    <string name="update_current">Telepítve: %1$s</string>
+    <string name="update_auto_label">Automatikus ellenőrzés indításkor</string>
+    <string name="update_check_button">Frissítések keresése</string>
+    <string name="update_checking">Ellenőrzés…</string>
+    <string name="update_uptodate">A legújabb verziót használod (%1$s).</string>
+    <string name="update_error">Nem sikerült frissítést keresni. Ellenőrizd a kapcsolatot, és próbáld újra.</string>
+    <string name="update_available_title">Frissítés érhető el</string>
+    <string name="update_available_body">Elérhető a(z) %1$s verzió — nálad a(z) %2$s van.</string>
+    <string name="update_install">Frissítés</string>
+    <string name="update_downloading">Letöltés… %1$d%%</string>
+    <string name="update_later">Később</string>
+    <string name="update_failed">A letöltés nem sikerült. Próbáld újra később.</string>
+    <string name="update_verify_failed">A letöltött fájl nem ment át a biztonsági ellenőrzésen, ezért nem lett telepítve.</string>
+    <string name="update_need_permission">Engedélyezd a ClimaPilotnak az alkalmazások telepítését, majd koppints újra a Frissítés gombra.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Kikapcsolás</string>
+    <string name="shortcut_demo">Demó</string>
+    <string name="shortcut_scene">Alkalmazás: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Automatikus kikapcsolás</string>
+    <string name="autooff_body">Biztonsági lekapcsolás: ha a klíma ennél tovább működik, automatikusan kikapcsol — a távolléti időzítő helyi megfelelője (a telefonod nem éri el a klímát, ha elhagyod a Wi-Fi-t). 0 = kikapcsolva.</string>
+    <string name="autooff_hours_label">Kikapcsolás ennyi óra után</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Elalvásidőzítő</string>
+    <string name="notif_timer_title">Elalvásidőzítő fut</string>
+    <string name="notif_timer_text">A klíma a visszaszámlálás végén kikapcsol.</string>
+    <string name="notif_timer_off_now">Kikapcsolás most</string>
+    <string name="notif_timer_cancel">Mégse</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Alkalmazászár</string>
+    <string name="lock_card_body">Ujjlenyomat, arcfelismerés vagy képernyőzár-PIN szükséges a ClimaPilot megnyitásához — így senki más nem vezérelheti a klímádat.</string>
+    <string name="lock_card_switch">Feloldás szükséges a megnyitáshoz</string>
+    <string name="lock_title">ClimaPilot feloldása</string>
+    <string name="lock_subtitle">Azonosítsd magad a klíma vezérléséhez</string>
+    <string name="lock_unlock">Feloldás</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Klímaüzemmód</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Előzmények</string>
+    <string name="history_card_title">Energia &amp; szűrő</string>
+    <string name="history_card_body">Nézd meg a legutóbbi teljesítményfelvételt és az összfogyasztást, és kövesd, mikor kell szűrőt tisztítani.</string>
+    <string name="history_card_open">Előzmények megnyitása</string>
+    <string name="history_power_title">Teljesítmény (24 óra)</string>
+    <string name="history_empty">Még nincs elég adat — használd egy ideig a klímát, és nézz vissza később.</string>
+    <string name="history_peak">Csúcs: %1$d W</string>
+    <string name="history_totals_title">Fogyasztás</string>
+    <string name="history_total_kwh">Összesen: %1$.1f kWh</string>
+    <string name="history_total_cost">Becsült költség: %1$.2f €</string>
+    <string name="history_filter_title">Szűrő</string>
+    <string name="history_filter_runtime">Üzemidő az utolsó tisztítás óta: %1$d / %2$d óra</string>
+    <string name="history_filter_due">Ideje kitisztítani a szűrőt.</string>
+    <string name="history_filter_reset">Szűrő kitisztítva (nullázás)</string>
+    <string name="history_filter_hint">Ez egy üzemidő-alapú, alkalmazáson belüli karbantartási emlékeztető. Nem olvassa ki és nem nullázza a készülék saját szűrőjelzőjét — azt magán a klímán kell nullázni.</string>
+    <string name="option_beep_hint">Megerősítő hang. Sok készülék csak be- és kikapcsoláskor sípol, más változtatásoknál nem.</string>
+    <string name="history_record_title">Előzmények rögzítése</string>
+    <string name="history_record_body">Bekapcsolva a ClimaPilot naplózza a teljesítményt, a hőmérsékleteket és a ventilátort, és kb. 15 percenként lekérdezi a klímát a háttérben (csak Wi-Fi-n). Alapból kikapcsolva.</string>
+    <string name="history_record_switch">Klímaadatok rögzítése</string>
+    <string name="history_indoor_title">Beltéri hőmérséklet (24 óra)</string>
+    <string name="history_outdoor_title">Kültéri hőmérséklet (24 óra)</string>
+    <string name="history_fan_title">Ventilátor-fokozat (24 óra)</string>
+    <string name="history_comp_hz_title">Kompresszor-frekvencia (béta)</string>
+    <string name="history_comp_w_title">Kültéri egység teljesítménye (béta)</string>
+    <string name="history_fan_rpm_title">Beltéri ventilátor-fordulatszám (béta)</string>
+    <string name="history_metric_summary">Most %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Óra</string>
+    <string name="range_day">Nap</string>
+    <string name="range_week">Hét</string>
+    <string name="range_month">Hónap</string>
+    <string name="history_pick_day">Válassz napot</string>
+    <string name="history_day">Nap: %1$s</string>
+    <string name="history_range_kwh">Ebben az időszakban: %1$.1f kWh</string>
+    <string name="history_range_cost">Becsült költség: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Tetszik a ClimaPilot?</string>
+    <string name="donate_prompt_body">A ClimaPilot ingyenes és reklámmentes. Ha kiérdemelte a helyét a telefonodon, egy kis borravaló segíti a folytatást — köszönöm!</string>
+    <string name="donate_later">Talán később</string>
+    <string name="donate_already">Már támogattam</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR-távirányító</string>
+    <string name="ir_remote_entry">IR-távirányító (infravörös)</string>
+    <string name="ir_remote_subtitle">Infravörös · csak küldés</string>
+    <string name="ir_no_emitter">Ebben a telefonban nincs infraport</string>
+    <string name="option_quiet">Csendes</string>
+    <string name="option_turbo">Turbó</string>
+    <string name="ir_options_hint">Az infravörös egyirányú — ezek a kapcsolók az utoljára küldött állapotot mutatják, nem a készülék tényleges állapotát.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Vezérlés</string>
+    <string name="nav_status">Állapot</string>
+    <string name="nav_options">Opciók</string>
+    <string name="nav_scenes">Jelenetek</string>
+    <string name="nav_history">Előzmények</string>
+</resources>

@@ -65,7 +65,12 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
             mode = mode,
             targetTemp = tempC,
             indoorTemp = live?.indoorTemp,
+            outdoorTemp = live?.outdoorTemp,
             powerW = energy?.powerW?.takeIf { !it.isNaN() },
+            fan = fan,
+            turbo = turbo,
+            eco = eco,
+            swing = swing,
             device = dev,
         )
         // EN: Log a throttled usage sample (power/temps/fan + enabled beta diagnostics) for the History
@@ -99,6 +104,7 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     var fan by mutableStateOf(60); private set
     var swing by mutableStateOf(false); private set
     var eco by mutableStateOf(false); private set
+    var turbo by mutableStateOf(false); private set
     var beep by mutableStateOf(false); private set
     var rate by mutableStateOf(MideaAc.RATE_OFF); private set
 
@@ -751,11 +757,13 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
     private fun syncOptionsFromState(s: AcState) {
         swing = s.swingOn
         eco = s.eco
+        turbo = s.turbo
         display = s.displayOn
         if (capAnion) anion = s.anion
         session?.let {
             it.swing = if (swing) 0x3F else 0
             it.eco = eco
+            it.turbo = turbo
             it.anion = anion
         }
     }
@@ -836,8 +844,11 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
         command({ tempC = userTemp }) { setTemp(dev) }
     }
 
-    fun nudgeTemp(delta: Double) =
-        sendTemp(snapTemp(tempC + (if (delta > 0) 1.0 else -1.0), min = if (irMode) 17.0 else 16.0))
+    // EN: Only the direction matters — the step is always 1 K because the unit accepts nothing else
+    //     (see snapTemp). DE: Nur die Richtung zählt — der Schritt ist immer 1 K, weil das Gerät nichts
+    //     anderes annimmt (siehe snapTemp).
+    fun nudgeTemp(direction: Int) =
+        sendTemp(snapTemp(tempC + (if (direction > 0) 1.0 else -1.0), min = if (irMode) 17.0 else 16.0))
 
     fun applyTemp(t: Double) = sendTemp(snapTemp(t))
     fun applyFan(value: Int) = command({ fan = value }) { setFan(value) }
@@ -872,6 +883,15 @@ class AcViewModel(app: Application) : AndroidViewModel(app) {
      *     Geräten (z. B. der PortaSplit) quittiert die Klima nur bei Ein/Aus, nicht bei Parameter-Änderungen.
      *     Wir speichern die Wahl und senden zusätzlich die Buzzer-Property für Geräte, die sie nutzen.
      */
+    /**
+     * EN: Toggle turbo/boost (issue #13). Turbo means "full power until further notice" — the unit ends
+     *     it itself when mode/power changes, and it reports the state in every state frame, so the
+     *     toggle self-corrects on the next poll if the unit rejected it (e.g. in fan-only/dry mode).
+     * DE: Turbo/Boost umschalten (Issue #13). Turbo heißt „Volllast bis auf Widerruf" — das Gerät beendet
+     *     ihn selbst bei Modus-/Power-Wechsel und meldet den Zustand in jedem State-Frame; der Schalter
+     *     korrigiert sich beim nächsten Poll also selbst, falls das Gerät ablehnt (z. B. bei Lüften/Entfeuchten).
+     */
+    fun toggleTurbo() { val v = !turbo; command({ turbo = v }) { setTurbo(v) } }
     fun applyBeep(on: Boolean) = command({ beep = on; session?.beep = on; SettingsRepo.setBeep(getApplication(), on) }) { setBuzzer(on) }
     fun applyRate(value: Int) = command({ rate = value }) { setRate(value) }
     /** EN: Flip the indoor unit's LED display panel; the switch reflects what we last sent. DE: Die LED-Anzeige des Innengeräts umschalten; der Schalter zeigt das zuletzt Gesendete. */

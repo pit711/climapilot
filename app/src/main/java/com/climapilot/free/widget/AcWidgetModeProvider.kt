@@ -46,10 +46,14 @@ class AcWidgetModeProvider : AppWidgetProvider() {
             // EN: Highlight the active mode chip; each chip selects its mode directly. DE: Aktiven Modus-Chip hervorheben; jeder Chip wählt seinen Modus direkt.
             val activeMode = snap.mode.takeIf { snap.present && snap.powerOn }
             for ((id, mode) in chips) {
+                val active = mode == activeMode
                 v.setInt(
                     id, "setBackgroundResource",
-                    if (mode == activeMode) R.drawable.widget_chip_active else R.drawable.widget_chip_bg,
+                    if (active) R.drawable.widget_chip_active else R.drawable.widget_chip_bg,
                 )
+                // EN: Dark text on the cyan fill — white on cyan was hard to read. DE: Dunkler Text auf
+                //     der cyanfarbenen Fläche — Weiß auf Cyan war schlecht lesbar.
+                v.setTextColor(id, if (active) 0xFF04262B.toInt() else 0xFFAFC2C7.toInt())
                 v.setOnClickPendingIntent(id, AcWidgetProvider.broadcastSetMode(ctx, mode))
             }
             return v

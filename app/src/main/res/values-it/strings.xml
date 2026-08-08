@@ -180,6 +180,24 @@
     <string name="field_name">Nome (facoltativo)</string>
     <string name="action_add">Aggiungi</string>
     <string name="action_cancel">Annulla</string>
+    <string name="action_save">Salva</string>
+    <string name="rename_title">Rinomina dispositivo</string>
+    <string name="rename_hint">Il nome viene salvato solo in questa app — utile per distinguere due apparecchi.</string>
+    <string name="cd_rename">Rinomina</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Dispositivo</string>
+    <string name="device_edit_name">Nome</string>
+    <string name="device_edit_save">Salva</string>
+    <string name="device_forget">Rimuovi</string>
+    <string name="device_forget_really">Rimuovi definitivamente</string>
+    <string name="device_forget_confirm">Questo elimina le credenziali salvate. Puoi aggiungere di nuovo il dispositivo in qualsiasi momento.</string>
+    <string name="pane_pick_device">Scegli un dispositivo</string>
+    <string name="pane_pick_device_hint">Scegline uno dall\'elenco a sinistra per comandarlo.</string>
+    <string name="option_turbo_fan_hint">Il turbo comanda il ventilatore — spegni il turbo per cambiare la velocità.</string>
+    <string name="option_self_clean_hint">Avvia il ciclo di autopulizia dell\'evaporatore. Dura da 20 a 30 minuti circa a seconda del dispositivo; nel frattempo il raffreddamento normale è sospeso.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
 
     <!-- Token export -->
     <string name="cd_export">Esporta token</string>
@@ -220,6 +238,16 @@
     <string name="widget_off">Spento</string>
     <string name="widget_on">Acceso</string>
     <string name="widget_indoor">Interno %1$s</string>
+    <string name="widget_outdoor">Esterno %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Timer di spegnimento</string>
+    <string name="widget_sleep_off_in">poi il clima si spegne</string>
+    <string name="widget_sleep_idle">Nessun timer attivo</string>
+    <string name="widget_sleep_off_now">Spegni ora</string>
+    <string name="widget_sleep_cancel">Annulla</string>
     <string name="widget_power">Accensione</string>
     <string name="widget_cool_down">Più freddo</string>
     <string name="widget_warm_up">Più caldo</string>
@@ -228,7 +256,18 @@
     <string name="widget_power_label">Clima — accensione</string>
     <string name="widget_temp_label">Clima — temperatura</string>
     <string name="widget_mode_label">Clima — modalità</string>
-    <string name="widget_all_desc">Nome, temperatura, accensione e modalità</string>
+    <string name="widget_all_desc">Accensione, temperatura, modalità, ventilatore, turbo e timer di spegnimento</string>
+    <string name="widget_sleep_label">Clima — timer di spegnimento</string>
+    <string name="widget_sleep_desc">Conto alla rovescia dal vivo con scelte rapide</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">ore</string>
+    <string name="widget_sleep_quick_desc">Un tocco imposta il timer di spegnimento</string>
+    <string name="widget_sleep_30_label">Timer 30 min</string>
+    <string name="widget_sleep_60_label">Timer 1 h</string>
+    <string name="widget_sleep_120_label">Timer 2 h</string>
+    <string name="widget_sleep_240_label">Timer 4 h</string>
+    <string name="widget_sleep_480_label">Timer 8 h</string>
+    <string name="widget_sleep_720_label">Timer 12 h</string>
     <string name="widget_power_desc">Accendi/spegni il climatizzatore</string>
     <string name="widget_temp_desc">Aumenta o riduci la temperatura</string>
     <string name="widget_mode_desc">Cambia la modalità di funzionamento</string>
@@ -245,6 +284,8 @@
     <string name="credits_title">Ringraziamenti</string>
     <string name="credits_body">Il protocollo Midea locale di ClimaPilot è un port in Kotlin dell\'ottimo progetto midea-msmart di @mill1000. Grazie di cuore: senza di esso quest\'app non esisterebbe.</string>
     <string name="credits_link">midea-msmart su GitHub</string>
+    <string name="changelog_0_6_9_title">Versione 0.6.9</string>
+    <string name="changelog_0_6_9_body">•  Novità: un\'unica superficie di comando per ogni dimensione di schermo — i tablet mostrano l\'elenco dei dispositivi su due colonne accanto ai comandi, le schede stanno in basso su ogni dispositivo, l\'app gira a schermo intero e la velocità del ventilatore ha ora un cursore sull\'intera gamma da 1 a 100 %\n•  Novità: interruttore turbo/boost nella scheda Opzioni. Lo stato viene riletto dall\'apparecchio, quindi l\'interruttore mostra anche il boost attivato dal telecomando o dall\'app ufficiale\n•  Novità: rinomina o rimuovi i dispositivi salvati con una pressione prolungata sul dispositivo — utile per distinguere due apparecchi\n•  Novità: l\'app ora parla 22 lingue, coprendo le lingue europee preinstallate sugli iPhone\n•  Corretto: i momentanei errori di lettura non disegnano più picchi a zero nei grafici della cronologia; i periodi di spegnimento reali restano visibili</string>
     <string name="changelog_0_6_7_title">Versione 0.6.7</string>
     <string name="changelog_0_6_7_body">•  Corretto: comandare il climatizzatore da un widget della schermata Home o dall\'orologio non azzera più le altre impostazioni. Un tocco sulla modalità imponeva anche 24 °C e ventilatore 60 e spegneva oscillazione, eco e ionizzatore, perché ogni comando invia lo stato completo e i campi non letti tornavano ai valori predefiniti\n•  Corretto: l\'avviso di aggiornamento mostrava il Markdown grezzo delle note di rilascio («###», «**grassetto**», sintassi dei link) — ora il testo è pulito</string>
     <string name="changelog_0_6_6_title">Versione 0.6.6</string>

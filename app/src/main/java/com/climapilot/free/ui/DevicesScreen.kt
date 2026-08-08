@@ -1,6 +1,8 @@
 package com.climapilot.free.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +27,7 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.SettingsRemote
 import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,6 +37,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -51,12 +55,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Color
 import com.climapilot.free.AcViewModel
 import com.climapilot.free.R
 import com.climapilot.free.Status
 import com.climapilot.free.ir.IrRemote
 import com.climapilot.free.TokenRepo
 import com.climapilot.free.midea.MideaDevice
+
+/** EN: Channel accent for Wi-Fi device entries. DE: Kanal-Akzentfarbe für WLAN-Geräteeinträge. */
+private val WifiColor = Color(0xFF3B9EFF)
 
 /**
  * EN: The landing screen: a hero header, the discover/manual-add actions, a demo-preview link, and
@@ -72,7 +80,18 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
     val context = LocalContext.current
     // EN: Devices we have a cached token for — connect instantly & offline, no discovery needed.
     // DE: Geräte mit gecachtem Token — sofort und offline verbinden, ohne Suche.
-    val known = remember { TokenRepo.list(context) }
+    var known by remember { mutableStateOf(TokenRepo.list(context)) }
+    // EN: Reload after every connect or disconnect. Connecting is what saves a device (once its token
+    //     arrives) — so without this the unit you just connected to keeps sitting under the search
+    //     results instead of moving to the saved list, where it can be renamed.
+    // DE: Nach jedem Verbinden und Trennen neu laden. Das Verbinden ist es, was ein Gerät speichert
+    //     (sobald sein Token da ist). Ohne das bliebe die gerade verbundene Anlage unter den
+    //     Suchtreffern stehen, statt in die gespeicherte Liste zu wandern, wo sie sich umbenennen lässt.
+    androidx.compose.runtime.LaunchedEffect(vm.connectedDevice) {
+        known = TokenRepo.list(context)
+    }
+    // EN: Long-press a saved device to rename or forget it. DE: Langes Drücken auf ein gespeichertes Gerät zum Umbenennen oder Entfernen.
+    var editing by remember { mutableStateOf<TokenRepo.Entry?>(null) }
     // EN: Drop discovery hits that are already shown under "known devices" (match by id, ip as
     //     fallback) so the same unit never appears twice after a re-scan.
     // DE: Suchtreffer ausblenden, die bereits unter „Bekannte Geräte" stehen (per ID, IP als
@@ -159,7 +178,11 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
                 }
                 items(known, key = { "known_${it.id}" }) { e ->
                     val dev = MideaDevice(ip = e.ip, port = e.port, id = e.id, sn = "", name = e.name, type = 0xAC, version = 3)
-                    DeviceCard(dev, connecting = vm.status == Status.Connecting) { vm.connect(dev) }
+                    DeviceCard(
+                        dev,
+                        connecting = vm.status == Status.Connecting,
+                        onLongPress = { editing = e },
+                    ) { vm.connect(dev) }
                 }
             }
 
@@ -187,6 +210,23 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
       }
     }
 
+    editing?.let { entry ->
+        DeviceEditDialog(
+            entry = entry,
+            onDismiss = { editing = null },
+            onRename = { name ->
+                TokenRepo.rename(context, entry.id, name)
+                known = TokenRepo.list(context)
+                editing = null
+            },
+            onForget = {
+                TokenRepo.clear(context, entry.id)
+                known = TokenRepo.list(context)
+                editing = null
+            },
+        )
+    }
+
     if (showManual) {
         ManualDeviceDialog(
             onDismiss = { showManual = false },
@@ -201,42 +241,37 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
 /** EN: Gradient header with the app name and a settings entry point. / DE: Farbverlauf-Kopf mit App-Name und Einstiegspunkt zu den Einstellungen. */
 @Composable
 private fun Hero(onOpenSettings: () -> Unit) {
+    // EN: A large title, not a billboard. The old gradient block took 180 dp and a full colour
+    //     field to say the app's own name — which the user already knows, having just opened it.
+    //     The devices below are what the screen is for, so they get the attention now.
+    // DE: Ein großer Titel, kein Plakat. Der frühere Verlaufsklotz brauchte 180 dp und eine volle
+    //     Farbfläche, um den Namen der App zu nennen — den der Nutzer kennt, er hat sie ja gerade
+    //     geöffnet. Der Bildschirm ist für die Geräte darunter da, also gehört ihnen die
+    //     Aufmerksamkeit.
     val cs = MaterialTheme.colorScheme
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(180.dp)
-            .clip(RoundedCornerShape(28.dp))
-            .background(Brush.linearGradient(listOf(cs.primary, cs.secondary))),
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(start = 4.dp, top = 4.dp, bottom = 2.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        IconButton(
-            onClick = onOpenSettings,
-            modifier = Modifier.align(Alignment.TopEnd).padding(8.dp),
-        ) {
-            Icon(Icons.Default.Settings, stringResource(R.string.cd_settings), tint = cs.onPrimary)
-        }
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(24.dp),
-        ) {
+        // EN: The name alone. The tagline underneath repeated what the device list shows anyway — each
+        //     entry already carries a channel icon — and cost two lines at the top of the screen the
+        //     devices themselves could use.
+        // DE: Nur der Name. Der Untertitel wiederholte, was die Geräteliste ohnehin zeigt — jeder
+        //     Eintrag trägt bereits ein Kanal-Symbol — und kostete oben zwei Zeilen, die den Geräten
+        //     selbst zustehen.
+        Text(
+            stringResource(R.string.app_name),
+            modifier = Modifier.weight(1f),
+            color = cs.onBackground,
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = (-0.5).sp,
+        )
+        IconButton(onClick = onOpenSettings) {
             Icon(
-                Icons.Default.AcUnit,
-                contentDescription = null,
-                tint = cs.onPrimary,
-                modifier = Modifier.size(40.dp),
-            )
-            Spacer(Modifier.height(10.dp))
-            Text(
-                stringResource(R.string.app_name),
-                color = cs.onPrimary,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-            )
-            Text(
-                stringResource(R.string.hero_subtitle),
-                color = cs.onPrimary.copy(alpha = 0.85f),
-                fontSize = 15.sp,
+                Icons.Default.Settings,
+                stringResource(R.string.cd_settings),
+                tint = cs.onSurfaceVariant,
             )
         }
     }
@@ -270,11 +305,17 @@ private fun EmptyHint() {
 
 /** EN: One row in the device list: icon, name, IP/version/type, and a connect affordance. / DE: Eine Zeile der Geräteliste: Icon, Name, IP/Version/Typ und ein Verbinden-Element. */
 @Composable
-private fun DeviceCard(dev: MideaDevice, connecting: Boolean, onClick: () -> Unit) {
+private fun DeviceCard(
+    dev: MideaDevice,
+    connecting: Boolean,
+    onLongPress: (() -> Unit)? = null,
+    onClick: () -> Unit,
+) {
     val cs = MaterialTheme.colorScheme
     Card(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .combinedClickable(onClick = onClick, onLongClick = { onLongPress?.invoke() }),
         colors = CardDefaults.cardColors(containerColor = cs.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
@@ -286,10 +327,10 @@ private fun DeviceCard(dev: MideaDevice, connecting: Boolean, onClick: () -> Uni
                 modifier = Modifier
                     .size(48.dp)
                     .clip(RoundedCornerShape(14.dp))
-                    .background(cs.primaryContainer),
+                    .background(WifiColor.copy(alpha = 0.16f)),
                 contentAlignment = Alignment.Center,
             ) {
-                Icon(Icons.Default.AcUnit, null, tint = cs.onPrimaryContainer)
+                Icon(Icons.Default.Wifi, null, tint = WifiColor)
             }
             Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
@@ -312,4 +353,77 @@ private fun DeviceCard(dev: MideaDevice, connecting: Boolean, onClick: () -> Uni
             }
         }
     }
+}
+
+/**
+ * EN: Rename or forget a saved device. Opened by long-pressing its card — units announce themselves
+ *     as "net_ac_E6DE", which tells you nothing about which room they are in, and until now a device
+ *     once saved could never be removed again.
+ * DE: Ein gespeichertes Gerät umbenennen oder entfernen. Öffnet sich bei langem Druck auf die Karte —
+ *     Anlagen melden sich als „net_ac_E6DE", was nichts über den Raum verrät, und ein einmal
+ *     gespeichertes Gerät ließ sich bisher nie wieder loswerden.
+ */
+@Composable
+private fun DeviceEditDialog(
+    entry: TokenRepo.Entry,
+    onDismiss: () -> Unit,
+    onRename: (String) -> Unit,
+    onForget: () -> Unit,
+) {
+    val cs = MaterialTheme.colorScheme
+    var name by remember { mutableStateOf(entry.name) }
+    var confirmForget by remember { mutableStateOf(false) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.device_edit_title)) },
+        text = {
+            Column {
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text(stringResource(R.string.device_edit_name)) },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    entry.ip,
+                    fontSize = 12.sp,
+                    color = cs.onSurfaceVariant,
+                )
+                if (confirmForget) {
+                    Spacer(Modifier.height(14.dp))
+                    Text(
+                        stringResource(R.string.device_forget_confirm),
+                        fontSize = 13.sp,
+                        color = cs.error,
+                        lineHeight = 18.sp,
+                    )
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onRename(name) },
+                enabled = name.isNotBlank() && name != entry.name,
+            ) { Text(stringResource(R.string.device_edit_save)) }
+        },
+        dismissButton = {
+            Row {
+                TextButton(
+                    onClick = { if (confirmForget) onForget() else confirmForget = true },
+                ) {
+                    Text(
+                        stringResource(
+                            if (confirmForget) R.string.device_forget_really
+                            else R.string.device_forget
+                        ),
+                        color = cs.error,
+                    )
+                }
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_cancel)) }
+            }
+        },
+    )
 }

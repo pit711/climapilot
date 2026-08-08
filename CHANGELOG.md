@@ -2,6 +2,28 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.9] — 2026-08-08
+
+### 🇬🇧 English
+**New**
+- **One control surface for every screen size.** Tablets show the device list beside the controls in two columns, phones a single column; the Control, Options, Scenes, Status and History tabs sit at the bottom on every device, the app runs fullscreen (a swipe from the edge brings the system bars back), and the fan speed gained a slider across the full 1 to 100 % range.
+- **Turbo/boost switch under Options.** The state is read back from the unit, so the switch also shows boost engaged from the IR remote or the official app. (#13)
+- **Rename or remove saved devices** by long-pressing them — handy for telling two units apart. The name is stored locally only. (#10)
+- **22 languages.** Added Swedish, Danish, Norwegian, Finnish, Polish, Czech, Slovak, Hungarian, Romanian, Greek, Croatian, Turkish, Ukrainian, Russian and Catalan — covering the European languages iPhones ship with — plus a grammar and spelling pass over the existing translations.
+
+**Fixed**
+- **History charts no longer show zero spikes** from momentary read failures; real off periods still show. (#12)
+
+### 🇩🇪 Deutsch
+**Neu**
+- **Eine Steuerfläche für jede Bildschirmgröße.** Tablets zeigen die Geräteliste zweispaltig neben der Steuerung, Handys eine Spalte; die Reiter Steuern, Optionen, Szenen, Status und Verlauf sitzen auf jedem Gerät unten, die App läuft im Vollbild (ein Wisch vom Rand holt die Systemleisten zurück) und die Lüfterstufe bekommt einen Schieber über den vollen Bereich von 1 bis 100 %.
+- **Turbo-Schalter unter Optionen.** Der Zustand wird vom Gerät zurückgelesen, der Schalter zeigt also auch Boost an, der über die IR-Fernbedienung oder die Original-App eingeschaltet wurde. (#13)
+- **Gespeicherte Geräte per langem Druck umbenennen oder entfernen** — praktisch, um zwei Anlagen zu unterscheiden. Der Name wird nur lokal gespeichert. (#10)
+- **22 Sprachen.** Neu: Schwedisch, Dänisch, Norwegisch, Finnisch, Polnisch, Tschechisch, Slowakisch, Ungarisch, Rumänisch, Griechisch, Kroatisch, Türkisch, Ukrainisch, Russisch und Katalanisch — damit sind die europäischen Sprachen abgedeckt, mit denen iPhones ausgeliefert werden — plus Grammatik- und Rechtschreibdurchgang über die bestehenden Übersetzungen.
+
+**Behoben**
+- **Verlaufs-Charts zeigen keine Null-Spitzen mehr** durch kurze Lese-Aussetzer; echte Aus-Phasen bleiben sichtbar. (#12)
+
 ## [0.6.7] — 2026-07-25
 
 ### 🇬🇧 English

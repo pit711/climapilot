@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN: 1x1 sleep-timer tile — one fixed duration per widget, tap arms it. While a timer runs the tile
+     shows the remaining time underneath and gets a cyan tint. RemoteViews-safe.
+     DE: 1x1-Sleep-Timer-Kachel — eine feste Dauer je Widget, ein Tipp stellt sie scharf. Läuft ein Timer,
+     zeigt die Kachel darunter die Restzeit und färbt sich cyan. RemoteViews-sicher. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/quick_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/wdg_card"
+    android:padding="6dp">
+
+    <TextView
+        android:id="@+id/quick_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="30"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:includeFontPadding="false"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/quick_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_sleep_unit_min"
+        android:textColor="#8FA6AC"
+        android:textSize="10sp"
+        android:maxLines="1" />
+
+    <Chronometer
+        android:id="@+id/quick_chrono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:textColor="#5CE1EE"
+        android:textSize="10sp"
+        android:visibility="gone" />
+</LinearLayout>

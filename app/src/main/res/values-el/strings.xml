@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Σκηνές</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco νύχτας</string>
+    <string name="scene_comfort">Άνεση</string>
+    <string name="scene_save">Αποθήκευση</string>
+    <string name="scene_save_title">Αποθήκευση σκηνής</string>
+    <string name="scene_name_label">Όνομα σκηνής</string>
+    <string name="scene_default_name">Σκηνή</string>
+    <string name="scene_hint">Πάτημα για εφαρμογή · παρατεταμένο πάτημα για επεξεργασία</string>
+    <string name="scene_edit_title">Επεξεργασία σκηνής</string>
+    <string name="scene_schedule">Καθημερινή εκτέλεση</string>
+    <string name="scene_schedule_at">Ώρα: %1$s</string>
+    <string name="scene_schedule_note">Εφαρμόζεται αυτόματα κάθε μέρα. Απαιτεί να επιτρέπεται η εφαρμογή στο παρασκήνιο.</string>
+    <string name="scene_delete">Διαγραφή</string>
+    <string name="scene_delete_title">Διαγραφή σκηνής;</string>
+    <string name="scene_delete_msg">Η σκηνή «%1$s» θα αφαιρεθεί.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Εβδομαδιαίο πλάνο</string>
+    <string name="plan_empty">Δεν υπάρχουν χρονικά παράθυρα ακόμα. Πρόσθεσε ένα για να εκτελείται μια σκηνή αυτόματα — π.χ. μέγιστη ψύξη κάθε Δευτέρα, 6 έως 18.</string>
+    <string name="plan_need_scene">Δημιούργησε πρώτα μια σκηνή — το πλάνο εκτελεί τις σκηνές σου.</string>
+    <string name="plan_add">Προσθήκη παραθύρου</string>
+    <string name="plan_hint">Τα παράθυρα εκτελούνται στο παρασκήνιο, ακόμα κι όταν το τηλέφωνο είναι αδρανές στο Wi-Fi. Για αξιόπιστο χρονισμό, επίτρεψε στο ClimaPilot να τρέχει στο παρασκήνιο (Ρυθμίσεις ▸ Αξιόπιστοι χρονοδιακόπτες).</string>
+    <string name="plan_new_title">Νέο παράθυρο</string>
+    <string name="plan_edit_title">Επεξεργασία παραθύρου</string>
+    <string name="plan_scene_label">Σκηνή</string>
+    <string name="plan_days_label">Ημέρες</string>
+    <string name="plan_from">Από</string>
+    <string name="plan_to">Έως</string>
+    <string name="plan_end_label">Όταν τελειώσει</string>
+    <string name="plan_end_off">Απενεργοποίηση</string>
+    <string name="plan_end_leave">Να συνεχίσει</string>
+    <string name="plan_overnight">+1 ημέρα</string>
+    <string name="plan_every_day">Κάθε μέρα</string>
+    <string name="plan_disabled">σε παύση</string>
+    <string name="plan_to_off">→ σβηστό</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Το κλιματιστικό σου στο Wi-Fi</string>
+    <string name="action_discover">Αναζήτηση συσκευών</string>
+    <string name="action_discovering">Αναζήτηση…</string>
+    <string name="action_manual">Χειροκίνητα</string>
+    <string name="demo_preview">Προεπισκόπηση χωρίς συσκευή (demo)</string>
+    <string name="empty_title">Καμία συσκευή ακόμα</string>
+    <string name="empty_body">Πάτησε «Αναζήτηση συσκευών». Το τηλέφωνό σου πρέπει να είναι στο ίδιο Wi-Fi με το κλιματιστικό.</string>
+    <string name="error_no_devices">Δεν βρέθηκαν συσκευές. Ίδιο Wi-Fi; Αλλιώς πρόσθεσε χειροκίνητα.</string>
+    <string name="action_connect">Σύνδεση</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Πίσω</string>
+    <string name="cd_refresh">Ανανέωση</string>
+    <string name="cd_power">Τροφοδοσία</string>
+    <string name="cd_reorder">Σύρε για αναδιάταξη</string>
+    <string name="connected_to">Συνδεδεμένο · %1$s</string>
+    <string name="disconnected">Αποσυνδεδεμένο</string>
+    <string name="state_on">ΕΝΕΡΓΟ</string>
+    <string name="state_off">ΑΝΕΝΕΡΓΟ</string>
+    <string name="target_temp">Επιθυμητή θερμοκρασία</string>
+    <string name="readout_indoor">Εσωτερική</string>
+    <string name="readout_outdoor">Εξωτερική</string>
+    <string name="readout_power">Ισχύς</string>
+
+    <string name="section_mode">Λειτουργία</string>
+    <string name="mode_auto">Αυτόματη</string>
+    <string name="mode_cool">Ψύξη</string>
+    <string name="mode_dry">Αφύγρανση</string>
+    <string name="mode_heat">Θέρμανση</string>
+    <string name="mode_fan">Αερισμός</string>
+
+    <string name="section_fan">Ταχύτητα ανεμιστήρα</string>
+    <string name="fan_auto">Αυτόματη</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Αθόρυβη</string>
+    <string name="fan_low">Χαμηλή</string>
+    <string name="fan_medium">Μεσαία</string>
+    <string name="fan_high">Υψηλή</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Αυτόματη</string>
+    <string name="fan_level">Επίπεδο: %1$d%%</string>
+
+    <string name="section_status">Ζωντανή κατάσταση</string>
+    <string name="status_indoor">Εσωτερική θερμοκρασία</string>
+    <string name="status_outdoor">Εξωτερική θερμοκρασία</string>
+    <string name="status_power">Ισχύς</string>
+    <string name="status_total">Συνολική κατανάλωση</string>
+    <string name="status_error">Κωδικός σφάλματος</string>
+    <string name="status_error_none">κανένας</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Συνολικό κόστος</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Διαγνωστικά (beta)</string>
+    <string name="diag_beta_hint">Πειραματική τηλεμετρία. Δεν τα αναφέρουν όλες οι μονάδες — οι τιμές μπορεί να μείνουν κενές.</string>
+    <string name="diag_group1_title">Συμπιεστής &amp; ψυκτικό</string>
+    <string name="diag_compressor_freq">Συχνότητα συμπιεστή</string>
+    <string name="diag_compressor_freq_target">Συχνότητα-στόχος</string>
+    <string name="diag_compressor_current">Ρεύμα λειτουργίας</string>
+    <string name="diag_compressor_voltage">Τάση τροφοδοσίας</string>
+    <string name="diag_temp_t1">Εσωτερικό στοιχείο (T1)</string>
+    <string name="diag_temp_t2">Εξατμιστής (T2)</string>
+    <string name="diag_temp_t3">Συμπυκνωτής (T3)</string>
+    <string name="diag_temp_t4">Εξωτερική (T4)</string>
+    <string name="diag_temp_tp">Σωλήνας κατάθλιψης (TP)</string>
+    <string name="diag_group2_title">Εσωτερικός ανεμιστήρας &amp; αντλία</string>
+    <string name="diag_fan_speed">Ταχύτητα ανεμιστήρα</string>
+    <string name="diag_fan_speed_target">Ταχύτητα-στόχος</string>
+    <string name="diag_water_pump">Αντλία συμπυκνωμάτων</string>
+    <string name="diag_pump_on">σε λειτουργία</string>
+    <string name="diag_pump_off">σβηστή</string>
+    <string name="diag_group7_title">Ισχύς εξωτερικής μονάδας</string>
+    <string name="diag_compressor_power">Κατανάλωση ισχύος</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Εμφάνιση &amp; τιμή</string>
+    <string name="unit_fahrenheit">Εμφάνιση °F (Φαρενάιτ)</string>
+    <string name="price_per_kwh">Τιμή ανά kWh</string>
+    <string name="price_hint">Χρησιμοποιείται για την εκτίμηση του συνολικού κόστους από την κατανάλωση.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Βαθμονόμηση εσωτερικής θερμοκρασίας</string>
+    <string name="calibration_hint">Πολλές μονάδες δείχνουν έναν-δύο βαθμούς απόκλιση από την πραγματική θερμοκρασία του δωματίου. Σύγκρινε με ένα θερμόμετρο δωματίου και διόρθωσε εδώ την ένδειξη. Η εφαρμογή θα εμφανίζει παντού τη διορθωμένη τιμή, σημειωμένη με ένα μικρό πορτοκαλί δέλτα, και θα μετατοπίζει την επιθυμητή θερμοκρασία που στέλνει στη μονάδα κατά τους ίδιους ακέραιους βαθμούς — ώστε το δωμάτιο να φτάνει πραγματικά αυτό που όρισες. Αποθηκεύεται για αυτήν τη συσκευή.</string>
+    <string name="calibration_none">χωρίς διόρθωση</string>
+    <string name="calibration_preview">Μετρήθηκε %1$s → εμφανίζεται %2$s</string>
+    <string name="calibration_device_target">Στη μονάδα στέλνεται: %1$s — στόχος %2$s</string>
+    <string name="calibration_no_reading">Αναμονή για την πρώτη μέτρηση…</string>
+    <string name="calibration_reset">Επαναφορά στο 0</string>
+    <string name="calibration_less">Μείωση της διόρθωσης</string>
+    <string name="calibration_more">Αύξηση της διόρθωσης</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Διάστημα ενημέρωσης</string>
+    <string name="settings_poll_hint">Πόσο συχνά ζητούνται κατάσταση, ενέργεια και διαγνωστικά όσο η εφαρμογή είναι συνδεδεμένη. Τα μικρότερα διαστήματα ενημερώνουν ταχύτερα, αλλά προκαλούν περισσότερη κίνηση στο Wi-Fi.</string>
+    <string name="poll_seconds">%1$d δευτ.</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Λειτουργίες beta</string>
+    <string name="settings_beta_hint">Πειραματικά πρόσθετα διαγνωστικά, ενεργά από προεπιλογή — κάθε επιλογή προσθέτει ένα ερώτημα ανά ανανέωση και μπορεί να απενεργοποιηθεί εδώ. Δεν τα υποστηρίζουν όλες οι μονάδες. Οι τιμές εμφανίζονται στην καρτέλα «Κατάσταση» και καταγράφονται στο Ιστορικό (όταν είναι ενεργή η καταγραφή ιστορικού).</string>
+    <string name="beta_group1">Διαγνωστικά συμπιεστή</string>
+    <string name="beta_group1_desc">Συχνότητα, ρεύμα, τάση &amp; θερμοκρασίες ψυκτικού (T1–T4, σωλήνας κατάθλιψης)</string>
+    <string name="beta_group2">Εσωτερικός ανεμιστήρας &amp; αντλία</string>
+    <string name="beta_group2_desc">Πραγματική ταχύτητα εσωτερικού ανεμιστήρα και κατάσταση αντλίας συμπυκνωμάτων</string>
+    <string name="beta_group7">Ισχύς εξωτερικής μονάδας</string>
+    <string name="beta_group7_desc">Κατανάλωση ισχύος της εξωτερικής μονάδας σε watt, σε πραγματικό χρόνο</string>
+
+    <string name="section_options">Επιλογές</string>
+    <string name="option_swing">Περσίδες (swing)</string>
+    <string name="option_eco">Λειτουργία Eco</string>
+    <string name="option_beep">Ηχητικό σήμα</string>
+    <string name="option_anion">Ιονιστής</string>
+    <string name="option_out_silent">Αθόρυβη εξωτερική μονάδα</string>
+    <string name="option_self_clean">Αυτοκαθαρισμός</string>
+    <string name="option_display">Οθόνη / LED</string>
+
+    <string name="section_gear">Περιορισμός συμπιεστή</string>
+    <string name="gear_full">Πλήρης</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Χρονοδιακόπτης ύπνου</string>
+    <string name="sleep_active">Σβήνει σε %1$d λεπτά</string>
+    <string name="sleep_cancel">Ακύρωση χρονοδιακόπτη</string>
+    <string name="sleep_custom">Προσαρμογή…</string>
+    <string name="sleep_custom_title">Χρονοδιακόπτης ύπνου</string>
+    <string name="sleep_custom_label">Λεπτά</string>
+    <string name="action_start">Έναρξη</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Συμβουλή: πάτησε παρατεταμένα μια κάρτα για να τη σύρεις σε διαφορετική σειρά.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Χειροκίνητη προσθήκη συσκευής</string>
+    <string name="manual_hint">Για συνδέσεις χωρίς αυτόματο εντοπισμό (broadcast). Το ID συσκευής θα το βρεις στην εφαρμογή Midea/SmartHome ή με μια σάρωση δικτύου.</string>
+    <string name="field_ip">Διεύθυνση IP</string>
+    <string name="field_port">Θύρα</string>
+    <string name="field_id">ID συσκευής (δεκαδικό)</string>
+    <string name="field_name">Όνομα (προαιρετικό)</string>
+    <string name="action_add">Προσθήκη</string>
+    <string name="action_cancel">Άκυρο</string>
+    <string name="action_save">Αποθήκευση</string>
+    <string name="rename_title">Μετονομασία συσκευής</string>
+    <string name="rename_hint">Το όνομα αποθηκεύεται μόνο σε αυτήν την εφαρμογή — βολικό για να ξεχωρίζεις δύο μονάδες.</string>
+    <string name="cd_rename">Μετονομασία</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Συσκευή</string>
+    <string name="device_edit_name">Όνομα</string>
+    <string name="device_edit_save">Αποθήκευση</string>
+    <string name="device_forget">Αφαίρεση</string>
+    <string name="device_forget_really">Οριστική αφαίρεση</string>
+    <string name="device_forget_confirm">Αυτό διαγράφει τα αποθηκευμένα διαπιστευτήρια. Μπορείς να προσθέσεις ξανά τη συσκευή όποτε θέλεις.</string>
+    <string name="pane_pick_device">Διάλεξε μια συσκευή</string>
+    <string name="pane_pick_device_hint">Διάλεξε μία από τη λίστα αριστερά για να την ελέγξεις.</string>
+    <string name="option_turbo_fan_hint">Το turbo ελέγχει τον ανεμιστήρα — για να αλλάξεις την ταχύτητα, απενεργοποίησε το turbo.</string>
+    <string name="option_self_clean_hint">Εκτελεί τον κύκλο αυτοκαθαρισμού του εξατμιστή. Διαρκεί περίπου 20 έως 30 λεπτά ανάλογα με τη συσκευή· στο μεταξύ, η κανονική ψύξη διακόπτεται.</string>
+    <string name="sleep_preset_min">%1$d λεπτά</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Εξαγωγή token</string>
+    <string name="export_title">Εξαγωγή token</string>
+    <string name="export_hint">Αυτά τα διαπιστευτήρια σού επιτρέπουν να ελέγχεις τη συσκευή τοπικά, χωρίς το cloud — κράτησε αντίγραφο ασφαλείας ή χρησιμοποίησέ τα σε άλλα εργαλεία. Κράτησέ τα ιδιωτικά.</string>
+    <string name="export_none">Δεν υπάρχει token ακόμα. Συνδέσου μία φορά στη συσκευή όσο είσαι online και μετά κάνε εξαγωγή.</string>
+    <string name="export_copy">Αντιγραφή</string>
+    <string name="export_share">Κοινοποίηση</string>
+    <string name="export_copied">Αντιγράφηκε στο πρόχειρο</string>
+    <string name="action_close">Κλείσιμο</string>
+    <string name="import_button">Εισαγωγή</string>
+    <string name="import_title">Εισαγωγή token</string>
+    <string name="import_hint">Επικόλλησε ένα μπλοκ token (από την Εξαγωγή, το msmart, …). Η συσκευή θα λειτουργεί μετά και εκτός σύνδεσης.</string>
+    <string name="import_field">Μπλοκ token</string>
+    <string name="import_ok">Το token εισήχθη</string>
+    <string name="import_error">Δεν ήταν δυνατή η ανάγνωση αυτού του μπλοκ token</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Αποθηκευμένες συσκευές</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Διακόπτης A/C</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Προεπισκόπηση (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Η σύνδεση απέτυχε: %1$s</string>
+    <string name="error_command">Η εντολή απέτυχε: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Πριν ξεκινήσεις</string>
+    <string name="disclaimer_body">Το ClimaPilot είναι ανεξάρτητη εφαρμογή και δεν συνδέεται, δεν εγκρίνεται και δεν υποστηρίζεται από τη Midea. Ελέγχει συμβατά κλιματιστικά μέσω του τοπικού σου Wi-Fi.\n\nΒεβαιώσου ότι η μονάδα σου είναι σωστά εγκατεστημένη και ασφαλής στη λειτουργία πριν στείλεις εντολές. Χρησιμοποιείς την εφαρμογή με δική σου ευθύνη. Οι δημιουργοί δεν φέρουν καμία ευθύνη για τυχόν ζημιές ή απώλειες.\n\nΟι μετρούμενες τιμές, όπως η ισχύς, παρέχονται από τη συσκευή και ενδέχεται να μην είναι ακριβείς.\n\nΣημείωση: την πρώτη φορά που συνδέεσαι σε μια συσκευή, το ClimaPilot λαμβάνει ένα εφάπαξ token πρόσβασης από τον διακομιστή της Midea (δεν χρειάζεται λογαριασμός). Από εκεί και πέρα, ο έλεγχος γίνεται εξ ολοκλήρου τοπικά — μπορείς ακόμη και να αρνηθείς στην εφαρμογή την πρόσβαση στο διαδίκτυο.</string>
+    <string name="disclaimer_accept">Κατάλαβα</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Γρήγορος έλεγχος κλιματιστικού</string>
+    <string name="widget_not_connected">Χωρίς σύνδεση</string>
+    <string name="widget_off">Ανενεργό</string>
+    <string name="widget_on">Ενεργό</string>
+    <string name="widget_indoor">Εσωτ. %1$s</string>
+    <string name="widget_outdoor">Εξωτ. %1$s</string>
+    <string name="widget_sleep_30">30 λεπ.</string>
+    <string name="widget_sleep_60">1 ώρα</string>
+    <string name="widget_sleep_120">2 ώρες</string>
+    <string name="widget_sleep_240">4 ώρες</string>
+    <string name="widget_sleep_title">Χρονοδιακόπτης ύπνου</string>
+    <string name="widget_sleep_off_in">μετά σβήνει το κλιματιστικό</string>
+    <string name="widget_sleep_idle">Κανένας χρονοδιακόπτης</string>
+    <string name="widget_sleep_off_now">Σβήσιμο τώρα</string>
+    <string name="widget_sleep_cancel">Ακύρωση</string>
+    <string name="widget_power">Τροφοδοσία</string>
+    <string name="widget_cool_down">Πιο κρύο</string>
+    <string name="widget_warm_up">Πιο ζεστό</string>
+    <string name="widget_mode">Λειτουργία</string>
+    <string name="widget_all_label">A/C — όλα τα χειριστήρια</string>
+    <string name="widget_power_label">A/C — τροφοδοσία</string>
+    <string name="widget_temp_label">A/C — θερμοκρασία</string>
+    <string name="widget_mode_label">A/C — λειτουργία</string>
+    <string name="widget_all_desc">Τροφοδοσία, θερμοκρασία, λειτουργία, ανεμιστήρας, turbo και χρονοδιακόπτης ύπνου</string>
+    <string name="widget_sleep_label">A/C — χρονοδιακόπτης ύπνου</string>
+    <string name="widget_sleep_desc">Ζωντανή αντίστροφη μέτρηση με γρήγορες επιλογές</string>
+    <string name="widget_sleep_unit_min">λεπτά</string>
+    <string name="widget_sleep_unit_hour">ώρες</string>
+    <string name="widget_sleep_quick_desc">Ένα πάτημα ρυθμίζει τον χρονοδιακόπτη ύπνου</string>
+    <string name="widget_sleep_30_label">Ύπνος 30 λεπτά</string>
+    <string name="widget_sleep_60_label">Ύπνος 1 ώρα</string>
+    <string name="widget_sleep_120_label">Ύπνος 2 ώρες</string>
+    <string name="widget_sleep_240_label">Ύπνος 4 ώρες</string>
+    <string name="widget_sleep_480_label">Ύπνος 8 ώρες</string>
+    <string name="widget_sleep_720_label">Ύπνος 12 ώρες</string>
+    <string name="widget_power_desc">Ενεργοποίηση/απενεργοποίηση του κλιματιστικού</string>
+    <string name="widget_temp_desc">Αύξηση ή μείωση της θερμοκρασίας</string>
+    <string name="widget_mode_desc">Εναλλαγή λειτουργίας</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="cd_settings">Ρυθμίσεις</string>
+    <string name="settings_version">Έκδοση %1$s</string>
+    <string name="support_title">Υποστήριξε την ανάπτυξη</string>
+    <string name="support_body">Το ClimaPilot είναι δωρεάν και χωρίς διαφημίσεις. Αν σε βοηθά, ένα μικρό φιλοδώρημα το κρατά ζωντανό — ευχαριστώ!</string>
+    <string name="support_kofi">Κέρασέ με έναν καφέ (Ko-fi)</string>
+    <string name="support_paypal">Φιλοδώρημα μέσω PayPal</string>
+    <string name="credits_title">Ευχαριστίες</string>
+    <string name="credits_body">Το τοπικό πρωτόκολλο Midea του ClimaPilot είναι μια μεταφορά σε Kotlin του εξαιρετικού project midea-msmart του @mill1000. Ένα μεγάλο ευχαριστώ — χωρίς αυτό, η εφαρμογή δεν θα υπήρχε.</string>
+    <string name="credits_link">Το midea-msmart στο GitHub</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Αξιόπιστοι χρονοδιακόπτες</string>
+    <string name="reliability_body">Για να ενεργοποιούνται ο χρονοδιακόπτης ύπνου και τα προγράμματα των σκηνών ακόμα κι όταν η εφαρμογή είναι κλειστή, επίτρεψε στο ClimaPilot να τρέχει στο παρασκήνιο.</string>
+    <string name="reliability_battery_ok">Βελτιστοποίηση μπαταρίας: ανενεργή ✓</string>
+    <string name="reliability_battery_warn">Η βελτιστοποίηση μπαταρίας είναι ενεργή — οι χρονοδιακόπτες μπορεί να καθυστερούν ή να παραλείπονται.</string>
+    <string name="reliability_battery_action">Να επιτρέπεται το παρασκήνιο (μπαταρία)</string>
+    <string name="reliability_autostart_action">Να επιτρέπεται η αυτόματη εκκίνηση (κατασκευαστής)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Ενημερώσεις εφαρμογής</string>
+    <string name="update_body">Οι νέες εκδόσεις λαμβάνονται από το GitHub. Την εγκατάσταση την επιβεβαιώνεις πάντα εσύ.</string>
+    <string name="update_current">Εγκατεστημένη: %1$s</string>
+    <string name="update_auto_label">Αυτόματος έλεγχος κατά την εκκίνηση</string>
+    <string name="update_check_button">Έλεγχος για ενημερώσεις</string>
+    <string name="update_checking">Έλεγχος…</string>
+    <string name="update_uptodate">Έχεις την πιο πρόσφατη έκδοση (%1$s).</string>
+    <string name="update_error">Δεν ήταν δυνατός ο έλεγχος για ενημερώσεις. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.</string>
+    <string name="update_available_title">Διαθέσιμη ενημέρωση</string>
+    <string name="update_available_body">Η έκδοση %1$s είναι διαθέσιμη — έχεις την %2$s.</string>
+    <string name="update_install">Ενημέρωση</string>
+    <string name="update_downloading">Λήψη… %1$d%%</string>
+    <string name="update_later">Αργότερα</string>
+    <string name="update_failed">Η λήψη απέτυχε. Δοκίμασε ξανά αργότερα.</string>
+    <string name="update_verify_failed">Η λήψη απέτυχε στον έλεγχο ασφαλείας και δεν εγκαταστάθηκε.</string>
+    <string name="update_need_permission">Επίτρεψε στο ClimaPilot να εγκαθιστά εφαρμογές και μετά πάτησε ξανά «Ενημέρωση».</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Απενεργοποίηση</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Εφαρμογή: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Αυτόματη απενεργοποίηση</string>
+    <string name="autooff_body">Μια δικλείδα ασφαλείας: αν το κλιματιστικό λειτουργεί περισσότερο από αυτό, σβήνει αυτόματα — το τοπικό υποκατάστατο ενός χρονοδιακόπτη απουσίας (το τηλέφωνό σου δεν μπορεί να επικοινωνήσει με το κλιματιστικό μόλις φύγεις από το Wi-Fi). 0 = ανενεργό.</string>
+    <string name="autooff_hours_label">Απενεργοποίηση μετά από (ώρες)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Χρονοδιακόπτης ύπνου</string>
+    <string name="notif_timer_title">Ο χρονοδιακόπτης ύπνου τρέχει</string>
+    <string name="notif_timer_text">Το κλιματιστικό θα σβήσει όταν τελειώσει η αντίστροφη μέτρηση.</string>
+    <string name="notif_timer_off_now">Σβήσιμο τώρα</string>
+    <string name="notif_timer_cancel">Ακύρωση</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Κλείδωμα εφαρμογής</string>
+    <string name="lock_card_body">Ζήτα δακτυλικό αποτύπωμα, πρόσωπο ή PIN οθόνης για το άνοιγμα του ClimaPilot — έτσι κανείς άλλος δεν μπορεί να ελέγξει το κλιματιστικό σου.</string>
+    <string name="lock_card_switch">Απαιτείται ξεκλείδωμα για άνοιγμα</string>
+    <string name="lock_title">Ξεκλείδωμα ClimaPilot</string>
+    <string name="lock_subtitle">Ταυτοποιήσου για να ελέγξεις το κλιματιστικό σου</string>
+    <string name="lock_unlock">Ξεκλείδωμα</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Λειτουργία A/C</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Ιστορικό</string>
+    <string name="history_card_title">Ενέργεια &amp; φίλτρο</string>
+    <string name="history_card_body">Δες την πρόσφατη χρήση ενέργειας και τη συνολική κατανάλωση, και παρακολούθησε πότε χρειάζεται καθάρισμα το φίλτρο.</string>
+    <string name="history_card_open">Άνοιγμα ιστορικού</string>
+    <string name="history_power_title">Ισχύς (24 ώρες)</string>
+    <string name="history_empty">Δεν υπάρχουν αρκετά δεδομένα ακόμα — χρησιμοποίησε το κλιματιστικό για λίγο και έλεγξε ξανά.</string>
+    <string name="history_peak">Μέγιστο: %1$d W</string>
+    <string name="history_totals_title">Κατανάλωση</string>
+    <string name="history_total_kwh">Σύνολο: %1$.1f kWh</string>
+    <string name="history_total_cost">Εκτιμώμενο κόστος: %1$.2f €</string>
+    <string name="history_filter_title">Φίλτρο</string>
+    <string name="history_filter_runtime">Λειτουργία από τον τελευταίο καθαρισμό: %1$d από %2$d ώρες</string>
+    <string name="history_filter_due">Ώρα να καθαρίσεις το φίλτρο.</string>
+    <string name="history_filter_reset">Το φίλτρο καθαρίστηκε (μηδενισμός)</string>
+    <string name="history_filter_hint">Πρόκειται για υπενθύμιση συντήρησης μέσα στην εφαρμογή, βασισμένη στις ώρες λειτουργίας. Δεν διαβάζει ούτε μηδενίζει την ένδειξη φίλτρου της ίδιας της μονάδας — αυτήν μηδένισέ την στο ίδιο το κλιματιστικό.</string>
+    <string name="option_beep_hint">Ήχος επιβεβαίωσης. Πολλές μονάδες κάνουν «μπιπ» μόνο στο άνοιγμα/κλείσιμο, όχι σε άλλες αλλαγές.</string>
+    <string name="history_record_title">Καταγραφή ιστορικού</string>
+    <string name="history_record_body">Όταν είναι ενεργή, το ClimaPilot καταγράφει ισχύ, θερμοκρασίες και ανεμιστήρα, και ρωτά το κλιματιστικό περίπου κάθε 15 λεπτά στο παρασκήνιο (μόνο μέσω Wi-Fi). Ανενεργή από προεπιλογή.</string>
+    <string name="history_record_switch">Καταγραφή δεδομένων A/C</string>
+    <string name="history_indoor_title">Εσωτερική θερμοκρασία (24 ώρες)</string>
+    <string name="history_outdoor_title">Εξωτερική θερμοκρασία (24 ώρες)</string>
+    <string name="history_fan_title">Επίπεδο ανεμιστήρα (24 ώρες)</string>
+    <string name="history_comp_hz_title">Συχνότητα συμπιεστή (beta)</string>
+    <string name="history_comp_w_title">Ισχύς εξωτερικής μονάδας (beta)</string>
+    <string name="history_fan_rpm_title">Ταχύτητα εσωτερικού ανεμιστήρα (beta)</string>
+    <string name="history_metric_summary">Τώρα %1$s%2$s · ελάχ. %3$s · μέγ. %4$s%5$s</string>
+    <string name="range_hour">Ώρα</string>
+    <string name="range_day">Ημέρα</string>
+    <string name="range_week">Εβδομάδα</string>
+    <string name="range_month">Μήνας</string>
+    <string name="history_pick_day">Διάλεξε ημέρα</string>
+    <string name="history_day">Ημέρα: %1$s</string>
+    <string name="history_range_kwh">Σε αυτό το διάστημα: %1$.1f kWh</string>
+    <string name="history_range_cost">Εκτιμώμενο κόστος: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Σου αρέσει το ClimaPilot;</string>
+    <string name="donate_prompt_body">Το ClimaPilot είναι δωρεάν και χωρίς διαφημίσεις. Αν έχει κερδίσει τη θέση του στο τηλέφωνό σου, ένα μικρό φιλοδώρημα το κρατά ζωντανό — ευχαριστώ!</string>
+    <string name="donate_later">Ίσως αργότερα</string>
+    <string name="donate_already">Έχω ήδη υποστηρίξει</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">Τηλεχειριστήριο IR</string>
+    <string name="ir_remote_entry">Τηλεχειριστήριο IR (υπέρυθρες)</string>
+    <string name="ir_remote_subtitle">Υπέρυθρες · μόνο αποστολή</string>
+    <string name="ir_no_emitter">Αυτό το τηλέφωνο δεν έχει πομπό υπερύθρων</string>
+    <string name="option_quiet">Αθόρυβο</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Οι υπέρυθρες είναι μονόδρομη επικοινωνία — αυτοί οι διακόπτες δείχνουν τι στάλθηκε τελευταίο, όχι την πραγματική κατάσταση της μονάδας.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Έλεγχος</string>
+    <string name="nav_status">Κατάσταση</string>
+    <string name="nav_options">Επιλογές</string>
+    <string name="nav_scenes">Σκηνές</string>
+    <string name="nav_history">Ιστορικό</string>
+</resources>

@@ -180,6 +180,24 @@
     <string name="field_name">Nom (facultatif)</string>
     <string name="action_add">Ajouter</string>
     <string name="action_cancel">Annuler</string>
+    <string name="action_save">Enregistrer</string>
+    <string name="rename_title">Renommer l\'appareil</string>
+    <string name="rename_hint">Le nom n\'est enregistré que dans cette application — pratique pour distinguer deux appareils.</string>
+    <string name="cd_rename">Renommer</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Appareil</string>
+    <string name="device_edit_name">Nom</string>
+    <string name="device_edit_save">Enregistrer</string>
+    <string name="device_forget">Retirer</string>
+    <string name="device_forget_really">Retirer définitivement</string>
+    <string name="device_forget_confirm">Cela supprime les identifiants enregistrés. Vous pourrez ajouter l\'appareil à nouveau à tout moment.</string>
+    <string name="pane_pick_device">Choisissez un appareil</string>
+    <string name="pane_pick_device_hint">Choisissez-en un dans la liste à gauche pour le piloter.</string>
+    <string name="option_turbo_fan_hint">Le turbo pilote le ventilateur — désactivez le turbo pour changer la vitesse.</string>
+    <string name="option_self_clean_hint">Lance le cycle d\'autonettoyage de l\'évaporateur. Dure environ 20 à 30 minutes selon l\'appareil. Pendant ce temps, le refroidissement normal est suspendu.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
 
     <!-- Token export -->
     <string name="cd_export">Exporter le jeton</string>
@@ -220,6 +238,16 @@
     <string name="widget_off">Arrêt</string>
     <string name="widget_on">Marche</string>
     <string name="widget_indoor">Intérieur %1$s</string>
+    <string name="widget_outdoor">Extérieur %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Minuterie d\'arrêt</string>
+    <string name="widget_sleep_off_in">puis la clim. s\'éteint</string>
+    <string name="widget_sleep_idle">Aucune minuterie active</string>
+    <string name="widget_sleep_off_now">Éteindre</string>
+    <string name="widget_sleep_cancel">Annuler</string>
     <string name="widget_power">Marche/Arrêt</string>
     <string name="widget_cool_down">Plus froid</string>
     <string name="widget_warm_up">Plus chaud</string>
@@ -228,7 +256,18 @@
     <string name="widget_power_label">Clim. — marche/arrêt</string>
     <string name="widget_temp_label">Clim. — température</string>
     <string name="widget_mode_label">Clim. — mode</string>
-    <string name="widget_all_desc">Nom, température, marche/arrêt &amp; mode</string>
+    <string name="widget_all_desc">Marche/arrêt, température, mode, ventilation, turbo et minuterie d\'arrêt</string>
+    <string name="widget_sleep_label">Clim. — minuterie d\'arrêt</string>
+    <string name="widget_sleep_desc">Compte à rebours en direct avec préréglages</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">heures</string>
+    <string name="widget_sleep_quick_desc">Un appui lance la minuterie d\'arrêt</string>
+    <string name="widget_sleep_30_label">Minuterie 30 min</string>
+    <string name="widget_sleep_60_label">Minuterie 1 h</string>
+    <string name="widget_sleep_120_label">Minuterie 2 h</string>
+    <string name="widget_sleep_240_label">Minuterie 4 h</string>
+    <string name="widget_sleep_480_label">Minuterie 8 h</string>
+    <string name="widget_sleep_720_label">Minuterie 12 h</string>
     <string name="widget_power_desc">Allumer/éteindre le climatiseur</string>
     <string name="widget_temp_desc">Augmenter ou baisser la température</string>
     <string name="widget_mode_desc">Changer le mode de fonctionnement</string>
@@ -245,6 +284,8 @@
     <string name="credits_title">Remerciements</string>
     <string name="credits_body">Le protocole Midea local de ClimaPilot est un portage en Kotlin de l\'excellent projet midea-msmart de @mill1000. Un grand merci — sans lui, cette application n\'existerait pas.</string>
     <string name="credits_link">midea-msmart sur GitHub</string>
+    <string name="changelog_0_6_9_title">Version 0.6.9</string>
+    <string name="changelog_0_6_9_body">•  Nouveau : une seule surface de commande pour toutes les tailles d\'écran — les tablettes affichent la liste des appareils sur deux colonnes à côté des commandes, les onglets se trouvent en bas sur chaque appareil, l\'application s\'exécute en plein écran et la vitesse de ventilation gagne un curseur sur toute la plage de 1 à 100 %\n•  Nouveau : un interrupteur turbo/boost dans les options. L\'état est relu depuis l\'appareil, l\'interrupteur indique donc aussi un boost activé depuis la télécommande ou l\'application officielle\n•  Nouveau : renommez ou retirez les appareils enregistrés par un appui long sur l\'appareil — pratique pour distinguer deux appareils\n•  Nouveau : l\'application parle désormais 22 langues, couvrant les langues européennes fournies avec les iPhone\n•  Corrigé : les échecs de lecture passagers ne dessinent plus de pics à zéro dans les graphiques de l\'historique ; les vraies périodes d\'arrêt restent visibles</string>
     <string name="changelog_0_6_7_title">Version 0.6.7</string>
     <string name="changelog_0_6_7_body">•  Corrigé : piloter le climatiseur depuis un widget de l\'écran d\'accueil ou depuis la montre ne réinitialise plus le reste des réglages. Un appui sur le mode imposait aussi 24 °C et une ventilation à 60, et désactivait l\'oscillation, l\'éco et l\'ioniseur, car chaque commande envoie l\'état complet et les champs non lus revenaient aux valeurs par défaut\n•  Corrigé : la fenêtre de mise à jour affichait le Markdown brut des notes de version (« ### », « **gras** », syntaxe des liens) — le texte est désormais propre</string>
     <string name="changelog_0_6_6_title">Version 0.6.6</string>

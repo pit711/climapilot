@@ -32,6 +32,9 @@ class AcWidgetPowerProvider : AppWidgetProvider() {
                 else -> ctx.getString(R.string.widget_off)
             }
             v.setTextViewText(R.id.widget_status, status)
+            // EN: Green power button when running, neutral otherwise — matches the new widget look. DE: Grüner Power-Knopf, wenn die Anlage läuft, sonst neutral — passend zum neuen Widget-Look.
+            v.setInt(R.id.btn_power, "setBackgroundResource",
+                if (snap.present && snap.powerOn) R.drawable.wdg_btn_on else R.drawable.widget_btn_bg)
             val power = AcWidgetProvider.broadcast(ctx, AcWidgetProvider.ACTION_POWER, 1)
             v.setOnClickPendingIntent(R.id.btn_power, power)
             v.setOnClickPendingIntent(R.id.widget_root, power)

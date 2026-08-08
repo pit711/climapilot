@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN: Dedicated sleep-timer widget. The Chronometer ticks the remaining time down on its own while
+     visible (no battery cost); presets arm it, and Off-now / Cancel act via the timer receiver.
+     RemoteViews-safe. DE: Eigenes Sleep-Timer-Widget. Der Chronometer zählt die Restzeit selbst herunter,
+     solange sichtbar (ohne Akku-Kosten); die Presets stellen ihn scharf, Jetzt-aus / Abbrechen wirken
+     über den Timer-Receiver. RemoteViews-sicher. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sleep_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/wdg_card"
+    android:padding="14dp"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/widget_sleep_title"
+            android:textColor="#8FA6AC"
+            android:textSize="11sp" />
+        <Chronometer
+            android:id="@+id/sleep_chrono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#5CE1EE"
+            android:textSize="30sp" />
+        <TextView
+            android:id="@+id/sleep_idle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/widget_sleep_idle"
+            android:textColor="#5E7278"
+            android:textSize="20sp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/sleep_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/widget_sleep_off_in"
+            android:textColor="#5E7278"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView android:id="@+id/sleep_p30" style="@style/WdgChip" android:text="@string/widget_sleep_30" />
+            <TextView android:id="@+id/sleep_p60" style="@style/WdgChip" android:text="@string/widget_sleep_60" />
+            <TextView android:id="@+id/sleep_p120" style="@style/WdgChip" android:text="@string/widget_sleep_120" />
+            <TextView android:id="@+id/sleep_p240" style="@style/WdgChip" android:text="@string/widget_sleep_240" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/sleep_off_now"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="1.5dp"
+                android:layout_marginEnd="1.5dp"
+                android:background="@drawable/wdg_accent"
+                android:gravity="center"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:text="@string/widget_sleep_off_now"
+                android:textColor="#5CE1EE"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/sleep_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="1.5dp"
+                android:layout_marginEnd="1.5dp"
+                android:background="@drawable/wdg_chip"
+                android:gravity="center"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:text="@string/widget_sleep_cancel"
+                android:textColor="#AFC2C7"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

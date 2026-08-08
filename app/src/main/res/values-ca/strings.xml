@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Escenes</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Nit eco</string>
+    <string name="scene_comfort">Confort</string>
+    <string name="scene_save">Desa</string>
+    <string name="scene_save_title">Desa l\'escena</string>
+    <string name="scene_name_label">Nom de l\'escena</string>
+    <string name="scene_default_name">Escena</string>
+    <string name="scene_hint">Toca per aplicar · mantén premut per editar</string>
+    <string name="scene_edit_title">Edita l\'escena</string>
+    <string name="scene_schedule">Executa cada dia</string>
+    <string name="scene_schedule_at">Hora: %1$s</string>
+    <string name="scene_schedule_note">S\'aplica automàticament cada dia. Cal permetre que l\'aplicació funcioni en segon pla.</string>
+    <string name="scene_delete">Suprimeix</string>
+    <string name="scene_delete_title">Vols suprimir l\'escena?</string>
+    <string name="scene_delete_msg">Se suprimirà «%1$s».</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Pla setmanal</string>
+    <string name="plan_empty">Encara no hi ha cap franja. Afegeix-ne una perquè una escena s\'executi automàticament — p. ex. refredament màxim els dilluns, de 6 a 18.</string>
+    <string name="plan_need_scene">Primer crea una escena — el pla executa les teves escenes.</string>
+    <string name="plan_add">Afegeix una franja</string>
+    <string name="plan_hint">Les franges s\'executen en segon pla, fins i tot amb el telèfon inactiu a la Wi-Fi. Perquè el moment d\'execució sigui fiable, permet que ClimaPilot funcioni en segon pla (Configuració ▸ Temporitzadors fiables).</string>
+    <string name="plan_new_title">Franja nova</string>
+    <string name="plan_edit_title">Edita la franja</string>
+    <string name="plan_scene_label">Escena</string>
+    <string name="plan_days_label">Dies</string>
+    <string name="plan_from">Des de</string>
+    <string name="plan_to">Fins a</string>
+    <string name="plan_end_label">En acabar</string>
+    <string name="plan_end_off">Apaga</string>
+    <string name="plan_end_leave">Continua en marxa</string>
+    <string name="plan_overnight">+1 dia</string>
+    <string name="plan_every_day">Cada dia</string>
+    <string name="plan_disabled">en pausa</string>
+    <string name="plan_to_off">→ apagat</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">El teu aire condicionat per Wi-Fi</string>
+    <string name="action_discover">Cerca dispositius</string>
+    <string name="action_discovering">S\'està cercant…</string>
+    <string name="action_manual">Manual</string>
+    <string name="demo_preview">Vista prèvia sense dispositiu (demo)</string>
+    <string name="empty_title">Encara no hi ha dispositius</string>
+    <string name="empty_body">Toca «Cerca dispositius». El telèfon ha d\'estar a la mateixa Wi-Fi que l\'aire condicionat.</string>
+    <string name="error_no_devices">No s\'ha trobat cap dispositiu. Mateixa Wi-Fi? Si no, afegeix-lo manualment.</string>
+    <string name="action_connect">Connecta</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Enrere</string>
+    <string name="cd_refresh">Actualitza</string>
+    <string name="cd_power">Engegada</string>
+    <string name="cd_reorder">Arrossega per reordenar</string>
+    <string name="connected_to">Connectat · %1$s</string>
+    <string name="disconnected">Desconnectat</string>
+    <string name="state_on">ON</string>
+    <string name="state_off">OFF</string>
+    <string name="target_temp">Temperatura objectiu</string>
+    <string name="readout_indoor">Interior</string>
+    <string name="readout_outdoor">Exterior</string>
+    <string name="readout_power">Potència</string>
+
+    <string name="section_mode">Mode</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Fred</string>
+    <string name="mode_dry">Sec</string>
+    <string name="mode_heat">Calor</string>
+    <string name="mode_fan">Ventilador</string>
+
+    <string name="section_fan">Velocitat del ventilador</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Silenciós</string>
+    <string name="fan_low">Baixa</string>
+    <string name="fan_medium">Mitjana</string>
+    <string name="fan_high">Alta</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automàtica</string>
+    <string name="fan_level">Nivell: %1$d%%</string>
+
+    <string name="section_status">Estat en directe</string>
+    <string name="status_indoor">Temperatura interior</string>
+    <string name="status_outdoor">Temperatura exterior</string>
+    <string name="status_power">Potència</string>
+    <string name="status_total">Consum total</string>
+    <string name="status_error">Codi d\'error</string>
+    <string name="status_error_none">cap</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Cost total</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Diagnòstic (beta)</string>
+    <string name="diag_beta_hint">Telemetria experimental. No tots els aparells informen d\'aquests valors — poden quedar buits.</string>
+    <string name="diag_group1_title">Compressor i refrigerant</string>
+    <string name="diag_compressor_freq">Freqüència del compressor</string>
+    <string name="diag_compressor_freq_target">Freqüència objectiu</string>
+    <string name="diag_compressor_current">Corrent consumit</string>
+    <string name="diag_compressor_voltage">Tensió d\'alimentació</string>
+    <string name="diag_temp_t1">Serpentí interior (T1)</string>
+    <string name="diag_temp_t2">Evaporador (T2)</string>
+    <string name="diag_temp_t3">Condensador (T3)</string>
+    <string name="diag_temp_t4">Exterior (T4)</string>
+    <string name="diag_temp_tp">Tub de descàrrega (TP)</string>
+    <string name="diag_group2_title">Ventilador interior i bomba</string>
+    <string name="diag_fan_speed">Velocitat del ventilador</string>
+    <string name="diag_fan_speed_target">Velocitat objectiu del ventilador</string>
+    <string name="diag_water_pump">Bomba de condensats</string>
+    <string name="diag_pump_on">en marxa</string>
+    <string name="diag_pump_off">aturada</string>
+    <string name="diag_group7_title">Potència de la unitat exterior</string>
+    <string name="diag_compressor_power">Potència consumida</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Pantalla i preu</string>
+    <string name="unit_fahrenheit">Mostra °F (Fahrenheit)</string>
+    <string name="price_per_kwh">Preu per kWh</string>
+    <string name="price_hint">S\'utilitza per estimar el cost total a partir del consum.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Calibratge de la temperatura interior</string>
+    <string name="calibration_hint">Molts aparells mesuren la temperatura real de l\'habitació amb un o dos graus de desviació. Compara-la amb un termòmetre d\'habitació i corregeix aquí la lectura. Llavors l\'aplicació mostra el valor corregit a tot arreu, marcat amb un petit delta de color ambre, i desplaça la consigna que envia a l\'aparell els mateixos graus sencers — així l\'habitació arriba de debò a la temperatura que has definit. Es desa per a aquest dispositiu.</string>
+    <string name="calibration_none">sense correcció</string>
+    <string name="calibration_preview">Mesurat %1$s → mostrat %2$s</string>
+    <string name="calibration_device_target">Enviat a l\'aparell: %1$s — objectiu %2$s</string>
+    <string name="calibration_no_reading">S\'està esperant la primera lectura…</string>
+    <string name="calibration_reset">Restableix a 0</string>
+    <string name="calibration_less">Redueix la correcció</string>
+    <string name="calibration_more">Augmenta la correcció</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Interval d\'actualització</string>
+    <string name="settings_poll_hint">Amb quina freqüència es consulten l\'estat, l\'energia i el diagnòstic mentre l\'aplicació està connectada. Els intervals més curts actualitzen més ràpid, però generen més trànsit Wi-Fi.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Funcions beta</string>
+    <string name="settings_beta_hint">Diagnòstic addicional experimental, activat per defecte — cada opció afegeix una consulta per actualització i es pot desactivar aquí. No tots els aparells ho admeten. Els valors es mostren a la pestanya Estat i es registren a l\'Historial (quan el registre de l\'historial està activat).</string>
+    <string name="beta_group1">Diagnòstic del compressor</string>
+    <string name="beta_group1_desc">Freqüència, corrent, tensió i temperatures del refrigerant (T1–T4, tub de descàrrega)</string>
+    <string name="beta_group2">Ventilador interior i bomba</string>
+    <string name="beta_group2_desc">Velocitat real del ventilador interior i estat de la bomba de condensats</string>
+    <string name="beta_group7">Potència de la unitat exterior</string>
+    <string name="beta_group7_desc">Potència en temps real de la unitat exterior en watts</string>
+
+    <string name="section_options">Opcions</string>
+    <string name="option_swing">Oscil·lació (lamel·les)</string>
+    <string name="option_eco">Mode Eco</string>
+    <string name="option_beep">Bip</string>
+    <string name="option_anion">Ionitzador</string>
+    <string name="option_out_silent">Silenci exterior</string>
+    <string name="option_self_clean">Autoneteja</string>
+    <string name="option_display">Pantalla / LED</string>
+
+    <string name="section_gear">Limitador del compressor</string>
+    <string name="gear_full">Màxim</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Temporitzador d\'apagada</string>
+    <string name="sleep_active">S\'apagarà d\'aquí a %1$d min</string>
+    <string name="sleep_cancel">Cancel·la el temporitzador</string>
+    <string name="sleep_custom">Personalitzat…</string>
+    <string name="sleep_custom_title">Temporitzador d\'apagada</string>
+    <string name="sleep_custom_label">Minuts</string>
+    <string name="action_start">Inicia</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Consell: mantén premuda una targeta per arrossegar-la i canviar-ne l\'ordre.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Afegeix un dispositiu manualment</string>
+    <string name="manual_hint">Per a connexions sense descoberta per difusió. Trobaràs l\'ID del dispositiu a l\'aplicació Midea/SmartHome o amb un escaneig de la xarxa.</string>
+    <string name="field_ip">Adreça IP</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">ID del dispositiu (decimal)</string>
+    <string name="field_name">Nom (opcional)</string>
+    <string name="action_add">Afegeix</string>
+    <string name="action_cancel">Cancel·la</string>
+    <string name="action_save">Desa</string>
+    <string name="rename_title">Canvia el nom del dispositiu</string>
+    <string name="rename_hint">El nom només es desa en aquesta aplicació — útil per distingir dos aparells.</string>
+    <string name="cd_rename">Canvia el nom</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Dispositiu</string>
+    <string name="device_edit_name">Nom</string>
+    <string name="device_edit_save">Desa</string>
+    <string name="device_forget">Elimina</string>
+    <string name="device_forget_really">Elimina definitivament</string>
+    <string name="device_forget_confirm">Això suprimeix les credencials desades. Pots tornar a afegir el dispositiu quan vulguis.</string>
+    <string name="pane_pick_device">Tria un dispositiu</string>
+    <string name="pane_pick_device_hint">Tria\'n un de la llista de l\'esquerra per controlar-lo.</string>
+    <string name="option_turbo_fan_hint">El turbo controla el ventilador — apaga el turbo per canviar la velocitat.</string>
+    <string name="option_self_clean_hint">Executa el cicle d\'autoneteja de l\'evaporador. Triga entre 20 i 30 minuts segons el dispositiu; mentrestant, la refrigeració normal queda en pausa.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Exporta el token</string>
+    <string name="export_title">Exporta el token</string>
+    <string name="export_hint">Aquestes credencials et permeten controlar aquest dispositiu localment sense el núvol — fes-ne una còpia de seguretat o utilitza-les en altres eines. Mantén-les en privat.</string>
+    <string name="export_none">Encara no hi ha cap token. Connecta\'t una vegada al dispositiu amb connexió a internet i després exporta\'l.</string>
+    <string name="export_copy">Copia</string>
+    <string name="export_share">Comparteix</string>
+    <string name="export_copied">Copiat al porta-retalls</string>
+    <string name="action_close">Tanca</string>
+    <string name="import_button">Importa</string>
+    <string name="import_title">Importa un token</string>
+    <string name="import_hint">Enganxa un bloc de token (d\'Exporta, msmart, …). Després, el dispositiu funciona sense connexió.</string>
+    <string name="import_field">Bloc de token</string>
+    <string name="import_ok">Token importat</string>
+    <string name="import_error">No s\'ha pogut llegir aquest bloc de token</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Dispositius desats</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Engegada de l\'AC</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Vista prèvia (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Ha fallat la connexió: %1$s</string>
+    <string name="error_command">Ha fallat l\'ordre: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Abans de començar</string>
+    <string name="disclaimer_body">ClimaPilot és una aplicació independent i no està afiliada a Midea, ni Midea l\'avala o li dona suport. Controla aires condicionats compatibles a través de la teva Wi-Fi local.\n\nAssegura\'t que l\'aparell està instal·lat correctament i que és segur fer-lo funcionar abans d\'enviar-hi ordres. Utilitzes aquesta aplicació sota la teva responsabilitat; els autors no assumeixen cap responsabilitat per danys o pèrdues.\n\nEls valors mesurats, com ara la potència, els proporciona el dispositiu i poden ser inexactes.\n\nNota: la primera vegada que et connectes a un dispositiu, ClimaPilot obté un token d\'accés d\'un sol ús del servidor de Midea (no cal cap compte). A partir de llavors, el control és totalment local — fins i tot pots denegar l\'accés a internet a l\'aplicació.</string>
+    <string name="disclaimer_accept">Ho entenc</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Control ràpid de l\'AC</string>
+    <string name="widget_not_connected">Sense connexió</string>
+    <string name="widget_off">Apagat</string>
+    <string name="widget_on">Engegat</string>
+    <string name="widget_indoor">Interior %1$s</string>
+    <string name="widget_outdoor">Exterior %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Temporitzador d\'apagada</string>
+    <string name="widget_sleep_off_in">després l\'AC s\'apaga</string>
+    <string name="widget_sleep_idle">Cap temporitzador actiu</string>
+    <string name="widget_sleep_off_now">Apaga ara</string>
+    <string name="widget_sleep_cancel">Cancel·la</string>
+    <string name="widget_power">Engegada</string>
+    <string name="widget_cool_down">Més fred</string>
+    <string name="widget_warm_up">Més calent</string>
+    <string name="widget_mode">Mode</string>
+    <string name="widget_all_label">AC — tots els controls</string>
+    <string name="widget_power_label">AC — engegada</string>
+    <string name="widget_temp_label">AC — temperatura</string>
+    <string name="widget_mode_label">AC — mode</string>
+    <string name="widget_all_desc">Engegada, temperatura, mode, ventilador, turbo i temporitzador d\'apagada</string>
+    <string name="widget_sleep_label">AC — temporitzador d\'apagada</string>
+    <string name="widget_sleep_desc">Compte enrere en directe amb opcions ràpides</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">hores</string>
+    <string name="widget_sleep_quick_desc">Un toc activa el temporitzador d\'apagada</string>
+    <string name="widget_sleep_30_label">Apaga en 30 min</string>
+    <string name="widget_sleep_60_label">Apaga en 1 h</string>
+    <string name="widget_sleep_120_label">Apaga en 2 h</string>
+    <string name="widget_sleep_240_label">Apaga en 4 h</string>
+    <string name="widget_sleep_480_label">Apaga en 8 h</string>
+    <string name="widget_sleep_720_label">Apaga en 12 h</string>
+    <string name="widget_power_desc">Engega o apaga l\'AC</string>
+    <string name="widget_temp_desc">Apuja o abaixa la temperatura</string>
+    <string name="widget_mode_desc">Canvia el mode de funcionament</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Configuració</string>
+    <string name="cd_settings">Configuració</string>
+    <string name="settings_version">Versió %1$s</string>
+    <string name="support_title">Dona suport al desenvolupament</string>
+    <string name="support_body">ClimaPilot és gratuïta i sense anuncis. Si et resulta útil, una petita aportació ajuda a mantenir-la — gràcies!</string>
+    <string name="support_kofi">Convida\'m a un cafè (Ko-fi)</string>
+    <string name="support_paypal">Aportació via PayPal</string>
+    <string name="credits_title">Crèdits</string>
+    <string name="credits_body">El protocol local de Midea de ClimaPilot és una adaptació a Kotlin de l\'excel·lent projecte midea-msmart de @mill1000. Moltes gràcies — sense ell, aquesta aplicació no existiria.</string>
+    <string name="credits_link">midea-msmart a GitHub</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Temporitzadors fiables</string>
+    <string name="reliability_body">Perquè el temporitzador d\'apagada i les programacions d\'escenes s\'executin encara que l\'aplicació estigui tancada, permet que ClimaPilot funcioni en segon pla.</string>
+    <string name="reliability_battery_ok">Optimització de bateria: desactivada ✓</string>
+    <string name="reliability_battery_warn">L\'optimització de bateria està activada — els temporitzadors es poden endarrerir o ometre.</string>
+    <string name="reliability_battery_action">Permet el segon pla (bateria)</string>
+    <string name="reliability_autostart_action">Permet l\'inici automàtic (fabricant)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Actualitzacions de l\'aplicació</string>
+    <string name="update_body">Les versions noves s\'obtenen de GitHub. La instal·lació sempre la confirmes tu.</string>
+    <string name="update_current">Instal·lada: %1$s</string>
+    <string name="update_auto_label">Comprova-ho automàticament en obrir l\'aplicació</string>
+    <string name="update_check_button">Cerca actualitzacions</string>
+    <string name="update_checking">S\'està comprovant…</string>
+    <string name="update_uptodate">Ja tens la darrera versió (%1$s).</string>
+    <string name="update_error">No s\'han pogut comprovar les actualitzacions. Revisa la connexió i torna-ho a provar.</string>
+    <string name="update_available_title">Actualització disponible</string>
+    <string name="update_available_body">La versió %1$s està disponible — tu tens la %2$s.</string>
+    <string name="update_install">Actualitza</string>
+    <string name="update_downloading">S\'està baixant… %1$d%%</string>
+    <string name="update_later">Més tard</string>
+    <string name="update_failed">Ha fallat la baixada. Torna-ho a provar més tard.</string>
+    <string name="update_verify_failed">La baixada no ha superat la comprovació de seguretat i no s\'ha instal·lat.</string>
+    <string name="update_need_permission">Permet que ClimaPilot instal·li aplicacions i torna a tocar «Actualitza».</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Apaga</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Aplica: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Apagada automàtica</string>
+    <string name="autooff_body">Una desconnexió de seguretat: si l\'AC funciona més temps del definit, s\'apaga automàticament — el substitut local d\'un temporitzador d\'absència (el telèfon no pot accedir a l\'AC quan surts de la Wi-Fi). 0 = desactivat.</string>
+    <string name="autooff_hours_label">Apaga al cap de (hores)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Temporitzador d\'apagada</string>
+    <string name="notif_timer_title">Temporitzador d\'apagada en marxa</string>
+    <string name="notif_timer_text">L\'AC s\'apagarà quan acabi el compte enrere.</string>
+    <string name="notif_timer_off_now">Apaga ara</string>
+    <string name="notif_timer_cancel">Cancel·la</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Bloqueig de l\'aplicació</string>
+    <string name="lock_card_body">Demana l\'empremta, la cara o el PIN de pantalla per obrir ClimaPilot — perquè ningú més pugui controlar el teu AC.</string>
+    <string name="lock_card_switch">Demana el desbloqueig per obrir</string>
+    <string name="lock_title">Desbloqueja ClimaPilot</string>
+    <string name="lock_subtitle">Autentica\'t per controlar el teu AC</string>
+    <string name="lock_unlock">Desbloqueja</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Mode de l\'AC</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Historial</string>
+    <string name="history_card_title">Energia i filtre</string>
+    <string name="history_card_body">Consulta l\'ús de potència recent i el consum total, i controla quan cal netejar el filtre.</string>
+    <string name="history_card_open">Obre l\'historial</string>
+    <string name="history_power_title">Potència (24 h)</string>
+    <string name="history_empty">Encara no hi ha prou dades — fes servir l\'AC una estona i torna-hi.</string>
+    <string name="history_peak">Pic: %1$d W</string>
+    <string name="history_totals_title">Consum</string>
+    <string name="history_total_kwh">Total: %1$.1f kWh</string>
+    <string name="history_total_cost">Cost estimat: %1$.2f €</string>
+    <string name="history_filter_title">Filtre</string>
+    <string name="history_filter_runtime">Funcionament des de l\'última neteja: %1$d h de %2$d h</string>
+    <string name="history_filter_due">És hora de netejar el filtre.</string>
+    <string name="history_filter_reset">Filtre netejat (restableix)</string>
+    <string name="history_filter_hint">Això és un recordatori de manteniment de l\'aplicació basat en el temps de funcionament. No llegeix ni restableix l\'indicador de filtre de l\'aparell — restableix-lo a l\'AC mateix.</string>
+    <string name="option_beep_hint">To de confirmació. Molts aparells només emeten un bip en engegar-se o apagar-se, no amb altres canvis.</string>
+    <string name="history_record_title">Registra l\'historial</string>
+    <string name="history_record_body">Quan està activat, ClimaPilot registra la potència, les temperatures i el ventilador, i consulta l\'AC aproximadament cada 15 min en segon pla (només amb Wi-Fi). Desactivat per defecte.</string>
+    <string name="history_record_switch">Registra les dades de l\'AC</string>
+    <string name="history_indoor_title">Temperatura interior (24 h)</string>
+    <string name="history_outdoor_title">Temperatura exterior (24 h)</string>
+    <string name="history_fan_title">Nivell del ventilador (24 h)</string>
+    <string name="history_comp_hz_title">Freqüència del compressor (beta)</string>
+    <string name="history_comp_w_title">Potència de la unitat exterior (beta)</string>
+    <string name="history_fan_rpm_title">Velocitat del ventilador interior (beta)</string>
+    <string name="history_metric_summary">Ara %1$s%2$s · mín %3$s · màx %4$s%5$s</string>
+    <string name="range_hour">Hora</string>
+    <string name="range_day">Dia</string>
+    <string name="range_week">Setmana</string>
+    <string name="range_month">Mes</string>
+    <string name="history_pick_day">Tria un dia</string>
+    <string name="history_day">Dia: %1$s</string>
+    <string name="history_range_kwh">En aquest període: %1$.1f kWh</string>
+    <string name="history_range_cost">Cost estimat: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">T\'agrada ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot és gratuïta i sense anuncis. Si s\'ha guanyat un lloc al teu telèfon, una petita aportació ajuda a mantenir-la — gràcies!</string>
+    <string name="donate_later">Potser més tard</string>
+    <string name="donate_already">Ja hi he col·laborat</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">Comandament IR</string>
+    <string name="ir_remote_entry">Comandament IR (infraroig)</string>
+    <string name="ir_remote_subtitle">Infraroig · només enviament</string>
+    <string name="ir_no_emitter">Aquest telèfon no té emissor d\'infraroigs</string>
+    <string name="option_quiet">Silenciós</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">L\'infraroig és unidireccional — aquests interruptors mostren el que s\'ha enviat per última vegada, no l\'estat real de l\'aparell.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Control</string>
+    <string name="nav_status">Estat</string>
+    <string name="nav_options">Opcions</string>
+    <string name="nav_scenes">Escenes</string>
+    <string name="nav_history">Historial</string>
+</resources>

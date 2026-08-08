@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -46,6 +47,7 @@ import androidx.compose.material.icons.filled.MonitorHeart
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material.icons.filled.PowerSettingsNew
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.Straighten
@@ -147,9 +149,9 @@ private val MODES = listOf(
  */
 /** EN: Steuern tab — power, temperature, mode, fan. DE: Steuern-Reiter — Ein/Aus, Temperatur, Modus, Lüfter. */
 @Composable
-fun ControlScreen(vm: AcViewModel) {
+fun ControlScreen(vm: AcViewModel, header: Boolean = true) {
     TabList {
-        item(key = "topbar") { ConnectedTopBar(vm) }
+        if (header) item(key = "topbar") { ConnectedTopBar(vm) }
         item(key = "hero") { PowerHero(vm) }
         item(key = "mode") { ModeSelector(vm) }
         item(key = "fan") { FanCard(vm) }
@@ -161,9 +163,9 @@ fun ControlScreen(vm: AcViewModel) {
 
 /** EN: Status tab — live readouts (power, consumption, cost, error). DE: Status-Reiter — Live-Anzeigen (Leistung, Verbrauch, Kosten, Fehler). */
 @Composable
-fun StatusTab(vm: AcViewModel) {
+fun StatusTab(vm: AcViewModel, header: Boolean = true) {
     TabList {
-        item(key = "topbar") { ConnectedTopBar(vm) }
+        if (header) item(key = "topbar") { ConnectedTopBar(vm) }
         item(key = "status") { LiveStatusCard(vm) }
         // EN: Beta diagnostics (PR #278) — only shown when at least one group is enabled in Settings. DE: Beta-Diagnose (PR #278) — nur sichtbar, wenn in den Einstellungen mindestens eine Gruppe aktiviert ist.
         if (vm.diagGroup1 || vm.diagGroup2 || vm.diagGroup7) item(key = "diagnostics") { DiagnosticsCard(vm) }
@@ -173,25 +175,36 @@ fun StatusTab(vm: AcViewModel) {
 
 /** EN: Options tab — unit toggles + compressor throttle (where supported). DE: Optionen-Reiter — Geräteschalter + Kompressor-Drossel (wo unterstützt). */
 @Composable
-fun OptionsTab(vm: AcViewModel) {
-    TabList {
-        item(key = "topbar") { ConnectedTopBar(vm) }
-        item(key = "options") { OptionsCard(vm) }
-        if (vm.rateLevels > 0) item(key = "gear") { GearCard(vm) }
-        // EN: Calibration needs a live reading to dial against, so it lives with the connected device
-        //     rather than in the app-wide settings (which are only reachable once disconnected).
-        // DE: Die Kalibrierung braucht einen Live-Messwert zum Abgleichen und wohnt daher beim verbundenen
-        //     Gerät statt in den app-weiten Einstellungen (die erst nach dem Trennen erreichbar sind).
-        item(key = "calibration") { CalibrationCard(vm) }
-        errorItem(vm)
+fun OptionsTab(vm: AcViewModel, header: Boolean = true) {
+    BoxWithConstraints {
+        // EN: On layouts wide enough for the two-column control surface (same 820 dp threshold as
+        //     WideControlPane) the toggle column is already visible beside the controls — repeating the
+        //     same switches here made every setting appear twice. The tab keeps what the column doesn't
+        //     show: throttle and calibration.
+        // DE: Auf Layouts, die breit genug für die zweispaltige Steuerfläche sind (dieselbe
+        //     820-dp-Schwelle wie WideControlPane), steht die Schalter-Spalte bereits neben den Reglern —
+        //     dieselben Schalter hier noch einmal zu zeigen, ließ jede Einstellung doppelt erscheinen.
+        //     Der Reiter behält, was die Spalte nicht zeigt: Drossel und Kalibrierung.
+        val wide = maxWidth >= 820.dp
+        TabList {
+            if (header) item(key = "topbar") { ConnectedTopBar(vm) }
+            if (!wide) item(key = "options") { OptionsCard(vm) }
+            if (vm.rateLevels > 0) item(key = "gear") { GearCard(vm) }
+            // EN: Calibration needs a live reading to dial against, so it lives with the connected device
+            //     rather than in the app-wide settings (which are only reachable once disconnected).
+            // DE: Die Kalibrierung braucht einen Live-Messwert zum Abgleichen und wohnt daher beim verbundenen
+            //     Gerät statt in den app-weiten Einstellungen (die erst nach dem Trennen erreichbar sind).
+            item(key = "calibration") { CalibrationCard(vm) }
+            errorItem(vm)
+        }
     }
 }
 
 /** EN: Scenes tab — quick scenes, weekly plan + sleep timer. DE: Szenen-Reiter — Schnell-Szenen, Wochenplan + Sleep-Timer. */
 @Composable
-fun ScenesTab(vm: AcViewModel) {
+fun ScenesTab(vm: AcViewModel, header: Boolean = true) {
     TabList {
-        item(key = "topbar") { ConnectedTopBar(vm) }
+        if (header) item(key = "topbar") { ConnectedTopBar(vm) }
         item(key = "scenes") { ScenesCard(vm) }
         item(key = "plan") { PlanCard(vm) }
         item(key = "sleep") { SleepTimerCard(vm) }
@@ -207,7 +220,7 @@ private fun TabList(content: LazyListScope.() -> Unit) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxHeight()
-                .widthIn(max = 640.dp)
+                .widthIn(max = 900.dp)
                 .fillMaxWidth()
                 .testTag("control_list")
                 .padding(horizontal = 16.dp),
@@ -219,7 +232,7 @@ private fun TabList(content: LazyListScope.() -> Unit) {
 }
 
 /** EN: Append an inline error banner item when the last command failed. DE: Ein Inline-Fehlerbanner anhängen, falls der letzte Befehl fehlschlug. */
-private fun LazyListScope.errorItem(vm: AcViewModel) {
+internal fun LazyListScope.errorItem(vm: AcViewModel) {
     val msg = vm.error ?: return
     item(key = "error") { ErrorBanner(msg) }
 }
@@ -254,16 +267,33 @@ fun ConnectedTopBar(vm: AcViewModel) {
                 val connected = vm.status == Status.Connected
                 Box(
                     Modifier.size(8.dp).clip(CircleShape)
-                        .background(if (vm.irMode) cs.primary else if (connected) Color(0xFF2ECC71) else cs.error)
+                        .background(
+                            when {
+                                vm.irMode -> cs.primary
+                                connected -> Color(0xFF2ECC71)
+                                else -> cs.error
+                            }
+                        )
                 )
                 Spacer(Modifier.width(6.dp))
+                // EN: Channel badge — shows the active path at a glance. DE: Kanal-Symbol — zeigt den aktiven Weg auf einen Blick.
+                if (connected && !vm.irMode) {
+                    Icon(
+                        Icons.Default.Wifi,
+                        null,
+                        Modifier.size(13.dp),
+                        tint = cs.onSurfaceVariant,
+                    )
+                    Spacer(Modifier.width(4.dp))
+                }
                 Text(
                     when {
                         vm.irMode -> stringResource(R.string.ir_remote_subtitle)
                         connected -> stringResource(R.string.connected_to, vm.connectedDevice?.ip ?: "")
                         else -> stringResource(R.string.disconnected)
                     },
-                    fontSize = 12.sp, color = if (vm.irMode) cs.primary else cs.onSurfaceVariant,
+                    fontSize = 12.sp,
+                    color = if (vm.irMode) cs.primary else cs.onSurfaceVariant,
                 )
             }
         }
@@ -303,7 +333,7 @@ private fun PowerHero(vm: AcViewModel) {
             Spacer(Modifier.height(8.dp))
 
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
-                RoundIconButton(Icons.Default.Remove, enabled = on, tint = fg) { vm.nudgeTemp(-0.5) }
+                RoundIconButton(Icons.Default.Remove, enabled = on, tint = fg) { vm.nudgeTemp(-1) }
                 Spacer(Modifier.width(20.dp))
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
@@ -313,7 +343,7 @@ private fun PowerHero(vm: AcViewModel) {
                     Text(stringResource(R.string.target_temp), color = fg.copy(alpha = 0.8f), fontSize = 13.sp)
                 }
                 Spacer(Modifier.width(20.dp))
-                RoundIconButton(Icons.Default.Add, enabled = on, tint = fg) { vm.nudgeTemp(0.5) }
+                RoundIconButton(Icons.Default.Add, enabled = on, tint = fg) { vm.nudgeTemp(1) }
             }
 
             Spacer(Modifier.height(10.dp))
@@ -716,6 +746,11 @@ private fun OptionsCard(vm: AcViewModel) {
     SectionCard(stringResource(R.string.section_options), Icons.Default.Eco) {
         ToggleRow(Icons.Default.SwapVert, stringResource(R.string.option_swing), vm.swing) { vm.toggleSwing() }
         ToggleRow(Icons.Default.Eco, stringResource(R.string.option_eco), vm.eco) { vm.toggleEco() }
+        // EN: Turbo/boost (issue #13) — read back from the device like eco/swing, so the switch matches
+        //     the unit even when boost was engaged from the physical remote or the official app.
+        // DE: Turbo/Boost (Issue #13) — wie Eco/Swing vom Gerät zurückgelesen, der Schalter passt also
+        //     auch dann, wenn Boost über die Fernbedienung oder die Original-App aktiviert wurde.
+        ToggleRow(Icons.Default.Bolt, stringResource(R.string.option_turbo), vm.turbo) { vm.toggleTurbo() }
         ToggleRow(Icons.Default.NotificationsActive, stringResource(R.string.option_beep), vm.beep) { vm.applyBeep(it) }
         // EN: The prompt tone is per-command; on many units (incl. the PortaSplit) the AC only chirps on
         //     power on/off, so set expectations. DE: Der Quittungston ist pro Befehl; viele Geräte (auch
@@ -736,7 +771,19 @@ private fun OptionsCard(vm: AcViewModel) {
         // DE: Gerätespezifische Schalter — nur sichtbar, wenn das Gerät die Fähigkeit gemeldet hat (B5).
         if (vm.capAnion) ToggleRow(Icons.Default.Spa, stringResource(R.string.option_anion), vm.anion) { vm.toggleAnion() }
         if (vm.capOutSilent) ToggleRow(Icons.Default.VolumeOff, stringResource(R.string.option_out_silent), vm.outSilent) { vm.toggleOutdoorSilent() }
-        if (vm.capSelfClean) ToggleRow(Icons.Default.CleaningServices, stringResource(R.string.option_self_clean), vm.selfClean) { vm.toggleSelfClean() }
+        if (vm.capSelfClean) {
+            ToggleRow(Icons.Default.CleaningServices, stringResource(R.string.option_self_clean), vm.selfClean) { vm.toggleSelfClean() }
+            // EN: A cleaning run takes a while and pauses normal cooling — say so before the switch is
+            //     flipped in passing. DE: Ein Reinigungslauf dauert eine Weile und unterbricht das normale
+            //     Kühlen — das gehört gesagt, bevor der Schalter im Vorbeigehen kippt.
+            Text(
+                stringResource(R.string.option_self_clean_hint),
+                fontSize = 11.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                lineHeight = 14.sp,
+                modifier = Modifier.padding(start = 32.dp, bottom = 4.dp),
+            )
+        }
     }
 }
 
@@ -748,7 +795,7 @@ private fun OptionsCard(vm: AcViewModel) {
  *     der Hinweis sagt das.
  */
 @Composable
-private fun IrOptionsCard(vm: AcViewModel) {
+internal fun IrOptionsCard(vm: AcViewModel) {
     val cs = MaterialTheme.colorScheme
     SectionCard(stringResource(R.string.section_options), Icons.Default.Eco) {
         ToggleRow(Icons.Default.SwapVert, stringResource(R.string.option_swing), vm.irSwing) { vm.toggleIrSwing() }
@@ -834,11 +881,15 @@ private fun SleepTimerCard(vm: AcViewModel) {
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth(),
             ) {
+                // EN: The unit is translatable rather than a hard-coded "m" — in German that reads as
+                //     metres, and a literal in the layout can't be translated at all.
+                // DE: Die Einheit kommt aus den Übersetzungen statt als festes „m" — das liest sich auf
+                //     Deutsch als Meter, und ein fest eingebauter Text lässt sich gar nicht übersetzen.
                 presets.forEach { min ->
                     FilterChip(
                         selected = false,
                         onClick = { vm.startSleepTimer(min) },
-                        label = { Text("${min}m", fontSize = 13.sp) },
+                        label = { Text(stringResource(R.string.sleep_preset_min, min), fontSize = 13.sp) },
                     )
                 }
                 // EN: Saved custom duration as a reusable quick chip. DE: Gespeicherte eigene Dauer als wiederverwendbarer Schnell-Chip.
@@ -846,7 +897,12 @@ private fun SleepTimerCard(vm: AcViewModel) {
                     FilterChip(
                         selected = false,
                         onClick = { vm.startSleepTimer(vm.sleepCustomMinutes) },
-                        label = { Text("${vm.sleepCustomMinutes}m", fontSize = 13.sp) },
+                        label = {
+                            Text(
+                                stringResource(R.string.sleep_preset_min, vm.sleepCustomMinutes),
+                                fontSize = 13.sp,
+                            )
+                        },
                     )
                 }
                 // EN: Free-form duration (remembered after use). DE: Frei wählbare Dauer (wird nach Nutzung gemerkt).

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Sceny</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Noc Eco</string>
+    <string name="scene_comfort">Komfort</string>
+    <string name="scene_save">Zapisz</string>
+    <string name="scene_save_title">Zapisz scenę</string>
+    <string name="scene_name_label">Nazwa sceny</string>
+    <string name="scene_default_name">Scena</string>
+    <string name="scene_hint">Stuknij, aby zastosować · przytrzymaj, aby edytować</string>
+    <string name="scene_edit_title">Edytuj scenę</string>
+    <string name="scene_schedule">Uruchamiaj codziennie</string>
+    <string name="scene_schedule_at">Godzina: %1$s</string>
+    <string name="scene_schedule_note">Stosowana automatycznie każdego dnia. Wymaga zgody na działanie aplikacji w tle.</string>
+    <string name="scene_delete">Usuń</string>
+    <string name="scene_delete_title">Usunąć scenę?</string>
+    <string name="scene_delete_msg">„%1$s” zostanie usunięta.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Plan tygodniowy</string>
+    <string name="plan_empty">Nie ma jeszcze żadnych okien. Dodaj jedno, aby automatycznie uruchamiać scenę — np. maksymalne chłodzenie w poniedziałki od 6 do 18.</string>
+    <string name="plan_need_scene">Najpierw utwórz scenę — plan uruchamia Twoje sceny.</string>
+    <string name="plan_add">Dodaj okno</string>
+    <string name="plan_hint">Okna działają w tle, nawet gdy telefon jest bezczynny w sieci Wi-Fi. Aby czasy były niezawodne, zezwól ClimaPilot na działanie w tle (Ustawienia ▸ Niezawodne timery).</string>
+    <string name="plan_new_title">Nowe okno</string>
+    <string name="plan_edit_title">Edytuj okno</string>
+    <string name="plan_scene_label">Scena</string>
+    <string name="plan_days_label">Dni</string>
+    <string name="plan_from">Od</string>
+    <string name="plan_to">Do</string>
+    <string name="plan_end_label">Po zakończeniu</string>
+    <string name="plan_end_off">Wyłącz</string>
+    <string name="plan_end_leave">Pozostaw włączone</string>
+    <string name="plan_overnight">+1 dzień</string>
+    <string name="plan_every_day">Codziennie</string>
+    <string name="plan_disabled">wstrzymane</string>
+    <string name="plan_to_off">→ wył.</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Twój klimatyzator w sieci Wi-Fi</string>
+    <string name="action_discover">Szukaj urządzeń</string>
+    <string name="action_discovering">Wyszukiwanie…</string>
+    <string name="action_manual">Ręcznie</string>
+    <string name="demo_preview">Podgląd bez urządzenia (demo)</string>
+    <string name="empty_title">Brak urządzeń</string>
+    <string name="empty_body">Stuknij „Szukaj urządzeń”. Telefon musi być w tej samej sieci Wi-Fi co klimatyzator.</string>
+    <string name="error_no_devices">Nie znaleziono urządzeń. Ta sama sieć Wi-Fi? W przeciwnym razie dodaj ręcznie.</string>
+    <string name="action_connect">Połącz</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Wstecz</string>
+    <string name="cd_refresh">Odśwież</string>
+    <string name="cd_power">Zasilanie</string>
+    <string name="cd_reorder">Przeciągnij, aby zmienić kolejność</string>
+    <string name="connected_to">Połączono · %1$s</string>
+    <string name="disconnected">Rozłączono</string>
+    <string name="state_on">WŁ.</string>
+    <string name="state_off">WYŁ.</string>
+    <string name="target_temp">Temperatura docelowa</string>
+    <string name="readout_indoor">Wewnątrz</string>
+    <string name="readout_outdoor">Na zewnątrz</string>
+    <string name="readout_power">Moc</string>
+
+    <string name="section_mode">Tryb</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Chłodzenie</string>
+    <string name="mode_dry">Osuszanie</string>
+    <string name="mode_heat">Grzanie</string>
+    <string name="mode_fan">Nawiew</string>
+
+    <string name="section_fan">Prędkość wentylatora</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Cicha</string>
+    <string name="fan_low">Niska</string>
+    <string name="fan_medium">Średnia</string>
+    <string name="fan_high">Wysoka</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automatyczna</string>
+    <string name="fan_level">Poziom: %1$d%%</string>
+
+    <string name="section_status">Stan na żywo</string>
+    <string name="status_indoor">Temperatura wewnętrzna</string>
+    <string name="status_outdoor">Temperatura zewnętrzna</string>
+    <string name="status_power">Moc</string>
+    <string name="status_total">Łączne zużycie</string>
+    <string name="status_error">Kod błędu</string>
+    <string name="status_error_none">brak</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Łączny koszt</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Diagnostyka (beta)</string>
+    <string name="diag_beta_hint">Telemetria eksperymentalna. Nie każde urządzenie ją zgłasza — wartości mogą pozostać puste.</string>
+    <string name="diag_group1_title">Sprężarka i czynnik chłodniczy</string>
+    <string name="diag_compressor_freq">Częstotliwość sprężarki</string>
+    <string name="diag_compressor_freq_target">Częstotliwość docelowa</string>
+    <string name="diag_compressor_current">Pobór prądu</string>
+    <string name="diag_compressor_voltage">Napięcie zasilania</string>
+    <string name="diag_temp_t1">Wymiennik wewn. (T1)</string>
+    <string name="diag_temp_t2">Parownik (T2)</string>
+    <string name="diag_temp_t3">Skraplacz (T3)</string>
+    <string name="diag_temp_t4">Na zewnątrz (T4)</string>
+    <string name="diag_temp_tp">Rura tłoczna (TP)</string>
+    <string name="diag_group2_title">Wentylator wewn. i pompka</string>
+    <string name="diag_fan_speed">Prędkość wentylatora</string>
+    <string name="diag_fan_speed_target">Docelowa prędkość wentylatora</string>
+    <string name="diag_water_pump">Pompka skroplin</string>
+    <string name="diag_pump_on">pracuje</string>
+    <string name="diag_pump_off">wył.</string>
+    <string name="diag_group7_title">Moc jednostki zewnętrznej</string>
+    <string name="diag_compressor_power">Pobór mocy</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Wyświetlanie i cena</string>
+    <string name="unit_fahrenheit">Pokazuj °F (Fahrenheit)</string>
+    <string name="price_per_kwh">Cena za kWh</string>
+    <string name="price_hint">Służy do szacowania łącznego kosztu na podstawie zużycia.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Kalibracja temperatury wewnętrznej</string>
+    <string name="calibration_hint">Wiele urządzeń wskazuje temperaturę o stopień lub dwa inną niż rzeczywista temperatura w pomieszczeniu. Porównaj odczyt z termometrem pokojowym i skoryguj go tutaj. Aplikacja będzie wtedy wszędzie pokazywać skorygowaną wartość, oznaczoną małą bursztynową deltą, i przesunie wysyłaną do urządzenia temperaturę zadaną o te same pełne stopnie — dzięki temu w pomieszczeniu naprawdę będzie tyle, ile ustawisz. Zapisywane dla tego urządzenia.</string>
+    <string name="calibration_none">bez korekty</string>
+    <string name="calibration_preview">Zmierzone %1$s → wyświetlane %2$s</string>
+    <string name="calibration_device_target">Wysyłane do urządzenia: %1$s — cel %2$s</string>
+    <string name="calibration_no_reading">Oczekiwanie na pierwszy odczyt…</string>
+    <string name="calibration_reset">Zresetuj do 0</string>
+    <string name="calibration_less">Zmniejsz korektę</string>
+    <string name="calibration_more">Zwiększ korektę</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Interwał odświeżania</string>
+    <string name="settings_poll_hint">Jak często odpytywane są stan, energia i diagnostyka, gdy aplikacja jest połączona. Krótsze interwały odświeżają szybciej, ale generują więcej ruchu Wi-Fi.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Funkcje beta</string>
+    <string name="settings_beta_hint">Eksperymentalna dodatkowa diagnostyka, domyślnie włączona — każda opcja dodaje jedno zapytanie na odświeżenie i można ją tutaj wyłączyć. Nie wszystkie urządzenia ją obsługują. Wartości widać na karcie Status, a przy włączonym rejestrowaniu historii trafiają też do Historii.</string>
+    <string name="beta_group1">Diagnostyka sprężarki</string>
+    <string name="beta_group1_desc">Częstotliwość, prąd, napięcie i temperatury czynnika chłodniczego (T1–T4, rura tłoczna)</string>
+    <string name="beta_group2">Wentylator wewn. i pompka</string>
+    <string name="beta_group2_desc">Rzeczywista prędkość wentylatora wewnętrznego i stan pompki skroplin</string>
+    <string name="beta_group7">Moc jednostki zewnętrznej</string>
+    <string name="beta_group7_desc">Pobór mocy jednostki zewnętrznej w watach w czasie rzeczywistym</string>
+
+    <string name="section_options">Opcje</string>
+    <string name="option_swing">Swing (żaluzje)</string>
+    <string name="option_eco">Tryb Eco</string>
+    <string name="option_beep">Dźwięk</string>
+    <string name="option_anion">Jonizator</string>
+    <string name="option_out_silent">Cicha jednostka zewn.</string>
+    <string name="option_self_clean">Samoczyszczenie</string>
+    <string name="option_display">Wyświetlacz / LED</string>
+
+    <string name="section_gear">Ograniczenie sprężarki</string>
+    <string name="gear_full">Pełna moc</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Wyłącznik czasowy</string>
+    <string name="sleep_active">Wyłączy się za %1$d min</string>
+    <string name="sleep_cancel">Anuluj timer</string>
+    <string name="sleep_custom">Własny…</string>
+    <string name="sleep_custom_title">Wyłącznik czasowy</string>
+    <string name="sleep_custom_label">Minuty</string>
+    <string name="action_start">Start</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Wskazówka: przytrzymaj kartę, aby przeciągnąć ją w inne miejsce.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Dodaj urządzenie ręcznie</string>
+    <string name="manual_hint">Do połączeń bez wykrywania rozgłoszeniowego. ID urządzenia znajdziesz w aplikacji Midea/SmartHome lub przez skanowanie sieci.</string>
+    <string name="field_ip">Adres IP</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">ID urządzenia (dziesiętnie)</string>
+    <string name="field_name">Nazwa (opcjonalnie)</string>
+    <string name="action_add">Dodaj</string>
+    <string name="action_cancel">Anuluj</string>
+    <string name="action_save">Zapisz</string>
+    <string name="rename_title">Zmień nazwę urządzenia</string>
+    <string name="rename_hint">Nazwa jest zapisywana tylko w tej aplikacji — przydaje się, aby odróżnić dwa urządzenia.</string>
+    <string name="cd_rename">Zmień nazwę</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Urządzenie</string>
+    <string name="device_edit_name">Nazwa</string>
+    <string name="device_edit_save">Zapisz</string>
+    <string name="device_forget">Usuń</string>
+    <string name="device_forget_really">Usuń na stałe</string>
+    <string name="device_forget_confirm">Spowoduje to usunięcie zapisanych danych dostępowych. Urządzenie możesz w każdej chwili dodać ponownie.</string>
+    <string name="pane_pick_device">Wybierz urządzenie</string>
+    <string name="pane_pick_device_hint">Wybierz urządzenie z listy po lewej stronie, aby nim sterować.</string>
+    <string name="option_turbo_fan_hint">Turbo steruje wentylatorem — aby zmienić prędkość, wyłącz turbo.</string>
+    <string name="option_self_clean_hint">Uruchamia cykl samoczyszczenia parownika. Zależnie od urządzenia trwa od 20 do 30 minut; w tym czasie normalne chłodzenie jest wstrzymane.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Eksportuj token</string>
+    <string name="export_title">Eksportuj token</string>
+    <string name="export_hint">Te dane dostępowe pozwalają sterować tym urządzeniem lokalnie, bez chmury — zrób ich kopię zapasową lub użyj w innych narzędziach. Zachowaj je dla siebie.</string>
+    <string name="export_none">Brak tokena. Połącz się raz z urządzeniem, będąc online, a następnie eksportuj.</string>
+    <string name="export_copy">Kopiuj</string>
+    <string name="export_share">Udostępnij</string>
+    <string name="export_copied">Skopiowano do schowka</string>
+    <string name="action_close">Zamknij</string>
+    <string name="import_button">Importuj</string>
+    <string name="import_title">Importuj token</string>
+    <string name="import_hint">Wklej blok tokena (z eksportu, msmart, …). Urządzenie będzie wtedy działać offline.</string>
+    <string name="import_field">Blok tokena</string>
+    <string name="import_ok">Token zaimportowany</string>
+    <string name="import_error">Nie udało się odczytać tego bloku tokena</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Zapisane urządzenia</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Zasilanie klimatyzacji</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Podgląd (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Połączenie nie powiodło się: %1$s</string>
+    <string name="error_command">Polecenie nie powiodło się: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Zanim zaczniesz</string>
+    <string name="disclaimer_body">ClimaPilot jest niezależną aplikacją i nie jest powiązany z firmą Midea ani przez nią autoryzowany czy wspierany. Steruje zgodnymi klimatyzatorami przez lokalną sieć Wi-Fi.\n\nZanim wyślesz polecenia, upewnij się, że urządzenie jest prawidłowo zainstalowane i bezpieczne w obsłudze. Używasz tej aplikacji na własne ryzyko; autorzy nie ponoszą odpowiedzialności za żadne szkody ani straty.\n\nWartości mierzone, takie jak moc, pochodzą z urządzenia i mogą być niedokładne.\n\nUwaga: przy pierwszym połączeniu z urządzeniem ClimaPilot pobiera jednorazowy token dostępu z serwera Midea (konto nie jest potrzebne). Potem sterowanie odbywa się w pełni lokalnie — możesz nawet odebrać aplikacji dostęp do internetu.</string>
+    <string name="disclaimer_accept">Rozumiem</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Szybkie sterowanie klimatyzacją</string>
+    <string name="widget_not_connected">Nie połączono</string>
+    <string name="widget_off">Wył.</string>
+    <string name="widget_on">Wł.</string>
+    <string name="widget_indoor">Wewnątrz %1$s</string>
+    <string name="widget_outdoor">Na zewnątrz %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Wyłącznik czasowy</string>
+    <string name="widget_sleep_off_in">potem klimatyzator się wyłączy</string>
+    <string name="widget_sleep_idle">Brak aktywnego timera</string>
+    <string name="widget_sleep_off_now">Wyłącz teraz</string>
+    <string name="widget_sleep_cancel">Anuluj</string>
+    <string name="widget_power">Zasilanie</string>
+    <string name="widget_cool_down">Chłodniej</string>
+    <string name="widget_warm_up">Cieplej</string>
+    <string name="widget_mode">Tryb</string>
+    <string name="widget_all_label">Klimatyzacja — wszystkie funkcje</string>
+    <string name="widget_power_label">Klimatyzacja — zasilanie</string>
+    <string name="widget_temp_label">Klimatyzacja — temperatura</string>
+    <string name="widget_mode_label">Klimatyzacja — tryb</string>
+    <string name="widget_all_desc">Zasilanie, temperatura, tryb, wentylator, turbo i wyłącznik czasowy</string>
+    <string name="widget_sleep_label">Klimatyzacja — wyłącznik czasowy</string>
+    <string name="widget_sleep_desc">Odliczanie na żywo z szybkim wyborem</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">godz.</string>
+    <string name="widget_sleep_quick_desc">Jedno dotknięcie ustawia wyłącznik czasowy</string>
+    <string name="widget_sleep_30_label">Wyłącz za 30 min</string>
+    <string name="widget_sleep_60_label">Wyłącz za 1 godz.</string>
+    <string name="widget_sleep_120_label">Wyłącz za 2 godz.</string>
+    <string name="widget_sleep_240_label">Wyłącz za 4 godz.</string>
+    <string name="widget_sleep_480_label">Wyłącz za 8 godz.</string>
+    <string name="widget_sleep_720_label">Wyłącz za 12 godz.</string>
+    <string name="widget_power_desc">Włączaj i wyłączaj klimatyzację</string>
+    <string name="widget_temp_desc">Podwyższ lub obniż temperaturę</string>
+    <string name="widget_mode_desc">Przełączaj tryb pracy</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Ustawienia</string>
+    <string name="cd_settings">Ustawienia</string>
+    <string name="settings_version">Wersja %1$s</string>
+    <string name="support_title">Wesprzyj rozwój</string>
+    <string name="support_body">ClimaPilot jest darmowy i bez reklam. Jeśli Ci pomaga, drobny napiwek pozwala go rozwijać — dziękuję!</string>
+    <string name="support_kofi">Postaw mi kawę (Ko-fi)</string>
+    <string name="support_paypal">Napiwek przez PayPal</string>
+    <string name="credits_title">Podziękowania</string>
+    <string name="credits_body">Lokalny protokół Midea w ClimaPilot to port świetnego projektu midea-msmart autorstwa @mill1000 na Kotlin. Ogromne podziękowania — bez niego ta aplikacja by nie powstała.</string>
+    <string name="credits_link">midea-msmart na GitHubie</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Niezawodne timery</string>
+    <string name="reliability_body">Aby wyłącznik czasowy i harmonogramy scen działały nawet przy zamkniętej aplikacji, zezwól ClimaPilot na działanie w tle.</string>
+    <string name="reliability_battery_ok">Optymalizacja baterii: wyłączona ✓</string>
+    <string name="reliability_battery_warn">Optymalizacja baterii jest włączona — timery mogą się opóźniać lub nie zadziałać.</string>
+    <string name="reliability_battery_action">Zezwól na działanie w tle (bateria)</string>
+    <string name="reliability_autostart_action">Zezwól na autostart (producent)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Aktualizacje aplikacji</string>
+    <string name="update_body">Nowe wersje są pobierane z GitHuba. Instalację zawsze potwierdzasz.</string>
+    <string name="update_current">Zainstalowano: %1$s</string>
+    <string name="update_auto_label">Sprawdzaj automatycznie przy uruchomieniu</string>
+    <string name="update_check_button">Sprawdź aktualizacje</string>
+    <string name="update_checking">Sprawdzanie…</string>
+    <string name="update_uptodate">Masz najnowszą wersję (%1$s).</string>
+    <string name="update_error">Nie udało się sprawdzić aktualizacji. Sprawdź połączenie i spróbuj ponownie.</string>
+    <string name="update_available_title">Dostępna aktualizacja</string>
+    <string name="update_available_body">Dostępna jest wersja %1$s — masz %2$s.</string>
+    <string name="update_install">Aktualizuj</string>
+    <string name="update_downloading">Pobieranie… %1$d%%</string>
+    <string name="update_later">Później</string>
+    <string name="update_failed">Pobieranie nie powiodło się. Spróbuj ponownie później.</string>
+    <string name="update_verify_failed">Pobrany plik nie przeszedł kontroli bezpieczeństwa i nie został zainstalowany.</string>
+    <string name="update_need_permission">Zezwól ClimaPilot na instalowanie aplikacji, a potem ponownie stuknij Aktualizuj.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Wyłącz</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Zastosuj: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Automatyczne wyłączanie</string>
+    <string name="autooff_body">Wyłącznik bezpieczeństwa: jeśli klimatyzator działa dłużej niż ustawiony czas, wyłącza się automatycznie — lokalny odpowiednik timera nieobecności (po opuszczeniu sieci Wi-Fi telefon nie ma łączności z klimatyzatorem). 0 = wyłączone.</string>
+    <string name="autooff_hours_label">Wyłącz po (godzinach)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Wyłącznik czasowy</string>
+    <string name="notif_timer_title">Wyłącznik czasowy aktywny</string>
+    <string name="notif_timer_text">Klimatyzator wyłączy się po zakończeniu odliczania.</string>
+    <string name="notif_timer_off_now">Wyłącz teraz</string>
+    <string name="notif_timer_cancel">Anuluj</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Blokada aplikacji</string>
+    <string name="lock_card_body">Wymagaj odcisku palca, twarzy lub kodu PIN ekranu, aby otworzyć ClimaPilot — nikt inny nie będzie sterować Twoją klimatyzacją.</string>
+    <string name="lock_card_switch">Wymagaj odblokowania przy otwarciu</string>
+    <string name="lock_title">Odblokuj ClimaPilot</string>
+    <string name="lock_subtitle">Uwierzytelnij się, aby sterować klimatyzacją</string>
+    <string name="lock_unlock">Odblokuj</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Tryb klimatyzacji</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Historia</string>
+    <string name="history_card_title">Energia i filtr</string>
+    <string name="history_card_body">Sprawdzaj ostatnie zużycie mocy i łączne zużycie energii oraz śledź, kiedy trzeba wyczyścić filtr.</string>
+    <string name="history_card_open">Otwórz historię</string>
+    <string name="history_power_title">Moc (24 h)</string>
+    <string name="history_empty">Za mało danych — poużywaj klimatyzatora przez jakiś czas i wróć później.</string>
+    <string name="history_peak">Szczyt: %1$d W</string>
+    <string name="history_totals_title">Zużycie</string>
+    <string name="history_total_kwh">Łącznie: %1$.1f kWh</string>
+    <string name="history_total_cost">Szacowany koszt: %1$.2f €</string>
+    <string name="history_filter_title">Filtr</string>
+    <string name="history_filter_runtime">Czas pracy od ostatniego czyszczenia: %1$d h z %2$d h</string>
+    <string name="history_filter_due">Pora wyczyścić filtr.</string>
+    <string name="history_filter_reset">Filtr wyczyszczony (reset)</string>
+    <string name="history_filter_hint">To przypomnienie serwisowe w aplikacji, oparte na czasie pracy. Nie odczytuje ani nie resetuje wskaźnika filtra w urządzeniu — ten zresetuj na samym klimatyzatorze.</string>
+    <string name="option_beep_hint">Dźwięk potwierdzenia. Wiele urządzeń wydaje dźwięk tylko przy włączaniu/wyłączaniu, a nie przy innych zmianach.</string>
+    <string name="history_record_title">Rejestrowanie historii</string>
+    <string name="history_record_body">Gdy włączone, ClimaPilot zapisuje moc, temperatury i wentylator, odpytując klimatyzator w tle mniej więcej co 15 min (tylko Wi-Fi). Domyślnie wyłączone.</string>
+    <string name="history_record_switch">Rejestruj dane klimatyzatora</string>
+    <string name="history_indoor_title">Temperatura wewnętrzna (24 h)</string>
+    <string name="history_outdoor_title">Temperatura zewnętrzna (24 h)</string>
+    <string name="history_fan_title">Poziom wentylatora (24 h)</string>
+    <string name="history_comp_hz_title">Częstotliwość sprężarki (beta)</string>
+    <string name="history_comp_w_title">Moc jednostki zewnętrznej (beta)</string>
+    <string name="history_fan_rpm_title">Prędkość wentylatora wewn. (beta)</string>
+    <string name="history_metric_summary">Teraz %1$s%2$s · min %3$s · maks %4$s%5$s</string>
+    <string name="range_hour">Godzina</string>
+    <string name="range_day">Dzień</string>
+    <string name="range_week">Tydzień</string>
+    <string name="range_month">Miesiąc</string>
+    <string name="history_pick_day">Wybierz dzień</string>
+    <string name="history_day">Dzień: %1$s</string>
+    <string name="history_range_kwh">W tym okresie: %1$.1f kWh</string>
+    <string name="history_range_cost">Szacowany koszt: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Podoba Ci się ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot jest darmowy i bez reklam. Jeśli zasłużył na miejsce na Twoim telefonie, drobny napiwek pozwoli mu się rozwijać — dziękuję!</string>
+    <string name="donate_later">Może później</string>
+    <string name="donate_already">Już wspieram</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">Pilot IR</string>
+    <string name="ir_remote_entry">Pilot IR (podczerwień)</string>
+    <string name="ir_remote_subtitle">Podczerwień · tylko wysyłanie</string>
+    <string name="ir_no_emitter">Ten telefon nie ma nadajnika podczerwieni</string>
+    <string name="option_quiet">Cichy</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Podczerwień działa tylko w jedną stronę — te przełączniki pokazują, co ostatnio wysłano, a nie rzeczywisty stan urządzenia.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Sterowanie</string>
+    <string name="nav_status">Status</string>
+    <string name="nav_options">Opcje</string>
+    <string name="nav_scenes">Sceny</string>
+    <string name="nav_history">Historia</string>
+</resources>

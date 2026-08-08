@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN: Shared styles for the redesigned home-screen widgets. DE: Gemeinsame Stile für die neu
+     gestalteten Homescreen-Widgets. -->
+<resources>
+    <style name="WdgChip">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">1.5dp</item>
+        <item name="android:layout_marginEnd">1.5dp</item>
+        <item name="android:background">@drawable/wdg_chip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:textColor">#AFC2C7</item>
+        <item name="android:textSize">9.5sp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="WdgSection">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:textColor">#5E7278</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.12</item>
+    </style>
+</resources>

@@ -7,6 +7,9 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.togetherWith
@@ -17,6 +20,12 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.VerticalDivider
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,8 +48,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationRail
-import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -57,7 +64,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.climapilot.free.ui.ConnectedTopBar
 import com.climapilot.free.ui.ControlScreen
+import com.climapilot.free.ui.WideControlPane
 import com.climapilot.free.ui.DevicesScreen
 import com.climapilot.free.ui.OptionsTab
 import com.climapilot.free.ui.ScenesTab
@@ -81,21 +90,53 @@ class MainActivity : FragmentActivity() {
     private val requestNotif =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
+    /** EN: Ask for the notification permission, if it isn't granted already. DE: Die Benachrichtigungs-Berechtigung anfragen, sofern noch nicht erteilt. */
+    fun askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestNotif.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
+    /**
+     * EN: Run without the system bars. The app is a control surface people glance at from across the
+     *     room, so every row of pixels counts — on a tablet the launcher taskbar alone ate the bottom of
+     *     the options screen. The bars stay one swipe from the edge away, and they auto-hide again, so
+     *     nothing becomes unreachable.
+     * DE: Ohne Systemleisten laufen. Die App ist eine Steuerfläche, auf die man aus einigen Metern schaut
+     *     — jede Pixelzeile zählt; auf dem Tablet fraß allein die Taskleiste den unteren Rand des
+     *     Optionen-Bildschirms. Die Leisten bleiben einen Wisch vom Rand entfernt erreichbar und
+     *     verbergen sich danach wieder von selbst.
+     */
+    private fun goFullscreen() {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            hide(WindowInsetsCompat.Type.systemBars())
+        }
+    }
+
+    // EN: A dialog or a pulled-down bar hands focus back with the bars visible; hide them again.
+    // DE: Ein Dialog oder eine heruntergezogene Leiste gibt den Fokus mit sichtbaren Leisten zurück —
+    //     also wieder verbergen.
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) goFullscreen()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        goFullscreen()
         // EN: Allow a launcher shortcut / test to open straight into demo mode. / DE: Erlaubt einer Verknüpfung / einem Test, direkt im Demo-Modus zu starten.
         val startDemo = intent?.getBooleanExtra("demo", false) ?: false
         // EN: Refresh the launcher long-press shortcuts (off / scene / demo). / DE: Die Launcher-Shortcuts (Aus / Szene / Demo) aktualisieren.
         AppShortcuts.refresh(this)
         // EN: Count usage days for the rare, tasteful donation prompt. / DE: Nutzungstage für den seltenen, dezenten Spenden-Hinweis zählen.
         DonationPrompt.recordUsage(this)
-        // EN: Ask for notification permission once (for the sleep-timer countdown). / DE: Einmal die Benachrichtigungs-Berechtigung anfragen (für den Sleep-Timer-Countdown).
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestNotif.launch(Manifest.permission.POST_NOTIFICATIONS)
-        }
+        // EN: Ask for notification permission once (for the sleep-timer countdown). DE: Einmal die
+        //     Benachrichtigungs-Berechtigung anfragen (für den Sleep-Timer-Countdown).
+        askNotificationPermission()
         setContent {
             MideaTheme {
                 Surface(
@@ -171,6 +212,32 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
     UpdateDialog(vm)
     when {
         showSettings -> SettingsScreen(vm = vm, onBack = { showSettings = false })
+        // EN: On a tablet both screens fit side by side: the device list stays put on the left and
+        //     tapping an entry only swaps the right half. No screen change, no back button — and
+        //     switching between rooms costs one tap instead of three.
+        // DE: Auf dem Tablet passen beide Bildschirme nebeneinander: die Geräteliste bleibt links
+        //     stehen, ein Antippen tauscht nur die rechte Hälfte. Kein Bildschirmwechsel, kein
+        //     Zurück — und der Wechsel zwischen Räumen kostet einen Tipper statt drei.
+        LocalConfiguration.current.screenWidthDp >= 900 -> Row(Modifier.fillMaxSize()) {
+            Box(Modifier.width(360.dp).fillMaxHeight()) {
+                DevicesScreen(vm, onOpenSettings = { showSettings = true })
+            }
+            VerticalDivider()
+            Box(Modifier.weight(1f).fillMaxHeight()) {
+                AnimatedContent(
+                    targetState = onControl,
+                    transitionSpec = { fadeIn() togetherWith fadeOut() },
+                    label = "detail",
+                ) { control ->
+                    if (control) {
+                        if (vm.irMode) ControlScreen(vm) else ConnectedScaffold(vm)
+                    } else {
+                        NoDeviceSelected()
+                    }
+                }
+            }
+        }
+
         else -> AnimatedContent(
             targetState = onControl,
             transitionSpec = {
@@ -191,6 +258,7 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
         }
     }
 
+    // EN: First-run disclaimer, accepted once. DE: Erststart-Hinweis, einmal zu bestätigen.
     if (!accepted) {
         DisclaimerDialog(onAccept = {
             DisclaimerPrefs.setAccepted(context)
@@ -200,23 +268,18 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
 }
 
 /**
- * EN: The connected experience wrapped in a Scaffold with a bottom navigation bar — two destinations,
- *     "Steuern" (the control cards) and "Verlauf" (the per-AC charts). Replaces the old small chart icon
- *     in the hero panel with a clearly discoverable, persistent tab. The bottom inset is applied so the
- *     scrolling content never hides behind the bar.
- * DE: Die verbundene Ansicht in einem Scaffold mit unterer Navigationsleiste — zwei Ziele, „Steuern"
- *     (die Steuer-Karten) und „Verlauf" (die Charts pro Klima). Ersetzt das alte kleine Chart-Icon im
- *     Hero-Panel durch einen klar auffindbaren, festen Reiter. Der untere Rand wird berücksichtigt, damit
- *     der scrollende Inhalt nie hinter der Leiste verschwindet.
+ * EN: The connected experience wrapped in a Scaffold with a bottom navigation bar. The bar sits at the
+ *     bottom on every screen size: a side rail put the destinations in a different place depending on
+ *     how you held the device, and on a tablet it also competed with the device list already occupying
+ *     the left edge. The bottom inset is applied so scrolling content never hides behind the bar.
+ * DE: Die verbundene Ansicht in einem Scaffold mit unterer Navigationsleiste. Die Leiste sitzt auf jeder
+ *     Bildschirmgröße unten: Eine seitliche Leiste legte die Ziele je nach Geräthaltung woandershin und
+ *     stritt auf dem Tablet zusätzlich mit der Geräteliste, die den linken Rand schon belegt. Der untere
+ *     Rand wird berücksichtigt, damit scrollender Inhalt nie hinter der Leiste verschwindet.
  */
 @Composable
 private fun ConnectedScaffold(vm: AcViewModel) {
     var tab by rememberSaveable { mutableStateOf(0) }
-    // EN: Adaptive navigation — a bottom bar on compact width (portrait phone) and a side rail on wide
-    //     width (landscape / tablet), so landscape doesn't waste vertical space on a bottom bar.
-    // DE: Adaptive Navigation — untere Leiste bei kompakter Breite (Hochformat-Phone) und seitliche Leiste
-    //     bei großer Breite (Querformat / Tablet), damit das Querformat keine Höhe an eine untere Leiste verliert.
-    val wide = LocalConfiguration.current.screenWidthDp >= 600
     val destinations = listOf(
         Triple(0, Icons.Default.Thermostat, R.string.nav_control),
         Triple(1, Icons.Default.Tune, R.string.nav_options),
@@ -225,36 +288,21 @@ private fun ConnectedScaffold(vm: AcViewModel) {
         Triple(4, Icons.Default.ShowChart, R.string.nav_history),
     )
 
-    if (wide) {
-        Row(Modifier.fillMaxSize()) {
-            NavigationRail {
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
                 destinations.forEach { (i, icon, label) ->
-                    NavigationRailItem(
+                    NavigationBarItem(
                         selected = tab == i, onClick = { tab = i },
                         icon = { Icon(icon, null) },
                         label = { Text(stringResource(label)) },
                     )
                 }
             }
-            Box(Modifier.weight(1f).fillMaxHeight()) { ConnectedTabContent(vm, tab) }
-        }
-    } else {
-        Scaffold(
-            bottomBar = {
-                NavigationBar {
-                    destinations.forEach { (i, icon, label) ->
-                        NavigationBarItem(
-                            selected = tab == i, onClick = { tab = i },
-                            icon = { Icon(icon, null) },
-                            label = { Text(stringResource(label)) },
-                        )
-                    }
-                }
-            },
-        ) { inner ->
-            Box(Modifier.fillMaxSize().padding(bottom = inner.calculateBottomPadding())) {
-                ConnectedTabContent(vm, tab)
-            }
+        },
+    ) { inner ->
+        Box(Modifier.fillMaxSize().padding(bottom = inner.calculateBottomPadding())) {
+            ConnectedTabContent(vm, tab)
         }
     }
 }
@@ -311,14 +359,67 @@ private fun UpdateDialog(vm: AcViewModel) {
     )
 }
 
-/** EN: Renders the content for the selected connected tab. DE: Rendert den Inhalt für den gewählten verbundenen Reiter. */
+/**
+ * EN: Renders the content for the selected connected tab. Where there is room — a tablet in
+ *     landscape — the control tab stops being a single column and shows options and live status
+ *     beside it, so the three things you look at while adjusting the unit are visible at once
+ *     instead of one tab apart. Measured on the actual pane, not the window, because the device
+ *     list already takes its share of the width.
+ * DE: Rendert den Inhalt für den gewählten Reiter. Wo Platz ist — Tablet im Querformat — hört der
+ *     Steuer-Reiter auf, eine einzelne Spalte zu sein, und zeigt Optionen und Live-Status daneben:
+ *     die drei Dinge, auf die man beim Einstellen schaut, gleichzeitig statt einen Reiter
+ *     auseinander. Gemessen wird die tatsächliche Fläche, nicht das Fenster, denn die Geräteliste
+ *     hat sich ihren Teil der Breite schon genommen.
+ */
 @Composable
 private fun ConnectedTabContent(vm: AcViewModel, tab: Int) {
-    when (tab) {
-        0 -> ControlScreen(vm)
-        1 -> OptionsTab(vm)
-        2 -> ScenesTab(vm)
-        3 -> StatusTab(vm)
-        else -> HistoryScreen(vm)
+    // EN: One control surface for every screen size — it lays itself out in one column or two. It used
+    //     to switch to a completely different screen below 820dp, so the redesign only ever reached
+    //     tablets while phones kept the old gradient-and-tiles look.
+    // DE: Eine Steuerfläche für jede Bildschirmgröße — sie ordnet sich selbst ein- oder zweispaltig.
+    //     Bisher wechselte sie unter 820dp auf einen völlig anderen Bildschirm, wodurch die
+    //     Neugestaltung nur Tablets erreichte und Handys beim alten Verlauf-und-Kacheln-Look blieben.
+    Box(Modifier.fillMaxSize()) {
+        when (tab) {
+            0 -> WideControlPane(vm)
+            1 -> OptionsTab(vm)
+            2 -> ScenesTab(vm)
+            3 -> StatusTab(vm)
+            else -> HistoryScreen(vm)
+        }
+    }
+}
+
+
+/**
+ * EN: Right-hand pane before a device is chosen. It names what to do rather than apologising for
+ *     being empty — the list is right there on the left.
+ * DE: Die rechte Hälfte, solange kein Gerät gewählt ist. Sie sagt, was zu tun ist, statt sich für
+ *     ihre Leere zu entschuldigen — die Liste steht ja links daneben.
+ */
+@Composable
+private fun NoDeviceSelected() {
+    val cs = MaterialTheme.colorScheme
+    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(
+                Icons.Default.Thermostat,
+                contentDescription = null,
+                modifier = Modifier.size(56.dp),
+                tint = cs.onSurfaceVariant.copy(alpha = 0.35f),
+            )
+            Spacer(Modifier.height(16.dp))
+            Text(
+                stringResource(R.string.pane_pick_device),
+                style = MaterialTheme.typography.titleMedium,
+                color = cs.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(6.dp))
+            Text(
+                stringResource(R.string.pane_pick_device_hint),
+                style = MaterialTheme.typography.bodyMedium,
+                color = cs.onSurfaceVariant.copy(alpha = 0.75f),
+            )
+        }
     }
 }

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Сценарии</string>
+    <string name="scene_boost">Буст</string>
+    <string name="scene_eco_night">Эко-ночь</string>
+    <string name="scene_comfort">Комфорт</string>
+    <string name="scene_save">Сохранить</string>
+    <string name="scene_save_title">Сохранить сценарий</string>
+    <string name="scene_name_label">Название сценария</string>
+    <string name="scene_default_name">Сценарий</string>
+    <string name="scene_hint">Нажмите — применить · удерживайте — изменить</string>
+    <string name="scene_edit_title">Изменить сценарий</string>
+    <string name="scene_schedule">Запускать ежедневно</string>
+    <string name="scene_schedule_at">Время: %1$s</string>
+    <string name="scene_schedule_note">Применяется автоматически каждый день. Приложению нужно разрешение на работу в фоне.</string>
+    <string name="scene_delete">Удалить</string>
+    <string name="scene_delete_title">Удалить сценарий?</string>
+    <string name="scene_delete_msg">«%1$s» будет удалён.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Недельный план</string>
+    <string name="plan_empty">Окон пока нет. Добавьте окно, чтобы автоматически запускать сценарий — например, максимальное охлаждение по понедельникам с 6 до 18.</string>
+    <string name="plan_need_scene">Сначала создайте сценарий — план запускает ваши сценарии.</string>
+    <string name="plan_add">Добавить окно</string>
+    <string name="plan_hint">Окна срабатывают в фоне, даже когда телефон простаивает в сети Wi-Fi. Для надёжного срабатывания разрешите ClimaPilot работать в фоне (Настройки ▸ Надёжные таймеры).</string>
+    <string name="plan_new_title">Новое окно</string>
+    <string name="plan_edit_title">Изменить окно</string>
+    <string name="plan_scene_label">Сценарий</string>
+    <string name="plan_days_label">Дни</string>
+    <string name="plan_from">С</string>
+    <string name="plan_to">До</string>
+    <string name="plan_end_label">По окончании</string>
+    <string name="plan_end_off">Выключить</string>
+    <string name="plan_end_leave">Оставить включённым</string>
+    <string name="plan_overnight">+1 день</string>
+    <string name="plan_every_day">Ежедневно</string>
+    <string name="plan_disabled">приостановлено</string>
+    <string name="plan_to_off">→ выкл.</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Ваш кондиционер в сети Wi-Fi</string>
+    <string name="action_discover">Поиск устройств</string>
+    <string name="action_discovering">Поиск…</string>
+    <string name="action_manual">Вручную</string>
+    <string name="demo_preview">Просмотр без устройства (демо)</string>
+    <string name="empty_title">Пока нет устройств</string>
+    <string name="empty_body">Нажмите «Поиск устройств». Телефон должен быть в той же сети Wi-Fi, что и кондиционер.</string>
+    <string name="error_no_devices">Устройства не найдены. Телефон в той же сети Wi-Fi? Иначе добавьте вручную.</string>
+    <string name="action_connect">Подключить</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Назад</string>
+    <string name="cd_refresh">Обновить</string>
+    <string name="cd_power">Питание</string>
+    <string name="cd_reorder">Перетащите, чтобы изменить порядок</string>
+    <string name="connected_to">Подключено · %1$s</string>
+    <string name="disconnected">Нет подключения</string>
+    <string name="state_on">ВКЛ</string>
+    <string name="state_off">ВЫКЛ</string>
+    <string name="target_temp">Целевая температура</string>
+    <string name="readout_indoor">В помещении</string>
+    <string name="readout_outdoor">На улице</string>
+    <string name="readout_power">Мощность</string>
+
+    <string name="section_mode">Режим</string>
+    <string name="mode_auto">Авто</string>
+    <string name="mode_cool">Охлаждение</string>
+    <string name="mode_dry">Осушение</string>
+    <string name="mode_heat">Обогрев</string>
+    <string name="mode_fan">Вентиляция</string>
+
+    <string name="section_fan">Скорость вентилятора</string>
+    <string name="fan_auto">Авто</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Тихий</string>
+    <string name="fan_low">Низкая</string>
+    <string name="fan_medium">Средняя</string>
+    <string name="fan_high">Высокая</string>
+    <string name="fan_turbo">Турбо</string>
+    <string name="fan_automatic">Автоматика</string>
+    <string name="fan_level">Уровень: %1$d%%</string>
+
+    <string name="section_status">Текущее состояние</string>
+    <string name="status_indoor">Температура в помещении</string>
+    <string name="status_outdoor">Температура на улице</string>
+    <string name="status_power">Мощность</string>
+    <string name="status_total">Общее потребление</string>
+    <string name="status_error">Код ошибки</string>
+    <string name="status_error_none">нет</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Общая стоимость</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Диагностика (бета)</string>
+    <string name="diag_beta_hint">Экспериментальная телеметрия. Не все модели передают эти данные — значения могут оставаться пустыми.</string>
+    <string name="diag_group1_title">Компрессор и хладагент</string>
+    <string name="diag_compressor_freq">Частота компрессора</string>
+    <string name="diag_compressor_freq_target">Целевая частота</string>
+    <string name="diag_compressor_current">Потребляемый ток</string>
+    <string name="diag_compressor_voltage">Напряжение питания</string>
+    <string name="diag_temp_t1">Внутренний теплообменник (T1)</string>
+    <string name="diag_temp_t2">Испаритель (T2)</string>
+    <string name="diag_temp_t3">Конденсатор (T3)</string>
+    <string name="diag_temp_t4">Наружный воздух (T4)</string>
+    <string name="diag_temp_tp">Трубка нагнетания (TP)</string>
+    <string name="diag_group2_title">Внутренний вентилятор и помпа</string>
+    <string name="diag_fan_speed">Скорость вентилятора</string>
+    <string name="diag_fan_speed_target">Целевая скорость вентилятора</string>
+    <string name="diag_water_pump">Дренажная помпа</string>
+    <string name="diag_pump_on">работает</string>
+    <string name="diag_pump_off">выкл.</string>
+    <string name="diag_group7_title">Мощность наружного блока</string>
+    <string name="diag_compressor_power">Потребляемая мощность</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Отображение и цена</string>
+    <string name="unit_fahrenheit">Показывать °F (Фаренгейт)</string>
+    <string name="price_per_kwh">Цена за kWh</string>
+    <string name="price_hint">Используется для оценки общей стоимости по потреблению.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Калибровка комнатной температуры</string>
+    <string name="calibration_hint">Многие блоки показывают температуру, отличающуюся от реальной комнатной на градус-другой. Сравните показания с комнатным термометром и задайте здесь поправку. Приложение будет везде показывать скорректированное значение, отмечая его небольшой янтарной дельтой, и сместит отправляемую на блок уставку на те же целые градусы — чтобы в комнате действительно устанавливалась заданная температура. Сохраняется для этого устройства.</string>
+    <string name="calibration_none">без поправки</string>
+    <string name="calibration_preview">Измерено %1$s → показывается %2$s</string>
+    <string name="calibration_device_target">Отправлено на блок: %1$s — цель %2$s</string>
+    <string name="calibration_no_reading">Ожидание первого показания…</string>
+    <string name="calibration_reset">Сбросить на 0</string>
+    <string name="calibration_less">Уменьшить поправку</string>
+    <string name="calibration_more">Увеличить поправку</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Интервал обновления</string>
+    <string name="settings_poll_hint">Как часто запрашиваются состояние, энергопотребление и диагностика, пока приложение подключено. Чем короче интервал, тем быстрее обновления, но больше трафика Wi-Fi.</string>
+    <string name="poll_seconds">%1$d с</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Бета-функции</string>
+    <string name="settings_beta_hint">Экспериментальная дополнительная диагностика, включена по умолчанию — каждая опция добавляет запрос при обновлении, и её можно отключить здесь. Поддерживается не всеми моделями. Значения отображаются на вкладке «Статус» и записываются в историю (если запись истории включена).</string>
+    <string name="beta_group1">Диагностика компрессора</string>
+    <string name="beta_group1_desc">Частота, ток, напряжение и температуры хладагента (T1–T4, трубка нагнетания)</string>
+    <string name="beta_group2">Внутренний вентилятор и помпа</string>
+    <string name="beta_group2_desc">Фактическая скорость внутреннего вентилятора и состояние дренажной помпы</string>
+    <string name="beta_group7">Мощность наружного блока</string>
+    <string name="beta_group7_desc">Потребляемая мощность наружного блока в ваттах в реальном времени</string>
+
+    <string name="section_options">Опции</string>
+    <string name="option_swing">Качание (жалюзи)</string>
+    <string name="option_eco">Эко-режим</string>
+    <string name="option_beep">Звуковой сигнал</string>
+    <string name="option_anion">Ионизатор</string>
+    <string name="option_out_silent">Тихий наружный блок</string>
+    <string name="option_self_clean">Самоочистка</string>
+    <string name="option_display">Дисплей / LED</string>
+
+    <string name="section_gear">Ограничение компрессора</string>
+    <string name="gear_full">Полная</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Таймер сна</string>
+    <string name="sleep_active">Выключение через %1$d мин</string>
+    <string name="sleep_cancel">Отменить таймер</string>
+    <string name="sleep_custom">Другое…</string>
+    <string name="sleep_custom_title">Таймер сна</string>
+    <string name="sleep_custom_label">Минуты</string>
+    <string name="action_start">Запустить</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Совет: удерживайте карточку и перетащите её, чтобы изменить порядок.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Добавить устройство вручную</string>
+    <string name="manual_hint">Для подключений без широковещательного обнаружения. ID устройства можно найти в приложении Midea/SmartHome или через сканирование сети.</string>
+    <string name="field_ip">IP-адрес</string>
+    <string name="field_port">Порт</string>
+    <string name="field_id">ID устройства (десятичный)</string>
+    <string name="field_name">Имя (необязательно)</string>
+    <string name="action_add">Добавить</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_save">Сохранить</string>
+    <string name="rename_title">Переименовать устройство</string>
+    <string name="rename_hint">Имя хранится только в этом приложении — удобно, чтобы различать два блока.</string>
+    <string name="cd_rename">Переименовать</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Устройство</string>
+    <string name="device_edit_name">Имя</string>
+    <string name="device_edit_save">Сохранить</string>
+    <string name="device_forget">Удалить</string>
+    <string name="device_forget_really">Удалить окончательно</string>
+    <string name="device_forget_confirm">Это удалит сохранённые учётные данные. Устройство можно в любой момент добавить снова.</string>
+    <string name="pane_pick_device">Выберите устройство</string>
+    <string name="pane_pick_device_hint">Выберите устройство в списке слева, чтобы управлять им.</string>
+    <string name="option_turbo_fan_hint">Турбо управляет вентилятором — чтобы изменить скорость, выключите турбо.</string>
+    <string name="option_self_clean_hint">Запускает цикл самоочистки испарителя. В зависимости от устройства занимает примерно от 20 до 30 минут; в это время обычное охлаждение приостанавливается.</string>
+    <string name="sleep_preset_min">%1$d мин</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Экспорт токена</string>
+    <string name="export_title">Экспорт токена</string>
+    <string name="export_hint">Эти учётные данные позволяют управлять устройством локально, без облака — сделайте их резервную копию или используйте в других инструментах. Держите их в секрете.</string>
+    <string name="export_none">Токена пока нет. Подключитесь к устройству один раз при доступе в интернет, затем экспортируйте.</string>
+    <string name="export_copy">Копировать</string>
+    <string name="export_share">Поделиться</string>
+    <string name="export_copied">Скопировано в буфер обмена</string>
+    <string name="action_close">Закрыть</string>
+    <string name="import_button">Импорт</string>
+    <string name="import_title">Импорт токена</string>
+    <string name="import_hint">Вставьте блок токена (из экспорта, msmart, …). После этого устройство работает офлайн.</string>
+    <string name="import_field">Блок токена</string>
+    <string name="import_ok">Токен импортирован</string>
+    <string name="import_error">Не удалось прочитать этот блок токена</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Сохранённые устройства</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Питание кондиционера</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Просмотр (демо)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Ошибка подключения: %1$s</string>
+    <string name="error_command">Команда не выполнена: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Перед началом работы</string>
+    <string name="disclaimer_body">ClimaPilot — независимое приложение; оно не связано с компанией Midea, не одобрено и не поддерживается ею. Приложение управляет совместимыми кондиционерами через вашу локальную сеть Wi-Fi.\n\nПеред отправкой команд убедитесь, что блок правильно установлен и безопасен в эксплуатации. Вы используете приложение на свой страх и риск; авторы не несут ответственности за любой ущерб или убытки.\n\nИзмеряемые значения, например мощность, предоставляются устройством и могут быть неточными.\n\nПримечание: при первом подключении к устройству ClimaPilot получает одноразовый токен доступа с сервера Midea (учётная запись не нужна). После этого управление полностью локальное — приложению можно даже запретить доступ в интернет.</string>
+    <string name="disclaimer_accept">Понятно</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Быстрое управление кондиционером</string>
+    <string name="widget_not_connected">Нет подключения</string>
+    <string name="widget_off">Выкл</string>
+    <string name="widget_on">Вкл</string>
+    <string name="widget_indoor">В комнате %1$s</string>
+    <string name="widget_outdoor">На улице %1$s</string>
+    <string name="widget_sleep_30">30 мин</string>
+    <string name="widget_sleep_60">1 ч</string>
+    <string name="widget_sleep_120">2 ч</string>
+    <string name="widget_sleep_240">4 ч</string>
+    <string name="widget_sleep_title">Таймер сна</string>
+    <string name="widget_sleep_off_in">затем кондиционер выключится</string>
+    <string name="widget_sleep_idle">Таймер не запущен</string>
+    <string name="widget_sleep_off_now">Выключить</string>
+    <string name="widget_sleep_cancel">Отмена</string>
+    <string name="widget_power">Питание</string>
+    <string name="widget_cool_down">Холоднее</string>
+    <string name="widget_warm_up">Теплее</string>
+    <string name="widget_mode">Режим</string>
+    <string name="widget_all_label">Кондиционер — всё управление</string>
+    <string name="widget_power_label">Кондиционер — питание</string>
+    <string name="widget_temp_label">Кондиционер — температура</string>
+    <string name="widget_mode_label">Кондиционер — режим</string>
+    <string name="widget_all_desc">Питание, температура, режим, вентилятор, турбо и таймер сна</string>
+    <string name="widget_sleep_label">Кондиционер — таймер сна</string>
+    <string name="widget_sleep_desc">Живой обратный отсчёт с быстрым выбором</string>
+    <string name="widget_sleep_unit_min">мин</string>
+    <string name="widget_sleep_unit_hour">часов</string>
+    <string name="widget_sleep_quick_desc">Одно касание включает таймер сна</string>
+    <string name="widget_sleep_30_label">Сон 30 мин</string>
+    <string name="widget_sleep_60_label">Сон 1 ч</string>
+    <string name="widget_sleep_120_label">Сон 2 ч</string>
+    <string name="widget_sleep_240_label">Сон 4 ч</string>
+    <string name="widget_sleep_480_label">Сон 8 ч</string>
+    <string name="widget_sleep_720_label">Сон 12 ч</string>
+    <string name="widget_power_desc">Включение и выключение кондиционера</string>
+    <string name="widget_temp_desc">Повышение или понижение температуры</string>
+    <string name="widget_mode_desc">Переключение режима работы</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Настройки</string>
+    <string name="cd_settings">Настройки</string>
+    <string name="settings_version">Версия %1$s</string>
+    <string name="support_title">Поддержать разработку</string>
+    <string name="support_body">ClimaPilot — бесплатное приложение без рекламы. Если оно вам помогает, небольшое пожертвование поможет проекту развиваться — спасибо!</string>
+    <string name="support_kofi">Угостить кофе (Ko-fi)</string>
+    <string name="support_paypal">Поддержать через PayPal</string>
+    <string name="credits_title">Благодарности</string>
+    <string name="credits_body">Локальный протокол Midea в ClimaPilot — это порт на Kotlin превосходного проекта midea-msmart от @mill1000. Огромное спасибо — без него этого приложения бы не было.</string>
+    <string name="credits_link">midea-msmart на GitHub</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Надёжные таймеры</string>
+    <string name="reliability_body">Чтобы таймер сна и расписания сценариев срабатывали даже при закрытом приложении, разрешите ClimaPilot работать в фоне.</string>
+    <string name="reliability_battery_ok">Оптимизация батареи: отключена ✓</string>
+    <string name="reliability_battery_warn">Оптимизация батареи включена — таймеры могут срабатывать с задержкой или пропускаться.</string>
+    <string name="reliability_battery_action">Разрешить работу в фоне (батарея)</string>
+    <string name="reliability_autostart_action">Разрешить автозапуск (производитель)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Обновления приложения</string>
+    <string name="update_body">Новые версии загружаются с GitHub. Установку вы всегда подтверждаете сами.</string>
+    <string name="update_current">Установлено: %1$s</string>
+    <string name="update_auto_label">Проверять автоматически при запуске</string>
+    <string name="update_check_button">Проверить обновления</string>
+    <string name="update_checking">Проверка…</string>
+    <string name="update_uptodate">У вас последняя версия (%1$s).</string>
+    <string name="update_error">Не удалось проверить обновления. Проверьте подключение и повторите попытку.</string>
+    <string name="update_available_title">Доступно обновление</string>
+    <string name="update_available_body">Доступна версия %1$s — у вас %2$s.</string>
+    <string name="update_install">Обновить</string>
+    <string name="update_downloading">Загрузка… %1$d%%</string>
+    <string name="update_later">Позже</string>
+    <string name="update_failed">Не удалось загрузить. Повторите попытку позже.</string>
+    <string name="update_verify_failed">Загруженный файл не прошёл проверку безопасности и не был установлен.</string>
+    <string name="update_need_permission">Разрешите ClimaPilot устанавливать приложения, затем снова нажмите «Обновить».</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Выключить</string>
+    <string name="shortcut_demo">Демо</string>
+    <string name="shortcut_scene">Применить: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Автовыключение</string>
+    <string name="autooff_body">Защитное отключение: если кондиционер работает дольше указанного времени, он выключается автоматически — локальная замена таймеру «вне дома» (вне вашей сети Wi-Fi телефон не может связаться с кондиционером). 0 = отключено.</string>
+    <string name="autooff_hours_label">Выключать через (часов)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Таймер сна</string>
+    <string name="notif_timer_title">Таймер сна запущен</string>
+    <string name="notif_timer_text">Кондиционер выключится по окончании отсчёта.</string>
+    <string name="notif_timer_off_now">Выключить сейчас</string>
+    <string name="notif_timer_cancel">Отмена</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Блокировка приложения</string>
+    <string name="lock_card_body">Требовать отпечаток пальца, распознавание лица или PIN-код экрана для открытия ClimaPilot — чтобы никто другой не мог управлять вашим кондиционером.</string>
+    <string name="lock_card_switch">Требовать разблокировку при открытии</string>
+    <string name="lock_title">Разблокируйте ClimaPilot</string>
+    <string name="lock_subtitle">Подтвердите личность, чтобы управлять кондиционером</string>
+    <string name="lock_unlock">Разблокировать</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Режим кондиционера</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">История</string>
+    <string name="history_card_title">Энергия и фильтр</string>
+    <string name="history_card_body">Смотрите недавнее энергопотребление и общий расход и следите, когда пора чистить фильтр.</string>
+    <string name="history_card_open">Открыть историю</string>
+    <string name="history_power_title">Мощность (24 ч)</string>
+    <string name="history_empty">Данных пока недостаточно — попользуйтесь кондиционером и загляните позже.</string>
+    <string name="history_peak">Пик: %1$d W</string>
+    <string name="history_totals_title">Потребление</string>
+    <string name="history_total_kwh">Всего: %1$.1f kWh</string>
+    <string name="history_total_cost">Примерная стоимость: %1$.2f €</string>
+    <string name="history_filter_title">Фильтр</string>
+    <string name="history_filter_runtime">Наработка с последней чистки: %1$d ч из %2$d ч</string>
+    <string name="history_filter_due">Пора почистить фильтр.</string>
+    <string name="history_filter_reset">Фильтр очищен (сброс)</string>
+    <string name="history_filter_hint">Это встроенное в приложение напоминание об обслуживании по времени работы. Оно не считывает и не сбрасывает собственный индикатор фильтра кондиционера — сбрасывайте его на самом блоке.</string>
+    <string name="option_beep_hint">Звук подтверждения. Многие блоки подают сигнал только при включении и выключении, но не при других изменениях.</string>
+    <string name="history_record_title">Запись истории</string>
+    <string name="history_record_body">Если включено, ClimaPilot записывает мощность, температуры и вентилятор, опрашивая кондиционер в фоне примерно каждые 15 мин (только по Wi-Fi). По умолчанию отключено.</string>
+    <string name="history_record_switch">Записывать данные кондиционера</string>
+    <string name="history_indoor_title">Температура в помещении (24 ч)</string>
+    <string name="history_outdoor_title">Температура на улице (24 ч)</string>
+    <string name="history_fan_title">Уровень вентилятора (24 ч)</string>
+    <string name="history_comp_hz_title">Частота компрессора (бета)</string>
+    <string name="history_comp_w_title">Мощность наружного блока (бета)</string>
+    <string name="history_fan_rpm_title">Скорость внутреннего вентилятора (бета)</string>
+    <string name="history_metric_summary">Сейчас %1$s%2$s · мин %3$s · макс %4$s%5$s</string>
+    <string name="range_hour">Час</string>
+    <string name="range_day">День</string>
+    <string name="range_week">Неделя</string>
+    <string name="range_month">Месяц</string>
+    <string name="history_pick_day">Выбрать день</string>
+    <string name="history_day">День: %1$s</string>
+    <string name="history_range_kwh">За период: %1$.1f kWh</string>
+    <string name="history_range_cost">Примерная стоимость: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Нравится ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot — бесплатное приложение без рекламы. Если оно заслужило место на вашем телефоне, небольшое пожертвование поможет проекту — спасибо!</string>
+    <string name="donate_later">Может, позже</string>
+    <string name="donate_already">Уже поддерживаю</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">ИК-пульт</string>
+    <string name="ir_remote_entry">ИК-пульт (инфракрасный)</string>
+    <string name="ir_remote_subtitle">Инфракрасный · только отправка</string>
+    <string name="ir_no_emitter">В этом телефоне нет ИК-передатчика</string>
+    <string name="option_quiet">Тихий режим</string>
+    <string name="option_turbo">Турбо</string>
+    <string name="ir_options_hint">Инфракрасный канал односторонний — переключатели показывают, что было отправлено, а не фактическое состояние блока.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Управление</string>
+    <string name="nav_status">Статус</string>
+    <string name="nav_options">Опции</string>
+    <string name="nav_scenes">Сценарии</string>
+    <string name="nav_history">История</string>
+</resources>

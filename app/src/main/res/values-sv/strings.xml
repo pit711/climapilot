@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Scener</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco-natt</string>
+    <string name="scene_comfort">Komfort</string>
+    <string name="scene_save">Spara</string>
+    <string name="scene_save_title">Spara scen</string>
+    <string name="scene_name_label">Scennamn</string>
+    <string name="scene_default_name">Scen</string>
+    <string name="scene_hint">Tryck för att aktivera · tryck länge för att redigera</string>
+    <string name="scene_edit_title">Redigera scen</string>
+    <string name="scene_schedule">Kör dagligen</string>
+    <string name="scene_schedule_at">Tid: %1$s</string>
+    <string name="scene_schedule_note">Aktiveras automatiskt varje dag. Kräver att appen tillåts köras i bakgrunden.</string>
+    <string name="scene_delete">Ta bort</string>
+    <string name="scene_delete_title">Ta bort scenen?</string>
+    <string name="scene_delete_msg">”%1$s” tas bort.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Veckoplan</string>
+    <string name="plan_empty">Inga tidsfönster ännu. Lägg till ett för att köra en scen automatiskt — t.ex. maxkyla på måndagar kl. 6–18.</string>
+    <string name="plan_need_scene">Skapa en scen först — planen kör dina scener.</string>
+    <string name="plan_add">Lägg till fönster</string>
+    <string name="plan_hint">Tidsfönstren körs i bakgrunden, även när telefonen är i viloläge på wifi. För tillförlitlig timing, tillåt ClimaPilot att köras i bakgrunden (Inställningar ▸ Tillförlitliga timers).</string>
+    <string name="plan_new_title">Nytt fönster</string>
+    <string name="plan_edit_title">Redigera fönster</string>
+    <string name="plan_scene_label">Scen</string>
+    <string name="plan_days_label">Dagar</string>
+    <string name="plan_from">Från</string>
+    <string name="plan_to">Till</string>
+    <string name="plan_end_label">När det slutar</string>
+    <string name="plan_end_off">Stäng av</string>
+    <string name="plan_end_leave">Fortsätt köra</string>
+    <string name="plan_overnight">+1 dag</string>
+    <string name="plan_every_day">Varje dag</string>
+    <string name="plan_disabled">pausad</string>
+    <string name="plan_to_off">→ av</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Din luftkonditionering via wifi</string>
+    <string name="action_discover">Sök enheter</string>
+    <string name="action_discovering">Söker…</string>
+    <string name="action_manual">Manuellt</string>
+    <string name="demo_preview">Förhandsvisa utan enhet (demo)</string>
+    <string name="empty_title">Inga enheter ännu</string>
+    <string name="empty_body">Tryck på ”Sök enheter”. Telefonen måste vara på samma wifi som AC:n.</string>
+    <string name="error_no_devices">Inga enheter hittades. Samma wifi? Annars kan du lägga till manuellt.</string>
+    <string name="action_connect">Anslut</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Tillbaka</string>
+    <string name="cd_refresh">Uppdatera</string>
+    <string name="cd_power">Ström</string>
+    <string name="cd_reorder">Dra för att ändra ordning</string>
+    <string name="connected_to">Ansluten · %1$s</string>
+    <string name="disconnected">Frånkopplad</string>
+    <string name="state_on">PÅ</string>
+    <string name="state_off">AV</string>
+    <string name="target_temp">Måltemperatur</string>
+    <string name="readout_indoor">Inne</string>
+    <string name="readout_outdoor">Ute</string>
+    <string name="readout_power">Effekt</string>
+
+    <string name="section_mode">Läge</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Kyla</string>
+    <string name="mode_dry">Avfukta</string>
+    <string name="mode_heat">Värme</string>
+    <string name="mode_fan">Fläkt</string>
+
+    <string name="section_fan">Fläkthastighet</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Tyst</string>
+    <string name="fan_low">Låg</string>
+    <string name="fan_medium">Medel</string>
+    <string name="fan_high">Hög</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automatisk</string>
+    <string name="fan_level">Nivå: %1$d%%</string>
+
+    <string name="section_status">Livestatus</string>
+    <string name="status_indoor">Innetemperatur</string>
+    <string name="status_outdoor">Utetemperatur</string>
+    <string name="status_power">Effekt</string>
+    <string name="status_total">Total förbrukning</string>
+    <string name="status_error">Felkod</string>
+    <string name="status_error_none">ingen</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Total kostnad</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Diagnostik (beta)</string>
+    <string name="diag_beta_hint">Experimentell telemetri. Alla enheter rapporterar inte dessa värden — de kan förbli tomma.</string>
+    <string name="diag_group1_title">Kompressor &amp; köldmedium</string>
+    <string name="diag_compressor_freq">Kompressorfrekvens</string>
+    <string name="diag_compressor_freq_target">Målfrekvens</string>
+    <string name="diag_compressor_current">Strömförbrukning</string>
+    <string name="diag_compressor_voltage">Matningsspänning</string>
+    <string name="diag_temp_t1">Inomhusbatteri (T1)</string>
+    <string name="diag_temp_t2">Förångare (T2)</string>
+    <string name="diag_temp_t3">Kondensor (T3)</string>
+    <string name="diag_temp_t4">Utomhus (T4)</string>
+    <string name="diag_temp_tp">Hetgasrör (TP)</string>
+    <string name="diag_group2_title">Inomhusfläkt &amp; pump</string>
+    <string name="diag_fan_speed">Fläkthastighet</string>
+    <string name="diag_fan_speed_target">Fläktens målhastighet</string>
+    <string name="diag_water_pump">Kondensatpump</string>
+    <string name="diag_pump_on">igång</string>
+    <string name="diag_pump_off">av</string>
+    <string name="diag_group7_title">Utedelens effekt</string>
+    <string name="diag_compressor_power">Effektförbrukning</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Visning &amp; pris</string>
+    <string name="unit_fahrenheit">Visa °F (Fahrenheit)</string>
+    <string name="price_per_kwh">Pris per kWh</string>
+    <string name="price_hint">Används för att uppskatta totalkostnaden utifrån förbrukningen.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Kalibrering av innetemperatur</string>
+    <string name="calibration_hint">Många enheter visar en grad eller två fel jämfört med den verkliga rumstemperaturen. Jämför med en rumstermometer och korrigera värdet här. Appen visar sedan det korrigerade värdet överallt, markerat med ett litet bärnstensfärgat delta, och förskjuter börvärdet som skickas till enheten med samma hela grader — så att rummet verkligen når det du ställt in. Sparas för den här enheten.</string>
+    <string name="calibration_none">ingen korrigering</string>
+    <string name="calibration_preview">Uppmätt %1$s → visas %2$s</string>
+    <string name="calibration_device_target">Skickas till enheten: %1$s — mål %2$s</string>
+    <string name="calibration_no_reading">Väntar på första avläsningen…</string>
+    <string name="calibration_reset">Återställ till 0</string>
+    <string name="calibration_less">Minska korrigeringen</string>
+    <string name="calibration_more">Öka korrigeringen</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Uppdateringsintervall</string>
+    <string name="settings_poll_hint">Hur ofta status, energi och diagnostik hämtas medan appen är ansluten. Kortare intervall uppdaterar snabbare men ger mer wifi-trafik.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Betafunktioner</string>
+    <string name="settings_beta_hint">Experimentell extradiagnostik, på som standard — varje alternativ lägger till en förfrågan per uppdatering och kan stängas av här. Alla enheter stöder dem inte. Värdena visas på fliken Status och registreras i Historiken (när historikinspelning är på).</string>
+    <string name="beta_group1">Kompressordiagnostik</string>
+    <string name="beta_group1_desc">Frekvens, ström, spänning &amp; köldmedietemperaturer (T1–T4, hetgasrör)</string>
+    <string name="beta_group2">Inomhusfläkt &amp; pump</string>
+    <string name="beta_group2_desc">Inomhusfläktens faktiska hastighet och kondensatpumpens status</string>
+    <string name="beta_group7">Utedelens effekt</string>
+    <string name="beta_group7_desc">Utedelens effektförbrukning i realtid, i watt</string>
+
+    <string name="section_options">Alternativ</string>
+    <string name="option_swing">Swing (lameller)</string>
+    <string name="option_eco">Eco-läge</string>
+    <string name="option_beep">Ljudsignal</string>
+    <string name="option_anion">Jonisator</string>
+    <string name="option_out_silent">Tyst utedel</string>
+    <string name="option_self_clean">Självrengöring</string>
+    <string name="option_display">Display / LED</string>
+
+    <string name="section_gear">Kompressorbegränsning</string>
+    <string name="gear_full">Full</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Sovtimer</string>
+    <string name="sleep_active">Stängs av om %1$d min</string>
+    <string name="sleep_cancel">Avbryt timer</string>
+    <string name="sleep_custom">Anpassad…</string>
+    <string name="sleep_custom_title">Sovtimer</string>
+    <string name="sleep_custom_label">Minuter</string>
+    <string name="action_start">Starta</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Tips: tryck länge på ett kort för att dra det till en annan plats i ordningen.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Lägg till enhet manuellt</string>
+    <string name="manual_hint">För anslutningar utan broadcast-sökning. Enhets-ID hittar du i Midea/SmartHome-appen eller via en nätverksskanning.</string>
+    <string name="field_ip">IP-adress</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">Enhets-ID (decimalt)</string>
+    <string name="field_name">Namn (valfritt)</string>
+    <string name="action_add">Lägg till</string>
+    <string name="action_cancel">Avbryt</string>
+    <string name="action_save">Spara</string>
+    <string name="rename_title">Byt namn på enhet</string>
+    <string name="rename_hint">Namnet sparas bara i den här appen — praktiskt för att skilja två enheter åt.</string>
+    <string name="cd_rename">Byt namn</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Enhet</string>
+    <string name="device_edit_name">Namn</string>
+    <string name="device_edit_save">Spara</string>
+    <string name="device_forget">Ta bort</string>
+    <string name="device_forget_really">Ta bort permanent</string>
+    <string name="device_forget_confirm">Detta raderar de sparade uppgifterna. Du kan lägga till enheten igen när som helst.</string>
+    <string name="pane_pick_device">Välj en enhet</string>
+    <string name="pane_pick_device_hint">Välj en i listan till vänster för att styra den.</string>
+    <string name="option_turbo_fan_hint">Turbo styr fläkten — stäng av turbo för att ändra hastigheten.</string>
+    <string name="option_self_clean_hint">Kör förångarens självrengöringscykel. Tar ungefär 20 till 30 minuter beroende på enheten; den normala kylningen pausas under tiden.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Exportera token</string>
+    <string name="export_title">Exportera token</string>
+    <string name="export_hint">Med de här uppgifterna kan du styra enheten lokalt utan molnet — säkerhetskopiera dem eller använd dem i andra verktyg. Håll dem hemliga.</string>
+    <string name="export_none">Ingen token ännu. Anslut till enheten en gång medan du är online och exportera sedan.</string>
+    <string name="export_copy">Kopiera</string>
+    <string name="export_share">Dela</string>
+    <string name="export_copied">Kopierat till urklipp</string>
+    <string name="action_close">Stäng</string>
+    <string name="import_button">Importera</string>
+    <string name="import_title">Importera token</string>
+    <string name="import_hint">Klistra in ett tokenblock (från Export, msmart, …). Enheten fungerar sedan offline.</string>
+    <string name="import_field">Tokenblock</string>
+    <string name="import_ok">Token importerad</string>
+    <string name="import_error">Kunde inte läsa tokenblocket</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Sparade enheter</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">AC-ström</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Förhandsvisning (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Anslutningen misslyckades: %1$s</string>
+    <string name="error_command">Kommandot misslyckades: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Innan du börjar</string>
+    <string name="disclaimer_body">ClimaPilot är en fristående app och har ingen koppling till Midea, som varken har godkänt appen eller ger support för den. Den styr kompatibla luftkonditioneringar via ditt lokala wifi.\n\nSe till att din enhet är korrekt installerad och säker att använda innan du skickar kommandon. Du använder appen på egen risk; upphovsmännen tar inget ansvar för eventuella skador eller förluster.\n\nUppmätta värden som effekt kommer från enheten och kan vara felaktiga.\n\nObs: första gången du ansluter till en enhet hämtar ClimaPilot en engångstoken från Mideas server (inget konto behövs). Därefter sker all styrning helt lokalt — du kan till och med neka appen internetåtkomst.</string>
+    <string name="disclaimer_accept">Jag förstår</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Snabb AC-styrning</string>
+    <string name="widget_not_connected">Inte ansluten</string>
+    <string name="widget_off">Av</string>
+    <string name="widget_on">På</string>
+    <string name="widget_indoor">Inne %1$s</string>
+    <string name="widget_outdoor">Ute %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Sovtimer</string>
+    <string name="widget_sleep_off_in">sedan stängs AC:n av</string>
+    <string name="widget_sleep_idle">Ingen timer igång</string>
+    <string name="widget_sleep_off_now">Stäng av nu</string>
+    <string name="widget_sleep_cancel">Avbryt</string>
+    <string name="widget_power">Ström</string>
+    <string name="widget_cool_down">Kallare</string>
+    <string name="widget_warm_up">Varmare</string>
+    <string name="widget_mode">Läge</string>
+    <string name="widget_all_label">AC — alla reglage</string>
+    <string name="widget_power_label">AC — ström</string>
+    <string name="widget_temp_label">AC — temperatur</string>
+    <string name="widget_mode_label">AC — läge</string>
+    <string name="widget_all_desc">Ström, temperatur, läge, fläkt, turbo och sovtimer</string>
+    <string name="widget_sleep_label">AC — sovtimer</string>
+    <string name="widget_sleep_desc">Live-nedräkning med snabbval</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">timmar</string>
+    <string name="widget_sleep_quick_desc">Ett tryck startar sovtimern</string>
+    <string name="widget_sleep_30_label">Sovtimer 30 min</string>
+    <string name="widget_sleep_60_label">Sovtimer 1 h</string>
+    <string name="widget_sleep_120_label">Sovtimer 2 h</string>
+    <string name="widget_sleep_240_label">Sovtimer 4 h</string>
+    <string name="widget_sleep_480_label">Sovtimer 8 h</string>
+    <string name="widget_sleep_720_label">Sovtimer 12 h</string>
+    <string name="widget_power_desc">Slå på/av AC:n</string>
+    <string name="widget_temp_desc">Höj eller sänk temperaturen</string>
+    <string name="widget_mode_desc">Byt driftläge</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Inställningar</string>
+    <string name="cd_settings">Inställningar</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="support_title">Stöd utvecklingen</string>
+    <string name="support_body">ClimaPilot är gratis och reklamfri. Om appen hjälper dig håller ett litet bidrag den vid liv — tack!</string>
+    <string name="support_kofi">Bjud mig på en kaffe (Ko-fi)</string>
+    <string name="support_paypal">Bidra via PayPal</string>
+    <string name="credits_title">Tack till</string>
+    <string name="credits_body">ClimaPilots lokala Midea-protokoll är en Kotlin-portering av det utmärkta projektet midea-msmart av @mill1000. Stort tack — utan det hade den här appen inte funnits.</string>
+    <string name="credits_link">midea-msmart på GitHub</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Tillförlitliga timers</string>
+    <string name="reliability_body">För att sovtimern och scenscheman ska köras även när appen är stängd behöver ClimaPilot tillåtas köras i bakgrunden.</string>
+    <string name="reliability_battery_ok">Batterioptimering: av ✓</string>
+    <string name="reliability_battery_warn">Batterioptimering är på — timers kan fördröjas eller hoppas över.</string>
+    <string name="reliability_battery_action">Tillåt bakgrund (batteri)</string>
+    <string name="reliability_autostart_action">Tillåt autostart (tillverkare)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Appuppdateringar</string>
+    <string name="update_body">Nya versioner hämtas från GitHub. Du bekräftar alltid installationen.</string>
+    <string name="update_current">Installerad: %1$s</string>
+    <string name="update_auto_label">Sök automatiskt vid start</string>
+    <string name="update_check_button">Sök efter uppdateringar</string>
+    <string name="update_checking">Söker…</string>
+    <string name="update_uptodate">Du har den senaste versionen (%1$s).</string>
+    <string name="update_error">Kunde inte söka efter uppdateringar. Kontrollera anslutningen och försök igen.</string>
+    <string name="update_available_title">Uppdatering tillgänglig</string>
+    <string name="update_available_body">Version %1$s finns tillgänglig — du har %2$s.</string>
+    <string name="update_install">Uppdatera</string>
+    <string name="update_downloading">Hämtar… %1$d%%</string>
+    <string name="update_later">Senare</string>
+    <string name="update_failed">Hämtningen misslyckades. Försök igen senare.</string>
+    <string name="update_verify_failed">Hämtningen klarade inte säkerhetskontrollen och installerades inte.</string>
+    <string name="update_need_permission">Tillåt ClimaPilot att installera appar och tryck sedan på Uppdatera igen.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Stäng av</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Aktivera: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Automatisk avstängning</string>
+    <string name="autooff_body">En säkerhetsavstängning: om AC:n körs längre än så här stängs den av automatiskt — den lokala motsvarigheten till en borta-timer (telefonen når inte AC:n när du har lämnat wifi-nätet). 0 = av.</string>
+    <string name="autooff_hours_label">Stäng av efter (timmar)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Sovtimer</string>
+    <string name="notif_timer_title">Sovtimern är igång</string>
+    <string name="notif_timer_text">AC:n stängs av när nedräkningen är slut.</string>
+    <string name="notif_timer_off_now">Stäng av nu</string>
+    <string name="notif_timer_cancel">Avbryt</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Applås</string>
+    <string name="lock_card_body">Kräv fingeravtryck, ansikte eller skärm-PIN för att öppna ClimaPilot — så att ingen annan kan styra din AC.</string>
+    <string name="lock_card_switch">Kräv upplåsning för att öppna</string>
+    <string name="lock_title">Lås upp ClimaPilot</string>
+    <string name="lock_subtitle">Autentisera för att styra din AC</string>
+    <string name="lock_unlock">Lås upp</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">AC-läge</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">Historik</string>
+    <string name="history_card_title">Energi &amp; filter</string>
+    <string name="history_card_body">Se effektanvändning och total förbrukning den senaste tiden och håll koll på när filtret behöver rengöras.</string>
+    <string name="history_card_open">Öppna historik</string>
+    <string name="history_power_title">Effekt (24 h)</string>
+    <string name="history_empty">Inte tillräckligt med data ännu — använd AC:n ett tag och titta in igen senare.</string>
+    <string name="history_peak">Topp: %1$d W</string>
+    <string name="history_totals_title">Förbrukning</string>
+    <string name="history_total_kwh">Totalt: %1$.1f kWh</string>
+    <string name="history_total_cost">Uppskattad kostnad: %1$.2f €</string>
+    <string name="history_filter_title">Filter</string>
+    <string name="history_filter_runtime">Drifttid sedan senaste rengöringen: %1$d h av %2$d h</string>
+    <string name="history_filter_due">Dags att rengöra filtret.</string>
+    <string name="history_filter_reset">Filtret rengjort (nollställ)</string>
+    <string name="history_filter_hint">Det här är en underhållspåminnelse i appen baserad på drifttid. Den läser inte av och nollställer inte enhetens egen filterindikator — den återställer du på själva AC:n.</string>
+    <string name="option_beep_hint">Bekräftelseton. Många enheter piper bara när de slås på/av, inte vid andra ändringar.</string>
+    <string name="history_record_title">Spela in historik</string>
+    <string name="history_record_body">När detta är på loggar ClimaPilot effekt, temperaturer och fläkt och frågar AC:n ungefär var 15:e minut i bakgrunden (endast wifi). Av som standard.</string>
+    <string name="history_record_switch">Spela in AC-data</string>
+    <string name="history_indoor_title">Innetemperatur (24 h)</string>
+    <string name="history_outdoor_title">Utetemperatur (24 h)</string>
+    <string name="history_fan_title">Fläktnivå (24 h)</string>
+    <string name="history_comp_hz_title">Kompressorfrekvens (beta)</string>
+    <string name="history_comp_w_title">Utedelens effekt (beta)</string>
+    <string name="history_fan_rpm_title">Inomhusfläktens hastighet (beta)</string>
+    <string name="history_metric_summary">Nu %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Timme</string>
+    <string name="range_day">Dag</string>
+    <string name="range_week">Vecka</string>
+    <string name="range_month">Månad</string>
+    <string name="history_pick_day">Välj en dag</string>
+    <string name="history_day">Dag: %1$s</string>
+    <string name="history_range_kwh">Under perioden: %1$.1f kWh</string>
+    <string name="history_range_cost">Uppskattad kostnad: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Gillar du ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot är gratis och reklamfri. Om appen har förtjänat sin plats på din telefon håller ett litet bidrag den vid liv — tack!</string>
+    <string name="donate_later">Kanske senare</string>
+    <string name="donate_already">Har redan bidragit</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR-fjärrkontroll</string>
+    <string name="ir_remote_entry">IR-fjärrkontroll (infraröd)</string>
+    <string name="ir_remote_subtitle">Infraröd · endast sändning</string>
+    <string name="ir_no_emitter">Den här telefonen saknar IR-sändare</string>
+    <string name="option_quiet">Tyst</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Infraröd är enkelriktad — reglagen visar det som senast skickades, inte enhetens faktiska läge.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Styrning</string>
+    <string name="nav_status">Status</string>
+    <string name="nav_options">Alternativ</string>
+    <string name="nav_scenes">Scener</string>
+    <string name="nav_history">Historik</string>
+</resources>

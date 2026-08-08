@@ -26,6 +26,11 @@ object WidgetRepo {
     private const val K_PORT = "port"
     private const val K_ID = "id"
     private const val K_VERSION = "version"
+    private const val K_FAN = "fan"
+    private const val K_TURBO = "turbo"
+    private const val K_ECO = "eco"
+    private const val K_SWING = "swing"
+    private const val K_OUTDOOR = "outdoor"
 
     data class Snapshot(
         val present: Boolean,
@@ -34,7 +39,12 @@ object WidgetRepo {
         val mode: Int,
         val targetTemp: Double,
         val indoorTemp: Double?,
+        val outdoorTemp: Double?,
         val powerW: Double?,
+        val fan: Int,
+        val turbo: Boolean,
+        val eco: Boolean,
+        val swing: Boolean,
         val device: MideaDevice?,
     )
 
@@ -47,7 +57,12 @@ object WidgetRepo {
         mode: Int,
         targetTemp: Double,
         indoorTemp: Double?,
+        outdoorTemp: Double?,
         powerW: Double?,
+        fan: Int,
+        turbo: Boolean,
+        eco: Boolean,
+        swing: Boolean,
         device: MideaDevice?,
     ) {
         // EN: Never persist the throw-away demo device as a controllable target. DE: Das Wegwerf-Demo-Gerät nie als steuerbares Ziel speichern.
@@ -58,7 +73,12 @@ object WidgetRepo {
             putBoolean(K_POWER, powerOn)
             putInt(K_MODE, mode)
             putFloat(K_TARGET, targetTemp.toFloat())
+            putInt(K_FAN, fan)
+            putBoolean(K_TURBO, turbo)
+            putBoolean(K_ECO, eco)
+            putBoolean(K_SWING, swing)
             if (indoorTemp != null) putFloat(K_INDOOR, indoorTemp.toFloat()) else remove(K_INDOOR)
+            if (outdoorTemp != null) putFloat(K_OUTDOOR, outdoorTemp.toFloat()) else remove(K_OUTDOOR)
             if (powerW != null) putFloat(K_POWERW, powerW.toFloat()) else remove(K_POWERW)
             if (controllable != null) {
                 putString(K_IP, controllable.ip)
@@ -88,6 +108,20 @@ object WidgetRepo {
         notifyWidgets(ctx)
     }
 
+    /** EN: Optimistically store fan + turbo after a widget fan/turbo tap. DE: Lüfter + Turbo optimistisch speichern nach einem Widget-Lüfter/Turbo-Tipp. */
+    fun updateFanTurbo(ctx: Context, fan: Int, turbo: Boolean) {
+        ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
+            .putInt(K_FAN, fan).putBoolean(K_TURBO, turbo).apply()
+        notifyWidgets(ctx)
+    }
+
+    /** EN: Optimistically flip eco/swing after a widget tap. DE: Eco/Swing optimistisch umschalten nach einem Widget-Tipp. */
+    fun updateOption(ctx: Context, eco: Boolean, swing: Boolean) {
+        ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
+            .putBoolean(K_ECO, eco).putBoolean(K_SWING, swing).apply()
+        notifyWidgets(ctx)
+    }
+
     fun load(ctx: Context): Snapshot {
         val p = ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val ip = p.getString(K_IP, null)
@@ -103,14 +137,19 @@ object WidgetRepo {
             mode = p.getInt(K_MODE, 2),
             targetTemp = p.getFloat(K_TARGET, 24f).toDouble(),
             indoorTemp = if (p.contains(K_INDOOR)) p.getFloat(K_INDOOR, 0f).toDouble() else null,
+            outdoorTemp = if (p.contains(K_OUTDOOR)) p.getFloat(K_OUTDOOR, 0f).toDouble() else null,
             powerW = if (p.contains(K_POWERW)) p.getFloat(K_POWERW, 0f).toDouble() else null,
+            fan = p.getInt(K_FAN, 60),
+            turbo = p.getBoolean(K_TURBO, false),
+            eco = p.getBoolean(K_ECO, false),
+            swing = p.getBoolean(K_SWING, false),
             device = device,
         )
     }
 
     private fun notifyWidgets(ctx: Context) {
-        // EN: Re-render every placed widget variant (all-in-one + the purpose-built power/temp/mode ones).
-        // DE: Jede platzierte Widget-Variante neu rendern (Alles-Widget + die zweckgebundenen Power/Temp/Modus).
+        // EN: Re-render every placed widget variant (all-in-one + the purpose-built power/temp/mode/sleep).
+        // DE: Jede platzierte Widget-Variante neu rendern (Alles-Widget + zweckgebundene Power/Temp/Modus/Sleep).
         val mgr = AppWidgetManager.getInstance(ctx)
         mgr.getAppWidgetIds(ComponentName(ctx, AcWidgetProvider::class.java))
             .takeIf { it.isNotEmpty() }?.let { AcWidgetProvider.renderAll(ctx, mgr, it) }
@@ -120,5 +159,15 @@ object WidgetRepo {
             .takeIf { it.isNotEmpty() }?.let { AcWidgetTempProvider.renderAll(ctx, mgr, it) }
         mgr.getAppWidgetIds(ComponentName(ctx, AcWidgetModeProvider::class.java))
             .takeIf { it.isNotEmpty() }?.let { AcWidgetModeProvider.renderAll(ctx, mgr, it) }
+        refreshSleepWidgets(ctx)
+    }
+
+    /** EN: Re-render only the sleep-timer widgets (call when the timer is armed or cleared). DE: Nur die Sleep-Timer-Widgets neu rendern (aufrufen, wenn der Timer gestellt oder gelöscht wird). */
+    fun refreshSleepWidgets(ctx: Context) {
+        val mgr = AppWidgetManager.getInstance(ctx)
+        mgr.getAppWidgetIds(ComponentName(ctx, AcWidgetSleepProvider::class.java))
+            .takeIf { it.isNotEmpty() }?.let { AcWidgetSleepProvider.renderAll(ctx, mgr, it) }
+        // EN: The 1x1 quick tiles show the same countdown. DE: Die 1x1-Schnell-Kacheln zeigen denselben Countdown.
+        AcWidgetSleepQuickProvider.renderAll(ctx)
     }
 }

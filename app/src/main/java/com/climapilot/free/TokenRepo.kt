@@ -95,6 +95,18 @@ object TokenRepo {
     }
 
     /**
+     * EN: Give a known device a user-chosen display name (issue #10). Purely local — only the cached
+     *     entry changes; token/key/ip stay untouched, so connections are unaffected.
+     * DE: Einem bekannten Gerät einen selbst gewählten Anzeigenamen geben (Issue #10). Rein lokal — nur
+     *     der gecachte Eintrag ändert sich; Token/Key/IP bleiben unberührt, Verbindungen sind nicht betroffen.
+     */
+    fun rename(ctx: Context, id: Long, newName: String) {
+        val name = newName.trim()
+        if (name.isEmpty()) return
+        persist(ctx, list(ctx).map { if (it.id == id) it.copy(name = name) else it })
+    }
+
+    /**
      * EN: Parse a previously exported credential block ("name:/ip:/port:/id:/token:/key:" lines) and
      *     save it. Lenient about order and extra lines. Returns true if the required fields were found.
      * DE: Einen zuvor exportierten Zugangsdaten-Block ("name:/ip:/port:/id:/token:/key:"-Zeilen) parsen

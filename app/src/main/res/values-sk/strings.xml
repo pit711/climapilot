@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClimaPilot</string>
+
+    <!-- Quick scenes -->
+    <string name="section_scenes">Scény</string>
+    <string name="scene_boost">Boost</string>
+    <string name="scene_eco_night">Eco noc</string>
+    <string name="scene_comfort">Komfort</string>
+    <string name="scene_save">Uložiť</string>
+    <string name="scene_save_title">Uložiť scénu</string>
+    <string name="scene_name_label">Názov scény</string>
+    <string name="scene_default_name">Scéna</string>
+    <string name="scene_hint">Ťuknutím použiješ · dlhým podržaním upravíš</string>
+    <string name="scene_edit_title">Upraviť scénu</string>
+    <string name="scene_schedule">Spúšťať denne</string>
+    <string name="scene_schedule_at">Čas: %1$s</string>
+    <string name="scene_schedule_note">Použije sa automaticky každý deň. Aplikácia musí mať povolený beh na pozadí.</string>
+    <string name="scene_delete">Vymazať</string>
+    <string name="scene_delete_title">Vymazať scénu?</string>
+    <string name="scene_delete_msg">„%1$s“ sa odstráni.</string>
+
+    <!-- Weekly day-planner -->
+    <string name="section_plan">Týždenný plán</string>
+    <string name="plan_empty">Zatiaľ žiadne okná. Pridaj jedno a scéna sa spustí automaticky — napr. maximálne chladenie v pondelky od 6 do 18.</string>
+    <string name="plan_need_scene">Najprv vytvor scénu — plán spúšťa tvoje scény.</string>
+    <string name="plan_add">Pridať okno</string>
+    <string name="plan_hint">Okná bežia na pozadí, aj keď telefón nečinne leží na Wi-Fi. Pre spoľahlivé časovanie povoľ aplikácii ClimaPilot beh na pozadí (Nastavenia ▸ Spoľahlivé časovače).</string>
+    <string name="plan_new_title">Nové okno</string>
+    <string name="plan_edit_title">Upraviť okno</string>
+    <string name="plan_scene_label">Scéna</string>
+    <string name="plan_days_label">Dni</string>
+    <string name="plan_from">Od</string>
+    <string name="plan_to">Do</string>
+    <string name="plan_end_label">Po skončení</string>
+    <string name="plan_end_off">Vypnúť</string>
+    <string name="plan_end_leave">Nechať bežať</string>
+    <string name="plan_overnight">+1 deň</string>
+    <string name="plan_every_day">Každý deň</string>
+    <string name="plan_disabled">pozastavené</string>
+    <string name="plan_to_off">→ vyp.</string>
+
+    <!-- Devices screen -->
+    <string name="hero_subtitle">Tvoja klimatizácia cez Wi-Fi</string>
+    <string name="action_discover">Vyhľadať zariadenia</string>
+    <string name="action_discovering">Vyhľadávanie…</string>
+    <string name="action_manual">Manuálne</string>
+    <string name="demo_preview">Náhľad bez zariadenia (demo)</string>
+    <string name="empty_title">Zatiaľ žiadne zariadenia</string>
+    <string name="empty_body">Ťukni na „Vyhľadať zariadenia“. Telefón musí byť v rovnakej Wi-Fi sieti ako klimatizácia.</string>
+    <string name="error_no_devices">Nenašli sa žiadne zariadenia. Si na rovnakej Wi-Fi? Inak pridaj zariadenie manuálne.</string>
+    <string name="action_connect">Pripojiť</string>
+    <string name="device_subtitle">%1$s · V%2$d · %3$s</string>
+
+    <!-- Control screen -->
+    <string name="cd_back">Späť</string>
+    <string name="cd_refresh">Obnoviť</string>
+    <string name="cd_power">Napájanie</string>
+    <string name="cd_reorder">Potiahnutím zmeníš poradie</string>
+    <string name="connected_to">Pripojené · %1$s</string>
+    <string name="disconnected">Odpojené</string>
+    <string name="state_on">ZAP</string>
+    <string name="state_off">VYP</string>
+    <string name="target_temp">Cieľová teplota</string>
+    <string name="readout_indoor">Vnútri</string>
+    <string name="readout_outdoor">Vonku</string>
+    <string name="readout_power">Výkon</string>
+
+    <string name="section_mode">Režim</string>
+    <string name="mode_auto">Auto</string>
+    <string name="mode_cool">Chladenie</string>
+    <string name="mode_dry">Sušenie</string>
+    <string name="mode_heat">Kúrenie</string>
+    <string name="mode_fan">Ventilátor</string>
+
+    <string name="section_fan">Rýchlosť ventilátora</string>
+    <string name="fan_auto">Auto</string>
+    <string name="fan_min">1%</string>
+    <string name="fan_silent">Tichá</string>
+    <string name="fan_low">Nízka</string>
+    <string name="fan_medium">Stredná</string>
+    <string name="fan_high">Vysoká</string>
+    <string name="fan_turbo">Turbo</string>
+    <string name="fan_automatic">Automatika</string>
+    <string name="fan_level">Stupeň: %1$d%%</string>
+
+    <string name="section_status">Aktuálny stav</string>
+    <string name="status_indoor">Vnútorná teplota</string>
+    <string name="status_outdoor">Vonkajšia teplota</string>
+    <string name="status_power">Výkon</string>
+    <string name="status_total">Celková spotreba</string>
+    <string name="status_error">Kód chyby</string>
+    <string name="status_error_none">žiadny</string>
+    <string name="status_error_code">#%1$d</string>
+    <string name="status_cost">Celkové náklady</string>
+
+    <!-- Beta diagnostics (midea-msmart PR #278 group data) -->
+    <string name="section_diagnostics">Diagnostika (beta)</string>
+    <string name="diag_beta_hint">Experimentálna telemetria. Nie každá jednotka tieto údaje hlási — hodnoty môžu zostať prázdne.</string>
+    <string name="diag_group1_title">Kompresor &amp; chladivo</string>
+    <string name="diag_compressor_freq">Frekvencia kompresora</string>
+    <string name="diag_compressor_freq_target">Cieľová frekvencia</string>
+    <string name="diag_compressor_current">Odber prúdu</string>
+    <string name="diag_compressor_voltage">Napájacie napätie</string>
+    <string name="diag_temp_t1">Vnútorný výmenník (T1)</string>
+    <string name="diag_temp_t2">Výparník (T2)</string>
+    <string name="diag_temp_t3">Kondenzátor (T3)</string>
+    <string name="diag_temp_t4">Vonku (T4)</string>
+    <string name="diag_temp_tp">Výtlačné potrubie (TP)</string>
+    <string name="diag_group2_title">Vnútorný ventilátor &amp; čerpadlo</string>
+    <string name="diag_fan_speed">Otáčky ventilátora</string>
+    <string name="diag_fan_speed_target">Cieľové otáčky ventilátora</string>
+    <string name="diag_water_pump">Čerpadlo kondenzátu</string>
+    <string name="diag_pump_on">beží</string>
+    <string name="diag_pump_off">vypnuté</string>
+    <string name="diag_group7_title">Výkon vonkajšej jednotky</string>
+    <string name="diag_compressor_power">Príkon</string>
+
+    <!-- Settings: display &amp; price -->
+    <string name="settings_display">Zobrazenie &amp; cena</string>
+    <string name="unit_fahrenheit">Zobrazovať °F (Fahrenheit)</string>
+    <string name="price_per_kwh">Cena za kWh</string>
+    <string name="price_hint">Používa sa na odhad celkových nákladov zo spotreby.</string>
+
+    <!-- Indoor-temperature calibration (Options tab) -->
+    <string name="section_calibration">Kalibrácia vnútornej teploty</string>
+    <string name="calibration_hint">Mnohé jednotky merajú teplotu v miestnosti o stupeň či dva nepresne. Porovnaj údaj s izbovým teplomerom a tu ho oprav. Aplikácia potom všade zobrazuje opravenú hodnotu, označenú malou jantárovou deltou, a o rovnaké celé stupne posúva aj cieľovú teplotu odosielanú do jednotky — miestnosť tak naozaj dosiahne to, čo nastavíš. Ukladá sa pre toto zariadenie.</string>
+    <string name="calibration_none">bez korekcie</string>
+    <string name="calibration_preview">Namerané %1$s → zobrazené %2$s</string>
+    <string name="calibration_device_target">Odoslané do jednotky: %1$s — cieľ %2$s</string>
+    <string name="calibration_no_reading">Čaká sa na prvé meranie…</string>
+    <string name="calibration_reset">Vynulovať</string>
+    <string name="calibration_less">Znížiť korekciu</string>
+    <string name="calibration_more">Zvýšiť korekciu</string>
+
+    <!-- Settings: poll interval -->
+    <string name="settings_poll">Interval aktualizácie</string>
+    <string name="settings_poll_hint">Ako často sa zisťuje stav, spotreba a diagnostika, kým je aplikácia pripojená. Kratšie intervaly aktualizujú rýchlejšie, ale vytvárajú viac prevádzky na Wi-Fi.</string>
+    <string name="poll_seconds">%1$d s</string>
+
+    <!-- Settings: beta / experimental diagnostics -->
+    <string name="settings_beta">Beta funkcie</string>
+    <string name="settings_beta_hint">Experimentálna rozšírená diagnostika, predvolene zapnutá — každá voľba pridáva jeden dopyt pri každej aktualizácii a dá sa tu vypnúť. Nie všetky jednotky ich podporujú. Hodnoty sa zobrazujú na karte Stav a zaznamenávajú sa do Histórie (keď je zapnuté zaznamenávanie histórie).</string>
+    <string name="beta_group1">Diagnostika kompresora</string>
+    <string name="beta_group1_desc">Frekvencia, prúd, napätie &amp; teploty chladiva (T1–T4, výtlačné potrubie)</string>
+    <string name="beta_group2">Vnútorný ventilátor &amp; čerpadlo</string>
+    <string name="beta_group2_desc">Skutočné otáčky vnútorného ventilátora a stav čerpadla kondenzátu</string>
+    <string name="beta_group7">Výkon vonkajšej jednotky</string>
+    <string name="beta_group7_desc">Aktuálny príkon vonkajšej jednotky vo wattoch</string>
+
+    <string name="section_options">Možnosti</string>
+    <string name="option_swing">Oscilácia (lamely)</string>
+    <string name="option_eco">Režim Eco</string>
+    <string name="option_beep">Pípanie</string>
+    <string name="option_anion">Ionizátor</string>
+    <string name="option_out_silent">Tichá vonkajšia jednotka</string>
+    <string name="option_self_clean">Samočistenie</string>
+    <string name="option_display">Displej / LED</string>
+
+    <string name="section_gear">Obmedzenie kompresora</string>
+    <string name="gear_full">Naplno</string>
+    <string name="gear_75">75%</string>
+    <string name="gear_50">50%</string>
+
+    <string name="section_sleep">Časovač vypnutia</string>
+    <string name="sleep_active">Vypne sa o %1$d min</string>
+    <string name="sleep_cancel">Zrušiť časovač</string>
+    <string name="sleep_custom">Vlastný…</string>
+    <string name="sleep_custom_title">Časovač vypnutia</string>
+    <string name="sleep_custom_label">Minúty</string>
+    <string name="action_start">Spustiť</string>
+
+    <!-- Control screen: card reorder hint -->
+    <string name="layout_hint">Tip: dlhým podržaním karty ju môžeš potiahnuť na iné miesto.</string>
+
+    <!-- Manual device dialog -->
+    <string name="manual_title">Pridať zariadenie manuálne</string>
+    <string name="manual_hint">Pre pripojenia bez automatického vyhľadávania (broadcast). ID zariadenia nájdeš v aplikácii Midea/SmartHome alebo cez sken siete.</string>
+    <string name="field_ip">IP adresa</string>
+    <string name="field_port">Port</string>
+    <string name="field_id">ID zariadenia (desiatkovo)</string>
+    <string name="field_name">Názov (voliteľné)</string>
+    <string name="action_add">Pridať</string>
+    <string name="action_cancel">Zrušiť</string>
+    <string name="action_save">Uložiť</string>
+    <string name="rename_title">Premenovať zariadenie</string>
+    <string name="rename_hint">Názov sa ukladá len v tejto aplikácii — hodí sa na rozlíšenie dvoch jednotiek.</string>
+    <string name="cd_rename">Premenovať</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Zariadenie</string>
+    <string name="device_edit_name">Názov</string>
+    <string name="device_edit_save">Uložiť</string>
+    <string name="device_forget">Odobrať</string>
+    <string name="device_forget_really">Odobrať natrvalo</string>
+    <string name="device_forget_confirm">Týmto sa vymažú uložené prístupové údaje. Zariadenie môžeš kedykoľvek pridať znova.</string>
+    <string name="pane_pick_device">Vyber zariadenie</string>
+    <string name="pane_pick_device_hint">Zvoľ jedno zo zoznamu vľavo a môžeš ho ovládať.</string>
+    <string name="option_turbo_fan_hint">Turbo riadi ventilátor — na zmenu rýchlosti turbo vypni.</string>
+    <string name="option_self_clean_hint">Spustí cyklus samočistenia výparníka. Podľa zariadenia trvá zhruba 20 až 30 minút; bežné chladenie je počas neho pozastavené.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
+
+    <!-- Token export -->
+    <string name="cd_export">Exportovať token</string>
+    <string name="export_title">Exportovať token</string>
+    <string name="export_hint">Tieto prístupové údaje ti umožňujú ovládať toto zariadenie lokálne bez cloudu — zálohuj si ich alebo ich použi v iných nástrojoch. Nikomu ich neprezrádzaj.</string>
+    <string name="export_none">Zatiaľ žiadny token. Raz sa k zariadeniu pripoj online a potom exportuj.</string>
+    <string name="export_copy">Kopírovať</string>
+    <string name="export_share">Zdieľať</string>
+    <string name="export_copied">Skopírované do schránky</string>
+    <string name="action_close">Zavrieť</string>
+    <string name="import_button">Importovať</string>
+    <string name="import_title">Importovať token</string>
+    <string name="import_hint">Vlož blok tokenu (z Exportu, msmart, …). Zariadenie potom funguje offline.</string>
+    <string name="import_field">Blok tokenu</string>
+    <string name="import_ok">Token importovaný</string>
+    <string name="import_error">Tento blok tokenu sa nepodarilo prečítať</string>
+
+    <!-- Known (cached) devices on the device list -->
+    <string name="known_devices">Uložené zariadenia</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">Napájanie klímy</string>
+
+    <!-- Demo / errors -->
+    <string name="demo_device_name">Náhľad (demo)</string>
+    <string name="default_device_name">Midea</string>
+    <string name="error_connect">Pripojenie zlyhalo: %1$s</string>
+    <string name="error_command">Príkaz zlyhal: %1$s</string>
+
+    <!-- First-run disclaimer -->
+    <string name="disclaimer_title">Skôr než začneš</string>
+    <string name="disclaimer_body">ClimaPilot je nezávislá aplikácia a nie je nijako spojená so spoločnosťou Midea, ňou schválená ani podporovaná. Kompatibilné klimatizácie ovláda cez tvoju lokálnu Wi-Fi sieť.\n\nPred odosielaním príkazov sa uisti, že je jednotka správne nainštalovaná a jej prevádzka je bezpečná. Aplikáciu používaš na vlastné riziko; autori nenesú žiadnu zodpovednosť za prípadné škody či straty.\n\nNamerané hodnoty, ako napríklad výkon, poskytuje zariadenie a môžu byť nepresné.\n\nPoznámka: pri prvom pripojení k zariadeniu si ClimaPilot stiahne jednorazový prístupový token zo servera spoločnosti Midea (bez potreby účtu). Potom už ovládanie beží úplne lokálne — aplikácii môžeš prístup na internet pokojne aj zakázať.</string>
+    <string name="disclaimer_accept">Rozumiem</string>
+
+    <!-- Widget -->
+    <string name="widget_description">Rýchle ovládanie klímy</string>
+    <string name="widget_not_connected">Nepripojené</string>
+    <string name="widget_off">Vyp.</string>
+    <string name="widget_on">Zap.</string>
+    <string name="widget_indoor">Vnútri %1$s</string>
+    <string name="widget_outdoor">Vonku %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Časovač vypnutia</string>
+    <string name="widget_sleep_off_in">potom sa klimatizácia vypne</string>
+    <string name="widget_sleep_idle">Žiadny časovač nebeží</string>
+    <string name="widget_sleep_off_now">Vypnúť hneď</string>
+    <string name="widget_sleep_cancel">Zrušiť</string>
+    <string name="widget_power">Napájanie</string>
+    <string name="widget_cool_down">Chladnejšie</string>
+    <string name="widget_warm_up">Teplejšie</string>
+    <string name="widget_mode">Režim</string>
+    <string name="widget_all_label">Klíma — všetky ovládacie prvky</string>
+    <string name="widget_power_label">Klíma — napájanie</string>
+    <string name="widget_temp_label">Klíma — teplota</string>
+    <string name="widget_mode_label">Klíma — režim</string>
+    <string name="widget_all_desc">Napájanie, teplota, režim, ventilátor, turbo a časovač vypnutia</string>
+    <string name="widget_sleep_label">Klíma — časovač vypnutia</string>
+    <string name="widget_sleep_desc">Živé odpočítavanie s rýchlou voľbou</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">hodín</string>
+    <string name="widget_sleep_quick_desc">Jedno klepnutie nastaví časovač vypnutia</string>
+    <string name="widget_sleep_30_label">Vypnúť o 30 min</string>
+    <string name="widget_sleep_60_label">Vypnúť o 1 h</string>
+    <string name="widget_sleep_120_label">Vypnúť o 2 h</string>
+    <string name="widget_sleep_240_label">Vypnúť o 4 h</string>
+    <string name="widget_sleep_480_label">Vypnúť o 8 h</string>
+    <string name="widget_sleep_720_label">Vypnúť o 12 h</string>
+    <string name="widget_power_desc">Zapnutie/vypnutie klimatizácie</string>
+    <string name="widget_temp_desc">Zvýšenie alebo zníženie teploty</string>
+    <string name="widget_mode_desc">Prepnutie prevádzkového režimu</string>
+
+    <!-- Settings & changelog -->
+    <string name="settings">Nastavenia</string>
+    <string name="cd_settings">Nastavenia</string>
+    <string name="settings_version">Verzia %1$s</string>
+    <string name="support_title">Podpor vývoj</string>
+    <string name="support_body">ClimaPilot je zadarmo a bez reklám. Ak ti pomáha, aj malý príspevok ho udrží pri živote — ďakujem!</string>
+    <string name="support_kofi">Kúp mi kávu (Ko-fi)</string>
+    <string name="support_paypal">Prispieť cez PayPal</string>
+    <string name="credits_title">Poďakovanie</string>
+    <string name="credits_body">Lokálny protokol Midea v aplikácii ClimaPilot je kotlinový port vynikajúceho projektu midea-msmart od @mill1000. Obrovská vďaka — bez neho by táto aplikácia neexistovala.</string>
+    <string name="credits_link">midea-msmart na GitHube</string>
+
+    <!-- Background reliability (battery / OEM auto-start) -->
+    <string name="reliability_title">Spoľahlivé časovače</string>
+    <string name="reliability_body">Aby sa časovač vypnutia a naplánované scény spustili, aj keď je aplikácia zavretá, povoľ aplikácii ClimaPilot beh na pozadí.</string>
+    <string name="reliability_battery_ok">Optimalizácia batérie: vypnutá ✓</string>
+    <string name="reliability_battery_warn">Optimalizácia batérie je zapnutá — časovače sa môžu oneskoriť alebo vynechať.</string>
+    <string name="reliability_battery_action">Povoliť beh na pozadí (batéria)</string>
+    <string name="reliability_autostart_action">Povoliť automatické spustenie (výrobca)</string>
+
+    <!-- In-app updater (GitHub/sideload build) -->
+    <string name="update_title">Aktualizácie aplikácie</string>
+    <string name="update_body">Nové verzie sa sťahujú z GitHubu. Každú inštaláciu vždy potvrdzuješ ty.</string>
+    <string name="update_current">Nainštalované: %1$s</string>
+    <string name="update_auto_label">Kontrolovať automaticky pri spustení</string>
+    <string name="update_check_button">Skontrolovať aktualizácie</string>
+    <string name="update_checking">Kontrola…</string>
+    <string name="update_uptodate">Máš najnovšiu verziu (%1$s).</string>
+    <string name="update_error">Aktualizácie sa nepodarilo skontrolovať. Skontroluj pripojenie a skús to znova.</string>
+    <string name="update_available_title">Dostupná aktualizácia</string>
+    <string name="update_available_body">K dispozícii je verzia %1$s — ty máš %2$s.</string>
+    <string name="update_install">Aktualizovať</string>
+    <string name="update_downloading">Sťahovanie… %1$d%%</string>
+    <string name="update_later">Neskôr</string>
+    <string name="update_failed">Sťahovanie zlyhalo. Skús to prosím neskôr.</string>
+    <string name="update_verify_failed">Stiahnutý súbor neprešiel bezpečnostnou kontrolou a nebol nainštalovaný.</string>
+    <string name="update_need_permission">Povoľ aplikácii ClimaPilot inštalovať aplikácie a potom znova ťukni na Aktualizovať.</string>
+
+    <!-- Launcher shortcuts -->
+    <string name="shortcut_off">Vypnúť</string>
+    <string name="shortcut_demo">Demo</string>
+    <string name="shortcut_scene">Použiť: %1$s</string>
+
+    <!-- Auto power-off (max runtime) -->
+    <string name="autooff_title">Automatické vypnutie</string>
+    <string name="autooff_body">Bezpečnostná poistka: ak klimatizácia beží dlhšie ako tento čas, automaticky sa vypne — lokálna náhrada za časovač neprítomnosti (telefón sa po odchode z dosahu Wi-Fi ku klimatizácii už nedostane). 0 = vypnuté.</string>
+    <string name="autooff_hours_label">Vypnúť po (hodinách)</string>
+
+    <!-- Sleep-timer countdown notification -->
+    <string name="notif_channel_timer">Časovač vypnutia</string>
+    <string name="notif_timer_title">Časovač vypnutia beží</string>
+    <string name="notif_timer_text">Klimatizácia sa po skončení odpočítavania vypne.</string>
+    <string name="notif_timer_off_now">Vypnúť hneď</string>
+    <string name="notif_timer_cancel">Zrušiť</string>
+
+    <!-- App lock (biometric) -->
+    <string name="lock_card_title">Zámok aplikácie</string>
+    <string name="lock_card_body">Na otvorenie aplikácie ClimaPilot vyžaduj odtlačok prsta, tvár alebo PIN obrazovky — aby ti klimatizáciu nemohol ovládať nikto iný.</string>
+    <string name="lock_card_switch">Vyžadovať odomknutie pri otvorení</string>
+    <string name="lock_title">Odomkni ClimaPilot</string>
+    <string name="lock_subtitle">Na ovládanie klimatizácie sa najprv over</string>
+    <string name="lock_unlock">Odomknúť</string>
+
+    <!-- Mode Quick Settings tile -->
+    <string name="tile_mode_label">Režim klímy</string>
+
+    <!-- Energy & filter history -->
+    <string name="history_title">História</string>
+    <string name="history_card_title">Energia &amp; filter</string>
+    <string name="history_card_body">Pozri si nedávny odber a celkovú spotrebu a sleduj, kedy treba vyčistiť filter.</string>
+    <string name="history_card_open">Otvoriť históriu</string>
+    <string name="history_power_title">Výkon (24 h)</string>
+    <string name="history_empty">Zatiaľ nie je dosť údajov — chvíľu klimatizáciu používaj a pozri sa sem neskôr.</string>
+    <string name="history_peak">Špička: %1$d W</string>
+    <string name="history_totals_title">Spotreba</string>
+    <string name="history_total_kwh">Spolu: %1$.1f kWh</string>
+    <string name="history_total_cost">Odhadované náklady: %1$.2f €</string>
+    <string name="history_filter_title">Filter</string>
+    <string name="history_filter_runtime">Prevádzka od posledného čistenia: %1$d h z %2$d h</string>
+    <string name="history_filter_due">Je čas vyčistiť filter.</string>
+    <string name="history_filter_reset">Filter vyčistený (vynulovať)</string>
+    <string name="history_filter_hint">Toto je pripomienka údržby v aplikácii založená na prevádzkovom čase. Nečíta ani nenuluje vlastný indikátor filtra jednotky — ten vynuluj priamo na klimatizácii.</string>
+    <string name="option_beep_hint">Potvrdzovací tón. Mnohé jednotky pípajú len pri zapnutí/vypnutí, nie pri iných zmenách.</string>
+    <string name="history_record_title">Zaznamenávať históriu</string>
+    <string name="history_record_body">Keď je zapnuté, ClimaPilot zaznamenáva výkon, teploty a ventilátor a približne každých 15 min sa na pozadí dopytuje klimatizácie (len cez Wi-Fi). Predvolene vypnuté.</string>
+    <string name="history_record_switch">Zaznamenávať údaje klímy</string>
+    <string name="history_indoor_title">Vnútorná teplota (24 h)</string>
+    <string name="history_outdoor_title">Vonkajšia teplota (24 h)</string>
+    <string name="history_fan_title">Stupeň ventilátora (24 h)</string>
+    <string name="history_comp_hz_title">Frekvencia kompresora (beta)</string>
+    <string name="history_comp_w_title">Výkon vonkajšej jednotky (beta)</string>
+    <string name="history_fan_rpm_title">Otáčky vnútorného ventilátora (beta)</string>
+    <string name="history_metric_summary">Teraz %1$s%2$s · min %3$s · max %4$s%5$s</string>
+    <string name="range_hour">Hodina</string>
+    <string name="range_day">Deň</string>
+    <string name="range_week">Týždeň</string>
+    <string name="range_month">Mesiac</string>
+    <string name="history_pick_day">Vyber deň</string>
+    <string name="history_day">Deň: %1$s</string>
+    <string name="history_range_kwh">Za toto obdobie: %1$.1f kWh</string>
+    <string name="history_range_cost">Odhadované náklady: %1$.2f €</string>
+
+    <!-- Donation prompt -->
+    <string name="donate_prompt_title">Páči sa ti ClimaPilot?</string>
+    <string name="donate_prompt_body">ClimaPilot je zadarmo a bez reklám. Ak si v tvojom telefóne vyslúžil svoje miesto, aj malý príspevok ho udrží pri živote — ďakujem!</string>
+    <string name="donate_later">Možno neskôr</string>
+    <string name="donate_already">Už som prispel(a)</string>
+
+    <!-- IR remote mode -->
+    <string name="ir_remote_title">IR ovládač</string>
+    <string name="ir_remote_entry">IR ovládač (infračervený)</string>
+    <string name="ir_remote_subtitle">Infračervené · iba vysielanie</string>
+    <string name="ir_no_emitter">Tento telefón nemá IR vysielač</string>
+    <string name="option_quiet">Tichý</string>
+    <string name="option_turbo">Turbo</string>
+    <string name="ir_options_hint">Infračervené ovládanie je jednosmerné — tieto prepínače ukazujú, čo sa naposledy odoslalo, nie skutočný stav jednotky.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_control">Ovládanie</string>
+    <string name="nav_status">Stav</string>
+    <string name="nav_options">Možnosti</string>
+    <string name="nav_scenes">Scény</string>
+    <string name="nav_history">História</string>
+</resources>

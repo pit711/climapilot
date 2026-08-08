@@ -21,7 +21,7 @@
 
     <!-- Weekly day-planner -->
     <string name="section_plan">Plan semanal</string>
-    <string name="plan_empty">Aún no hay franjas. Añade una para ejecutar una escena automáticamente, por ejemplo refrigeración máxima los lunes de 6 a 18.</string>
+    <string name="plan_empty">Aún no hay franjas. Añade una para ejecutar una escena automáticamente, por ejemplo, refrigeración máxima los lunes de 6 a 18.</string>
     <string name="plan_need_scene">Crea primero una escena: el plan ejecuta tus escenas.</string>
     <string name="plan_add">Añadir franja</string>
     <string name="plan_hint">Las franjas se ejecutan en segundo plano, incluso con el teléfono en reposo en la wifi. Para que se cumplan los horarios, permite que ClimaPilot funcione en segundo plano (Ajustes ▸ Temporizadores fiables).</string>
@@ -180,6 +180,24 @@
     <string name="field_name">Nombre (opcional)</string>
     <string name="action_add">Añadir</string>
     <string name="action_cancel">Cancelar</string>
+    <string name="action_save">Guardar</string>
+    <string name="rename_title">Renombrar dispositivo</string>
+    <string name="rename_hint">El nombre solo se guarda en esta aplicación: práctico para distinguir dos equipos.</string>
+    <string name="cd_rename">Renombrar</string>
+
+    <!-- Unified control surface / device editing (0.7 design) -->
+    <string name="device_edit_title">Dispositivo</string>
+    <string name="device_edit_name">Nombre</string>
+    <string name="device_edit_save">Guardar</string>
+    <string name="device_forget">Quitar</string>
+    <string name="device_forget_really">Quitar definitivamente</string>
+    <string name="device_forget_confirm">Esto borra las credenciales guardadas. Puedes volver a añadir el dispositivo en cualquier momento.</string>
+    <string name="pane_pick_device">Elige un dispositivo</string>
+    <string name="pane_pick_device_hint">Elige uno de la lista de la izquierda para controlarlo.</string>
+    <string name="option_turbo_fan_hint">El turbo controla el ventilador — apaga el turbo para cambiar la velocidad.</string>
+    <string name="option_self_clean_hint">Inicia el ciclo de autolimpieza del evaporador. Tarda entre 20 y 30 minutos según el dispositivo; mientras dura, la refrigeración normal queda en pausa.</string>
+    <string name="sleep_preset_min">%1$d min</string>
+    <string name="fan_percent">%1$d&#8239;%%</string>
 
     <!-- Token export -->
     <string name="cd_export">Exportar token</string>
@@ -220,6 +238,16 @@
     <string name="widget_off">Apagado</string>
     <string name="widget_on">Encendido</string>
     <string name="widget_indoor">Interior %1$s</string>
+    <string name="widget_outdoor">Exterior %1$s</string>
+    <string name="widget_sleep_30">30 min</string>
+    <string name="widget_sleep_60">1 h</string>
+    <string name="widget_sleep_120">2 h</string>
+    <string name="widget_sleep_240">4 h</string>
+    <string name="widget_sleep_title">Temporizador de apagado</string>
+    <string name="widget_sleep_off_in">luego el aire se apaga</string>
+    <string name="widget_sleep_idle">Sin temporizador activo</string>
+    <string name="widget_sleep_off_now">Apagar ya</string>
+    <string name="widget_sleep_cancel">Cancelar</string>
     <string name="widget_power">Encendido</string>
     <string name="widget_cool_down">Más frío</string>
     <string name="widget_warm_up">Más calor</string>
@@ -228,7 +256,18 @@
     <string name="widget_power_label">Aire — encendido</string>
     <string name="widget_temp_label">Aire — temperatura</string>
     <string name="widget_mode_label">Aire — modo</string>
-    <string name="widget_all_desc">Nombre, temperatura, encendido y modo</string>
+    <string name="widget_all_desc">Encendido, temperatura, modo, ventilador, turbo y temporizador de apagado</string>
+    <string name="widget_sleep_label">Aire — temporizador de apagado</string>
+    <string name="widget_sleep_desc">Cuenta atrás en vivo con ajustes rápidos</string>
+    <string name="widget_sleep_unit_min">min</string>
+    <string name="widget_sleep_unit_hour">horas</string>
+    <string name="widget_sleep_quick_desc">Un toque activa el temporizador de apagado</string>
+    <string name="widget_sleep_30_label">Apagar en 30 min</string>
+    <string name="widget_sleep_60_label">Apagar en 1 h</string>
+    <string name="widget_sleep_120_label">Apagar en 2 h</string>
+    <string name="widget_sleep_240_label">Apagar en 4 h</string>
+    <string name="widget_sleep_480_label">Apagar en 8 h</string>
+    <string name="widget_sleep_720_label">Apagar en 12 h</string>
     <string name="widget_power_desc">Encender/apagar el aire acondicionado</string>
     <string name="widget_temp_desc">Subir o bajar la temperatura</string>
     <string name="widget_mode_desc">Cambiar el modo de funcionamiento</string>
@@ -245,6 +284,8 @@
     <string name="credits_title">Créditos</string>
     <string name="credits_body">El protocolo Midea local de ClimaPilot es una adaptación a Kotlin del excelente proyecto midea-msmart de @mill1000. Muchísimas gracias: sin él esta aplicación no existiría.</string>
     <string name="credits_link">midea-msmart en GitHub</string>
+    <string name="changelog_0_6_9_title">Versión 0.6.9</string>
+    <string name="changelog_0_6_9_body">•  Nuevo: una única superficie de control para todos los tamaños de pantalla — las tabletas muestran la lista de dispositivos a dos columnas junto a los controles, las pestañas están abajo en todos los dispositivos, la aplicación va a pantalla completa y la velocidad del ventilador estrena un deslizador en todo el rango de 1 a 100 %\n•  Nuevo: interruptor de turbo en Opciones. El estado se relee del equipo, así que el interruptor también muestra el turbo activado desde el mando o la aplicación oficial\n•  Nuevo: renombra o quita los dispositivos guardados con una pulsación larga sobre el dispositivo: práctico para distinguir dos equipos\n•  Nuevo: la aplicación habla ahora 22 idiomas y cubre los idiomas europeos que los iPhone traen de serie\n•  Corregido: los fallos de lectura momentáneos ya no pintan picos a cero en las gráficas del historial; los periodos de apagado reales se siguen mostrando</string>
     <string name="changelog_0_6_7_title">Versión 0.6.7</string>
     <string name="changelog_0_6_7_body">•  Corregido: controlar el aire desde un widget de la pantalla de inicio o desde el reloj ya no restablece el resto de los ajustes. Un toque en el modo también imponía 24 °C y ventilador 60 y apagaba la oscilación, el eco y el ionizador, porque cada comando envía el estado completo y los campos no leídos volvían a los valores predeterminados\n•  Corregido: el aviso de actualización mostraba el Markdown en bruto de las notas de versión («###», «**negrita**», sintaxis de enlaces); ahora se ve texto limpio</string>
     <string name="changelog_0_6_6_title">Versión 0.6.6</string>
