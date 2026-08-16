@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Display &amp; price</string>
     <string name="unit_fahrenheit">Show °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Fullscreen</string>
     <string name="price_per_kwh">Price per kWh</string>
     <string name="price_hint">Used to estimate the total cost from consumption.</string>
+    <string name="settings_fullscreen_hint">Fullscreen hides the status and navigation bars. Useful on a tablet mounted on a wall as a control panel; without it the clock and the navigation buttons stay visible.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Indoor temperature calibration</string>
@@ -286,6 +288,8 @@
     <string name="credits_title">Credits</string>
     <string name="credits_body">ClimaPilot\'s local Midea protocol is a Kotlin port of the excellent midea-msmart project by @mill1000. Huge thanks — without it this app wouldn\'t exist.</string>
     <string name="credits_link">midea-msmart on GitHub</string>
+    <string name="changelog_0_6_10_title">Version 0.6.10</string>
+    <string name="changelog_0_6_10_body">•  Fixed: the app no longer hides the status bar and the navigation buttons. The system bars are back on every screen, so the clock, the notifications and the back gesture stay where they belong and the tabs at the bottom are easy to hit again\n•  New: fullscreen is now a switch under Settings, Display &amp; price. Off by default; worth turning on for a tablet mounted on a wall as a control panel, where the taskbar would otherwise eat a strip of the controls</string>
     <string name="changelog_0_6_9_title">Version 0.6.9</string>
     <string name="changelog_0_6_9_body">•  New: one control surface for every screen size — tablets show the device list beside the controls in two columns, the tabs sit at the bottom on every device, the app runs fullscreen and the fan speed gained a slider across the full 1 to 100 % range\n•  New: a turbo/boost switch under Options. The state is read back from the unit, so the switch also shows boost engaged from the remote or the official app\n•  New: rename or remove saved devices by long-pressing them — handy for telling two units apart\n•  New: the app now speaks 22 languages, covering the European languages iPhones ship with\n•  Fixed: momentary read failures no longer paint zero spikes into the history charts; real off periods still show</string>
     <string name="changelog_0_6_7_title">Version 0.6.7</string>

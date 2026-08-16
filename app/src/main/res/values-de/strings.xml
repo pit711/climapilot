@@ -116,8 +116,10 @@
     <!-- Einstellungen: Anzeige &amp; Preis -->
     <string name="settings_display">Anzeige &amp; Preis</string>
     <string name="unit_fahrenheit">°F (Fahrenheit) anzeigen</string>
+    <string name="settings_fullscreen">Vollbild</string>
     <string name="price_per_kwh">Preis pro kWh</string>
     <string name="price_hint">Für die Schätzung der Gesamtkosten aus dem Verbrauch.</string>
+    <string name="settings_fullscreen_hint">Vollbild blendet Status- und Navigationsleiste aus. Nützlich auf einem Tablet, das als Bedienfeld an der Wand hängt; ohne Vollbild bleiben Uhr und Navigationsknöpfe sichtbar.</string>
 
     <!-- Innentemperatur-Kalibrierung (Optionen-Reiter) -->
     <string name="section_calibration">Innentemperatur-Kalibrierung</string>
@@ -283,6 +285,8 @@
     <string name="credits_title">Danksagung</string>
     <string name="credits_body">Das lokale Midea-Protokoll von ClimaPilot ist eine Kotlin-Portierung des großartigen Projekts midea-msmart von @mill1000. Riesigen Dank — ohne ihre Arbeit gäbe es diese App nicht.</string>
     <string name="credits_link">midea-msmart auf GitHub</string>
+    <string name="changelog_0_6_10_title">Version 0.6.10</string>
+    <string name="changelog_0_6_10_body">•  Behoben: Die App blendet Statusleiste und Navigationsknöpfe nicht mehr aus. Die Systemleisten sind auf jedem Bildschirm zurück, Uhr, Benachrichtigungen und die Zurück-Geste bleiben also, wo sie hingehören, und die Reiter unten lassen sich wieder sicher treffen\n•  Neu: Vollbild ist jetzt ein Schalter unter Einstellungen, Anzeige &amp; Preis. Standardmäßig aus; lohnt sich für ein Tablet, das als Bedienfeld an der Wand hängt und dem die Taskleiste sonst einen Streifen der Steuerfläche wegnimmt</string>
     <string name="changelog_0_6_9_title">Version 0.6.9</string>
     <string name="changelog_0_6_9_body">•  Neu: eine Steuerfläche für jede Bildschirmgröße — Tablets zeigen die Geräteliste zweispaltig neben der Steuerung, die Reiter sitzen auf jedem Gerät unten, die App läuft im Vollbild und die Lüfterstufe bekommt einen Schieber über den vollen Bereich von 1 bis 100 %\n•  Neu: ein Turbo-Schalter unter Optionen. Der Zustand wird vom Gerät zurückgelesen, der Schalter zeigt also auch Boost an, der über die Fernbedienung oder die Original-App eingeschaltet wurde\n•  Neu: gespeicherte Geräte lassen sich per langem Druck umbenennen oder entfernen — praktisch, um zwei Anlagen zu unterscheiden\n•  Neu: die App spricht jetzt 22 Sprachen und deckt damit die europäischen Sprachen ab, mit denen iPhones ausgeliefert werden\n•  Behoben: kurze Lese-Aussetzer malen keine Null-Spitzen mehr in die Verlaufs-Charts; echte Aus-Phasen bleiben sichtbar</string>
     <string name="changelog_0_6_7_title">Version 0.6.7</string>

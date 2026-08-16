@@ -23,6 +23,7 @@ object SettingsRepo {
     private const val K_DIAG_GROUP2 = "diag_group2"
     private const val K_DIAG_GROUP7 = "diag_group7"
     private const val K_POLL_INTERVAL = "poll_interval_sec"
+    private const val K_FULLSCREEN = "fullscreen"
     private const val K_INDOOR_OFFSET = "indoor_offset_"
 
     /** EN: Largest indoor-temperature correction we allow, in kelvin. DE: Größte erlaubte Innentemperatur-Korrektur in Kelvin. */
@@ -45,6 +46,19 @@ object SettingsRepo {
 
     fun setUseFahrenheit(ctx: Context, value: Boolean) =
         prefs(ctx).edit().putBoolean(K_FAHRENHEIT, value).apply()
+
+    /**
+     * EN: Hide the status and navigation bars (off by default). Worth it on a tablet that hangs on the
+     *     wall as a control panel, where the launcher taskbar would eat a strip of the screen; on a
+     *     phone it costs the clock, the notifications and the back gesture bar, so the app asks first.
+     * DE: Status- und Navigationsleiste ausblenden (standardmäßig aus). Lohnt sich auf einem Tablet, das
+     *     als Bedienfeld an der Wand hängt und dem die Taskleiste sonst einen Streifen wegnimmt; auf dem
+     *     Handy kostet es Uhr, Benachrichtigungen und die Zurück-Geste — deshalb fragt die App vorher.
+     */
+    fun fullscreen(ctx: Context): Boolean = prefs(ctx).getBoolean(K_FULLSCREEN, false)
+
+    fun setFullscreen(ctx: Context, value: Boolean) =
+        prefs(ctx).edit().putBoolean(K_FULLSCREEN, value).apply()
 
     /** EN: Price per kWh (0 = not set → no cost shown). DE: Preis pro kWh (0 = nicht gesetzt → keine Kosten). */
     fun pricePerKwh(ctx: Context): Double = prefs(ctx).getFloat(K_PRICE, 0f).toDouble()

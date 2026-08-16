@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Wyświetlanie i cena</string>
     <string name="unit_fahrenheit">Pokazuj °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Pełny ekran</string>
     <string name="price_per_kwh">Cena za kWh</string>
     <string name="price_hint">Służy do szacowania łącznego kosztu na podstawie zużycia.</string>
+    <string name="settings_fullscreen_hint">Pełny ekran ukrywa pasek stanu i pasek nawigacji. Przydatne na tablecie zawieszonym na ścianie jako panel sterowania; bez niego zegar i przyciski nawigacji pozostają widoczne.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Kalibracja temperatury wewnętrznej</string>

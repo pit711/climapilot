@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Εμφάνιση &amp; τιμή</string>
     <string name="unit_fahrenheit">Εμφάνιση °F (Φαρενάιτ)</string>
+    <string name="settings_fullscreen">Πλήρης οθόνη</string>
     <string name="price_per_kwh">Τιμή ανά kWh</string>
     <string name="price_hint">Χρησιμοποιείται για την εκτίμηση του συνολικού κόστους από την κατανάλωση.</string>
+    <string name="settings_fullscreen_hint">Η πλήρης οθόνη αποκρύπτει τη γραμμή κατάστασης και τη γραμμή πλοήγησης. Χρήσιμη σε tablet τοποθετημένο στον τοίχο ως πίνακας ελέγχου· χωρίς αυτήν, το ρολόι και τα κουμπιά πλοήγησης παραμένουν ορατά.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Βαθμονόμηση εσωτερικής θερμοκρασίας</string>

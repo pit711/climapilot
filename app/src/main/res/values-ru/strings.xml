@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Отображение и цена</string>
     <string name="unit_fahrenheit">Показывать °F (Фаренгейт)</string>
+    <string name="settings_fullscreen">Полный экран</string>
     <string name="price_per_kwh">Цена за kWh</string>
     <string name="price_hint">Используется для оценки общей стоимости по потреблению.</string>
+    <string name="settings_fullscreen_hint">Полноэкранный режим скрывает строку состояния и панель навигации. Удобно на планшете, закреплённом на стене как панель управления; без него часы и кнопки навигации остаются видимыми.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Калибровка комнатной температуры</string>

@@ -117,8 +117,10 @@
     <!-- Settings: display & price -->
     <string name="settings_display">Pantalla y precio</string>
     <string name="unit_fahrenheit">Mostrar °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Pantalla completa</string>
     <string name="price_per_kwh">Precio por kWh</string>
     <string name="price_hint">Se usa para estimar el coste total a partir del consumo.</string>
+    <string name="settings_fullscreen_hint">La pantalla completa oculta las barras de estado y de navegación. Útil en una tableta montada en la pared como panel de control; sin ella, el reloj y los botones de navegación siguen visibles.</string>
 
     <!-- Indoor-temperature calibration -->
     <string name="section_calibration">Calibración de la temperatura interior</string>
@@ -284,6 +286,8 @@
     <string name="credits_title">Créditos</string>
     <string name="credits_body">El protocolo Midea local de ClimaPilot es una adaptación a Kotlin del excelente proyecto midea-msmart de @mill1000. Muchísimas gracias: sin él esta aplicación no existiría.</string>
     <string name="credits_link">midea-msmart en GitHub</string>
+    <string name="changelog_0_6_10_title">Versión 0.6.10</string>
+    <string name="changelog_0_6_10_body">•  Corregido: la aplicación ya no oculta la barra de estado ni los botones de navegación. Las barras del sistema vuelven a estar en todas las pantallas, así que el reloj, las notificaciones y el gesto de volver siguen donde corresponde y las pestañas de abajo se pulsan de nuevo sin problema\n•  Nuevo: la pantalla completa es ahora un interruptor en Ajustes, Pantalla y precio. Desactivado de forma predeterminada; merece la pena en una tableta montada en la pared como panel de control, donde la barra de tareas se comería una franja de los mandos</string>
     <string name="changelog_0_6_9_title">Versión 0.6.9</string>
     <string name="changelog_0_6_9_body">•  Nuevo: una única superficie de control para todos los tamaños de pantalla — las tabletas muestran la lista de dispositivos a dos columnas junto a los controles, las pestañas están abajo en todos los dispositivos, la aplicación va a pantalla completa y la velocidad del ventilador estrena un deslizador en todo el rango de 1 a 100 %\n•  Nuevo: interruptor de turbo en Opciones. El estado se relee del equipo, así que el interruptor también muestra el turbo activado desde el mando o la aplicación oficial\n•  Nuevo: renombra o quita los dispositivos guardados con una pulsación larga sobre el dispositivo: práctico para distinguir dos equipos\n•  Nuevo: la aplicación habla ahora 22 idiomas y cubre los idiomas europeos que los iPhone traen de serie\n•  Corregido: los fallos de lectura momentáneos ya no pintan picos a cero en las gráficas del historial; los periodos de apagado reales se siguen mostrando</string>
     <string name="changelog_0_6_7_title">Versión 0.6.7</string>

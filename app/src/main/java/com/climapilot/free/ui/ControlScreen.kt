@@ -224,7 +224,11 @@ private fun TabList(content: LazyListScope.() -> Unit) {
                 .fillMaxWidth()
                 .testTag("control_list")
                 .padding(horizontal = 16.dp),
-            contentPadding = PaddingValues(top = 40.dp, bottom = 12.dp),
+            // EN: Modest top padding — the status bar already supplies the gap above it, and with the
+            //     bars hidden a control surface wants the pixels. DE: Sparsamer oberer Abstand — die
+            //     Statusleiste liefert die Lücke darüber schon, und bei versteckten Leisten will eine
+            //     Steuerfläche die Pixel haben.
+            contentPadding = PaddingValues(top = 16.dp, bottom = 12.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
             content = content,
         )

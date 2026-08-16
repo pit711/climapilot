@@ -117,8 +117,10 @@
     <!-- Settings: display & price -->
     <string name="settings_display">Visualizzazione e prezzo</string>
     <string name="unit_fahrenheit">Mostra °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Schermo intero</string>
     <string name="price_per_kwh">Prezzo per kWh</string>
     <string name="price_hint">Serve a stimare il costo totale a partire dal consumo.</string>
+    <string name="settings_fullscreen_hint">Lo schermo intero nasconde la barra di stato e quella di navigazione. Utile su un tablet montato a parete come pannello di controllo; senza, l\'orologio e i pulsanti di navigazione restano visibili.</string>
 
     <!-- Indoor-temperature calibration -->
     <string name="section_calibration">Calibrazione della temperatura interna</string>
@@ -284,6 +286,8 @@
     <string name="credits_title">Ringraziamenti</string>
     <string name="credits_body">Il protocollo Midea locale di ClimaPilot è un port in Kotlin dell\'ottimo progetto midea-msmart di @mill1000. Grazie di cuore: senza di esso quest\'app non esisterebbe.</string>
     <string name="credits_link">midea-msmart su GitHub</string>
+    <string name="changelog_0_6_10_title">Versione 0.6.10</string>
+    <string name="changelog_0_6_10_body">•  Corretto: l\'app non nasconde più la barra di stato e i pulsanti di navigazione. Le barre di sistema sono tornate su ogni schermata, quindi orologio, notifiche e gesto Indietro restano al loro posto e le schede in basso si toccano di nuovo senza sforzo\n•  Novità: lo schermo intero è ora un interruttore in Impostazioni, Visualizzazione e prezzo. Disattivato di serie; utile per un tablet montato a parete come pannello di controllo, dove la barra delle applicazioni si mangerebbe una striscia dei comandi</string>
     <string name="changelog_0_6_9_title">Versione 0.6.9</string>
     <string name="changelog_0_6_9_body">•  Novità: un\'unica superficie di comando per ogni dimensione di schermo — i tablet mostrano l\'elenco dei dispositivi su due colonne accanto ai comandi, le schede stanno in basso su ogni dispositivo, l\'app gira a schermo intero e la velocità del ventilatore ha ora un cursore sull\'intera gamma da 1 a 100 %\n•  Novità: interruttore turbo/boost nella scheda Opzioni. Lo stato viene riletto dall\'apparecchio, quindi l\'interruttore mostra anche il boost attivato dal telecomando o dall\'app ufficiale\n•  Novità: rinomina o rimuovi i dispositivi salvati con una pressione prolungata sul dispositivo — utile per distinguere due apparecchi\n•  Novità: l\'app ora parla 22 lingue, coprendo le lingue europee preinstallate sugli iPhone\n•  Corretto: i momentanei errori di lettura non disegnano più picchi a zero nei grafici della cronologia; i periodi di spegnimento reali restano visibili</string>
     <string name="changelog_0_6_7_title">Versione 0.6.7</string>

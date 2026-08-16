@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Prikaz &amp; cijena</string>
     <string name="unit_fahrenheit">Prikaži °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Cijeli zaslon</string>
     <string name="price_per_kwh">Cijena po kWh</string>
     <string name="price_hint">Koristi se za procjenu ukupnog troška iz potrošnje.</string>
+    <string name="settings_fullscreen_hint">Cijeli zaslon skriva statusnu i navigacijsku traku. Korisno na tabletu postavljenom na zid kao upravljačka ploča; bez njega sat i navigacijske tipke ostaju vidljivi.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Kalibracija unutarnje temperature</string>

@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Visning &amp; pris</string>
     <string name="unit_fahrenheit">Vis °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Fuld skærm</string>
     <string name="price_per_kwh">Pris pr. kWh</string>
     <string name="price_hint">Bruges til at anslå den samlede pris ud fra forbruget.</string>
+    <string name="settings_fullscreen_hint">Fuld skærm skjuler status- og navigationslinjen. Nyttigt på en tablet, der hænger på væggen som betjeningspanel; uden fuld skærm forbliver uret og navigationsknapperne synlige.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Kalibrering af indetemperatur</string>

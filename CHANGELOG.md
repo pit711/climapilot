@@ -2,6 +2,22 @@
 
 All notable changes to **ClimaPilot (Free)** are documented here · Alle wesentlichen Änderungen an **ClimaPilot (Free)**.
 
+## [0.6.10] — 2026-08-16
+
+### 🇬🇧 English
+**Fixed**
+- **The app no longer hides the status bar and the navigation buttons.** 0.6.9 ran fullscreen on every device, which cost the clock, the notifications and the back gesture bar, and made the tabs at the bottom awkward to hit. The system bars are back on every screen, and the layout keeps its content clear of them. (#14)
+
+**New**
+- **Fullscreen is now a switch** under Settings, Display and price. Off by default; worth turning on for a tablet mounted on a wall as a control panel, where the launcher taskbar would otherwise eat a strip of the controls.
+
+### 🇩🇪 Deutsch
+**Behoben**
+- **Die App blendet Statusleiste und Navigationsknöpfe nicht mehr aus.** 0.6.9 lief auf jedem Gerät im Vollbild, was Uhr, Benachrichtigungen und die Zurück-Geste kostete und die Reiter unten schwer treffbar machte. Die Systemleisten sind auf jedem Bildschirm zurück, und das Layout hält den Inhalt von ihnen frei. (#14)
+
+**Neu**
+- **Vollbild ist jetzt ein Schalter** unter Einstellungen, Anzeige und Preis. Standardmäßig aus; lohnt sich für ein Tablet, das als Bedienfeld an der Wand hängt und dem die Taskleiste sonst einen Streifen der Steuerfläche wegnimmt.
+
 ## [0.6.9] — 2026-08-08
 
 ### 🇬🇧 English

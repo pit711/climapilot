@@ -117,8 +117,10 @@
     <!-- Settings: display & price -->
     <string name="settings_display">Weergave en tarief</string>
     <string name="unit_fahrenheit">°F (Fahrenheit) tonen</string>
+    <string name="settings_fullscreen">Volledig scherm</string>
     <string name="price_per_kwh">Prijs per kWh</string>
     <string name="price_hint">Wordt gebruikt om de totale kosten uit het verbruik te schatten.</string>
+    <string name="settings_fullscreen_hint">Volledig scherm verbergt de status- en navigatiebalk. Handig op een tablet die als bedieningspaneel aan de muur hangt; zonder volledig scherm blijven de klok en de navigatieknoppen zichtbaar.</string>
 
     <!-- Indoor-temperature calibration -->
     <string name="section_calibration">Kalibratie binnentemperatuur</string>
@@ -284,6 +286,8 @@
     <string name="credits_title">Met dank aan</string>
     <string name="credits_body">Het lokale Midea-protocol van ClimaPilot is een Kotlin-port van het uitstekende project midea-msmart van @mill1000. Enorm bedankt — zonder dat project bestond deze app niet.</string>
     <string name="credits_link">midea-msmart op GitHub</string>
+    <string name="changelog_0_6_10_title">Versie 0.6.10</string>
+    <string name="changelog_0_6_10_body">•  Opgelost: de app verbergt de statusbalk en de navigatieknoppen niet meer. De systeembalken zijn op elk scherm terug, dus de klok, de meldingen en het terug-gebaar blijven waar ze horen en de tabbladen onderaan zijn weer goed te raken\n•  Nieuw: volledig scherm is nu een schakelaar onder Instellingen, Weergave en tarief. Standaard uit; de moeite waard voor een tablet die als bedieningspaneel aan de muur hangt, waar de taakbalk anders een strook van de bediening opeet</string>
     <string name="changelog_0_6_9_title">Versie 0.6.9</string>
     <string name="changelog_0_6_9_body">•  Nieuw: één bedieningsvlak voor elk schermformaat — tablets tonen de apparatenlijst in twee kolommen naast de bediening, de tabbladen zitten op elk apparaat onderaan, de app draait schermvullend en de ventilatorsnelheid kreeg een schuifregelaar over het volledige bereik van 1 tot 100 %\n•  Nieuw: een turbo/boost-schakelaar bij Opties. De stand wordt teruggelezen van het apparaat, dus de schakelaar toont ook boost die met de afstandsbediening of de officiële app is ingeschakeld\n•  Nieuw: opgeslagen apparaten hernoemen of verwijderen door er lang op te drukken — handig om twee apparaten uit elkaar te houden\n•  Nieuw: de app spreekt nu 22 talen en dekt daarmee de Europese talen die iPhones standaard meeleveren\n•  Opgelost: kortstondige leesfouten tekenen geen nulpieken meer in de geschiedenisgrafieken; echte uit-periodes blijven gewoon zichtbaar</string>
     <string name="changelog_0_6_7_title">Versie 0.6.7</string>

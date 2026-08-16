@@ -109,7 +109,14 @@ fun DevicesScreen(vm: AcViewModel, onOpenSettings: () -> Unit = {}) {
                 .widthIn(max = 640.dp)
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            contentPadding = PaddingValues(top = inner.calculateTopPadding() + 8.dp, bottom = 32.dp),
+            // EN: The bottom inset comes from the Scaffold, so the last device in the list can be
+            //     scrolled clear of the gesture bar instead of ending underneath it.
+            // DE: Der untere Abstand kommt vom Scaffold, damit sich das letzte Gerät der Liste über die
+            //     Gestenleiste schieben lässt, statt darunter zu enden.
+            contentPadding = PaddingValues(
+                top = inner.calculateTopPadding() + 8.dp,
+                bottom = inner.calculateBottomPadding() + 32.dp,
+            ),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             item { Hero(onOpenSettings) }

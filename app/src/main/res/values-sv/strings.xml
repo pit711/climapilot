@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Visning &amp; pris</string>
     <string name="unit_fahrenheit">Visa °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Helskärm</string>
     <string name="price_per_kwh">Pris per kWh</string>
     <string name="price_hint">Används för att uppskatta totalkostnaden utifrån förbrukningen.</string>
+    <string name="settings_fullscreen_hint">Helskärm döljer status- och navigeringsfältet. Praktiskt på en surfplatta som sitter på väggen som manöverpanel; utan helskärm förblir klockan och navigeringsknapparna synliga.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Kalibrering av innetemperatur</string>

@@ -1,6 +1,7 @@
 package com.climapilot.free
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,12 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.foundation.layout.size
@@ -85,6 +92,32 @@ import com.climapilot.free.ui.SettingsScreen
  * DE: Die einzige Activity der App. Richtet randloses Zeichnen, das Material-Theme und den
  *     Compose-Inhaltsbaum ein. Ein optionales „demo"-Intent-Extra springt direkt in den Demo-Steuer-Bildschirm.
  */
+/**
+ * EN: Show or hide the status and navigation bars, following the "fullscreen" setting. Off by default:
+ *     hiding the system bars costs people the clock, their notifications and the back gesture bar on a
+ *     screen they usually open to change one setting and leave again. It stays available as a choice
+ *     because on a wall-mounted tablet the launcher taskbar eats a strip of the control surface, and
+ *     there the extra rows of pixels are worth more than the clock.
+ * DE: Status- und Navigationsleiste ein- oder ausblenden, gemäß der Einstellung „Vollbild". Standardmäßig
+ *     aus: Versteckte Systemleisten kosten Uhr, Benachrichtigungen und die Zurück-Geste auf einem
+ *     Bildschirm, den man meist öffnet, um eine Einstellung zu ändern und wieder zu gehen. Als Wahl
+ *     bleibt es erhalten, weil auf einem an der Wand hängenden Tablet die Taskleiste einen Streifen der
+ *     Steuerfläche frisst — dort sind die zusätzlichen Pixelzeilen mehr wert als die Uhr.
+ */
+fun applySystemBars(activity: Activity) {
+    WindowCompat.getInsetsController(activity.window, activity.window.decorView).apply {
+        // EN: In fullscreen the bars stay one swipe from the edge away and hide again by themselves,
+        //     so nothing ever becomes unreachable. DE: Im Vollbild bleiben die Leisten einen Wisch vom
+        //     Rand entfernt erreichbar und verbergen sich danach von selbst — nichts wird unerreichbar.
+        systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        if (SettingsRepo.fullscreen(activity)) {
+            hide(WindowInsetsCompat.Type.systemBars())
+        } else {
+            show(WindowInsetsCompat.Type.systemBars())
+        }
+    }
+}
+
 class MainActivity : FragmentActivity() {
     // EN: One-time request so the sleep-timer countdown notification can show on Android 13+. / DE: Einmal-Anfrage, damit die Sleep-Timer-Countdown-Benachrichtigung ab Android 13 erscheinen darf.
     private val requestNotif =
@@ -99,35 +132,18 @@ class MainActivity : FragmentActivity() {
         }
     }
 
-    /**
-     * EN: Run without the system bars. The app is a control surface people glance at from across the
-     *     room, so every row of pixels counts — on a tablet the launcher taskbar alone ate the bottom of
-     *     the options screen. The bars stay one swipe from the edge away, and they auto-hide again, so
-     *     nothing becomes unreachable.
-     * DE: Ohne Systemleisten laufen. Die App ist eine Steuerfläche, auf die man aus einigen Metern schaut
-     *     — jede Pixelzeile zählt; auf dem Tablet fraß allein die Taskleiste den unteren Rand des
-     *     Optionen-Bildschirms. Die Leisten bleiben einen Wisch vom Rand entfernt erreichbar und
-     *     verbergen sich danach wieder von selbst.
-     */
-    private fun goFullscreen() {
-        WindowCompat.getInsetsController(window, window.decorView).apply {
-            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            hide(WindowInsetsCompat.Type.systemBars())
-        }
-    }
-
-    // EN: A dialog or a pulled-down bar hands focus back with the bars visible; hide them again.
-    // DE: Ein Dialog oder eine heruntergezogene Leiste gibt den Fokus mit sichtbaren Leisten zurück —
-    //     also wieder verbergen.
+    // EN: A dialog or a pulled-down bar hands focus back; re-apply what the user asked for.
+    // DE: Ein Dialog oder eine heruntergezogene Leiste gibt den Fokus zurück — wieder anwenden, was
+    //     der Nutzer eingestellt hat.
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) goFullscreen()
+        if (hasFocus) applySystemBars(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        goFullscreen()
+        applySystemBars(this)
         // EN: Allow a launcher shortcut / test to open straight into demo mode. / DE: Erlaubt einer Verknüpfung / einem Test, direkt im Demo-Modus zu starten.
         val startDemo = intent?.getBooleanExtra("demo", false) ?: false
         // EN: Refresh the launcher long-press shortcuts (off / scene / demo). / DE: Die Launcher-Shortcuts (Aus / Szene / Demo) aktualisieren.
@@ -143,7 +159,23 @@ class MainActivity : FragmentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    App(startDemo = startDemo)
+                    // EN: Keep the content out from under the status bar and any display cutout. The
+                    //     bottom edge is deliberately left alone: the navigation bar has to reach the
+                    //     screen edge and colour the strip behind the gesture bar, so each screen
+                    //     handles its own bottom inset. With the bars hidden these are simply zero.
+                    // DE: Den Inhalt unter Statusleiste und Display-Aussparung hervorholen. Der untere
+                    //     Rand bleibt bewusst frei: Die Navigationsleiste muss bis zur Bildschirmkante
+                    //     reichen und den Streifen hinter der Gestenleiste einfärben — den unteren
+                    //     Rand behandelt daher jeder Bildschirm selbst. Bei versteckten Leisten sind
+                    //     diese Abstände schlicht null.
+                    Box(
+                        Modifier.fillMaxSize().windowInsetsPadding(
+                            WindowInsets.safeDrawing
+                                .only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal)
+                        )
+                    ) {
+                        App(startDemo = startDemo)
+                    }
                 }
             }
         }
@@ -211,7 +243,7 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
     // EN: App-wide "update available" prompt (download + confirm install). DE: App-weiter „Update verfügbar"-Hinweis (laden + Installation bestätigen).
     UpdateDialog(vm)
     when {
-        showSettings -> SettingsScreen(vm = vm, onBack = { showSettings = false })
+        showSettings -> AboveNavigationBar { SettingsScreen(vm = vm, onBack = { showSettings = false }) }
         // EN: On a tablet both screens fit side by side: the device list stays put on the left and
         //     tapping an entry only swaps the right half. No screen change, no back button — and
         //     switching between rooms costs one tap instead of three.
@@ -230,7 +262,7 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
                     label = "detail",
                 ) { control ->
                     if (control) {
-                        if (vm.irMode) ControlScreen(vm) else ConnectedScaffold(vm)
+                        if (vm.irMode) AboveNavigationBar { ControlScreen(vm) } else ConnectedScaffold(vm)
                     } else {
                         NoDeviceSelected()
                     }
@@ -251,7 +283,7 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
         ) { control ->
             if (control) {
                 // EN: IR mode is a focused, transmit-only screen (no tabs/readback). DE: Der IR-Modus ist ein fokussierter, reiner Sende-Bildschirm (keine Reiter/Readback).
-                if (vm.irMode) ControlScreen(vm) else ConnectedScaffold(vm)
+                if (vm.irMode) AboveNavigationBar { ControlScreen(vm) } else ConnectedScaffold(vm)
             } else {
                 DevicesScreen(vm, onOpenSettings = { showSettings = true })
             }
@@ -265,6 +297,19 @@ private fun App(vm: AcViewModel = viewModel(), startDemo: Boolean = false) {
             accepted = true
         })
     }
+}
+
+/**
+ * EN: Holds a full-screen page clear of the navigation bar. Screens that carry their own bottom bar
+ *     get that spacing from their Scaffold; the ones that don't — settings, the IR remote — would
+ *     otherwise end their last row underneath the gesture bar.
+ * DE: Hält eine bildschirmfüllende Seite von der Navigationsleiste frei. Bildschirme mit eigener
+ *     unterer Leiste bekommen diesen Abstand von ihrem Scaffold; die ohne — Einstellungen, die
+ *     IR-Fernbedienung — ließen ihre letzte Zeile sonst unter der Gestenleiste enden.
+ */
+@Composable
+private fun AboveNavigationBar(content: @Composable () -> Unit) {
+    Box(Modifier.fillMaxSize().navigationBarsPadding()) { content() }
 }
 
 /**

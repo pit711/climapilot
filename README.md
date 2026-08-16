@@ -3,7 +3,7 @@
 **Control your Midea air conditioner locally over Wi-Fi. No cloud account required.**
 **Steuere deine Midea-Klimaanlage lokal im WLAN. Ganz ohne Cloud-Konto.**
 
-[![Version](https://img.shields.io/badge/version-0.6.9-blue)](https://github.com/pit711/climapilot/releases)
+[![Version](https://img.shields.io/badge/version-0.6.10-blue)](https://github.com/pit711/climapilot/releases)
 [![Platform](https://img.shields.io/badge/platform-Android%208%2B-green)](#)
 [![Languages](https://img.shields.io/badge/languages-22-orange)](#)
 [![Wear OS](https://img.shields.io/badge/Wear%20OS-companion-4285F4?logo=wearos&logoColor=white)](#)
@@ -49,7 +49,8 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 
 **One surface, every screen size**
 - Phones show a single column, tablets show the device list beside the controls in two columns, with options and live status alongside
-- The tabs Control, Options, Scenes, Status and History sit at the bottom on every device, and the app runs fullscreen
+- The tabs Control, Options, Scenes, Status and History sit at the bottom on every device
+- Fullscreen is optional: a switch under Settings, Display and price hides the system bars, which is worth it on a tablet mounted on a wall as a control panel
 - Saved devices can be renamed or removed by long-pressing them, which is handy for telling two units apart
 
 **Timers and automation**
@@ -82,7 +83,7 @@ ClimaPilot is a small, ad-free Android app that talks **directly to your Midea a
 > **Background reliability and trade-offs.** The sleep timer and the weekly planner use a Doze-proof alarm clock so they fire on time even in standby. As a side effect, Android shows the alarm-clock icon in the status bar while a timer or plan is active. When the alarm fires, the actual command runs as a background job with retries, so it also works if the app was closed in the meantime. For dependable timing, allow ClimaPilot to run in the background and disable battery optimisation under **Settings, Reliable timers**, especially on aggressive vendors such as Samsung and Xiaomi. The planner acts on your first connected AC, and saving or editing a plan never sends a command; windows only act at their scheduled start and end times.
 
 ### Install
-1. Download the latest `climapilot-0.6.9.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
+1. Download the latest `climapilot-0.6.10.apk` from the [**Releases**](https://github.com/pit711/climapilot/releases) page.
 2. On your phone, allow installing from unknown sources when prompted.
 3. Open the app, tap **Search devices** (the phone must be on the same Wi-Fi as the AC), and connect.
 
@@ -119,7 +120,8 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 
 **Eine Oberfläche für jede Bildschirmgröße**
 - Handys zeigen eine Spalte, Tablets die Geräteliste neben der Steuerung in zwei Spalten, mit Optionen und Live-Status daneben
-- Die Reiter Steuern, Optionen, Szenen, Status und Verlauf sitzen auf jedem Gerät unten, die App läuft im Vollbild
+- Die Reiter Steuern, Optionen, Szenen, Status und Verlauf sitzen auf jedem Gerät unten
+- Vollbild ist optional: ein Schalter unter Einstellungen, Anzeige und Preis blendet die Systemleisten aus, was sich für ein Tablet lohnt, das als Bedienfeld an der Wand hängt
 - Gespeicherte Geräte lassen sich per langem Druck umbenennen oder entfernen, praktisch um zwei Anlagen zu unterscheiden
 
 **Timer und Automatik**
@@ -152,7 +154,7 @@ ClimaPilot ist eine kleine, werbefreie Android-App, die **direkt mit deiner Mide
 > **Hintergrund-Zuverlässigkeit und Kompromisse.** Sleep-Timer und Wochenplaner nutzen einen Doze-festen Wecker-Alarm, damit sie auch im Standby pünktlich auslösen. Als Nebeneffekt zeigt Android das Wecker-Symbol in der Statusleiste, solange ein Timer oder Plan aktiv ist. Wenn der Alarm auslöst, läuft der eigentliche Befehl als Hintergrund-Auftrag mit Wiederholungen, er funktioniert also auch, wenn die App zwischenzeitlich geschlossen wurde. Für verlässliches Timing die App im Hintergrund erlauben und die Akku-Optimierung deaktivieren, unter **Einstellungen, Zuverlässige Timer**, besonders bei aggressiven Herstellern wie Samsung und Xiaomi. Der Planer wirkt auf die erste verbundene Anlage, und das Speichern oder Bearbeiten eines Plans sendet nie einen Befehl; Fenster wirken nur zu ihren geplanten Start- und Endzeiten.
 
 ### Installation
-1. Lade die aktuelle `climapilot-0.6.9.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
+1. Lade die aktuelle `climapilot-0.6.10.apk` von der [**Releases**](https://github.com/pit711/climapilot/releases)-Seite.
 2. Erlaube auf dem Handy bei der Nachfrage die Installation aus unbekannten Quellen.
 3. Öffne die App, tippe auf **Geräte suchen** (Handy im selben WLAN wie die Anlage) und verbinde dich.
 

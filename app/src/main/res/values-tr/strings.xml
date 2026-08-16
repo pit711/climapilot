@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Gösterim ve fiyat</string>
     <string name="unit_fahrenheit">°F göster (Fahrenheit)</string>
+    <string name="settings_fullscreen">Tam ekran</string>
     <string name="price_per_kwh">kWh başına fiyat</string>
     <string name="price_hint">Tüketimden toplam maliyeti tahmin etmek için kullanılır.</string>
+    <string name="settings_fullscreen_hint">Tam ekran, durum ve gezinme çubuklarını gizler. Duvara kumanda paneli olarak asılan bir tablette kullanışlıdır; tam ekran olmadan saat ve gezinme düğmeleri görünür kalır.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">İç ortam sıcaklığı kalibrasyonu</string>

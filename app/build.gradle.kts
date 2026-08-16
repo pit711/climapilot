@@ -15,8 +15,8 @@ android {
         applicationId = "com.climapilot.free"
         minSdk = 26
         targetSdk = 36
-        versionCode = 19
-        versionName = "0.6.9"
+        versionCode = 20
+        versionName = "0.6.10"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

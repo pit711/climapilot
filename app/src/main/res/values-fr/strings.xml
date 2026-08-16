@@ -117,8 +117,10 @@
     <!-- Settings: display & price -->
     <string name="settings_display">Affichage &amp; tarif</string>
     <string name="unit_fahrenheit">Afficher en °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Plein écran</string>
     <string name="price_per_kwh">Prix du kWh</string>
     <string name="price_hint">Sert à estimer le coût total à partir de la consommation.</string>
+    <string name="settings_fullscreen_hint">Le plein écran masque les barres d\'état et de navigation. Utile sur une tablette fixée au mur en panneau de commande ; sans lui, l\'horloge et les boutons de navigation restent visibles.</string>
 
     <!-- Indoor-temperature calibration -->
     <string name="section_calibration">Étalonnage de la température intérieure</string>
@@ -284,6 +286,8 @@
     <string name="credits_title">Remerciements</string>
     <string name="credits_body">Le protocole Midea local de ClimaPilot est un portage en Kotlin de l\'excellent projet midea-msmart de @mill1000. Un grand merci — sans lui, cette application n\'existerait pas.</string>
     <string name="credits_link">midea-msmart sur GitHub</string>
+    <string name="changelog_0_6_10_title">Version 0.6.10</string>
+    <string name="changelog_0_6_10_body">•  Corrigé : l\'application ne masque plus la barre d\'état ni les boutons de navigation. Les barres système sont de retour sur chaque écran, l\'horloge, les notifications et le geste de retour restent donc à leur place et les onglets du bas se touchent à nouveau sans peine\n•  Nouveau : le plein écran est désormais un interrupteur dans Paramètres, Affichage &amp; tarif. Désactivé par défaut ; utile pour une tablette fixée au mur en panneau de commande, où la barre des tâches mangerait sinon une bande des commandes</string>
     <string name="changelog_0_6_9_title">Version 0.6.9</string>
     <string name="changelog_0_6_9_body">•  Nouveau : une seule surface de commande pour toutes les tailles d\'écran — les tablettes affichent la liste des appareils sur deux colonnes à côté des commandes, les onglets se trouvent en bas sur chaque appareil, l\'application s\'exécute en plein écran et la vitesse de ventilation gagne un curseur sur toute la plage de 1 à 100 %\n•  Nouveau : un interrupteur turbo/boost dans les options. L\'état est relu depuis l\'appareil, l\'interrupteur indique donc aussi un boost activé depuis la télécommande ou l\'application officielle\n•  Nouveau : renommez ou retirez les appareils enregistrés par un appui long sur l\'appareil — pratique pour distinguer deux appareils\n•  Nouveau : l\'application parle désormais 22 langues, couvrant les langues européennes fournies avec les iPhone\n•  Corrigé : les échecs de lecture passagers ne dessinent plus de pics à zéro dans les graphiques de l\'historique ; les vraies périodes d\'arrêt restent visibles</string>
     <string name="changelog_0_6_7_title">Version 0.6.7</string>

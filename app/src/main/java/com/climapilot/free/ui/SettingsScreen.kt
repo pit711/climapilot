@@ -1,5 +1,6 @@
 package com.climapilot.free.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -56,6 +57,7 @@ import com.climapilot.free.R
 import com.climapilot.free.ReliabilityHelper
 import com.climapilot.free.SettingsRepo
 import com.climapilot.free.TokenRepo
+import com.climapilot.free.applySystemBars
 
 // EN: Outbound links for the support and credits cards. / DE: Externe Links für die Unterstützungs- und Danksagungs-Karten.
 private const val KOFI_URL = "https://ko-fi.com/711it"
@@ -97,7 +99,7 @@ fun SettingsScreen(vm: AcViewModel, onBack: () -> Unit) {
             .widthIn(max = 640.dp)
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
-        contentPadding = PaddingValues(top = 48.dp, bottom = 40.dp),
+        contentPadding = PaddingValues(top = 16.dp, bottom = 40.dp),
         // EN: The same rhythm the control surface uses between groups — a caption needs air above it to
         //     read as a heading rather than as a stray line of the group before.
         // DE: Derselbe Rhythmus wie zwischen den Gruppen der Steuerfläche — eine Überschrift braucht Luft
@@ -507,10 +509,21 @@ private fun ImportTokenDialog(onDismiss: () -> Unit, onImport: (String) -> Unit)
  */
 @Composable
 private fun DisplayCard(vm: AcViewModel) {
+    val context = LocalContext.current
     var priceText by remember { mutableStateOf(if (vm.pricePerKwh > 0) vm.pricePerKwh.toString() else "") }
+    var fullscreen by remember { mutableStateOf(SettingsRepo.fullscreen(context)) }
     Column {
         InsetGroup(caption = stringResource(R.string.settings_display)) {
             ToggleRow(stringResource(R.string.unit_fahrenheit), vm.useFahrenheit) { vm.setFahrenheit(it) }
+            Separator()
+            // EN: Applied to the window straight away, so the switch shows its effect while it is
+            //     still under your finger. DE: Wird sofort auf das Fenster angewandt, damit der
+            //     Schalter seine Wirkung zeigt, während der Finger noch darauf liegt.
+            ToggleRow(stringResource(R.string.settings_fullscreen), fullscreen) {
+                fullscreen = it
+                SettingsRepo.setFullscreen(context, it)
+                (context as? Activity)?.let { activity -> applySystemBars(activity) }
+            }
             Separator()
             FieldRow {
                 OutlinedTextField(
@@ -529,6 +542,7 @@ private fun DisplayCard(vm: AcViewModel) {
             }
         }
         GroupFootnote(stringResource(R.string.price_hint))
+        GroupFootnote(stringResource(R.string.settings_fullscreen_hint))
     }
 }
 
@@ -595,6 +609,7 @@ private fun BetaCard(vm: AcViewModel) {
  *     kopierter Blöcke — eine neue Version ist damit eine Zeile.
  */
 private val CHANGELOG = listOf(
+    R.string.changelog_0_6_10_title to R.string.changelog_0_6_10_body,
     R.string.changelog_0_6_9_title to R.string.changelog_0_6_9_body,
     R.string.changelog_0_6_7_title to R.string.changelog_0_6_7_body,
     R.string.changelog_0_6_6_title to R.string.changelog_0_6_6_body,

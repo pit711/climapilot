@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Megjelenítés &amp; ár</string>
     <string name="unit_fahrenheit">°F megjelenítése (Fahrenheit)</string>
+    <string name="settings_fullscreen">Teljes képernyő</string>
     <string name="price_per_kwh">Ár kWh-nként</string>
     <string name="price_hint">Ebből becsüljük az összköltséget a fogyasztás alapján.</string>
+    <string name="settings_fullscreen_hint">A teljes képernyő elrejti az állapotsávot és a navigációs sávot. Falra szerelt, vezérlőpultként használt táblagépen hasznos; nélküle az óra és a navigációs gombok láthatók maradnak.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Beltéri hőmérséklet kalibrálása</string>

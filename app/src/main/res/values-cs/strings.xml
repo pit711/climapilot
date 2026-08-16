@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Zobrazení &amp; cena</string>
     <string name="unit_fahrenheit">Zobrazovat °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Celá obrazovka</string>
     <string name="price_per_kwh">Cena za kWh</string>
     <string name="price_hint">Slouží k odhadu celkových nákladů ze spotřeby.</string>
+    <string name="settings_fullscreen_hint">Režim celé obrazovky skryje stavový a navigační panel. Hodí se na tabletu pověšeném na zdi jako ovládací panel; bez něj zůstanou hodiny i navigační tlačítka viditelné.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Kalibrace vnitřní teploty</string>

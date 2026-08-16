@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Visning &amp; pris</string>
     <string name="unit_fahrenheit">Vis °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Fullskjerm</string>
     <string name="price_per_kwh">Pris per kWh</string>
     <string name="price_hint">Brukes til å anslå total kostnad ut fra forbruket.</string>
+    <string name="settings_fullscreen_hint">Fullskjerm skjuler status- og navigasjonslinjen. Nyttig på et nettbrett som henger på veggen som betjeningspanel; uten fullskjerm forblir klokken og navigasjonsknappene synlige.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Kalibrering av innetemperatur</string>

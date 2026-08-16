@@ -117,8 +117,10 @@
     <!-- Settings: display & price -->
     <string name="settings_display">Visualização e preço</string>
     <string name="unit_fahrenheit">Mostrar °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Ecrã inteiro</string>
     <string name="price_per_kwh">Preço por kWh</string>
     <string name="price_hint">Serve para estimar o custo total a partir do consumo.</string>
+    <string name="settings_fullscreen_hint">O ecrã inteiro oculta as barras de estado e de navegação. Útil num tablet montado na parede como painel de comando; sem ele, o relógio e os botões de navegação continuam visíveis.</string>
 
     <!-- Indoor-temperature calibration -->
     <string name="section_calibration">Calibração da temperatura interior</string>
@@ -284,6 +286,8 @@
     <string name="credits_title">Agradecimentos</string>
     <string name="credits_body">O protocolo Midea local do ClimaPilot é uma adaptação em Kotlin do excelente projeto midea-msmart de @mill1000. Muito obrigado — sem ele esta aplicação não existiria.</string>
     <string name="credits_link">midea-msmart no GitHub</string>
+    <string name="changelog_0_6_10_title">Versão 0.6.10</string>
+    <string name="changelog_0_6_10_body">•  Corrigido: a aplicação já não oculta a barra de estado nem os botões de navegação. As barras do sistema estão de volta em todos os ecrãs, pelo que o relógio, as notificações e o gesto para retroceder ficam onde devem estar e os separadores em baixo voltam a ser fáceis de tocar\n•  Novidade: o ecrã inteiro é agora um interruptor em Definições, Visualização e preço. Desativado por predefinição; vale a pena num tablet montado na parede como painel de comando, onde a barra de tarefas comeria uma faixa dos comandos</string>
     <string name="changelog_0_6_9_title">Versão 0.6.9</string>
     <string name="changelog_0_6_9_body">•  Novo: uma única superfície de controlo para todos os tamanhos de ecrã — os tablets mostram a lista de dispositivos em duas colunas ao lado dos controlos, os separadores ficam em baixo em todos os dispositivos, a aplicação corre em ecrã inteiro e a velocidade da ventoinha ganhou um cursor em toda a gama de 1 a 100 %\n•  Novo: um interruptor turbo/boost no separador Opções. O estado é relido do aparelho, pelo que o interruptor mostra também o boost ativado a partir do comando ou da aplicação oficial\n•  Novo: mude o nome ou remova os dispositivos guardados com um toque longo sobre o dispositivo — útil para distinguir dois aparelhos\n•  Novo: a aplicação fala agora 22 idiomas, abrangendo os idiomas europeus que os iPhones trazem de fábrica\n•  Corrigido: falhas de leitura momentâneas já não desenham picos a zero nos gráficos do histórico; os períodos realmente desligados continuam a aparecer</string>
     <string name="changelog_0_6_7_title">Versão 0.6.7</string>

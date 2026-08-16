@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Näyttö &amp; hinta</string>
     <string name="unit_fahrenheit">Näytä °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Koko näyttö</string>
     <string name="price_per_kwh">kWh-hinta</string>
     <string name="price_hint">Käytetään kokonaiskustannusten arviointiin kulutuksen perusteella.</string>
+    <string name="settings_fullscreen_hint">Koko näyttö piilottaa tila- ja navigointipalkin. Kätevä seinällä ohjauspaneelina olevassa tabletissa; ilman sitä kello ja navigointipainikkeet pysyvät näkyvissä.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Sisälämpötilan kalibrointi</string>

@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Pantalla i preu</string>
     <string name="unit_fahrenheit">Mostra °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Pantalla completa</string>
     <string name="price_per_kwh">Preu per kWh</string>
     <string name="price_hint">S\'utilitza per estimar el cost total a partir del consum.</string>
+    <string name="settings_fullscreen_hint">La pantalla completa amaga les barres d\'estat i de navegació. Útil en una tauleta muntada a la paret com a plafó de control; sense ella, el rellotge i els botons de navegació continuen visibles.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Calibratge de la temperatura interior</string>

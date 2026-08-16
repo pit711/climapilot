@@ -119,8 +119,10 @@
     <!-- Settings: display &amp; price -->
     <string name="settings_display">Afișaj &amp; preț</string>
     <string name="unit_fahrenheit">Afișează °F (Fahrenheit)</string>
+    <string name="settings_fullscreen">Ecran complet</string>
     <string name="price_per_kwh">Preț per kWh</string>
     <string name="price_hint">Folosit pentru a estima costul total din consum.</string>
+    <string name="settings_fullscreen_hint">Ecranul complet ascunde bara de stare și bara de navigare. Util pe o tabletă montată pe perete ca panou de comandă; fără el, ceasul și butoanele de navigare rămân vizibile.</string>
 
     <!-- Indoor-temperature calibration (Options tab) -->
     <string name="section_calibration">Calibrarea temperaturii interioare</string>
