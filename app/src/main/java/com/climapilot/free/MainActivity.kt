@@ -87,12 +87,6 @@ import com.climapilot.free.ui.MideaTheme
 import com.climapilot.free.ui.SettingsScreen
 
 /**
- * EN: The app's single Activity. Sets up edge-to-edge drawing, the Material theme and the Compose
- *     content tree. An optional "demo" intent extra jumps straight into the demo control screen.
- * DE: Die einzige Activity der App. Richtet randloses Zeichnen, das Material-Theme und den
- *     Compose-Inhaltsbaum ein. Ein optionales „demo"-Intent-Extra springt direkt in den Demo-Steuer-Bildschirm.
- */
-/**
  * EN: Show or hide the status and navigation bars, following the "fullscreen" setting. Off by default:
  *     hiding the system bars costs people the clock, their notifications and the back gesture bar on a
  *     screen they usually open to change one setting and leave again. It stays available as a choice
@@ -118,6 +112,12 @@ fun applySystemBars(activity: Activity) {
     }
 }
 
+/**
+ * EN: The app's single Activity. Sets up edge-to-edge drawing, the Material theme and the Compose
+ *     content tree. An optional "demo" intent extra jumps straight into the demo control screen.
+ * DE: Die einzige Activity der App. Richtet randloses Zeichnen, das Material-Theme und den
+ *     Compose-Inhaltsbaum ein. Ein optionales „demo"-Intent-Extra springt direkt in den Demo-Steuer-Bildschirm.
+ */
 class MainActivity : FragmentActivity() {
     // EN: One-time request so the sleep-timer countdown notification can show on Android 13+. / DE: Einmal-Anfrage, damit die Sleep-Timer-Countdown-Benachrichtigung ab Android 13 erscheinen darf.
     private val requestNotif =
