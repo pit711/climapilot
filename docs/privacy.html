@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ClimaPilot – Datenschutzerklärung / Privacy Policy</title>
+<title>ClimaPilot – Datenschutzerklärung / Privacy Policy / Confidentialité</title>
 <style>
   :root { color-scheme: light dark; }
   * { box-sizing: border-box; }
@@ -11,104 +11,289 @@
          color: #1c1c1e; background: #f5f5f7; }
   .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
   h1 { font-size: 1.9rem; margin: .2em 0 .1em; }
-  h2 { font-size: 1.25rem; margin: 1.8em 0 .4em; }
+  h2 { font-size: 1.2rem; margin: 1.8em 0 .4em; }
   .sub { color: #6b6b70; margin-top: 0; }
   .card { background: #fff; border-radius: 16px; padding: 20px 24px; margin: 22px 0;
           box-shadow: 0 1px 3px rgba(0,0,0,.06); }
   a { color: #0a84ff; }
   ul { padding-left: 1.2em; }
-  li { margin: .3em 0; }
-  .lang { color: #6b6b70; font-size: .95rem; }
-  hr { border: none; border-top: 1px solid #e2e2e6; margin: 40px 0; }
+  li { margin: .35em 0; }
+  nav.lang { font-size: .95rem; color: #6b6b70; }
+  nav.lang a { margin-right: .8em; }
+  hr { border: none; border-top: 1px solid #e2e2e6; margin: 48px 0; }
   @media (prefers-color-scheme: dark) {
     body { color: #f2f2f7; background: #000; }
     .card { background: #1c1c1e; box-shadow: none; }
-    .sub, .lang { color: #98989f; }
+    .sub, nav.lang { color: #98989f; }
     hr { border-top-color: #333; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <nav class="lang"><a href="#de">Deutsch</a><a href="#en">English</a><a href="#fr">Français</a></nav>
+
+  <!-- ─────────────────────────── DEUTSCH ─────────────────────────── -->
+  <section id="de" lang="de">
   <h1>ClimaPilot – Datenschutzerklärung</h1>
-  <p class="sub">Stand: 3. Juli 2026</p>
+  <p class="sub">Stand: 29. September 2026</p>
 
   <div class="card">
-    <p><strong>Kurzfassung:</strong> ClimaPilot steuert deine Midea-Klimaanlage lokal in deinem WLAN. Die App
-    braucht kein Benutzerkonto und erhebt, speichert oder überträgt <strong>keine personenbezogenen Daten</strong>
-    an uns oder Dritte.</p>
+    <p><strong>Kurzfassung:</strong> ClimaPilot steuert deine Midea-Klimaanlage direkt in deinem WLAN. Wir
+    betreiben keinen Server, es gibt kein Konto bei uns, keine Werbung, keine Analyse und kein Tracking. Wir
+    erhalten keine personenbezogenen Daten von dir. Nur für den einmaligen Abruf der Zugangsdaten deiner Anlage
+    kann die App mit der Cloud des Herstellers Midea sprechen – wie genau, steht unten.</p>
   </div>
 
-  <h2>Wer wir sind</h2>
-  <p>Verantwortlich für ClimaPilot: Peter Holzhauser. Kontakt: <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
+  <h2>1. Verantwortlicher</h2>
+  <p>Peter Holzhauser<br>Kontakt: <a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
 
-  <h2>Welche Daten verarbeitet werden</h2>
+  <h2>2. Was die App verarbeitet</h2>
   <ul>
-    <li><strong>Keine Registrierung, kein Konto, keine Anmeldung.</strong> Wir sammeln keine Namen, E-Mail-Adressen,
-        Standort- oder Nutzungsdaten.</li>
-    <li><strong>Lokale Steuerung:</strong> Die Kommunikation mit deiner Klimaanlage findet ausschließlich direkt in
-        deinem lokalen WLAN statt. Diese Daten verlassen dein Netzwerk nicht und erreichen uns nie.</li>
-    <li><strong>Einmaliger Token-Abruf:</strong> Beim ersten Verbinden mit einem Gerät wird einmalig ein
-        Zugriffs-Token über die NetHome-Plus-Cloud von Midea abgerufen (über ein in der App hinterlegtes
-        Demo-Konto). Dabei wird die technische Geräte-Kennung deiner Anlage übertragen – keine personenbezogenen
-        Daten von dir. Dieser Vorgang unterliegt den Bedingungen von Midea. Danach läuft alles lokal.</li>
-    <li><strong>Speicherung auf dem Gerät:</strong> Geräte-Einstellungen, das Token und deine Szenen werden lokal auf
-        deinem iPhone gespeichert.</li>
-    <li><strong>Optionale iCloud-Sicherung:</strong> Wenn du sie aktivierst, werden deine Geräte, das Token und
-        Szenen in deiner <em>privaten</em> iCloud (Apple) gesichert, damit du sie auf ein anderes Gerät übertragen
-        kannst. Diese Daten liegen ausschließlich in deinem iCloud-Konto, nicht bei uns.</li>
-    <li><strong>Lokales Netzwerk:</strong> Die App fragt die Berechtigung „Lokales Netzwerk" an, um deine Anlage im
-        WLAN zu finden und zu steuern.</li>
+    <li><strong>Lokales Netzwerk:</strong> Die App findet und steuert die Anlage direkt im WLAN (Berechtigung
+        „Lokales Netzwerk"). Steuerbefehle, Messwerte und Verbrauchsdaten laufen nur zwischen deinem iPhone und
+        der Anlage und erreichen uns nie.</li>
+    <li><strong>Zugangsdaten der Anlage (Token und Schlüssel):</strong> Neuere Midea-Anlagen verlangen für die
+        lokale Verbindung einmalig ein Token und einen Schlüssel. Dafür gibt es drei Wege:
+      <ul>
+        <li><em>Automatischer Abruf:</em> Die App fragt die NetHome-Plus-Cloud von Midea über ein in der App
+            hinterlegtes, gemeinsam genutztes Demo-Konto. Übertragen wird dabei nur eine technische Kennung, die
+            aus der Geräte-Kennung deiner Anlage berechnet wird – keine Angaben zu deiner Person.</li>
+        <li><em>Anmeldung mit deinem eigenen Midea-Konto (freiwillig):</em> Wenn du „Mit Midea-Konto anmelden"
+            wählst, sendet die App deine E-Mail-Adresse und dein Passwort verschlüsselt (HTTPS) direkt an die
+            SmartHome-Cloud von Midea – das Passwort nur als Prüfsumme (Hash). Einziger Zweck ist, Token und
+            Schlüssel deiner Anlage abzurufen. ClimaPilot speichert weder dein Passwort noch deine E-Mail-Adresse,
+            und nichts davon geht an uns. Für die Verarbeitung bei Midea gilt die Datenschutzerklärung von Midea;
+            deren Server können außerhalb der EU stehen.</li>
+        <li><em>Eintragen von Hand:</em> Du kannst Token und Schlüssel aus einer bestehenden Einrichtung (z. B.
+            Home Assistant) selbst eintragen. Dann findet kein Cloud-Abruf statt.</li>
+      </ul>
+      Danach läuft die Steuerung ohne Internet und ohne Cloud.</li>
+    <li><strong>Speicherung auf dem Gerät:</strong> Gespeicherte Anlagen und ihre Namen, Token und Schlüssel,
+        Szenen, Einstellungen, der Verlauf (Temperaturen, Verbrauch) und Diagnose-Mitschriften liegen nur auf
+        deinem iPhone. Widgets und Siri-Kurzbefehle lesen sie über einen geschützten App-Gruppen-Speicher auf
+        demselben Gerät.</li>
+    <li><strong>iCloud-Sicherung (freiwillig):</strong> Wenn du sie einschaltest, werden deine Anlagen, ihre Namen,
+        Token und Schlüssel sowie deine Szenen in deiner <em>privaten</em> iCloud gesichert, damit du sie auf ein
+        anderes iPhone übertragen kannst. Diese Daten liegen in deinem iCloud-Konto bei Apple, nicht bei uns.</li>
+    <li><strong>Export und Teilen:</strong> Backup-Dateien, Diagnose-Protokolle und Messwert-Tabellen verlassen das
+        Gerät nur, wenn du sie selbst über die iOS-Teilen-Funktion weitergibst. Eine Backup-Datei enthält Token und
+        Schlüssel – gib sie nur weiter, wenn du das willst.</li>
+    <li><strong>Siri und Kurzbefehle:</strong> Sprachbefehle verarbeitet Apple nach den Datenschutzbestimmungen von
+        Apple. Die Aktion selbst führt die App lokal im WLAN aus.</li>
+    <li><strong>Freiwillige Unterstützung:</strong> Die Links zu Ko-fi und PayPal öffnen die Seiten dieser Anbieter.
+        Was du dort eingibst, verarbeiten diese Anbieter nach ihren eigenen Datenschutzbestimmungen.</li>
+    <li><strong>App Store und TestFlight:</strong> Apple verarbeitet beim Laden und Aktualisieren der App Daten nach
+        den eigenen Bestimmungen. Absturzberichte und Nutzungsstatistiken erhalten wir nur, wenn du das in den
+        iOS-Einstellungen erlaubt hast, und dann nur zusammengefasst ohne Personenbezug. Feedback aus TestFlight
+        (Kommentar, Screenshot) sehen wir nur, wenn du es selbst abschickst.</li>
   </ul>
+  <p>Die App nutzt weder Standort noch Bluetooth, Kamera, Mikrofon, Kontakte oder Fotos.</p>
 
-  <h2>Kein Tracking</h2>
-  <p>ClimaPilot enthält <strong>keine</strong> Analyse-Tools, keine Werbung und keine Tracker Dritter.</p>
+  <h2>3. Keine Weitergabe, kein Tracking</h2>
+  <p>ClimaPilot enthält keine Analyse-, Werbe- oder Tracking-Bibliotheken. Wir verkaufen oder teilen keine Daten.</p>
 
-  <h2>Deine Rechte</h2>
-  <p>Da wir keine personenbezogenen Daten erheben, gibt es bei uns nichts zu löschen oder herauszugeben. Lokale
-     Daten kannst du jederzeit entfernen, indem du das Gerät in der App entfernst oder die App löschst. Bei Fragen:
+  <h2>4. Diese Webseite</h2>
+  <p>Diese Seiten liegen bei GitHub Pages (GitHub Inc.). Beim Aufruf verarbeitet GitHub technisch notwendige
+     Daten wie deine IP-Adresse in Server-Protokollen. Wir setzen keine Cookies und keine Analyse-Werkzeuge ein.</p>
+
+  <h2>5. Rechtsgrundlagen</h2>
+  <p>Soweit die DSGVO gilt: Die Verarbeitung dient der Bereitstellung der von dir gewünschten Funktion (Art. 6
+     Abs. 1 lit. b DSGVO). Freiwillige Funktionen wie die Anmeldung mit deinem Midea-Konto oder die iCloud-Sicherung
+     beruhen auf deiner Entscheidung, sie zu nutzen (Art. 6 Abs. 1 lit. a DSGVO); du kannst sie jederzeit
+     ausschalten bzw. nicht mehr verwenden.</p>
+
+  <h2>6. Deine Rechte</h2>
+  <p>Da bei uns keine personenbezogenen Daten gespeichert werden, können wir dazu keine Auskunft, Berichtigung oder
+     Löschung durchführen. Lokale Daten entfernst du, indem du die Anlage in der App entfernst oder die App löschst;
+     die iCloud-Sicherung verwaltest du in den iCloud-Einstellungen deines iPhones. Für Daten bei Midea wende dich an
+     Midea. Du hast das Recht, dich bei einer Datenschutzaufsichtsbehörde zu beschweren. Fragen:
      <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
 
-  <p><em>Hinweis: ClimaPilot ist eine unabhängige App und steht in keiner Verbindung zu Midea.</em></p>
+  <h2>7. Kinder</h2>
+  <p>Die App richtet sich nicht gezielt an Kinder und erhebt keine Daten von Kindern.</p>
+
+  <h2>8. Änderungen</h2>
+  <p>Änderungen dieser Erklärung veröffentlichen wir auf dieser Seite.</p>
+
+  <p><em>ClimaPilot ist eine unabhängige App und steht in keiner Verbindung zu Midea. Midea, MSmartHome und
+     NetHome Plus sind Marken ihrer jeweiligen Inhaber.</em></p>
+  </section>
 
   <hr>
 
-  <h1>ClimaPilot – Privacy Policy <span class="lang">(English)</span></h1>
-  <p class="sub">Last updated: July 3, 2026</p>
+  <!-- ─────────────────────────── ENGLISH ─────────────────────────── -->
+  <section id="en" lang="en">
+  <h1>ClimaPilot – Privacy Policy</h1>
+  <p class="sub">Effective: 29 September 2026</p>
 
   <div class="card">
-    <p><strong>In short:</strong> ClimaPilot controls your Midea air conditioner locally on your Wi-Fi. The app needs
-    no account and does <strong>not collect, store or transmit any personal data</strong> to us or third parties.</p>
+    <p><strong>In short:</strong> ClimaPilot controls your Midea air conditioner directly on your Wi-Fi. We run no
+    server, there is no account with us, no ads, no analytics and no tracking. We receive no personal data from you.
+    Only to fetch your unit's access credentials once, the app may talk to the manufacturer Midea's cloud – details
+    below.</p>
   </div>
 
-  <h2>Who we are</h2>
-  <p>ClimaPilot is provided by Peter Holzhauser. Contact: <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
+  <h2>1. Controller</h2>
+  <p>Peter Holzhauser<br>Contact: <a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
 
-  <h2>What data is processed</h2>
+  <h2>2. What the app processes</h2>
   <ul>
-    <li><strong>No sign-up, no account, no login.</strong> We collect no names, e-mail addresses, location or usage data.</li>
-    <li><strong>Local control:</strong> Communication with your air conditioner happens exclusively and directly on
-        your local Wi-Fi. This data never leaves your network and never reaches us.</li>
-    <li><strong>One-time token fetch:</strong> When you first connect to a device, the app fetches an access token
-        once via Midea's NetHome Plus cloud (using a shared demo account bundled with the app). This transmits your
-        unit's technical device identifier – no personal data about you. This step is subject to Midea's terms.
-        Afterwards everything runs locally.</li>
-    <li><strong>On-device storage:</strong> Device settings, the token and your scenes are stored locally on your iPhone.</li>
-    <li><strong>Optional iCloud backup:</strong> If you enable it, your devices, the token and scenes are backed up to
-        your <em>private</em> iCloud (Apple) so you can transfer them to another device. This data resides solely in
-        your iCloud account, not with us.</li>
-    <li><strong>Local network:</strong> The app requests the "Local Network" permission to find and control your unit on Wi-Fi.</li>
+    <li><strong>Local network:</strong> The app finds and controls the unit directly on your Wi-Fi ("Local Network"
+        permission). Commands, readings and energy data travel only between your iPhone and the unit and never
+        reach us.</li>
+    <li><strong>Unit credentials (token and key):</strong> Newer Midea units require a token and a key once for the
+        local connection. There are three ways to get them:
+      <ul>
+        <li><em>Automatic fetch:</em> the app asks Midea's NetHome Plus cloud using a shared demo account built into
+            the app. Only a technical identifier derived from your unit's device ID is sent – nothing about you.</li>
+        <li><em>Sign-in with your own Midea account (optional):</em> if you choose "Sign in with Midea account", the
+            app sends your e-mail address and password encrypted (HTTPS) directly to Midea's SmartHome cloud – the
+            password only as a hash. The sole purpose is to fetch your unit's token and key. ClimaPilot stores
+            neither your password nor your e-mail address, and none of it reaches us. Processing at Midea is
+            governed by Midea's privacy policy; their servers may be located outside the EU.</li>
+        <li><em>Manual entry:</em> you can enter the token and key from an existing setup (e.g. Home Assistant)
+            yourself. No cloud request takes place then.</li>
+      </ul>
+      Afterwards control works without internet and without any cloud.</li>
+    <li><strong>On-device storage:</strong> saved units and their names, token and key, scenes, settings, history
+        (temperatures, energy) and diagnostic logs are kept on your iPhone only. Widgets and Siri shortcuts read them
+        through a protected app-group container on the same device.</li>
+    <li><strong>iCloud backup (optional):</strong> if you turn it on, your units, their names, token and key and your
+        scenes are backed up to your <em>private</em> iCloud so you can move them to another iPhone. This data lives
+        in your iCloud account at Apple, not with us.</li>
+    <li><strong>Export and sharing:</strong> backup files, diagnostic logs and data tables leave the device only if
+        you share them yourself via the iOS share sheet. A backup file contains the token and key – only pass it on
+        if you want to.</li>
+    <li><strong>Siri and Shortcuts:</strong> voice requests are processed by Apple under Apple's privacy policy. The
+        action itself runs locally on your Wi-Fi.</li>
+    <li><strong>Voluntary support:</strong> the Ko-fi and PayPal links open those providers' websites. Whatever you
+        enter there is processed by them under their own privacy policies.</li>
+    <li><strong>App Store and TestFlight:</strong> Apple processes data when you download and update the app under
+        its own terms. We receive crash reports and usage statistics only if you allowed this in iOS settings, and
+        then only aggregated without personal reference. We see TestFlight feedback (comment, screenshot) only if
+        you send it yourself.</li>
   </ul>
+  <p>The app uses no location, Bluetooth, camera, microphone, contacts or photos.</p>
 
-  <h2>No tracking</h2>
-  <p>ClimaPilot contains <strong>no</strong> analytics, no ads and no third-party trackers.</p>
+  <h2>3. No sharing, no tracking</h2>
+  <p>ClimaPilot contains no analytics, advertising or tracking libraries. We do not sell or share any data.</p>
 
-  <h2>Your rights</h2>
-  <p>Because we collect no personal data, there is nothing on our side to delete or disclose. You can remove local
-     data at any time by removing the device in the app or deleting the app. Questions:
-     <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
+  <h2>4. This website</h2>
+  <p>These pages are hosted on GitHub Pages (GitHub Inc.). When you visit them, GitHub processes technically
+     necessary data such as your IP address in server logs. We use no cookies and no analytics.</p>
 
-  <p><em>Note: ClimaPilot is an independent app and is not affiliated with Midea.</em></p>
+  <h2>5. Legal basis</h2>
+  <p>Where the GDPR applies, processing serves to provide the function you requested (Art. 6(1)(b) GDPR). Optional
+     features such as signing in with your Midea account or the iCloud backup are based on your choice to use them
+     (Art. 6(1)(a) GDPR); you can switch them off or stop using them at any time.</p>
+
+  <h2>6. Your rights</h2>
+  <p>Since we store no personal data, we cannot provide access, rectification or erasure for it. Remove local data by
+     removing the unit in the app or deleting the app; manage the iCloud backup in your iPhone's iCloud settings. For
+     data held by Midea, contact Midea. You have the right to lodge a complaint with a data protection authority.
+     Questions: <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
+
+  <h2>7. Children</h2>
+  <p>The app is not directed at children and collects no data from children.</p>
+
+  <h2>8. Changes</h2>
+  <p>Changes to this policy will be published on this page.</p>
+
+  <p><em>ClimaPilot is an independent app and is not affiliated with Midea. Midea, MSmartHome and NetHome Plus are
+     trademarks of their respective owners.</em></p>
+  </section>
+
+  <hr>
+
+  <!-- ─────────────────────────── FRANÇAIS ─────────────────────────── -->
+  <section id="fr" lang="fr">
+  <h1>ClimaPilot – Politique de confidentialité</h1>
+  <p class="sub">En vigueur : 29 septembre 2026</p>
+
+  <div class="card">
+    <p><strong>En bref :</strong> ClimaPilot pilote votre climatiseur Midea directement sur votre Wi-Fi. Nous
+    n’exploitons aucun serveur, il n’existe aucun compte chez nous, ni publicité, ni analyse, ni pistage. Nous ne
+    recevons aucune donnée personnelle vous concernant. Uniquement pour récupérer une fois les identifiants d’accès
+    de votre appareil, l’app peut dialoguer avec le cloud du fabricant Midea – détails ci-dessous.</p>
+  </div>
+
+  <h2>1. Responsable du traitement</h2>
+  <p>Peter Holzhauser<br>Contact : <a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
+
+  <h2>2. Données traitées par l’app</h2>
+  <ul>
+    <li><strong>Réseau local :</strong> l’app trouve et pilote le climatiseur directement sur votre Wi-Fi
+        (autorisation « Réseau local »). Commandes, mesures et consommation circulent uniquement entre votre iPhone
+        et l’appareil et ne nous parviennent jamais.</li>
+    <li><strong>Identifiants de l’appareil (jeton et clé) :</strong> les appareils Midea récents exigent une fois un
+        jeton et une clé pour la connexion locale. Trois possibilités :
+      <ul>
+        <li><em>Récupération automatique :</em> l’app interroge le cloud NetHome Plus de Midea avec un compte de
+            démonstration partagé intégré à l’app. Seul un identifiant technique dérivé de l’identifiant de votre
+            appareil est transmis – rien sur vous.</li>
+        <li><em>Connexion avec votre propre compte Midea (facultatif) :</em> si vous choisissez « Se connecter avec
+            un compte Midea », l’app envoie votre adresse e-mail et votre mot de passe de façon chiffrée (HTTPS)
+            directement au cloud SmartHome de Midea – le mot de passe uniquement sous forme d’empreinte (hash). Le
+            seul but est de récupérer le jeton et la clé de votre appareil. ClimaPilot n’enregistre ni votre mot de
+            passe ni votre adresse e-mail, et rien ne nous est transmis. Le traitement chez Midea relève de la
+            politique de confidentialité de Midea ; ses serveurs peuvent se trouver hors de l’UE.</li>
+        <li><em>Saisie manuelle :</em> vous pouvez saisir vous-même le jeton et la clé d’une installation existante
+            (p. ex. Home Assistant). Aucune requête cloud n’a alors lieu.</li>
+      </ul>
+      Ensuite, le pilotage fonctionne sans Internet et sans cloud.</li>
+    <li><strong>Stockage sur l’appareil :</strong> les climatiseurs enregistrés et leurs noms, jeton et clé, scènes,
+        réglages, historique (températures, consommation) et journaux de diagnostic restent uniquement sur votre
+        iPhone. Les widgets et raccourcis Siri y accèdent via un espace de groupe d’apps protégé sur le même
+        appareil.</li>
+    <li><strong>Sauvegarde iCloud (facultative) :</strong> si vous l’activez, vos climatiseurs, leurs noms, jeton et
+        clé ainsi que vos scènes sont sauvegardés dans votre iCloud <em>privé</em> afin de les transférer vers un
+        autre iPhone. Ces données se trouvent dans votre compte iCloud chez Apple, pas chez nous.</li>
+    <li><strong>Export et partage :</strong> fichiers de sauvegarde, journaux de diagnostic et tableaux de mesures ne
+        quittent l’appareil que si vous les partagez vous-même via la feuille de partage d’iOS. Un fichier de
+        sauvegarde contient le jeton et la clé – ne le transmettez que si vous le souhaitez.</li>
+    <li><strong>Siri et Raccourcis :</strong> les commandes vocales sont traitées par Apple selon sa politique de
+        confidentialité. L’action elle-même s’exécute localement sur votre Wi-Fi.</li>
+    <li><strong>Soutien volontaire :</strong> les liens Ko-fi et PayPal ouvrent les sites de ces prestataires. Ce que
+        vous y saisissez est traité par eux selon leurs propres règles.</li>
+    <li><strong>App Store et TestFlight :</strong> Apple traite des données lors du téléchargement et des mises à jour
+        selon ses propres conditions. Nous ne recevons des rapports de plantage et des statistiques d’utilisation que
+        si vous l’avez autorisé dans les réglages d’iOS, et uniquement sous forme agrégée et anonyme. Nous ne voyons
+        les retours TestFlight (commentaire, capture) que si vous les envoyez vous-même.</li>
+  </ul>
+  <p>L’app n’utilise ni la localisation, ni le Bluetooth, ni l’appareil photo, le micro, les contacts ou les photos.</p>
+
+  <h2>3. Aucun partage, aucun pistage</h2>
+  <p>ClimaPilot ne contient aucune bibliothèque d’analyse, de publicité ou de pistage. Nous ne vendons ni ne
+     partageons aucune donnée.</p>
+
+  <h2>4. Ce site web</h2>
+  <p>Ces pages sont hébergées par GitHub Pages (GitHub Inc.). Lors de leur consultation, GitHub traite des données
+     techniquement nécessaires comme votre adresse IP dans ses journaux serveur. Nous n’utilisons ni cookies ni
+     outils d’analyse.</p>
+
+  <h2>5. Base juridique</h2>
+  <p>Lorsque le RGPD s’applique, le traitement sert à fournir la fonction que vous demandez (art. 6, par. 1, point b
+     du RGPD). Les fonctions facultatives, comme la connexion avec votre compte Midea ou la sauvegarde iCloud,
+     reposent sur votre choix de les utiliser (art. 6, par. 1, point a du RGPD) ; vous pouvez les désactiver ou
+     cesser de les utiliser à tout moment.</p>
+
+  <h2>6. Vos droits</h2>
+  <p>Comme nous ne conservons aucune donnée personnelle, nous ne pouvons fournir ni accès, ni rectification, ni
+     effacement à ce titre. Supprimez les données locales en retirant l’appareil dans l’app ou en supprimant l’app ;
+     gérez la sauvegarde iCloud dans les réglages iCloud de votre iPhone. Pour les données détenues par Midea,
+     adressez-vous à Midea. Vous avez le droit d’introduire une réclamation auprès d’une autorité de protection des
+     données. Questions : <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
+
+  <h2>7. Enfants</h2>
+  <p>L’app ne s’adresse pas spécifiquement aux enfants et ne collecte aucune donnée les concernant.</p>
+
+  <h2>8. Modifications</h2>
+  <p>Toute modification de cette politique sera publiée sur cette page.</p>
+
+  <p><em>ClimaPilot est une app indépendante, sans lien avec Midea. Midea, MSmartHome et NetHome Plus sont des marques
+     de leurs propriétaires respectifs.</em></p>
+  </section>
 </div>
 </body>
 </html>

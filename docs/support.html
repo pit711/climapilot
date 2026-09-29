@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ClimaPilot – Support / Hilfe</title>
+<title>ClimaPilot – Support</title>
 <style>
   :root { color-scheme: light dark; }
   * { box-sizing: border-box; }
@@ -11,83 +11,325 @@
          color: #1c1c1e; background: #f5f5f7; }
   .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
   h1 { font-size: 1.9rem; margin: .2em 0 .1em; }
-  h2 { font-size: 1.2rem; margin: 1.6em 0 .3em; }
+  h2 { font-size: 1.2rem; margin: 1.8em 0 .5em; }
   .sub { color: #6b6b70; margin-top: 0; }
   .card { background: #fff; border-radius: 16px; padding: 20px 24px; margin: 22px 0;
           box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .mail { font-size: 1.15rem; font-weight: 600; margin: .2em 0; }
   a { color: #0a84ff; }
-  .mail { font-size: 1.1rem; font-weight: 600; }
-  details { margin: .5em 0; }
+  details { background: #fff; border-radius: 12px; padding: 12px 18px; margin: 10px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,.05); }
   summary { cursor: pointer; font-weight: 600; }
-  details p { margin: .5em 0 1em; }
-  .lang { color: #6b6b70; font-size: .95rem; }
-  hr { border: none; border-top: 1px solid #e2e2e6; margin: 40px 0; }
+  details p, details ul { margin: .6em 0 .2em; }
+  ul { padding-left: 1.2em; }
+  nav.lang { font-size: .95rem; color: #6b6b70; }
+  nav.lang a { margin-right: .8em; }
+  hr { border: none; border-top: 1px solid #e2e2e6; margin: 48px 0; }
   @media (prefers-color-scheme: dark) {
     body { color: #f2f2f7; background: #000; }
-    .card { background: #1c1c1e; box-shadow: none; }
-    .sub, .lang { color: #98989f; }
+    .card, details { background: #1c1c1e; box-shadow: none; }
+    .sub, nav.lang { color: #98989f; }
     hr { border-top-color: #333; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <nav class="lang"><a href="#de">Deutsch</a><a href="#en">English</a><a href="#fr">Français</a></nav>
+
+  <!-- ─────────────────────────── DEUTSCH ─────────────────────────── -->
+  <section id="de" lang="de">
   <h1>ClimaPilot – Support</h1>
-  <p class="sub">Steuere deine Midea-Klimaanlage lokal im WLAN – ohne Cloud-Konto.</p>
+  <p class="sub">Steuere deine Midea-Klimaanlage (z. B. PortaSplit) direkt im WLAN – lokal, ohne Umweg über die Cloud.</p>
 
   <div class="card">
     <p>Fragen, Feedback oder ein Problem? Schreib uns:</p>
     <p class="mail"><a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
-    <p class="sub">Wir antworten in der Regel innerhalb weniger Tage.</p>
+    <p class="sub">Wir antworten in der Regel innerhalb weniger Tage. Hilfreich sind das iPhone-Modell, die
+       Anlage und – falls vorhanden – ein Screenshot der Fehlermeldung.</p>
   </div>
 
   <h2>Häufige Fragen</h2>
 
   <details open>
     <summary>Wie verbinde ich meine Anlage?</summary>
-    <p>Öffne die App und tippe auf „Im WLAN suchen" oder gib die IP-Adresse der Anlage ein. iPhone und Klimaanlage
-       müssen im selben WLAN sein. Erlaube die Abfrage „Lokales Netzwerk", sonst kann die App die Anlage nicht finden.</p>
+    <p>iPhone und Klimaanlage müssen im selben WLAN sein. Öffne die App, tippe auf „Anlage suchen" oder gib die
+       IP-Adresse der Anlage ein und erlaube die Abfrage „Lokales Netzwerk". Tippe dann auf die gefundene Anlage.</p>
   </details>
 
   <details>
-    <summary>Welche Geräte werden unterstützt?</summary>
-    <p>Viele Midea-basierte Klimageräte mit lokaler WLAN-Steuerung (z. B. PortaSplit). Beim ersten Verbinden holt die
-       App einmalig ein Zugriffs-Token; danach läuft alles lokal.</p>
+    <summary>Welche Anlagen werden unterstützt?</summary>
+    <p>Midea-basierte Klimageräte mit WLAN-Modul und lokaler Steuerung (Protokoll V3), zum Beispiel die Midea
+       PortaSplit. Welche Zusatzfunktionen (Turbo, iECO, Außengerät leise, Selbstreinigung …) erscheinen, meldet die
+       Anlage selbst.</p>
   </details>
 
   <details>
-    <summary>Was bedeutet der einmalige Token-Abruf?</summary>
-    <p>Beim ersten Verbinden wird ein Geräte-Token über Midea's Cloud abgerufen (kein Login nötig). Danach ist keine
-       Internetverbindung mehr erforderlich – die Steuerung läuft rein lokal. Details in der
-       <a href="privacy.html">Datenschutzerklärung</a>.</p>
+    <summary>Was sind Token und Schlüssel – und wozu das Midea-Konto?</summary>
+    <p>Für die lokale Verbindung braucht die Anlage einmalig ein Token und einen Schlüssel. ClimaPilot versucht
+       zuerst, beides ohne Anmeldung über die Cloud von Midea zu holen. Gibt die Cloud so keinen Token heraus
+       (das ist zurzeit der Fall), erscheint „Zugang reparieren":</p>
+    <ul>
+      <li><strong>Mit Midea-Konto anmelden:</strong> Melde dich mit dem Konto der MSmartHome-App an, in der deine
+          Anlage eingerichtet ist. Das Passwort geht nur an Midea und wird nicht gespeichert.</li>
+      <li><strong>Token &amp; Schlüssel eintragen:</strong> falls du die Anlage schon lokal nutzt, etwa mit Home
+          Assistant.</li>
+    </ul>
+    <p>Danach steuert ClimaPilot rein lokal, ohne Internet. Details in der <a href="privacy.html#de">Datenschutzerklärung</a>.</p>
   </details>
 
   <details>
-    <summary>Wie sichere/übertrage ich meine Einrichtung?</summary>
-    <p>Unter Einstellungen → „Token &amp; Backup" kannst du „In iCloud sichern" aktivieren oder ein Backup als Datei
-       exportieren/importieren. Auf einem neuen iPhone einfach „Aus iCloud wiederherstellen" – Geräte, Token und
-       Szenen kommen zurück.</p>
+    <summary>„Diese Anlage ist nicht in deinem Midea-Konto"</summary>
+    <p>Die Anmeldung hat geklappt, aber die Anlage ist in einem anderen Konto eingerichtet. Füge sie in der
+       MSmartHome-App mit dem Konto hinzu, mit dem du dich in ClimaPilot anmeldest.</p>
   </details>
 
   <details>
-    <summary>Das Widget reagiert nicht / die Anlage antwortet nicht.</summary>
-    <p>Öffne die App einmal und verbinde dich mit der Anlage (dabei wird die Lokalnetz-Freigabe erteilt). Prüfe, dass
-       iPhone und Anlage im selben WLAN sind. Bei anhaltenden Problemen: <a href="mailto:app@holzhauser.net">app@holzhauser.net</a>.</p>
+    <summary>Die Anlage antwortet nicht oder weist die Verbindung ab</summary>
+    <ul>
+      <li>Die Anlage erlaubt <strong>nur eine lokale Verbindung gleichzeitig</strong>. Schließe andere Apps oder
+          Integrationen, die sie gerade steuern (z. B. Home Assistant, eine zweite ClimaPilot-Instanz).</li>
+      <li>Nach dem Einschalten oder einem Firmware-Update startet das WLAN-Modul neu und ist etwa 20–30 Sekunden
+          nicht erreichbar – kurz warten und erneut verbinden.</li>
+      <li>Prüfe, dass iPhone und Anlage im selben WLAN sind und die Freigabe „Lokales Netzwerk" in den
+          iOS-Einstellungen für ClimaPilot an ist.</li>
+    </ul>
   </details>
 
-  <p><em>Hinweis: ClimaPilot ist eine unabhängige App und steht in keiner Verbindung zu Midea.</em></p>
+  <details>
+    <summary>Ein Knopf wird orange und zeigt „hängt"</summary>
+    <p>Die Anlage hat den Befehl noch nicht übernommen. ClimaPilot schickt ihn automatisch erneut und zeigt erst
+       dann einen grünen Haken, wenn die Anlage den neuen Wert zurückmeldet. Klappt es gar nicht, übernimmt die App
+       ehrlich den Stand der Anlage.</p>
+  </details>
+
+  <details>
+    <summary>Wie sichere oder übertrage ich meine Einrichtung?</summary>
+    <p>Unter Einstellungen → „Token &amp; Backup" kannst du „In iCloud sichern" einschalten oder ein Backup als Datei
+       exportieren und importieren. Auf einem neuen iPhone: „Aus iCloud wiederherstellen" – Anlagen, Namen, Token
+       und Szenen kommen zurück.</p>
+  </details>
+
+  <details>
+    <summary>Widgets und Siri</summary>
+    <p>Öffne die App einmal und verbinde dich mit der Anlage – dabei erteilt iOS die Lokalnetz-Freigabe, die Widgets
+       und Siri brauchen. Sprachbefehle beginnen mit „Klima Pilot", z. B. „Klima Pilot ein". Eigene Formulierungen
+       legst du in der Kurzbefehle-App an. Siri und Widgets funktionieren im eigenen WLAN (oder per VPN).</p>
+  </details>
+
+  <details>
+    <summary>Was kostet ClimaPilot?</summary>
+    <p>Die App ist kostenlos, ohne Werbung und ohne Abo. Wer die Entwicklung unterstützen möchte, findet in den
+       Einstellungen freiwillige Links zu Ko-fi und PayPal.</p>
+  </details>
+
+  <details>
+    <summary>Beta testen</summary>
+    <p>Neue Versionen gibt es vorab über TestFlight:
+       <a href="https://testflight.apple.com/join/mj92zbTb">testflight.apple.com/join/mj92zbTb</a>.</p>
+  </details>
+
+  <p><a href="privacy.html#de">Datenschutzerklärung</a></p>
+  <p><em>ClimaPilot ist eine unabhängige App und steht in keiner Verbindung zu Midea. Midea, MSmartHome und PortaSplit
+     sind Marken ihrer jeweiligen Inhaber.</em></p>
+  </section>
 
   <hr>
 
-  <h1>ClimaPilot – Support <span class="lang">(English)</span></h1>
+  <!-- ─────────────────────────── ENGLISH ─────────────────────────── -->
+  <section id="en" lang="en">
+  <h1>ClimaPilot – Support</h1>
+  <p class="sub">Control your Midea air conditioner (e.g. PortaSplit) directly on your Wi-Fi – locally, without a detour through the cloud.</p>
+
   <div class="card">
-    <p>Questions, feedback or an issue? Email us:</p>
+    <p>Questions, feedback or a problem? Email us:</p>
     <p class="mail"><a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
+    <p class="sub">We usually reply within a few days. Please include your iPhone model, the unit and – if there is
+       one – a screenshot of the error.</p>
   </div>
-  <p>ClimaPilot controls your Midea air conditioner locally over Wi-Fi, with no cloud account. Make sure your iPhone
-     and the unit are on the same Wi-Fi and allow the "Local Network" permission. Backup &amp; transfer via iCloud or
-     an export file (Settings → "Token &amp; Backup"). See the <a href="privacy.html">Privacy Policy</a>.
-     Independent app, not affiliated with Midea.</p>
+
+  <h2>FAQ</h2>
+
+  <details open>
+    <summary>How do I connect my unit?</summary>
+    <p>Your iPhone and the air conditioner must be on the same Wi-Fi. Open the app, tap "Search for unit" or enter the
+       unit's IP address, and allow the "Local Network" prompt. Then tap the unit that was found.</p>
+  </details>
+
+  <details>
+    <summary>Which units are supported?</summary>
+    <p>Midea-based air conditioners with a Wi-Fi module and local control (protocol V3), for example the Midea
+       PortaSplit. The unit itself reports which extra functions (Turbo, iECO, quiet outdoor unit, self-clean …)
+       appear.</p>
+  </details>
+
+  <details>
+    <summary>What are the token and key – and why a Midea account?</summary>
+    <p>For the local connection the unit needs a token and a key, once. ClimaPilot first tries to fetch both from
+       Midea's cloud without signing in. If the cloud hands out no token that way (currently the case), "Repair
+       access" appears:</p>
+    <ul>
+      <li><strong>Sign in with Midea account:</strong> use the account of the MSmartHome app in which your unit is
+          set up. The password goes to Midea only and is not stored.</li>
+      <li><strong>Enter token &amp; key:</strong> if you already run the unit locally, e.g. with Home Assistant.</li>
+    </ul>
+    <p>After that ClimaPilot controls the unit purely locally, without internet. Details in the
+       <a href="privacy.html#en">Privacy Policy</a>.</p>
+  </details>
+
+  <details>
+    <summary>"This unit is not in your Midea account"</summary>
+    <p>Signing in worked, but the unit is set up in a different account. Add it in the MSmartHome app using the
+       account you sign in with in ClimaPilot.</p>
+  </details>
+
+  <details>
+    <summary>The unit doesn't answer or refuses the connection</summary>
+    <ul>
+      <li>The unit allows <strong>only one local connection at a time</strong>. Close other apps or integrations that
+          are controlling it (e.g. Home Assistant, a second ClimaPilot).</li>
+      <li>After switching on or a firmware update the Wi-Fi module restarts and is unreachable for about 20–30
+          seconds – wait a moment and connect again.</li>
+      <li>Check that your iPhone and the unit are on the same Wi-Fi and that "Local Network" is allowed for
+          ClimaPilot in iOS Settings.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>A control turns orange and says it is hanging</summary>
+    <p>The unit has not taken the command yet. ClimaPilot resends it automatically and only shows a green check once
+       the unit reports the new value back. If it never does, the app honestly shows the unit's actual state.</p>
+  </details>
+
+  <details>
+    <summary>How do I back up or transfer my setup?</summary>
+    <p>In Settings → "Token &amp; Backup" turn on "Back up to iCloud" or export and import a backup file. On a new
+       iPhone: "Restore from iCloud" – units, names, token and scenes come back.</p>
+  </details>
+
+  <details>
+    <summary>Widgets and Siri</summary>
+    <p>Open the app once and connect to the unit – that grants the local-network permission widgets and Siri need.
+       Voice commands start with "Klima Pilot", e.g. "Klima Pilot on". Create your own phrases in the Shortcuts
+       app. Siri and widgets work on your home Wi-Fi (or via VPN).</p>
+  </details>
+
+  <details>
+    <summary>What does ClimaPilot cost?</summary>
+    <p>The app is free, with no ads and no subscription. If you'd like to support development, Settings has optional
+       links to Ko-fi and PayPal.</p>
+  </details>
+
+  <details>
+    <summary>Beta testing</summary>
+    <p>New versions are available early via TestFlight:
+       <a href="https://testflight.apple.com/join/mj92zbTb">testflight.apple.com/join/mj92zbTb</a>.</p>
+  </details>
+
+  <p><a href="privacy.html#en">Privacy Policy</a></p>
+  <p><em>ClimaPilot is an independent app and is not affiliated with Midea. Midea, MSmartHome and PortaSplit are
+     trademarks of their respective owners.</em></p>
+  </section>
+
+  <hr>
+
+  <!-- ─────────────────────────── FRANÇAIS ─────────────────────────── -->
+  <section id="fr" lang="fr">
+  <h1>ClimaPilot – Assistance</h1>
+  <p class="sub">Pilotez votre climatiseur Midea (p. ex. PortaSplit) directement sur votre Wi-Fi – en local, sans passer par le cloud.</p>
+
+  <div class="card">
+    <p>Une question, un retour ou un problème ? Écrivez-nous :</p>
+    <p class="mail"><a href="mailto:app@holzhauser.net">app@holzhauser.net</a></p>
+    <p class="sub">Nous répondons en général sous quelques jours. Indiquez le modèle d’iPhone, le climatiseur et, si
+       possible, une capture du message d’erreur.</p>
+  </div>
+
+  <h2>Questions fréquentes</h2>
+
+  <details open>
+    <summary>Comment connecter mon climatiseur ?</summary>
+    <p>L’iPhone et le climatiseur doivent être sur le même Wi-Fi. Ouvrez l’app, touchez « Rechercher le climatiseur » ou saisissez
+       l’adresse IP du climatiseur et autorisez l’accès au « Réseau local ». Touchez ensuite l’appareil trouvé.</p>
+  </details>
+
+  <details>
+    <summary>Quels appareils sont compatibles ?</summary>
+    <p>Les climatiseurs basés sur Midea avec module Wi-Fi et pilotage local (protocole V3), par exemple le Midea
+       PortaSplit. L’appareil indique lui-même quelles fonctions supplémentaires (Turbo, iECO, unité extérieure
+       silencieuse, autonettoyage …) s’affichent.</p>
+  </details>
+
+  <details>
+    <summary>Que sont le jeton et la clé – et pourquoi un compte Midea ?</summary>
+    <p>Pour la connexion locale, le climatiseur a besoin une seule fois d’un jeton et d’une clé. ClimaPilot essaie
+       d’abord de les récupérer sans connexion via le cloud de Midea. Si le cloud ne délivre pas de jeton ainsi
+       (c’est actuellement le cas), « Réparer l’accès » apparaît :</p>
+    <ul>
+      <li><strong>Se connecter avec un compte Midea :</strong> utilisez le compte de l’app MSmartHome dans laquelle
+          votre climatiseur est configuré. Le mot de passe n’est envoyé qu’à Midea et n’est pas enregistré.</li>
+      <li><strong>Saisir le jeton et la clé :</strong> si vous pilotez déjà l’appareil en local, p. ex. avec Home
+          Assistant.</li>
+    </ul>
+    <p>Ensuite, ClimaPilot pilote uniquement en local, sans Internet. Détails dans la
+       <a href="privacy.html#fr">politique de confidentialité</a>.</p>
+  </details>
+
+  <details>
+    <summary>« Ce climatiseur n’est pas dans votre compte Midea »</summary>
+    <p>La connexion a réussi, mais l’appareil est configuré dans un autre compte. Ajoutez-le dans l’app MSmartHome
+       avec le compte que vous utilisez dans ClimaPilot.</p>
+  </details>
+
+  <details>
+    <summary>Le climatiseur ne répond pas ou refuse la connexion</summary>
+    <ul>
+      <li>L’appareil n’accepte <strong>qu’une seule connexion locale à la fois</strong>. Fermez les autres apps ou
+          intégrations qui le pilotent (p. ex. Home Assistant, une seconde instance de ClimaPilot).</li>
+      <li>Après la mise en marche ou une mise à jour du micrologiciel, le module Wi-Fi redémarre et reste injoignable
+          environ 20 à 30 secondes – patientez puis reconnectez-vous.</li>
+      <li>Vérifiez que l’iPhone et l’appareil sont sur le même Wi-Fi et que l’accès au « Réseau local » est autorisé
+          pour ClimaPilot dans les réglages d’iOS.</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Une commande passe à l’orange et « bloque »</summary>
+    <p>L’appareil n’a pas encore pris en compte la commande. ClimaPilot la renvoie automatiquement et n’affiche une
+       coche verte qu’une fois la nouvelle valeur confirmée par l’appareil. Sinon, l’app affiche honnêtement l’état
+       réel de l’appareil.</p>
+  </details>
+
+  <details>
+    <summary>Comment sauvegarder ou transférer ma configuration ?</summary>
+    <p>Dans Réglages → « Jeton et sauvegarde », activez « Sauvegarder dans iCloud » ou exportez et importez un fichier
+       de sauvegarde. Sur un nouvel iPhone : « Restaurer depuis iCloud » – appareils, noms, jeton et scènes
+       reviennent.</p>
+  </details>
+
+  <details>
+    <summary>Widgets et Siri</summary>
+    <p>Ouvrez l’app une fois et connectez-vous au climatiseur – iOS accorde alors l’accès au réseau local dont les
+       widgets et Siri ont besoin. Les commandes vocales commencent par « Klima Pilot ». Créez vos propres phrases dans
+       l’app Raccourcis. Siri et les widgets fonctionnent sur votre Wi-Fi (ou via VPN).</p>
+  </details>
+
+  <details>
+    <summary>Combien coûte ClimaPilot ?</summary>
+    <p>L’app est gratuite, sans publicité ni abonnement. Pour soutenir le développement, les Réglages proposent des
+       liens facultatifs vers Ko-fi et PayPal.</p>
+  </details>
+
+  <details>
+    <summary>Tester la bêta</summary>
+    <p>Les nouvelles versions sont disponibles en avant-première via TestFlight :
+       <a href="https://testflight.apple.com/join/mj92zbTb">testflight.apple.com/join/mj92zbTb</a>.</p>
+  </details>
+
+  <p><a href="privacy.html#fr">Politique de confidentialité</a></p>
+  <p><em>ClimaPilot est une app indépendante, sans lien avec Midea. Midea, MSmartHome et PortaSplit sont des marques de
+     leurs propriétaires respectifs.</em></p>
+  </section>
 </div>
 </body>
 </html>
